@@ -277,3 +277,4 @@ validation_one TI33_750a TI33_750a Estar 9 32 [4 4 4 ] 7.744658 5.007044
 validation_one TI33_750a TI33_750a Estar 9 32 [5 5 5 ] 5.137566 6.3082805
 validation_one TI33_750a TI33_750a Estar 9 32 [10 10 10 ] 2.6173031 1.3194628
 validation_one TI33_750a TI33_750a Estar 9 32 [20 20 20 ] 1.9064773 1.7983129
+validation_one [TI33_750] TI33_750 Estar 9 32 [20 ] 2.127493 1.9437919

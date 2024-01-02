@@ -8,7 +8,7 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
-        "validation_one('Estar', ['TI33_750a'], 'TI33_750a', 'Exp', [20])"
+        "validation_one('Estar', ['TI33_750'], 'TI33_750', 'Exp', [20])"
         ])
     
     processes = []

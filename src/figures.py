@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 
 '''
 n = [1, 2, 3, 4, 5, 10, 20]
@@ -147,58 +149,106 @@ plt.savefig("/Users/Joe/Desktop/figure3.jpeg", dpi=800, bbox_inches="tight")
 plt.show()
 '''
 '''
-x1 = [0.4, 0.2, 0.1]
-x2 = [0.02, 0.01, 0.005]
-e1 = [0.5325, 0.3381, 0.1132]
-e2 = [0.003842, 0.000286, 0.00007156]
+Bqx = [0.051885, 0.10377, 0.20754, 0.41508, 0.83016]
+Bqy = [0.023333333, 0.093333333, 1.206666667, 16.98333333, 41.74333333]
+Blx = [0.1084895, 0.216979, 0.433958, 0.867916]
+Bly = [1.03E-02, 3.99E-02, 1.05E-01, 4.33E-01]
+Bfx = [0.01, 3]
+C30x = [0.00074234, 0.00148468, 0.00296936, 0.00593872]
+C30y = [0.000109, 0.000434, 0.00100, 0.00662]
+C45x = [0.0297795, 0.059559, 0.119]
+C45y = [0.00174, 0.00697, 0.00901]
+C60x = [0.0462775, 0.092555, 0.18511]
+C60y = [0.00500, 0.0200, 0.0612]
+Cfx = [0.0005, 1]
+def equation(x, y, eqx):
+    l = len(x) - 1
+    p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
+    C = 0
+    for i in range(len(x)):
+        C += y[i]/(len(x)*x[i]**p)
+    print('C = ', C)
+    print('p = ', p)
+    eqy = [0, 0]
+    for i in range(2):
+        eqy[i] = C * eqx[i] ** p
+    return eqy
+Cf30 = equation(C30x, C30y, Cfx)
+Cf45 = equation(C45x, C45y, Cfx)
+Cf60 = equation(C60x, C60y, Cfx)
+Bfq = equation(Bqx, Bqy, Bfx)
+Bfl = equation(Blx, Bly, Bfx)
 
 fig, ax = plt.subplots()
-ax.plot(x1, e1, label='3D FEA', color='blue', linestyle='-', marker='x')
-ax.plot(x2, e2, label='2D FEA', color='red', linestyle='--', marker='x')
+ax.scatter(C30x, C30y, color='blue', marker='s', label='30˚: $||e||_{L_{2}}=148h^{1.97}$')
+ax.scatter(C45x, C45y, color='black', marker='o', facecolor='none', label='45˚: $||e||_{L_{2}}=0.141h^{1.19}$')
+ax.scatter(C60x, C60y, color='red', marker='x', label='60˚: $||e||_{L_{2}}=1.35h^{1.81}$')
+ax.plot(Cfx, Cf30, linestyle="--", color='blue')
+ax.plot(Cfx, Cf45, linestyle="--", color='black')
+ax.plot(Cfx, Cf60, linestyle="--", color='red')
+ax.set_xlabel('Element length (μm)')
+ax.set_xscale('log')
+ax.set_xlim([0.0005, 1])
 ax.set_ylabel('L$_{2}$ error')
-ax.set_xscale('log')
-ax.set_xlim([0.001, 0.5])
-ax.set_xlabel('Element length (μm)')
 ax.set_yscale('log')
-ax.set_ylim([0.00001, 1])
-#ax.set_yticks([0.55, 1])
-ax.legend()
-plt.subplots_adjust(left=0.25, right=0.85, bottom=0.15, top=0.85)
-plt.savefig('figure1.jpeg')
+ax.set_ylim([0.00008, 0.1])
+ax.grid(False)
+leg = ax.legend(loc='lower right')
+leg.set_title("Conical half-angle")
+plt.savefig('/Users/joe/Desktop/figure3.jpeg', dpi=800, bbox_inches="tight")
 plt.show()
 
-e1 = [0.003842, 0.001867, 0.000465989]
-e2 = [0.5473, 0.3381, 0.1159]
 fig, ax = plt.subplots()
-ax.plot(x1, e1, label='2D FEA', color='blue', linestyle='-', marker='x')
-ax.plot(x2, e2, label='3D FEA', color='red', linestyle='--', marker='x')
-ax.set_ylabel('Energy error')
-ax.set_xscale('log')
-ax.set_xlim([0.001, 0.5])
+ax.scatter(Blx, Bly, color='blue', marker='s', label='Linear: $||e||_{L_{2}}=0.55h^{1.80}$')
+ax.scatter(Bqx, Bqy, color='black', marker='o', facecolor='none', label='Quadratic: $||e||_{L_{2}}=89.5h^{2.70}$')
+ax.plot(Bfx, Bfl, linestyle="--", color='blue')
+ax.plot(Bfx, Bfq, linestyle="--", color='black')
 ax.set_xlabel('Element length (μm)')
+ax.set_xscale('log')
+ax.set_xlim([0.03, 2])
+ax.set_ylabel('L$_{2}$ error')
 ax.set_yscale('log')
-ax.set_ylim([0.0001, 1])
-#ax.set_yticks([0.0001, 1])
-#ax.legend()
-plt.subplots_adjust(left=0.25, right=0.85, bottom=0.15, top=0.85)
-plt.savefig('figure2.jpeg')
-plt.show()
-
-
-x1 = [37.5, 75, 90]
-e1 = [1875, 2567, 2780]
-
-fig, ax = plt.subplots()
-ax.plot(x1, e1, color='blue', linestyle='-', marker='x')
-ax.set_xlabel('$E_{tp}$ (GPa)')
-#ax.set_xscale('log')
-ax.set_xlim([20, 100])
-ax.set_ylabel('$F$ (μN)')
-#ax.set_yscale('log')
-ax.set_ylim([1500, 3000])
-#ax.set_yticks([0.55, 1])
-#ax.legend()
-#plt.subplots_adjust(left=0.25, right=0.85, bottom=0.15, top=0.85)
-plt.savefig('figure3.jpeg')
+ax.set_ylim([0.005, 100])
+ax.grid(False)
+leg = ax.legend()
+leg.set_title("Element order")
+plt.savefig('/Users/joe/Desktop/figure4.jpeg', dpi=800, bbox_inches="tight")
 plt.show()
 '''
+
+df = pd.read_csv('../data/model/compare.csv', skiprows=1)
+fig, ax = plt.subplots()
+ax.plot(df['Depth (nm)'], df['Load (uN)'], linewidth=0.3, color='gray', zorder=1, label='Experimental results')
+ax.plot(df['Depth0 (nm)'], df['Load0 (uN)'], linewidth=0.3, color='gray', zorder=1)
+ax.plot(df['Depth2 (nm)'], df['Load2 (uN)'], linewidth=0.3, color='gray', zorder=1)
+ax.plot(df['Depth3 (nm)'], df['Load3 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth4 (nm)'], df['Load4 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth5 (nm)'], df['Load5 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth6 (nm)'], df['Load6 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth7 (nm)'], df['Load7 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth8 (nm)'], df['Load8 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth9 (nm)'], df['Load9 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth10 (nm)'], df['Load10 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth11 (nm)'], df['Load11 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth12 (nm)'], df['Load12 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth13 (nm)'], df['Load13 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth14 (nm)'], df['Load14 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth15 (nm)'], df['Load15 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth16 (nm)'], df['Load16 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth17 (nm)'], df['Load17 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth18 (nm)'], df['Load18 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth19 (nm)'], df['Load19 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth20 (nm)'], df['Load20 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth21 (nm)'], df['Load21 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth22 (nm)'], df['Load22 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth23 (nm)'], df['Load23 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.plot(df['Depth24 (nm)'], df['Load24 (uN)'], color='gray', linewidth=0.3, zorder=1)
+ax.scatter(df['hm (nm)'], df['F (uN)'], color='blue', marker='.', zorder=2, label='3D FEM simulation')
+ax.set_xlabel('Indenter depth (nm)')
+ax.set_xlim([0, 275])
+ax.set_ylabel('Load (μN)')
+ax.set_ylim([0, 11000])
+ax.grid(False)
+leg = ax.legend()
+plt.savefig('/Users/joe/Desktop/figure5.jpeg', dpi=800, bbox_inches="tight")
+plt.show()
