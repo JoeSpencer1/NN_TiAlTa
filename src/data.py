@@ -6,24 +6,26 @@ import numpy as np
 import pandas as pd
 
 class FEMDataT(object):
-    def __init__(self, yname, angles):
+    def __init__(self, yname):
         self.yname = yname
         self.angles = angles
 
         self.X = None
         self.y = None
 
+        self.read_3angles()
+        '''
         if len(angles) == 1:
             self.read_1angle()
         elif len(angles) == 2:
             self.read_2angles()
         elif len(angles) == 3:
-            self.read_3angles()
+            self.read_3angles()'''
 
     def read_3angles(self):
-        df1 = pd.read_csv('../data/FEM_30deg.csv')
-        df2 = pd.read_csv('../data/FEM_45deg.csv')
-        df3 = pd.read_csv('../data/FEM_60deg.csv')
+        df1 = pd.read_csv('../data/TI33_conical_30.csv')
+        df2 = pd.read_csv('../data/TI33_conical_45.csv')
+        df3 = pd.read_csv('../data/TI33_conical_60.csv')
         df = (
             df3.set_index('Case')
             .join(df1.set_index('Case'), how='inner', rsuffix='_30')
@@ -48,8 +50,8 @@ class FEMDataT(object):
 
 
 class ExpDataT(object):
-    def __init__(self, filename, yname):
-        filename = '../data/' + filename + '.csv'
+    def __init__(self, temp, yname):
+        filename = '../data/TI33_' + temp + '.csv'
         self.filename = filename
         self.yname = yname
 
@@ -107,8 +109,7 @@ class BerkovichDataT(object):
         self.read()
 
     def read(self):
-        df = pd.read_csv('../data/Berkovich.csv')
-        # Scale c* from Berkovich to Conical
+        df = pd.read_csv('../data/TI33_Berkovich.csv')
         if self.scale_c:
             df['dP/dh (N/m)'] *= 1.128 / 1.167
         print(df.describe())

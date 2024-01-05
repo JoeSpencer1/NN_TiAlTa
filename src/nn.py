@@ -141,10 +141,16 @@ def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32, ang
     with open('Output.txt', 'a') as f:
         f.write('validation_one [' + ' '.join(map(str, trnames)) + '] ' +  tstname + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' [' + stsize + '] ' + str(np.mean(mape, axis=0)) + ' ' + str(np.std(mape, axis=0)) + '\n')
 
-def validation_two(yname, exp, fac=1, typ='err'):
-    dataexp = ExpDataT("../data/" + exp + ".csv", yname)
-    datalow = FEMData(yname, [70])
-    dataBerkovich = BerkovichData(yname)
+def validation_two(yname, temp, low, hi, fac=1, typ='err'):
+    dataexp = ExpDataT(temp, yname)
+    if low == 'FEM':
+        datalow = FEMDataT(yname, [30, 45, 60])
+    if low == 'Berk':
+        datalow = BerkovichDataT(yname)
+    if hi == 'Berk':
+        datahigh = BerkovichDataT(yname)
+    if hi == 'Exp':
+        datahigh = ExpDataT(temp, yname)
 
     if fac != 1:
         dataexp.y *= fac
@@ -155,9 +161,9 @@ def validation_two(yname, exp, fac=1, typ='err'):
         print("\nIteration: {}".format(iter))
         data = dde.data.MfDataSet(
             X_lo_train=datalow.X,
-            X_hi_train=dataBerkovich.X,
+            X_hi_train=datahigh.X,
             y_lo_train=datalow.y,
-            y_hi_train=dataBerkovich.y,
+            y_hi_train=datahigh.y,
             X_hi_test=dataexp.X,
             y_hi_test=dataexp.y,
             standardize=True
@@ -166,7 +172,8 @@ def validation_two(yname, exp, fac=1, typ='err'):
         ape.append(res[:2])
         y.append(res[2])
 
-    print(yname, "validation_exp", np.mean(ape, axis=0), np.std(ape, axis=0))
+    print(ape)
+    print(yname, "validation_exp ", np.mean(ape, axis=0), np.std(ape, axis=0))
     if typ == 'n':
         with open('Output.txt', 'a') as f:
             f.write("exp raw " + exp + ' ' + str(fac) + ' ' + yname + ' [' + str(np.mean(y)) + ' ' + str(np.std(y)) + ']\n')
