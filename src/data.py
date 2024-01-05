@@ -51,7 +51,7 @@ class FEMData(object):
 
 class ExpDataT(object):
     def __init__(self, temp, yname):
-        filename = '../data/TI33_' + temp + '.csv'
+        filename = '../data/' + temp + '.csv'
         self.filename = filename
         self.yname = yname
 
