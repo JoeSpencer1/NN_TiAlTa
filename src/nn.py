@@ -141,132 +141,46 @@ def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32, ang
     with open('Output.txt', 'a') as f:
         f.write('validation_one [' + ' '.join(map(str, trnames)) + '] ' +  tstname + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' [' + stsize + '] ' + str(np.mean(mape, axis=0)) + ' ' + str(np.std(mape, axis=0)) + '\n')
 
-def validation_two(yname, tsize_1, tsize_2, train1_name, train2_name, test_name):
-    data_train1 = FEMDataT('../data/TI33_' + train1_name + '.csv')
-    data_train2 = FEMDataT('../data/TI33_' + train2_name + '.csv')
-    data_test = ExpDataT('../data/TI33_' + test_name + '.csv')
+def validation_two(yname, exp, fac=1, typ='err'):
+    '''
+    This function uses data from FEM simulations and experiment. It forms a \
+        multi-fidelity data set for this.
+    '''
+    datalow = FEMData(yname, [70])
+    dataBerkovich = BerkovichData(yname)
+    dataexp = ExpData("../data/" + exp + ".csv", yname)
+
+    if fac != 1:
+        dataexp.y *= fac
 
     ape = []
     y = []
-    kf = ShuffleSplit(n_splits=10, train_size=tsize_1, random_state=0)
-    for train_index, _ in kf.split(data_train1.X):
-        print('\nIteration: {}'.format(len(ape)))
-        print(train_index)
+    for iter in range(10):
+        print("\nIteration: {}".format(iter))
         data = dde.data.MfDataSet(
-            X_lo_train=data_train1.X,
-            X_hi_train=data_train2.X,
-            y_lo_train=data_train1.y,
-            y_hi_train=data_train2.y,
-            X_hi_test=data_test.X,
-            y_hi_test=data_test.y,
+            X_lo_train=datalow.X,
+            X_hi_train=dataBerkovich.X,
+            y_lo_train=datalow.y,
+            y_hi_train=dataBerkovich.y,
+            X_hi_test=dataexp.X,
+            y_hi_test=dataexp.y,
             standardize=True
         )
         res = dde.utils.apply(mfnn, (data,))
         ape.append(res[:2])
         y.append(res[2])
 
-    num = 5
-    y_res = [res[0]]
-    y_data = np.vstack((data_train1.y, data_train2.y))
-    
-
-def validation_joe(yname, tsize_1, tsize_2, train1_name, train2_name, test_name):
-    
-    dataFEM = FEMData(yname, [70])
-    dataBerkovich = BerkovichData(yname)
-    data_train1 = ExpData('../data/' + train1_name + '.csv', yname)
-    data_train2 = ExpData('../data/' + train2_name + '.csv', yname)
-    data_test = ExpData('../data/' + test_name + '.csv', yname)
-    
-    ape = []
-    y = []
-    
-    kf = ShuffleSplit(n_splits=10, train_size=tsize_1, random_state=0)
-    
-    if tsize_1 > 0:
-        for train_index, _ in kf.split(data_train1.X):
-            print("\nIteration: {}".format(len(ape)))
-            print(train_index)
-            data = dde.data.MfDataSet(
-                X_lo_train=dataFEM.X,
-                X_hi_train=np.vstack((dataBerkovich.X, data_train1.X[train_index])),
-                y_lo_train=dataFEM.y,
-                y_hi_train=np.vstack((dataBerkovich.y, data_train1.y[train_index])),
-                X_hi_test=data_test.X,
-                y_hi_test=data_test.y,
-                standardize=True
-            )
-            res = dde.utils.apply(mfnn, (data,))
-            ape.append(res[:2])
-            y.append(res[2])
+    print(yname, "validation_exp", np.mean(ape, axis=0), np.std(ape, axis=0))
+    if typ == 'n':
+        with open('Output.txt', 'a') as f:
+            f.write("exp raw " + exp + ' ' + str(fac) + ' ' + yname + ' [' + str(np.mean(y)) + ' ' + str(np.std(y)) + ']\n')
     else:
-        for train_index in range(10):
-            print("\nIteration: {}".format(train_index))
-            print(train_index)
-            data = dde.data.MfDataSet(
-                X_lo_train=dataFEM.X,
-                X_hi_train=dataBerkovich.X,
-                y_lo_train=dataFEM.y,
-                y_hi_train=dataBerkovich.y,
-                X_hi_test=data_test.X,
-                y_hi_test=data_test.y,
-                standardize=True
-            )
-            res = dde.utils.apply(mfnn, (data,))
-            ape.append(res[:2])
-            y.append(res[2])
- 
-    num = 5
-    y_res = [res[0]]
-    y_data = np.vstack((dataBerkovich.y, data_train1.y[train_index]))
-    X_data = np.vstack((dataBerkovich.X, data_train1.X[train_index]))
-    find_index = np.argmax(y_data > y_res)
-    X_res = X_data[find_index]
-    y_res = np.repeat([y_res], num, axis = 0)
-    X_res = np.repeat([X_res], num, axis = 0)
+        with open('Output.txt', 'a') as f:
+            f.write("exp " + exp + ' ' + str(fac) + ' ' + yname + ' ' + str(np.mean(ape, axis=0)) + ' ' + str(np.std(ape, axis=0)) + '\n')
+    print("Saved to ", yname, ".dat.")
+    np.savetxt(yname + ".dat", np.hstack(y).T)
 
-    kf = ShuffleSplit(n_splits=10, train_size=tsize_2, random_state=0)
 
-    if tsize_2 > 0:
-        for train_index, _ in kf.split(data_train2.X):
-            print("\nIteration: {}".format(len(ape)))
-            print(train_index)
-            data = dde.data.MfDataSet(
-                X_lo_train=dataBerkovich.X,
-                X_hi_train=np.vstack((X_res, data_train2.X[train_index])),
-                y_lo_train=dataBerkovich.y,
-                y_hi_train=np.vstack((y_res, data_train2.y[train_index])),
-                X_hi_test=data_test.X,
-                y_hi_test=data_test.y,
-                standardize=True
-            )
-            res = dde.utils.apply(mfnn, (data,))
-            ape.append(res[:2])
-            y.append(res[2])
-    else:
-        y_res = np.vstack((y_res, y_res))
-        X_res = np.vstack((X_res, X_res))
-        print('dataBerkovich.X: ', dataBerkovich.X)
-        print('X_res: ', X_res)
-        print('dataBerkovich.y: ', dataBerkovich.y)
-        print('y_res: ', y_res)
-        print('data_test.X: ', data_test.X)
-        print('data_test.y: ', data_test.y)
-        for train_index in range(10):
-            print("\nIteration: {}".format(train_index))
-            print(train_index)
-            data = dde.data.MfDataSet(
-                X_lo_train=dataBerkovich.X,
-                X_hi_train=X_res,
-                y_lo_train=dataBerkovich.y,
-                y_hi_train=y_res,
-                X_hi_test=data_test.X,
-                y_hi_test=data_test.y,
-                standardize=True
-            )
-            res = dde.utils.apply(mfnn, (data,))
-            ape.append(res[:2])
-            y.append(res[2])
 
 def main(argument=None):
     if argument != None:
