@@ -142,13 +142,9 @@ def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32, ang
         f.write('validation_one [' + ' '.join(map(str, trnames)) + '] ' +  tstname + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' [' + stsize + '] ' + str(np.mean(mape, axis=0)) + ' ' + str(np.std(mape, axis=0)) + '\n')
 
 def validation_two(yname, exp, fac=1, typ='err'):
-    '''
-    This function uses data from FEM simulations and experiment. It forms a \
-        multi-fidelity data set for this.
-    '''
+    dataexp = ExpDataT("../data/" + exp + ".csv", yname)
     datalow = FEMData(yname, [70])
     dataBerkovich = BerkovichData(yname)
-    dataexp = ExpData("../data/" + exp + ".csv", yname)
 
     if fac != 1:
         dataexp.y *= fac

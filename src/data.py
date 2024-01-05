@@ -22,7 +22,7 @@ class FEMDataT(object):
 
     def read_1angle(self):
         df = pd.read_csv('../data/FEM_{}deg.csv'.format(self.angles[0]))
-        df['E* (GPa)'] = Etoestar(df['E (GPa)'])
+        df['E* (GPa)'] = EtoEr(df['E (GPa)', 'nu'])
         df['sy/E*'] = df['sy (GPa)'] / df['E* (GPa)']
         # df = df.loc[~((df['n'] > 0.3) & (df['sy/E*'] >= 0.03))]
         #
@@ -60,7 +60,7 @@ class FEMDataT(object):
         self.X = df[['C (GPa)', 'dP/dh (N/m)', 'Wp/Wt', 'C (GPa)_60']].values
         # self.X = df[['C (GPa)', 'dP/dh (N/m)', 'C (GPa)_60', 'dP/dh (N/m)_60']].values
         if self.yname == 'Estar':
-            self.y = Etoestar(df['E (GPa)'].values)[:, None]
+            self.y = EtoEr(df['E (GPa)', 'nu'].values)[:, None]
         elif self.yname == 'sigma_y':
             self.y = df['sy (GPa)'].values[:, None]
 
@@ -88,7 +88,7 @@ class FEMDataT(object):
             ]
         ].values
         if self.yname == 'Estar':
-            self.y = Etoestar(df['E (GPa)'].values)[:, None]
+            self.y = EtoEr(df['E (GPa)', 'nu'].values)[:, None]
         elif self.yname == 'sigma_y':
             self.y = df['sy (GPa)'].values[:, None]
 
@@ -108,7 +108,7 @@ class ModelData(object):
         df = pd.read_csv('model_{}.csv'.format(self.model))
         self.X = df[['C (GPa)', 'dP/dh (N/m)', 'WpWt']].values
         if self.yname == 'Estar':
-            self.y = Etoestar(df['E (GPa)'].values)[:, None]
+            self.y = EtoEr(df['E (GPa)', 'nu'].values)[:, None]
         elif self.yname == 'sigma_y':
             self.y = df['sy (GPa)'].values[:, None]
         idx = np.random.choice(np.arange(len(self.X)), self.n, replace=False)
@@ -184,7 +184,7 @@ class BerkovichDataT(object):
 
         self.X = df[['C (GPa)', 'dP/dh (N/m)', 'Wp/Wt']].values
         if self.yname == 'Estar':
-            self.y = Etoestar(df['E (GPa)'].values)[:, None]
+            self.y = EtoEr(df['E (GPa)', 'nu'].values)[:, None]
         elif self.yname == 'sigma_y':
             self.y = df['sy (GPa)'].values[:, None]
         elif self.yname == 'n':
@@ -197,7 +197,6 @@ class BerkovichDataT(object):
             ).values[:, None]
 
 
-def Etoestar(E):
-    nu = 0.3
-    nu_i, E_i = 0.07, 1100
+def EtoEr(E, nu):
+    nu_i, E_i = 0.0691, 1143
     return 1 / ((1 - nu ** 2) / E + (1 - nu_i ** 2) / E_i)
