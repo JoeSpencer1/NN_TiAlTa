@@ -54,20 +54,13 @@ def nn(data, lay=9, wid=32):
     return train_state.best_metrics[0]
 
 def nntf(data, lay=9, wid=32):
-    # Assuming data.train_x and data.train_y are your input and output data
     model = models.Sequential()
-    # Add the input layer
     model.add(layers.InputLayer(input_shape=(data.train_x.shape[1],)))
-    # Add hidden layers
     for _ in range(lay):
         model.add(layers.Dense(wid, activation='selu', kernel_initializer='lecun_normal', kernel_regularizer=tf.keras.regularizers.l2(0.01)))
-    # Add output layer
-    model.add(layers.Dense(1))  # Assuming you have one output node
-    # Compile the model
+    model.add(layers.Dense(1))
     model.compile(optimizer='adam', loss='mean_absolute_percentage_error', metrics=['mae'])
-    # Train the model
     history = model.fit(data.train_x, data.train_y, epochs=30000, verbose=1)
-    # Evaluate the model
     mape = model.evaluate(data.test_x, data.test_y, verbose=0)[1]
     return mape
 
