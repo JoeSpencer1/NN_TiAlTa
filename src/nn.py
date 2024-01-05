@@ -94,11 +94,11 @@ def mfnn(data, lay = 2):
         train_state.best_y[1],
     )
 
-def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32, angles=[]):
+def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32):
     
     data = []
     if type == 'FEM':
-        data = FEMDataT(yname, angles)
+        data = FEMDataT(yname)
     if type == 'Berk':
         data = BerkovichDataT(yname)
     if type == 'Exp':
@@ -174,14 +174,8 @@ def validation_two(yname, temp, low, hi, fac=1, typ='err'):
 
     print(ape)
     print(yname, "validation_exp ", np.mean(ape, axis=0), np.std(ape, axis=0))
-    if typ == 'n':
-        with open('Output.txt', 'a') as f:
-            f.write("exp raw " + exp + ' ' + str(fac) + ' ' + yname + ' [' + str(np.mean(y)) + ' ' + str(np.std(y)) + ']\n')
-    else:
-        with open('Output.txt', 'a') as f:
-            f.write("exp " + exp + ' ' + str(fac) + ' ' + yname + ' ' + str(np.mean(ape, axis=0)) + ' ' + str(np.std(ape, axis=0)) + '\n')
-    print("Saved to ", yname, ".dat.")
-    np.savetxt(yname + ".dat", np.hstack(y).T)
+    with open('Output.txt', 'a') as f:
+        f.write('validation_two [ ' + low + ', ' + hi + '] ' + temp + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' [' + stsize + '] ' + str(np.mean(ape, axis=0)) + ' ' + str(np.std(ape, axis=0)) + '\n')
 
 
 
