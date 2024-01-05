@@ -53,6 +53,9 @@ def nn(data, lay=9, wid=32):
     dde.saveplot(losshistory, train_state, issave=True, isplot=False)
     return train_state.best_metrics[0]
 
+'''
+This attempt to reproduce the nn in tensorflow does not quite produce the correct results yet.
+'''
 def nntf(data, lay=9, wid=32):
     model = models.Sequential()
     model.add(layers.InputLayer(input_shape=(data.train_x.shape[1],)))
@@ -127,8 +130,8 @@ def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32, ang
                 X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test
             )
 
-            #mape.append(dde.utils.apply(nn, (data1, lay, wid, )))
-            mape.append(dde.utils.apply(nntf, (data1, lay, wid, )))
+            mape.append(dde.utils.apply(nn, (data1, lay, wid, )))
+            #mape.append(dde.utils.apply(nntf, (data1, lay, wid, )))
 
     stsize = ''
     for digit in train_size:
@@ -136,7 +139,7 @@ def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32, ang
     print(mape)
     print(yname, 'validation_one ', trnames, ' ', tstname, ' ', str(train_size), ' ', np.mean(mape), ' ', np.std(mape))
     with open('Output.txt', 'a') as f:
-        f.write('tf:validation_one [' + ' '.join(map(str, trnames)) + '] ' +  tstname + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' [' + stsize + '] ' + str(np.mean(mape, axis=0)) + ' ' + str(np.std(mape, axis=0)) + '\n')
+        f.write('validation_one [' + ' '.join(map(str, trnames)) + '] ' +  tstname + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' [' + stsize + '] ' + str(np.mean(mape, axis=0)) + ' ' + str(np.std(mape, axis=0)) + '\n')
 
 def main(argument=None):
     if argument != None:
