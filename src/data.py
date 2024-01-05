@@ -5,7 +5,7 @@ from __future__ import print_function
 import numpy as np
 import pandas as pd
 
-class FEMDataT(object):
+class FEMData(object):
     def __init__(self, yname):
         self.yname = yname
         self.angles = angles
@@ -98,7 +98,7 @@ class ExpDataT(object):
             self.y = df['s' + e_plastic + ' (GPa)'].values[:, None]
 
 
-class BerkovichDataT(object):
+class BerkovichData(object):
     def __init__(self, yname, scale_c=False):
         self.yname = yname
         self.scale_c = scale_c

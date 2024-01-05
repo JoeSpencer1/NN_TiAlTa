@@ -9,7 +9,7 @@ from sklearn.svm import SVR
 from sklearn.model_selection import KFold, LeaveOneOut, RepeatedKFold, ShuffleSplit
 
 import deepxde as dde
-from data import BerkovichDataT, ExpDataT, FEMDataT, ModelData
+from data import BerkovichData, FEMData, ExpDataT
 import tensorflow as tf
 tf.config.run_functions_eagerly(False)
 from tensorflow.keras import layers, models
@@ -54,8 +54,6 @@ def nn(data, lay=9, wid=32):
     return train_state.best_metrics[0]
 
 '''
-This attempt to reproduce the nn in tensorflow does not quite produce the correct results yet.
-'''
 def nntf(data, lay=9, wid=32):
     model = models.Sequential()
     model.add(layers.InputLayer(input_shape=(data.train_x.shape[1],)))
@@ -66,6 +64,7 @@ def nntf(data, lay=9, wid=32):
     history = model.fit(data.train_x, data.train_y, epochs=30000, verbose=1)
     mape = model.evaluate(data.test_x, data.test_y, verbose=0)[1]
     return mape
+'''
 
 def mfnn(data, lay=2, wid=128):
     x_dim, y_dim = 4, 1
@@ -98,9 +97,9 @@ def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32):
     
     data = []
     if type == 'FEM':
-        data = FEMDataT(yname)
+        data = FEMData(yname)
     if type == 'Berk':
-        data = BerkovichDataT(yname)
+        data = BerkovichData(yname)
     if type == 'Exp':
         data = ExpDataT(trnames[0], yname)
     print(data)
@@ -144,11 +143,11 @@ def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32):
 def validation_two(yname, temp, low, hi, fac=1, lay=9, wid=32):
     dataexp = ExpDataT(temp, yname)
     if low == 'FEM':
-        datalow = FEMDataT(yname, [30, 45, 60])
+        datalow = FEMData(yname, [30, 45, 60])
     if low == 'Berk':
-        datalow = BerkovichDataT(yname)
+        datalow = BerkovichData(yname)
     if hi == 'Berk':
-        datahigh = BerkovichDataT(yname)
+        datahigh = BerkovichData(yname)
     if hi == 'Exp':
         datahigh = ExpDataT(temp, yname)
 
@@ -168,16 +167,44 @@ def validation_two(yname, temp, low, hi, fac=1, lay=9, wid=32):
             y_hi_test=dataexp.y,
             standardize=True
         )
-        res = dde.utils.apply(mfnn, (data,))
+        res = dde.utils.apply(mfnn, (data, lay, wid))
         ape.append(res[:2])
         y.append(res[2])
 
     print(ape)
-    print(yname, "validation_exp ", np.mean(ape, axis=0), np.std(ape, axis=0))
+    print(yname, "validation_two ", np.mean(ape, axis=0), np.std(ape, axis=0))
     with open('Output.txt', 'a') as f:
-        f.write('validation_two [ ' + low + ', ' + hi + '] ' + temp + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' [' + stsize + '] ' + str(np.mean(ape, axis=0)) + ' ' + str(np.std(ape, axis=0)) + '\n')
+        f.write('validation_two [ ' + low + ', ' + hi + '] ' + temp + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + str(np.mean(ape, axis=0)) + ' ' + str(np.std(ape, axis=0)) + '\n')
 
+def validation_three(yname, train_size, temp, fac=1, lay=9, wid=32):
+    dataexp = ExpDataT(temp, yname)
+    dataBerk = BerkovichData(yname)
+    dataFEM = FEMData(yname)
 
+    ape = []
+    y = []
+
+    kf = ShuffleSplit(n_splits=10, train_size=train_size, random_state=0)
+    for train_index, _ in kf.split(dataexp.X):
+        print('\nIteration: {}'.format(len(ape)))
+        print(train_index)
+        data = dde.data.MfDataSet(
+            X_lo_train=dataFEM.X,
+            y_lo_train=dataFEM.y,
+            X_hi_train=np.vstack((dataBerk.X, dataexp.X)),
+            y_hi_train=np.vstack((dataBerk.y, dataexp.y)),
+            X_hi_test=dataexp.X,
+            y_hi_test=dataexp.y
+        )
+        res = dde.apply(mfnn, (data, lay, wid))
+        ape.append(res[:2])
+        y.append(res[2])
+    
+    print(ape)
+    print(yname, "validation_three ", np.mean(ape, axis=0), np.std(ape, axis=0))
+    with open('Output.txt', 'a') as f:
+        f.write('validation_three ' + temp + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + str(np.mean(ape, axis=0)) + ' ' + str(np.std(ape, axis=0)) + '\n')
+    
 
 def main(argument=None):
     if argument != None:
