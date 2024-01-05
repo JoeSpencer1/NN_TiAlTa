@@ -67,13 +67,13 @@ def nntf(data, lay=9, wid=32):
     mape = model.evaluate(data.test_x, data.test_y, verbose=0)[1]
     return mape
 
-def mfnn(data, lay = 2):
+def mfnn(data, lay=2, wid=128):
     x_dim, y_dim = 4, 1
     activation = "selu"
     initializer = "LeCun normal"
     regularization = ["l2", 0.01]
     net = dde.maps.MfNN(
-        [x_dim] + [128] * lay + [y_dim],
+        [x_dim] + [wid] * lay + [y_dim],
         [8] * lay + [y_dim],
         activation,
         initializer,
@@ -141,7 +141,7 @@ def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32):
     with open('Output.txt', 'a') as f:
         f.write('validation_one [' + ' '.join(map(str, trnames)) + '] ' +  tstname + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' [' + stsize + '] ' + str(np.mean(mape, axis=0)) + ' ' + str(np.std(mape, axis=0)) + '\n')
 
-def validation_two(yname, temp, low, hi, fac=1, typ='err'):
+def validation_two(yname, temp, low, hi, fac=1, lay=9, wid=32):
     dataexp = ExpDataT(temp, yname)
     if low == 'FEM':
         datalow = FEMDataT(yname, [30, 45, 60])
