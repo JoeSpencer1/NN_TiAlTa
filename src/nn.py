@@ -11,8 +11,8 @@ from sklearn.model_selection import KFold, LeaveOneOut, RepeatedKFold, ShuffleSp
 import deepxde as dde
 from data import BerkovichDataT, ExpDataT, FEMDataT, ModelData
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
+tf.config.run_functions_eagerly(False)
+from tensorflow.keras import layers, models
 import os
 
 def svm(data):
@@ -54,27 +54,22 @@ def nn(data, lay=9, wid=32):
     return train_state.best_metrics[0]
 
 def nntf(data, lay=9, wid=32):
-    # Define the model
-    model = Sequential()
-    model.add(Dense(wid, input_dim=data.train_x.shape[1], activation='selu', kernel_initializer='lecun_normal', kernel_regularizer=tf.keras.regularizers.l2(0.01)))
-
-    for _ in range(lay - 1):
-        model.add(Dense(wid, activation='selu', kernel_initializer='lecun_normal', kernel_regularizer=tf.keras.regularizers.l2(0.01)))
-
-    model.add(Dense(1))
-
+    # Assuming data.train_x and data.train_y are your input and output data
+    model = models.Sequential()
+    # Add the input layer
+    model.add(layers.InputLayer(input_shape=(data.train_x.shape[1],)))
+    # Add hidden layers
+    for _ in range(lay):
+        model.add(layers.Dense(wid, activation='selu', kernel_initializer='lecun_normal', kernel_regularizer=tf.keras.regularizers.l2(0.01)))
+    # Add output layer
+    model.add(layers.Dense(1))  # Assuming you have one output node
     # Compile the model
-    optimizer = tf.keras.optimizers.Adam(learning_rate=0.0001 if data.train_x.shape[1] == 4 else 0.001)
-    model.compile(optimizer=optimizer, loss='mae', metrics=['mape'])
-
+    model.compile(optimizer='adam', loss='mean_absolute_percentage_error', metrics=['mae'])
     # Train the model
-    epochs = 30000
-    history = model.fit(data.train_x, data.train_y, epochs=epochs, verbose=1)
-
-    # Plot the loss if needed
-    # ...
-
-    return history.history['mape'][-1]
+    history = model.fit(data.train_x, data.train_y, epochs=30000, verbose=1)
+    # Evaluate the model
+    mape = model.evaluate(data.test_x, data.test_y, verbose=0)[1]
+    return mape
 
 def mfnn(data, lay = 2):
     x_dim, y_dim = 4, 1
@@ -148,7 +143,7 @@ def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32, ang
     print(mape)
     print(yname, 'validation_one ', trnames, ' ', tstname, ' ', str(train_size), ' ', np.mean(mape), ' ', np.std(mape))
     with open('Output.txt', 'a') as f:
-        f.write('validation_one [' + ' '.join(map(str, trnames)) + '] ' +  tstname + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' [' + stsize + '] ' + str(np.mean(mape, axis=0)) + ' ' + str(np.std(mape, axis=0)) + '\n')
+        f.write('tf:validation_one [' + ' '.join(map(str, trnames)) + '] ' +  tstname + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' [' + stsize + '] ' + str(np.mean(mape, axis=0)) + ' ' + str(np.std(mape, axis=0)) + '\n')
 
 def main(argument=None):
     if argument != None:
