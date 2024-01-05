@@ -10,9 +10,7 @@ from sklearn.model_selection import KFold, LeaveOneOut, RepeatedKFold, ShuffleSp
 
 import deepxde as dde
 from data import BerkovichDataT, ExpDataT, FEMDataT, ModelData
-import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
+
 import os
 
 def svm(data):
@@ -52,29 +50,6 @@ def nn(data, lay=9, wid=32):
     losshistory, train_state = model.train(epochs=epochs)
     dde.saveplot(losshistory, train_state, issave=True, isplot=False)
     return train_state.best_metrics[0]
-
-def nntf(data, lay=9, wid=32):
-    # Define the model
-    model = Sequential()
-    model.add(Dense(wid, input_dim=data.train_x.shape[1], activation='selu', kernel_initializer='lecun_normal', kernel_regularizer=tf.keras.regularizers.l2(0.01)))
-
-    for _ in range(lay - 1):
-        model.add(Dense(wid, activation='selu', kernel_initializer='lecun_normal', kernel_regularizer=tf.keras.regularizers.l2(0.01)))
-
-    model.add(Dense(1))
-
-    # Compile the model
-    optimizer = tf.keras.optimizers.Adam(learning_rate=0.0001 if data.train_x.shape[1] == 4 else 0.001)
-    model.compile(optimizer=optimizer, loss='mae', metrics=['mape'])
-
-    # Train the model
-    epochs = 30000
-    history = model.fit(data.train_x, data.train_y, epochs=epochs, verbose=1)
-
-    # Plot the loss if needed
-    # ...
-
-    return history.history['mape'][-1]
 
 def mfnn(data, lay = 2):
     x_dim, y_dim = 4, 1
@@ -139,8 +114,7 @@ def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32, ang
                 X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test
             )
 
-            #mape.append(dde.utils.apply(nn, (data1, lay, wid, )))
-            mape.append(dde.utils.apply(nntf, (data1, lay, wid, )))
+            mape.append(dde.utils.apply(nn, (data1, lay, wid, )))
 
     stsize = ''
     for digit in train_size:

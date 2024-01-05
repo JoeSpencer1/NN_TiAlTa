@@ -139,8 +139,7 @@ def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32, ang
                 X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test
             )
 
-            #mape.append(dde.utils.apply(nn, (data1, lay, wid, )))
-            mape.append(dde.utils.apply(nntf, (data1, lay, wid, )))
+            mape.append(dde.utils.apply(nn, (data1, lay, wid, )))
 
     stsize = ''
     for digit in train_size:
