@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 from scipy import optimize
 
-from data import BerkovichData, ExpData, FEMData
+from data import BerkovichDataT, ExpDataT, FEMDataT
 '''
 In this file you need to select conical or Berkovich indentations for c* in forward_model and inverse_model. In test_inverse you also need to select d for E* and σy.
 '''

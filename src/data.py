@@ -17,103 +17,34 @@ class FEMDataT(object):
             self.read_1angle()
         elif len(angles) == 2:
             self.read_2angles()
-        elif len(angles) == 4:
-            self.read_4angles()
+        elif len(angles) == 3:
+            self.read_3angles()
 
-    def read_1angle(self):
-        df = pd.read_csv('../data/FEM_{}deg.csv'.format(self.angles[0]))
-        df['E* (GPa)'] = EtoEr(df['E (GPa)', 'nu'])
-        df['sy/E*'] = df['sy (GPa)'] / df['E* (GPa)']
-        # df = df.loc[~((df['n'] > 0.3) & (df['sy/E*'] >= 0.03))]
-        #
-        df = df.loc[df['n'] <= 0.3]
-        # Scale c* from Conical to Berkovich
-        # df['dP/dh (N/m)'] *= 1.167 / 1.128
-        # Add noise
-        # sigma = 0.2
-        # df['E* (GPa)'] *= 1 + sigma * np.random.randn(len(df))
-        # df['sy (GPa)'] *= 1 + sigma * np.random.randn(len(df))
-        #
-        print(df.describe())
-
-        self.X = df[['C (GPa)', 'dP/dh (N/m)', 'Wp/Wt']].values
-        if self.yname == 'Estar':
-            self.y = df['E* (GPa)'].values[:, None]
-        elif self.yname == 'sigma_y':
-            self.y = df['sy (GPa)'].values[:, None]
-        elif self.yname.startswith('sigma_'):
-            e_plastic = float(self.yname[6:])
-            self.y = (
-                df['sy (GPa)']
-                * (1 + e_plastic * df['E (GPa)'] / df['sy (GPa)']) ** df['n']
-            ).values[:, None]
-
-    def read_2angles(self):
-        df1 = pd.read_csv('../data/FEM_70deg.csv')
-        df2 = pd.read_csv('../data/FEM_60deg.csv')
-        df = df1.set_index('Case').join(
-            df2.set_index('Case'), how='inner', rsuffix='_60'
-        )
-        # df = df.loc[:100]
-        print(df.describe())
-
-        self.X = df[['C (GPa)', 'dP/dh (N/m)', 'Wp/Wt', 'C (GPa)_60']].values
-        # self.X = df[['C (GPa)', 'dP/dh (N/m)', 'C (GPa)_60', 'dP/dh (N/m)_60']].values
-        if self.yname == 'Estar':
-            self.y = EtoEr(df['E (GPa)', 'nu'].values)[:, None]
-        elif self.yname == 'sigma_y':
-            self.y = df['sy (GPa)'].values[:, None]
-
-    def read_4angles(self):
-        df1 = pd.read_csv('../data/FEM_50deg.csv')
-        df2 = pd.read_csv('../data/FEM_60deg.csv')
-        df3 = pd.read_csv('../data/FEM_70deg.csv')
-        df4 = pd.read_csv('../data/FEM_80deg.csv')
+    def read_3angles(self):
+        df1 = pd.read_csv('../data/FEM_30deg.csv')
+        df2 = pd.read_csv('../data/FEM_45deg.csv')
+        df3 = pd.read_csv('../data/FEM_60deg.csv')
         df = (
             df3.set_index('Case')
-            .join(df1.set_index('Case'), how='inner', rsuffix='_50')
-            .join(df2.set_index('Case'), how='inner', rsuffix='_60')
-            .join(df4.set_index('Case'), how='inner', rsuffix='_80')
+            .join(df1.set_index('Case'), how='inner', rsuffix='_30')
+            .join(df2.set_index('Case'), how='inner', rsuffix='_45')
+            .join(df3.set_index('Case'), how='inner', rsuffix='_60')
         )
         print(df.describe())
 
         self.X = df[
             [
-                'C (GPa)',
+                'C (GPa)_30',
+                'C (GPa)_45',
+                'C (GPa)_60',
                 'dP/dh (N/m)',
                 'Wp/Wt',
-                'C (GPa)_50',
-                'C (GPa)_60',
-                'C (GPa)_80',
             ]
         ].values
         if self.yname == 'Estar':
             self.y = EtoEr(df['E (GPa)', 'nu'].values)[:, None]
         elif self.yname == 'sigma_y':
             self.y = df['sy (GPa)'].values[:, None]
-
-
-class ModelData(object):
-    def __init__(self, yname, n, model):
-        self.yname = yname
-        self.n = n
-        self.model = model
-
-        self.X = None
-        self.y = None
-
-        self.read()
-
-    def read(self):
-        df = pd.read_csv('model_{}.csv'.format(self.model))
-        self.X = df[['C (GPa)', 'dP/dh (N/m)', 'WpWt']].values
-        if self.yname == 'Estar':
-            self.y = EtoEr(df['E (GPa)', 'nu'].values)[:, None]
-        elif self.yname == 'sigma_y':
-            self.y = df['sy (GPa)'].values[:, None]
-        idx = np.random.choice(np.arange(len(self.X)), self.n, replace=False)
-        self.X = self.X[idx]
-        self.y = self.y[idx]
 
 
 class ExpDataT(object):
