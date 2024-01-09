@@ -279,3 +279,43 @@ validation_one TI33_750a TI33_750a Estar 9 32 [10 10 10 ] 2.6173031 1.3194628
 validation_one TI33_750a TI33_750a Estar 9 32 [20 20 20 ] 1.9064773 1.7983129
 validation_one [TI33_750] TI33_750 Estar 9 32 [20 ] 2.127493 1.9437919
 pt:validation_one [TI33_750] TI33_750 Estar 9 32 [20 ] 0.10078774 0.05360606
+
+validation_one [TI33_25] TI33_25 sigma_y 9 32 [1 ] 16.298481 11.107712
+validation_one [TI33_25] TI33_25 sigma_y 9 32 [2 ] 25.712402 16.251955
+validation_one [TI33_25] TI33_25 sigma_y 9 32 [3 ] 13.143738 12.229436
+validation_one [TI33_25] TI33_25 sigma_y 9 32 [4 ] 17.928295 17.120594
+validation_one [TI33_25] TI33_25 sigma_y 9 32 [5 ] 49.467793 47.07572
+validation_one [TI33_25] TI33_25 sigma_y 9 32 [6 ] 20.973923 22.357649
+validation_one [TI33_25] TI33_25 sigma_y 9 32 [8 ] 17.397984 14.675819
+validation_one [TI33_25] TI33_25 sigma_y 9 32 [10 ] 13.527865 12.130457
+validation_one [TI33_25] TI33_25 sigma_y 9 32 [20 ] 12.241926 7.981076
+
+validation_one [TI33_25] TI33_25 Estar 9 32 [1 ] 8.524261 1.5966234
+validation_one [TI33_25] TI33_25 Estar 9 32 [2 ] 7.3441963 2.0469677
+validation_one [TI33_25] TI33_25 Estar 9 32 [3 ] 6.138986 2.0446553
+validation_one [TI33_25] TI33_25 Estar 9 32 [4 ] 5.6723385 1.6022279
+validation_one [TI33_25] TI33_25 Estar 9 32 [5 ] 5.334794 1.518541
+validation_one [TI33_25] TI33_25 Estar 9 32 [6 ] 4.9967904 1.2272456
+validation_one [TI33_25] TI33_25 Estar 9 32 [8 ] 5.052113 1.4478174
+validation_one [TI33_25] TI33_25 Estar 9 32 [10 ] 4.7445893 1.6975716
+validation_one [TI33_25] TI33_25 Estar 9 32 [20 ] 4.0668025 1.919474
+
+validation_two [ Berk, Exp] TI33_25 Estar 9 32[0.04772829 0.03345381] [0. 0.]
+
+validation_two [ Berk, Exp] TI33_25 sigma_y 9 32[0.13511241 0.11075563] [0. 0.]
+validation_two [ Berk, Exp] TI33_25 Estar 9 32[0.04955292 0.02357516] [0.00539398 0.00051751]
+validation_two [ Berk, Exp] TI33_25 sigma_y 9 32[0.14249583 0.07282659] [0.00763281 0.00150977]
+validation_two [ Berk, Exp] TI33_25 Estar 9 32[0.02504141 0.01705515] [0.01234024 0.00662647]
+validation_two [ Berk, Exp] TI33_25 sigma_y 9 32[0.20100019 0.07333729] [0.17058454 0.02662135]
+validation_two [ Berk, Exp] TI33_25 Estar 9 32[0.03741064 0.01861549] [0.01837077 0.00647846]
+validation_two [ Berk, Exp] TI33_25 sigma_y 9 32[0.14105052 0.12402746] [0.01580981 0.03688873]
+validation_two [ Berk, Exp] TI33_25 Estar 9 32[0.04022418 0.02142102] [0.01192489 0.00442039]
+validation_two [ Berk, Exp] TI33_25 sigma_y 9 32[0.16821606 0.10261862] [0.03827596 0.03668714]
+validation_two [ Berk, Exp] TI33_25 Estar 9 32[0.03883797 0.01635006] [0.01659479 0.00410747]
+validation_two [ Berk, Exp] TI33_25 sigma_y 9 32[0.16625593 0.10857527] [0.04184655 0.03535145]
+validation_two [ Berk, Exp] TI33_25 Estar 9 32[0.0294193  0.01670762] [0.02008158 0.00493859]
+validation_two [ Berk, Exp] TI33_25 sigma_y 9 32[0.16164872 0.11338683] [0.06276971 0.05119138]
+validation_two [ Berk, Exp] TI33_25 Estar 9 32[0.04159297 0.02332219] [0.01604498 0.00834495]
+validation_two [ Berk, Exp] TI33_25 sigma_y 9 32[0.17195019 0.1208494 ] [0.07670003 0.05699555]
+validation_two [ Berk, Exp] TI33_25 Estar 9 32[0.03272342 0.0151095 ] [0.01955287 0.00620695]
+validation_two [ Berk, Exp] TI33_25 sigma_y 9 32[0.17479111 0.1054616 ] [0.18068599 0.05897239]
