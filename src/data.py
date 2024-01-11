@@ -10,7 +10,7 @@ class FEMData(object):
         self.yname = yname
         #self.angles = angles
         self.angles = ['../data/TI33_conical_30.csv', '../data/TI33_conical_45.csv', '../data/TI33_conical_60.csv']
-        print('Size: '+len(self.angles))
+        print('Size: '+str(len(self.angles)))
 
         self.X = None
         self.y = None
@@ -25,23 +25,18 @@ class FEMData(object):
             self.read_3angles()'''
 
     def read_angles(self):
-        df1 = pd.read_csv('../data/TI33_conical_30.csv')
-        df2 = pd.read_csv('../data/TI33_conical_45.csv')
-        df3 = pd.read_csv('../data/TI33_conical_60.csv')
-        df = (
-            df3.set_index('Case')
-            .join(df2.set_index('Case'), how='inner', rsuffix='_45')
-            .join(df3.set_index('Case'), how='inner', rsuffix='_60')
-        )
-        print(df.describe())
+        df_list = []
+        for angle in self.angles:
+            df_list.append(pd.read_csv(angle))
+            print(df_list[-1].describe())
 
-        self.X = df[
-            [
+        df = pd.concat(df_list, ignore_index=True)
+
+        self.X = df[[
                 'C (GPa)',
                 'dP/dh (N/m)',
                 'Wp/Wt'
-            ]
-        ].values
+            ]].values
         if self.yname == 'Estar':
             self.y = EtoEr(df['E (GPa)'].values, df['nu'].values)[:, None]
         elif self.yname == 'sigma_y':
