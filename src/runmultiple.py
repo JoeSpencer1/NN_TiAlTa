@@ -25,7 +25,13 @@ if __name__ == '__main__':
         "validation_two('Estar', 20, 'TI33_25', 'FEM', 'Berk', lay=2)",
         "validation_two('sigma_y', 0, 'TI33_25', 'FEM', 'Berk', lay=2)",
         "validation_two('sigma_y', 1, 'TI33_25', 'FEM', 'Berk', lay=2)",
-        "validation_two('sigma_y', 20, 'TI33_25', 'FEM', 'Berk', lay=2)"
+        "validation_two('sigma_y', 20, 'TI33_25', 'FEM', 'Berk', lay=2)",
+        "validation_three('Estar', 0, 'TI33_25', 'TI33_25')",
+        "validation_three('Estar', 1, 'TI33_25', 'TI33_25')",
+        "validation_three('Estar', 20, 'TI33_25', 'TI33_25')",
+        "validation_three('sigma_y', 0, 'TI33_25', 'TI33_25')",
+        "validation_three('sigma_y', 1, 'TI33_25', 'TI33_25')",
+        "validation_three('sigma_y', 20, 'TI33_25', 'TI33_25')"
         ])
     
     processes = []
@@ -39,12 +45,6 @@ if __name__ == '__main__':
     for process in processes:
         process.join()
         '''
-        "validation_three('Estar', 0, 'TI33_25', 'TI33_25')",
-        "validation_three('Estar', 1, 'TI33_25', 'TI33_25')",
-        "validation_three('Estar', 20, 'TI33_25', 'TI33_25')",
-        "validation_three('sigma_y', 0, 'TI33_25', 'TI33_25')",
-        "validation_three('sigma_y', 1, 'TI33_25', 'TI33_25')",
-        "validation_three('sigma_y', 20, 'TI33_25', 'TI33_25')"
         '''
         '''
         "validation_two('Estar', 1, 'Al6061', 'FEM', 'Exp', lay=2)",
