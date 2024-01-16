@@ -8,24 +8,24 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
-        "validation_two('Estar', 1, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('Estar', 2, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('Estar', 3, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('Estar', 4, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('Estar', 5, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('Estar', 6, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('Estar', 8, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('Estar', 10, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('Estar', 20, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('sigma_y', 1, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('sigma_y', 2, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('sigma_y', 3, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('sigma_y', 4, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('sigma_y', 5, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('sigma_y', 6, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('sigma_y', 8, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('sigma_y', 10, 'TI33_25', 'FEM', 'Exp', lay=1)",
-        "validation_two('sigma_y', 20, 'TI33_25', 'FEM', 'Exp', lay=1)"
+        "validation_two('Estar', 0, 'TI33_25', 'Berk', 'Exp', lay=2)",
+        "validation_two('Estar', 1, 'TI33_25', 'Berk', 'Exp', lay=2)",
+        "validation_two('Estar', 20, 'TI33_25', 'Berk', 'Exp', lay=2)",
+        "validation_two('sigma_y', 0, 'TI33_25', 'Berk', 'Exp', lay=2)",
+        "validation_two('sigma_y', 1, 'TI33_25', 'Berk', 'Exp', lay=2)",
+        "validation_two('sigma_y', 20, 'TI33_25', 'Berk', 'Exp', lay=2)",
+        "validation_two('Estar', 0, 'TI33_25', 'FEM', 'Exp', lay=2)",
+        "validation_two('Estar', 1, 'TI33_25', 'FEM', 'Exp', lay=2)",
+        "validation_two('Estar', 20, 'TI33_25', 'FEM', 'Exp', lay=2)",
+        "validation_two('sigma_y', 0, 'TI33_25', 'FEM', 'Exp', lay=2)",
+        "validation_two('sigma_y', 1, 'TI33_25', 'FEM', 'Exp', lay=2)",
+        "validation_two('sigma_y', 20, 'TI33_25', 'FEM', 'Exp', lay=2)",
+        "validation_two('Estar', 0, 'TI33_25', 'FEM', 'Berk', lay=2)",
+        "validation_two('Estar', 1, 'TI33_25', 'FEM', 'Berk', lay=2)",
+        "validation_two('Estar', 20, 'TI33_25', 'FEM', 'Berk', lay=2)",
+        "validation_two('sigma_y', 0, 'TI33_25', 'FEM', 'Berk', lay=2)",
+        "validation_two('sigma_y', 1, 'TI33_25', 'FEM', 'Berk', lay=2)",
+        "validation_two('sigma_y', 20, 'TI33_25', 'FEM', 'Berk', lay=2)"
         ])
     
     processes = []
@@ -38,28 +38,53 @@ if __name__ == '__main__':
         process.start()
     for process in processes:
         process.join()
-
         '''
-        "validation_two('Estar', 1, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('Estar', 2, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('Estar', 3, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('Estar', 4, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('Estar', 5, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('Estar', 6, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('Estar', 8, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('Estar', 10, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('Estar', 20, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('sigma_y', 1, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('sigma_y', 2, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('sigma_y', 3, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('sigma_y', 4, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('sigma_y', 5, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('sigma_y', 6, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('sigma_y', 8, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('sigma_y', 10, 'TI33_25', 'Berk', 'Exp', lay=2)",
-        "validation_two('sigma_y', 20, 'TI33_25', 'Berk', 'Exp', lay=2)"
+        "validation_three('Estar', 0, 'TI33_25', 'TI33_25')",
+        "validation_three('Estar', 1, 'TI33_25', 'TI33_25')",
+        "validation_three('Estar', 20, 'TI33_25', 'TI33_25')",
+        "validation_three('sigma_y', 0, 'TI33_25', 'TI33_25')",
+        "validation_three('sigma_y', 1, 'TI33_25', 'TI33_25')",
+        "validation_three('sigma_y', 20, 'TI33_25', 'TI33_25')"
         '''
         '''
+        "validation_two('Estar', 1, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('Estar', 2, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('Estar', 3, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('Estar', 4, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('Estar', 5, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('Estar', 6, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('Estar', 8, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('Estar', 10, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('Estar', 20, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('sigma_y', 1, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('sigma_y', 2, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('sigma_y', 3, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('sigma_y', 4, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('sigma_y', 5, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('sigma_y', 6, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('sigma_y', 8, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('sigma_y', 10, 'Al6061', 'FEM', 'Exp', lay=2)",
+        "validation_two('sigma_y', 20, 'Al6061', 'FEM', 'Exp', lay=2)",
+        '''
+        '''
+        "validation_two('Estar', 1, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('Estar', 2, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('Estar', 3, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('Estar', 4, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('Estar', 5, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('Estar', 6, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('Estar', 8, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('Estar', 10, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('Estar', 20, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('sigma_y', 1, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('sigma_y', 2, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('sigma_y', 3, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('sigma_y', 4, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('sigma_y', 5, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('sigma_y', 6, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('sigma_y', 8, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('sigma_y', 10, 'Al6061', 'Berk', 'Exp', lay=2)",
+        "validation_two('sigma_y', 20, 'Al6061', 'Berk', 'Exp', lay=2)"
         '''
         '''
         "validation_one('Estar', ['TI33_25'], 'TI33_25', 'Exp', [1])",
