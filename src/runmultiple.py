@@ -8,6 +8,43 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
+        "validation_three('Estar', 20, 'B3090', 'B3090', lay=2)",
+        "validation_three('Estar', 20, 'B3090', 'B3090', lay=2)"
+        ])
+    
+    processes = []
+    num_processes = len(arguments)
+    for i in range(num_processes):        
+        process = multiprocessing.Process(target=run_main, args=(arguments[i],))
+        processes.append(process)
+
+    for process in processes:
+        process.start()
+    for process in processes:
+        process.join()
+        '''
+        
+        '''
+        '''
+        "validation_two('Estar', 5, 'TI33_25', 'FEM', 'Berk', lay=2)",
+        "validation_two('Estar', 10, 'TI33_25', 'FEM', 'Berk', lay=2)",
+        "validation_two('Estar', 20, 'TI33_25', 'FEM', 'Berk', lay=2)",
+        "validation_two('sigma_y', 0, 'TI33_25', 'FEM', 'Berk', lay=2)",
+        "validation_two('sigma_y', 5, 'TI33_25', 'FEM', 'Berk', lay=2)",
+        "validation_two('sigma_y', 10, 'TI33_25', 'FEM', 'Berk', lay=2)",
+        "validation_two('sigma_y', 20, 'TI33_25', 'FEM', 'Berk', lay=2)",
+        '''
+        '''
+        "validation_three('Estar', 0, 'TI33_25', 'TI33_25')",
+        "validation_three('Estar', 5, 'TI33_25', 'TI33_25')",
+        "validation_three('Estar', 10, 'TI33_25', 'TI33_25')",
+        "validation_three('Estar', 20, 'TI33_25', 'TI33_25')",
+        "validation_three('sigma_y', 0, 'TI33_25', 'TI33_25')",
+        "validation_three('sigma_y', 5, 'TI33_25', 'TI33_25')",
+        "validation_three('sigma_y', 10, 'TI33_25', 'TI33_25')",
+        "validation_three('sigma_y', 20, 'TI33_25', 'TI33_25')"
+        '''
+        '''
         "validation_two('Estar', 0, 'TI33_25', 'Berk', 'Exp', lay=2)",
         "validation_two('Estar', 1, 'TI33_25', 'Berk', 'Exp', lay=2)",
         "validation_two('Estar', 20, 'TI33_25', 'Berk', 'Exp', lay=2)",
@@ -26,25 +63,6 @@ if __name__ == '__main__':
         "validation_two('sigma_y', 0, 'TI33_25', 'FEM', 'Berk', lay=2)",
         "validation_two('sigma_y', 1, 'TI33_25', 'FEM', 'Berk', lay=2)",
         "validation_two('sigma_y', 20, 'TI33_25', 'FEM', 'Berk', lay=2)",
-        "validation_three('Estar', 0, 'TI33_25', 'TI33_25')",
-        "validation_three('Estar', 1, 'TI33_25', 'TI33_25')",
-        "validation_three('Estar', 20, 'TI33_25', 'TI33_25')",
-        "validation_three('sigma_y', 0, 'TI33_25', 'TI33_25')",
-        "validation_three('sigma_y', 1, 'TI33_25', 'TI33_25')",
-        "validation_three('sigma_y', 20, 'TI33_25', 'TI33_25')"
-        ])
-    
-    processes = []
-    num_processes = len(arguments)
-    for i in range(num_processes):        
-        process = multiprocessing.Process(target=run_main, args=(arguments[i],))
-        processes.append(process)
-
-    for process in processes:
-        process.start()
-    for process in processes:
-        process.join()
-        '''
         '''
         '''
         "validation_two('Estar', 1, 'Al6061', 'FEM', 'Exp', lay=2)",

@@ -150,6 +150,7 @@ plt.show()
 '''
 
 Bqx = [0.125, 0.25, 0.5]
+'''
 Bqy = [0.003352735, 0.013410939, 0.140242188]
 Blx = [0.125, 0.25, 0.5]
 Bly = [0.032266477, 0.12906591, 0.354190574]
@@ -160,6 +161,18 @@ C45x = [0.0125, 0.025, 0.05]
 C45y = [0.001166093, 0.004664373, 0.017291087]
 C60x = [0.0125, 0.025, 0.05, 0.1]
 C60y = [0.004029647, 0.016118587, 0.049746948, 0.17236334]
+Cfx = [0.0001, 1]
+'''
+Bqy = [0.00843, 0.03372, 0.05746]
+Blx = [0.125, 0.25, 0.5]
+Bly = []
+Bfx = [0.01, 1.5]
+C30x = [0.0125, 0.025, 0.05, 0.1]
+C30y = []
+C45x = [0.0125, 0.025, 0.05]
+C45y = []
+C60x = [0.0125, 0.025, 0.05, 0.1]
+C60y = []
 Cfx = [0.0001, 1]
 def equation(x, y, eqx):
     l = len(x) - 1
@@ -214,7 +227,7 @@ leg = ax.legend(loc='lower right')
 leg.set_title('Element order')
 plt.savefig('/Users/joe/Desktop/figure4.jpeg', dpi=800, bbox_inches="tight")
 plt.show()
-
+''''''
 '''
 df = pd.read_csv('../data/model/compare.csv', skiprows=1)
 fig, ax = plt.subplots()
@@ -253,3 +266,60 @@ leg = ax.legend()
 plt.savefig('/Users/joe/Desktop/figure5.jpeg', dpi=800, bbox_inches="tight")
 plt.show()
 '''
+
+n = [0, 5, 10, 20]
+threeσ = [376.0572733054678, 39.5938033843615, 41.8456251546561, 37.20982506131551]
+εthreeσ = [196.86908836541178, 21.68148559652081, 28.00063811133066, 28.472024602496692]
+threeE = [27.637875079481226, 1.8371707313939147, 0.9618014686986018, 0.6094185678582443]
+εthreeE = [16.76186263408408, 0.7040937053244141, 0.5416984171832155, 0.1433441723448427]
+FEAExpσ = [10340.612, 30.692963398804512, 17.966434316750032, 20.30981467660651]
+εFEAExpσ = [4267.742, 24.432717466772974, 17.157632184190486, 15.24454689795884]
+FEAExpE = [452.68634, 3.1407760620117187, 0.8857396979081005, 0.48970565795898435]
+εFEAExpE = [60.762478, 2.1787414072193108, 0.20985072884833247, 0.24028577974579077]
+BerExpσ = [3993.4524, 29.085435433129238, 7.699660556574902, 3.526308835701772]
+εBerExpσ = [2809.7415, 11.931510220287686, 4.180595260183477, 4.05852053586458]
+BerExpE = [43.70184, 5.2056050250404775, 2.3034492091128698, 0.5525932111238178]
+εBerExpE = [31.433922, 2.364614922311323, 2.124353990665903, 0.8359455695302426]
+FEABerσ = [16360.667, 224.50905550158168, 318.32331392100775, 411.2046768176986]
+εFEABerσ = [10235.277, 105.82854182729396, 210.21371442021476, 242.1779691403267]
+FEABerE = [462.53745, 50.763517706017744, 35.24591202986868, 35.340911950563125]
+εFEABerE = [74.264534, 20.539216787616077, 17.80116783395519, 8.634077709953575]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n, threeσ, yerr = εthreeσ, color = 'blue', label = "All three")
+ax1.errorbar(n, BerExpσ, yerr = εBerExpσ, color = 'green', label = "Berkovich/Exp")
+ax1.errorbar(n, FEAExpσ, yerr = εFEAExpσ, color = 'grey', label = "FEA/Exp")
+ax1.errorbar(n, FEABerσ, yerr = εFEABerσ, color = 'red', label = "FEA/Berkovich")
+ax1.set_yscale('linear')
+ax1.set_ylim([0, 1200])
+ax1.set_xlim([-0.5, 21])
+ax1.set_xticks([0, 5, 10, 15, 20])
+ax1.set_yticks([0, 100, 200, 300, 400, 500, 1000])
+ax1.set_yticklabels([0, 100, 200, 300, 400, 500, 1000])
+ax1.legend()
+ax1.set_ylabel("MAPE (%)")
+ax1.set_xlabel("Experimental training data size")
+ax1.annotate("A: $\sigma_{y}$", xy=(0.15, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(n, threeE, yerr = εthreeE, color = 'blue', label = "All three")
+ax2.errorbar(n, BerExpE, yerr = εBerExpE, color = 'green', label = "Berkovich/Exp")
+ax2.errorbar(n, FEAExpE, yerr = εFEAExpE, color = 'grey', label = "FEA/Exp")
+ax2.errorbar(n, FEABerE, yerr = εFEABerE, color = 'red', label = "FEA/Berkovich")
+ax2.set_yscale('linear')
+ax2.set_ylim([0, 500])
+ax2.set_xlim([-0.5, 21])
+ax2.set_xticks([0, 5, 10, 15, 20])
+ax2.set_yticks([0, 40, 100, 300])
+ax2.set_yticklabels([0, 40, 100, 300])
+ax2.legend()
+ax2.set_ylabel("MAPE (%)")
+ax2.set_xlabel("Experimental training data size")
+plt.subplots_adjust(bottom=0.180)
+fig.tight_layout()
+ax2.annotate("B: $E_{r}$", xy=(0.15, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/figure1.jpeg", dpi=800, bbox_inches="tight")
+plt.show()

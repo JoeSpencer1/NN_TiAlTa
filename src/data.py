@@ -10,9 +10,11 @@ class FEMData(object):
         self.yname = yname
         #self.angles = angles
         #self.angles = ['../data/TI33_conical_30.csv', '../data/TI33_conical_45.csv', '../data/TI33_conical_60.csv']
-        self.angles = ['../data/TI33_conical_30_i.csv', '../data/TI33_conical_45_i.csv', '../data/TI33_conical_60_i.csv']
+        #self.angles = ['../data/TI33_conical_30_i.csv', '../data/TI33_conical_45_i.csv', '../data/TI33_conical_60_i.csv']
         #self.angles = ['../data/TI33_conical_30_i.csv']
-        #self.angles = ['../data/FEM_70deg.csv']
+            #self.angles = ['../data/TI33_conical_30.csv']
+        #self.angles = ['../data/TI33_conical_30_i.csv', '../data/TI33_conical_30.csv']
+        self.angles = ['../data/FEM_70deg.csv']
         print('Size: '+str(len(self.angles)))
 
         self.X = None
@@ -153,8 +155,8 @@ class BerkovichData(object):
         self.read()
 
     def read(self):
-        #df = pd.read_csv('../data/Berkovich.csv')
-        df = pd.read_csv('../data/TI33_Berkovich.csv')
+        df = pd.read_csv('../data/Berkovich.csv')
+        #df = pd.read_csv('../data/TI33_Berkovich.csv')
         if self.scale_c:
             df['dP/dh (N/m)'] *= 1.128 / 1.167
         print(df.describe())

@@ -154,11 +154,13 @@ def validation_two(yname, train_size, exp, low, hi, lay=2, wid=128):
     if train_size == 0:
         kf = ShuffleSplit(n_splits=10, train_size=10, random_state=0)
         iter = 0
-        if len(dataexp.X) < len(datalow.X):
-            short = dataexp
-        else:
-            short = datalow
-        for train_index, _ in kf.split(short.X):
+        while len(dataexp.X) < train_size:
+            dataexp.X=np.vstack((dataexp.X, dataexp.X))
+            dataexp.y=np.vstack((dataexp.y, dataexp.y))
+        while len(datalow.X) < len(dataexp.X):
+            datalow.X=np.vstack((datalow.X, datalow.X))
+            datalow.y=np.vstack((datalow.y, datalow.y))
+        for train_index, _ in kf.split(dataexp.X):
             iter += 1
             print("\nCross-validation iteration: {}".format(iter))
 
@@ -172,11 +174,16 @@ def validation_two(yname, train_size, exp, low, hi, lay=2, wid=128):
             ape.append(dde.utils.apply(nn, (data, lay, wid, )))
     else:
         kf = ShuffleSplit(n_splits=10, train_size=train_size, random_state=0)
-        if len(dataexp.X) < len(datalow.X):
-            short = dataexp
-        else:
-            short = datalow
-        for train_index, _ in kf.split(short.X):
+        while len(dataexp.X) < train_size:
+            dataexp.X=np.vstack((dataexp.X, dataexp.X))
+            dataexp.y=np.vstack((dataexp.y, dataexp.y))
+        while len(datalow.X) < train_size:
+            datalow.X=np.vstack((datalow.X, datalow.X))
+            datalow.y=np.vstack((datalow.y, datalow.y))
+        while len(datahigh.X) < train_size:
+            datahigh.X=np.vstack((datalow.X, datalow.X))
+            datahigh.y=np.vstack((datalow.y, datalow.y))
+        for train_index, _ in kf.split(dataexp.X):
             print("\nIteration: {}".format(len(ape)))
             print(train_index)
             data = dde.data.MfDataSet(
@@ -209,7 +216,7 @@ def validation_three(yname, train_size, train, exp, lay=2, wid=128):
 
     ape = []
     y = []
-    
+
     if train_size == 0:
         kf = ShuffleSplit(n_splits=10, train_size=10, random_state=0)
         if len(dataexp.X) < len(dataFEM.X):
@@ -232,31 +239,40 @@ def validation_three(yname, train_size, train, exp, lay=2, wid=128):
             ape.append(res[:2])
             y.append(res[2])
     else:
-        kf = ShuffleSplit(n_splits=10, train_size=train_size, random_state=0)
-        if len(dataexp.X) < len(dataFEM.X):
-            short = dataexp
-        else:
-            short = dataFEM
-        for train_index, _ in kf.split(short.X):
-            print("\nIteration: {}".format(len(ape)))
-            print(train_index)
-            data = dde.data.MfDataSet(
-                X_lo_train=dataFEM.X,
-                X_hi_train=np.vstack((datatrain.X[train_index], dataBerk.X)),
-                y_lo_train=dataFEM.y,
-                y_hi_train=np.vstack((datatrain.y[train_index], dataBerk.y)),
-                X_hi_test=dataexp.X,
-                y_hi_test=dataexp.y,
-                standardize=True
-            )
-            res = dde.utils.apply(mfnn, (data, lay, wid))
-            ape.append(res[:2])
-            y.append(res[2])
+        div = 10
+        for _ in range(div):
+            kf = ShuffleSplit(n_splits=10, train_size=train_size, random_state=0)
+            og = len(datatrain.X)
+            for _ in range(int((div-0.5)*og/div)):
+                size = datatrain.y.shape[0]
+                index = np.random.choice(size)
+                datatrain.X = np.delete(datatrain.X, index, axis=0)
+                datatrain.y = np.delete(datatrain.y, index, axis=0)
+            while len(datatrain.X) < og:
+                datatrain.X = np.concatenate((datatrain.X, datatrain.X), axis=0)
+                datatrain.y = np.concatenate((datatrain.y, datatrain.y), axis=0)
+            for train_index, _ in kf.split(datatrain.X):
+                print("\nIteration: {}".format(len(ape)))
+                print(train_index)
+                data = dde.data.MfDataSet(
+                    X_lo_train=dataFEM.X,
+                    X_hi_train=np.vstack((dataBerk.X, datatrain.X[train_index])),
+                    y_lo_train=dataFEM.y,
+                    y_hi_train=np.vstack((dataBerk.y, datatrain.y[train_index])),
+                    X_hi_test=dataexp.X,
+                    y_hi_test=dataexp.y,
+                    standardize=True
+                )
+                res = dde.utils.apply(mfnn, (data, lay, wid))
+                ape.append(res[:2])
+                y.append(res[2])
+            del res
+
 
     print(ape)
     with open('Output.txt', 'a') as f:
         print(yname, "validation_three ", np.mean(ape, axis=0), np.std(ape, axis=0))
-        f.write('validation_two [' + train + ', ' + exp + '] ' + str(train_size) + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' ' + str(np.mean(ape, axis=0)[0]) + ' ' + str(np.std(ape, axis=0)[0]) + '\n')
+        f.write('validation_three [' + train + ', ' + exp + '] ' + str(train_size) + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' ' + str(np.mean(ape, axis=0)[0]) + ' ' + str(np.std(ape, axis=0)[0]) + '\n')
 
 
 
