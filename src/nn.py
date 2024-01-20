@@ -243,7 +243,7 @@ def validation_three(yname, train_size, train, exp, lay=2, wid=128):
         for _ in range(div):
             kf = ShuffleSplit(n_splits=10, train_size=train_size, random_state=0)
             og = len(datatrain.X)
-            for _ in range(int((div-0.5)*og/div)):
+            for _ in range(int((div-1)*og/div)):
                 size = datatrain.y.shape[0]
                 index = np.random.choice(size)
                 datatrain.X = np.delete(datatrain.X, index, axis=0)
