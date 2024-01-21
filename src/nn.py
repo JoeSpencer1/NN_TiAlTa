@@ -14,6 +14,9 @@ import tensorflow as tf
 tf.config.run_functions_eagerly(False)
 from tensorflow.keras import layers, models
 import os
+import multiprocessing
+
+global apeG, yG
 
 def svm(data):
     clf = SVR(kernel="rbf")
@@ -94,7 +97,64 @@ def mfnn(data, lay=2, wid=128):
         train_state.best_metrics[3],
         train_state.best_y[1],
     )
+''''''
+def run_arg(arg):
+    main(arg)
 
+def multiple_NN(yname, train_size, div, exp, train, lay=2, wid=128):
+    arg = "data_portion(" + yname + "," + str(train_size) + "," + str(div) + "," + exp + "," + train + ",lay=" + str(lay) + ",wid=" + str(wid) + ")"
+    arguments = np.array([
+        arg
+    ])
+    for i in range(div * 4 - 1):
+        arguments = np.vstack((arguments, arg))
+    processes = []
+    num_processes = len(arguments)
+    for i in range(num_processes):        
+        process = multiprocessing.Process(target=run_arg, args=(arguments[i],))
+        processes.append(process)
+
+    for process in processes:
+        process.start()
+    for process in processes:
+        process.join()
+
+def data_portion(yname, train_size, div, exp, train, lay=2, wid=128):
+    global apeG
+    apeG = []
+    global yG 
+    yG = []
+    dataFEM = FEMData(yname)
+    dataBerk = BerkovichData(yname)
+    dataexp = ExpData(exp, yname)
+    datatrain = ExpData(train, yname)
+    kf = ShuffleSplit(n_splits=10, train_size=train_size, random_state=0)
+    og = len(datatrain.X)
+    for _ in range(int((div-1)*og/div)):
+        size = datatrain.y.shape[0]
+        index = np.random.choice(size)
+        datatrain.X = np.delete(datatrain.X, index, axis=0)
+        datatrain.y = np.delete(datatrain.y, index, axis=0)
+    while len(datatrain.X) < og:
+        datatrain.X = np.concatenate((datatrain.X, datatrain.X), axis=0)
+        datatrain.y = np.concatenate((datatrain.y, datatrain.y), axis=0)
+    for train_index, _ in kf.split(datatrain.X):
+        print("\nIteration: {}".format(len(ape)))
+        print(train_index)
+        data = dde.data.MfDataSet(
+            X_lo_train=dataFEM.X,
+            X_hi_train=np.vstack((dataBerk.X, datatrain.X[train_index])),
+            y_lo_train=dataFEM.y,
+            y_hi_train=np.vstack((dataBerk.y, datatrain.y[train_index])),
+            X_hi_test=dataexp.X,
+            y_hi_test=dataexp.y,
+            standardize=True
+        )
+        res = dde.utils.apply(mfnn, (data, lay, wid))
+        apeG.append(res[:2])
+        yG.append(res[2])
+    return
+        
 def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32):
     
     data = []
@@ -239,8 +299,14 @@ def validation_three(yname, train_size, train, exp, lay=2, wid=128):
             ape.append(res[:2])
             y.append(res[2])
     else:
+        global apeG
+        apeG = []
+        global yG
+        yG = []
         div = 10
-        for _ in range(div):
+        multiple_NN(yname, train_size, div, exp, train, lay, wid)
+        '''
+        for _ in range(div * 4):
             kf = ShuffleSplit(n_splits=10, train_size=train_size, random_state=0)
             og = len(datatrain.X)
             for _ in range(int((div-1)*og/div)):
@@ -268,12 +334,16 @@ def validation_three(yname, train_size, train, exp, lay=2, wid=128):
                 y.append(res[2])
             del res
 
-
     print(ape)
     with open('Output.txt', 'a') as f:
         print(yname, "validation_three ", np.mean(ape, axis=0), np.std(ape, axis=0))
         f.write('validation_three [' + train + ', ' + exp + '] ' + str(train_size) + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' ' + str(np.mean(ape, axis=0)[0]) + ' ' + str(np.std(ape, axis=0)[0]) + '\n')
-
+        '''
+    with open('Output.txt', 'a') as f:
+        print(yname, "validation_three ", np.mean(apeG, axis=0), np.std(apeG, axis=0))
+        f.write('validation_three [' + train + ', ' + exp + '] ' + str(train_size) + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' ' + str(np.mean(apeG, axis=0)[0]) + ' ' + str(np.std(apeG, axis=0)[0]) + '\n')
+    yG = []
+    apeG = []
 
 
 def main(argument=None):

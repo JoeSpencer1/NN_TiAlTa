@@ -8,8 +8,8 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
-        "validation_three('Estar', 20, 'TI33_25', 'TI33_25', lay=2)",
-        "validation_three('Estar', 20, 'TI33_25', 'TI33_25', lay=2)"
+        "validation_three('sigma_y', 20, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('sigma_y', 20, 'TI33_25', 'TI33_25', lay=2)"
         ])
     
     processes = []
