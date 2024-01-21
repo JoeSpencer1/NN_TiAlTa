@@ -149,8 +149,8 @@ plt.savefig("/Users/Joe/Desktop/figure3.jpeg", dpi=800, bbox_inches="tight")
 plt.show()
 '''
 
-Bqx = [0.125, 0.25, 0.5]
 '''
+Bqx = [0.125, 0.25, 0.5]
 Bqy = [0.003352735, 0.013410939, 0.140242188]
 Blx = [0.125, 0.25, 0.5]
 Bly = [0.032266477, 0.12906591, 0.354190574]
@@ -163,16 +163,18 @@ C60x = [0.0125, 0.025, 0.05, 0.1]
 C60y = [0.004029647, 0.016118587, 0.049746948, 0.17236334]
 Cfx = [0.0001, 1]
 '''
-Bqy = [0.00843, 0.03372, 0.05746]
-Blx = [0.125, 0.25, 0.5]
-Bly = []
+'''
+Bqx = [0.5, 0.25, 0.125]
+Bqy = [0.05743, 0.03417, 0.00854]
+Blx = [0.25, 0.125, 0.0625]
+Bly = [0.16434, 0.14397, 0.03599]
 Bfx = [0.01, 1.5]
-C30x = [0.0125, 0.025, 0.05, 0.1]
-C30y = []
-C45x = [0.0125, 0.025, 0.05]
-C45y = []
-C60x = [0.0125, 0.025, 0.05, 0.1]
-C60y = []
+C30x = [0.050, 0.025, 0.0125]
+C30y = [0.00193, 0.00029, 0.00007]
+C45x = [0.100, 0.050, 0.025, 0.0125]
+C45y = [0.10706, 0.01024, 0.00738, 0.00185]
+C60x = [0.050, 0.025, 0.0125]
+C60y = [0.01087, 0.00156, 0.00039]
 Cfx = [0.0001, 1]
 def equation(x, y, eqx):
     l = len(x) - 1
@@ -193,18 +195,18 @@ Bfq = equation(Bqx, Bqy, Bfx)
 Bfl = equation(Blx, Bly, Bfx)
 
 fig, ax = plt.subplots()
-ax.scatter(C30x, C30y, color='blue', marker='s', label='30˚: $||e||_{L_{2}}=4.95h^{2.13}$')
-ax.scatter(C45x, C45y, color='black', marker='o', facecolor='none', label='45˚: $||e||_{L_{2}}=5.87h^{1.95}$')
-ax.scatter(C60x, C60y, color='red', marker='x', label='60˚: $||e||_{L_{2}}=11.03h^{1.81}$')
+ax.scatter(C30x, C30y, color='blue', marker='s', label='30˚: $||e||_{L_{2}}=2.30h^{2.36}$')
+ax.scatter(C45x, C45y, color='red', marker='o', facecolor='none', label='45˚: $||e||_{L_{2}}=14.42h^{2.40}$')
+ax.scatter(C60x, C60y, color='black', marker='x', label='60˚: $||e||_{L_{2}}=9.60h^{1.95}$')
 ax.plot(Cfx, Cf30, linestyle="--", color='blue')
-ax.plot(Cfx, Cf45, linestyle="--", color='black')
-ax.plot(Cfx, Cf60, linestyle="--", color='red')
+ax.plot(Cfx, Cf45, linestyle="--", color='red')
+ax.plot(Cfx, Cf60, linestyle="--", color='black')
 ax.set_xlabel('Element length (μm)')
 ax.set_xscale('log')
 ax.set_xlim([0.006, 0.2])
 ax.set_ylabel('L$_{2}$ error')
 ax.set_yscale('log')
-ax.set_ylim([0.0003, 0.7])
+ax.set_ylim([0.00003, 0.4])
 ax.grid(False)
 leg = ax.legend(loc='lower right')
 leg.set_title('Conical half-angle')
@@ -212,13 +214,13 @@ plt.savefig('/Users/joe/Desktop/figure3.jpeg', dpi=800, bbox_inches="tight")
 plt.show()
 
 fig, ax = plt.subplots()
-ax.scatter(Blx, Bly, color='blue', marker='s', label='Linear: $||e||_{L_{2}}=1.17h^{1.73}$')
-ax.scatter(Bqx, Bqy, color='black', marker='o', facecolor='none', label='Quadratic: $||e||_{L_{2}}=0.91h^{2.69}$')
+ax.scatter(Blx, Bly, color='blue', marker='s', label='Linear: $||e||_{L_{2}}=0.75h^{1.10}$')
+ax.scatter(Bqx, Bqy, color='red', marker='o', facecolor='none', label='Quadratic: $||e||_{L_{2}}=0.15h^{1.37}$')
 ax.plot(Bfx, Bfl, linestyle="--", color='blue')
-ax.plot(Bfx, Bfq, linestyle="--", color='black')
+ax.plot(Bfx, Bfq, linestyle="--", color='red')
 ax.set_xlabel('Element length (μm)')
 ax.set_xscale('log')
-ax.set_xlim([0.05, 1])
+ax.set_xlim([0.03, 1])
 ax.set_ylabel('L$_{2}$ error')
 ax.set_yscale('log')
 ax.set_ylim([0.001, 1])
@@ -227,7 +229,7 @@ leg = ax.legend(loc='lower right')
 leg.set_title('Element order')
 plt.savefig('/Users/joe/Desktop/figure4.jpeg', dpi=800, bbox_inches="tight")
 plt.show()
-''''''
+'''
 '''
 df = pd.read_csv('../data/model/compare.csv', skiprows=1)
 fig, ax = plt.subplots()
@@ -266,7 +268,7 @@ leg = ax.legend()
 plt.savefig('/Users/joe/Desktop/figure5.jpeg', dpi=800, bbox_inches="tight")
 plt.show()
 '''
-
+'''
 n = [0, 5, 10, 20]
 threeσ = [376.0572733054678, 39.5938033843615, 41.8456251546561, 37.20982506131551]
 εthreeσ = [196.86908836541178, 21.68148559652081, 28.00063811133066, 28.472024602496692]
@@ -323,3 +325,4 @@ ax2.annotate("B: $E_{r}$", xy=(0.15, 0.95), xycoords="axes fraction",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
 plt.savefig("/Users/Joe/Desktop/figure1.jpeg", dpi=800, bbox_inches="tight")
 plt.show()
+'''
