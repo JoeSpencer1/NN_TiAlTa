@@ -15,6 +15,7 @@ tf.config.run_functions_eagerly(False)
 from tensorflow.keras import layers, models
 import os
 import multiprocessing
+dde.backend.tf.Session()
 
 global apeG, yG
 
