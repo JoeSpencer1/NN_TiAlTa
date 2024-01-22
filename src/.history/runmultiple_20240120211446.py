@@ -1,5 +1,4 @@
 import multiprocessing
-from multiprocessing import Pool
 import numpy as np
 import nn
 
@@ -41,7 +40,6 @@ if __name__ == '__main__':
         process.start()
     for process in processes:
         process.join()
-        
         '''
         
         '''

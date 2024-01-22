@@ -300,16 +300,15 @@ def validation_three(yname, train_size, train, exp, lay=2, wid=128):
             ape.append(res[:2])
             y.append(res[2])
     else:
-        div = 5
-        #div = 10
-        '''
         global apeG
         apeG = []
         global yG
         yG = []
+        div = 10
+        '''
         multiple_NN(yname, train_size, div, exp, train, lay, wid)
         '''
-        for _ in range(div):# * 4):
+        for _ in range(div * 4):
             kf = ShuffleSplit(n_splits=10, train_size=train_size, random_state=0)
             og = len(datatrain.X)
             for _ in range(int((div-1)*og/div)):
@@ -341,12 +340,12 @@ def validation_three(yname, train_size, train, exp, lay=2, wid=128):
     with open('output.txt', 'a') as f:
         print(yname, "validation_three ", np.mean(ape, axis=0), np.std(ape, axis=0))
         f.write('validation_three [' + train + ', ' + exp + '] ' + str(train_size) + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' ' + str(np.mean(ape, axis=0)[0]) + ' ' + str(np.std(ape, axis=0)[0]) + '\n')
-    '''    
+        
     with open('output.txt', 'a') as f:
         print(yname, "validation_three ", np.mean(apeG, axis=0), np.std(apeG, axis=0))
         f.write('validation_three [' + train + ', ' + exp + '] ' + str(train_size) + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' ' + str(np.mean(apeG, axis=0)[0]) + ' ' + str(np.std(apeG, axis=0)[0]) + '\n')
     yG = []
-    apeG = []'''
+    apeG = []
 
 
 def main(argument=None):
