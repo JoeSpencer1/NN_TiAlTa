@@ -341,12 +341,12 @@ def validation_three(yname, train_size, train, exp, lay=2, wid=128):
     with open('output.txt', 'a') as f:
         print(yname, "validation_three ", np.mean(ape, axis=0), np.std(ape, axis=0))
         f.write('validation_three [' + train + ', ' + exp + '] ' + str(train_size) + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' ' + str(np.mean(ape, axis=0)[0]) + ' ' + str(np.std(ape, axis=0)[0]) + '\n')
-    '''    
+        
     with open('output.txt', 'a') as f:
         print(yname, "validation_three ", np.mean(apeG, axis=0), np.std(apeG, axis=0))
         f.write('validation_three [' + train + ', ' + exp + '] ' + str(train_size) + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' ' + str(np.mean(apeG, axis=0)[0]) + ' ' + str(np.std(apeG, axis=0)[0]) + '\n')
     yG = []
-    apeG = []'''
+    apeG = []
 
 
 def main(argument=None):

@@ -1,5 +1,4 @@
 import multiprocessing
-from multiprocessing import Pool
 import numpy as np
 import nn
 

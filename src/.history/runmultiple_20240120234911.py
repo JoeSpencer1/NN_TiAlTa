@@ -1,10 +1,40 @@
 import multiprocessing
-from multiprocessing import Pool
 import numpy as np
 import nn
 
 def run_main(arg):
     nn.main(arg)
+
+from multiprocessing import Pool
+
+if __name__ == '__main__':
+    arguments = [
+        "validation_three('Estar', 0, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('Estar', 1, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('Estar', 1, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('Estar', 3, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('Estar', 4, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('Estar', 5, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('Estar', 6, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('Estar', 8, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('Estar', 10, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('Estar', 20, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('sigma_y', 0, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('sigma_y', 1, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('sigma_y', 1, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('sigma_y', 3, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('sigma_y', 4, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('sigma_y', 5, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('sigma_y', 6, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('sigma_y', 8, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('sigma_y', 10, 'TI33_25', 'TI33_25', lay=2)",
+        "validation_three('sigma_y', 20, 'TI33_25', 'TI33_25', lay=2)"
+    ]
+
+    with Pool() as pool:
+        pool.map(run_main, arguments)
+
+'''
 
 if __name__ == '__main__':
 
@@ -41,7 +71,7 @@ if __name__ == '__main__':
         process.start()
     for process in processes:
         process.join()
-        
+        '''
         '''
         
         '''

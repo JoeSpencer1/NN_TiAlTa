@@ -15,7 +15,6 @@ tf.config.run_functions_eagerly(False)
 from tensorflow.keras import layers, models
 import os
 import multiprocessing
-#dde.backend.tf.Session()
 
 global apeG, yG
 
@@ -103,12 +102,10 @@ def run_arg(arg):
     main(arg)
 
 def multiple_NN(yname, train_size, div, exp, train, lay=2, wid=128):
-    arg = "data_portion(" + yname + "," + str(train_size) + "," + str(div) + "," + exp + "," + train + ",lay=" + str(lay) + ",wid=" + str(wid) + ")"
-    arguments = np.array([
-        arg
-    ])
-    for i in range(div * 4 - 1):
-        arguments = np.vstack((arguments, arg))
+    arg = "data_portion(" + yname + "," + str(train_size) + "," + str(div) + "," + exp + "," + train + ",lay=" + lay + ",wid=" + wid + ")"
+    arguments = np.array([])
+    for i in div * 4:
+        arguments.append(arg)
     processes = []
     num_processes = len(arguments)
     for i in range(num_processes):        
@@ -195,7 +192,7 @@ def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32):
         stsize += str(digit) + ' '
     print(mape)
     print(yname, 'validation_one ', trnames, ' ', tstname, ' ', str(train_size), ' ', np.mean(mape), ' ', np.std(mape))
-    with open('output.txt', 'a') as f:
+    with open('Output.txt', 'a') as f:
         f.write('validation_one [' + ' '.join(map(str, trnames)) + '] ' +  tstname + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' [' + stsize + '] ' + str(np.mean(mape, axis=0)) + ' ' + str(np.std(mape, axis=0)) + '\n')
 
 def validation_two(yname, train_size, exp, low, hi, lay=2, wid=128):
@@ -261,7 +258,7 @@ def validation_two(yname, train_size, exp, low, hi, lay=2, wid=128):
             y.append(res[2])
 
     print(ape)
-    with open('output.txt', 'a') as f:
+    with open('Output.txt', 'a') as f:
         if train_size > 0:
             print(yname, "validation_two ", np.mean(ape, axis=0), np.std(ape, axis=0))
             f.write('validation_two [' + low + ', ' + hi + '] ' + str(train_size) + ' ' + exp + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' ' + str(np.mean(ape, axis=0)[0]) + ' ' + str(np.std(ape, axis=0)[0]) + '\n')
@@ -300,16 +297,14 @@ def validation_three(yname, train_size, train, exp, lay=2, wid=128):
             ape.append(res[:2])
             y.append(res[2])
     else:
-        div = 5
-        #div = 10
-        '''
         global apeG
         apeG = []
         global yG
         yG = []
-        multiple_NN(yname, train_size, div, exp, train, lay, wid)
+        div = 10
+        multiple_NN(train_size, div, exp, train, lay, wid)
         '''
-        for _ in range(div):# * 4):
+        for _ in range(div * 4):
             kf = ShuffleSplit(n_splits=10, train_size=train_size, random_state=0)
             og = len(datatrain.X)
             for _ in range(int((div-1)*og/div)):
@@ -338,15 +333,15 @@ def validation_three(yname, train_size, train, exp, lay=2, wid=128):
             del res
 
     print(ape)
-    with open('output.txt', 'a') as f:
+    with open('Output.txt', 'a') as f:
         print(yname, "validation_three ", np.mean(ape, axis=0), np.std(ape, axis=0))
         f.write('validation_three [' + train + ', ' + exp + '] ' + str(train_size) + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' ' + str(np.mean(ape, axis=0)[0]) + ' ' + str(np.std(ape, axis=0)[0]) + '\n')
-    '''    
-    with open('output.txt', 'a') as f:
+        '''
+    with open('Output.txt', 'a') as f:
         print(yname, "validation_three ", np.mean(apeG, axis=0), np.std(apeG, axis=0))
         f.write('validation_three [' + train + ', ' + exp + '] ' + str(train_size) + ' ' + yname + ' ' + str(lay) + ' ' + str(wid) + ' ' + str(np.mean(apeG, axis=0)[0]) + ' ' + str(np.std(apeG, axis=0)[0]) + '\n')
     yG = []
-    apeG = []'''
+    apeG = []
 
 
 def main(argument=None):
