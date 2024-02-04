@@ -9,6 +9,25 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
+        "validation_three('Estar', 0, 'TI33_25', 'TI33_25', lay=2)"
+        ])
+    
+    processes = []
+    num_processes = len(arguments)
+    for i in range(num_processes):        
+        process = multiprocessing.Process(target=run_main, args=(arguments[i],))
+        processes.append(process)
+
+    for process in processes:
+        process.start()
+    for process in processes:
+        process.join()
+        
+        '''
+        "validation_FEM('sigma_y', 'FEM_70deg', 10)",
+        "validation_FEM('Estar', 'FEM_70deg', 10)"
+
+
         "validation_three('Estar', 0, 'TI33_25', 'TI33_25', lay=2)",
         "validation_three('Estar', 1, 'TI33_25', 'TI33_25', lay=2)",
         "validation_three('Estar', 1, 'TI33_25', 'TI33_25', lay=2)",
@@ -29,20 +48,6 @@ if __name__ == '__main__':
         "validation_three('sigma_y', 8, 'TI33_25', 'TI33_25', lay=2)",
         "validation_three('sigma_y', 10, 'TI33_25', 'TI33_25', lay=2)",
         "validation_three('sigma_y', 20, 'TI33_25', 'TI33_25', lay=2)"
-        ])
-    
-    processes = []
-    num_processes = len(arguments)
-    for i in range(num_processes):        
-        process = multiprocessing.Process(target=run_main, args=(arguments[i],))
-        processes.append(process)
-
-    for process in processes:
-        process.start()
-    for process in processes:
-        process.join()
-        
-        '''
         
         '''
         '''

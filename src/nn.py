@@ -9,7 +9,7 @@ from sklearn.svm import SVR
 from sklearn.model_selection import KFold, LeaveOneOut, RepeatedKFold, ShuffleSplit
 
 import deepxde as dde
-from data import BerkovichData, FEMData, ExpDataT, ExpData
+from data import BerkovichData, FEMData, ExpDataT, ExpData, FEM1
 import tensorflow as tf
 tf.config.run_functions_eagerly(False)
 from tensorflow.keras import layers, models
@@ -155,6 +155,97 @@ def data_portion(yname, train_size, div, exp, train, lay=2, wid=128):
         apeG.append(res[:2])
         yG.append(res[2])
     return
+        
+
+
+def validation_FEM(yname, filename, train_size):
+    datafem = FEM1(yname, filename)
+    # datafem = BerkovichData(yname)
+    '''
+    def normalize(vec):
+        vec = np.array([x for x in vec if x is not None])
+        mean = np.mean(vec)
+        std_dev = np.std(vec)
+        return (vec - mean) / std_dev if std_dev != 0 else vec - mean
+    datafem.y = normalize(datafem.y)
+    for i in range(3):
+        datafem.X[int(i)] = normalize(datafem.X[int(i)])
+    '''
+    if train_size == 80:
+        kf = RepeatedKFold(n_splits=5, n_repeats=2, random_state=0)
+    elif train_size == 90:
+        kf = KFold(n_splits=10, shuffle=True, random_state=0)
+    else:
+        kf = ShuffleSplit(
+            n_splits=10, test_size=len(datafem.X) - train_size, random_state=0
+        )
+
+    mape = []
+    iter = 0
+    for train_index, test_index in kf.split(datafem.X):
+        iter += 1
+        print("\nCross-validation iteration: {}".format(iter))
+
+        X_train, X_test = datafem.X[train_index], datafem.X[test_index]
+        y_train, y_test = datafem.y[train_index], datafem.y[test_index]
+
+        data = dde.data.DataSet(
+            X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test
+        )
+
+        mape.append(dde.apply(nn, (data,)))
+
+    print(mape)
+    print(yname, train_size, np.mean(mape), np.std(mape))
+    with open('output.txt', 'a') as f:
+        f.write('validation_FEM ', filename, ' ', str(train_size), ' ', str(np.mean(mape)), ' ', str(np.std(mape)), '\n')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
 def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32):
     

@@ -5,6 +5,41 @@ from __future__ import print_function
 import numpy as np
 import pandas as pd
 
+class FEM1(object):
+    def __init__(self, yname, filename):
+        self.yname = yname
+        self.filename = filename
+
+        self.X = None
+        self.y = None
+
+
+    def read_1angle(self):
+        name = '../data/' + self.filename + '.csv'
+        print('Name=', name)
+        df = pd.read_csv(name)
+        df["Estar (GPa)"] = EtoEstar(df["E (GPa)"])
+        df["sy/Estar"] = df["sy (GPa)"] / df["Estar (GPa)"]
+        df = df.loc[~((df["n"] > 0.3) & (df["sy/Estar"] >= 0.03))]
+        # df = df.loc[df["n"] <= 0.3]
+        # Scale c* from Conical to Berkovich
+        # df["dP/dh (N/m)"] *= 1.167 / 1.128
+        # Add noise
+        # sigma = 0.2
+        # df["E* (GPa)"] *= 1 + sigma * np.random.randn(len(df))
+        # df["sy (GPa)"] *= 1 + sigma * np.random.randn(len(df))
+        print(df.describe())
+
+        self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
+        if self.yname == "E*":
+            self.y = df["Estar (GPa)"].values[:, None]
+        else:
+            self.y = df["sy (GPa)"].values[:, None]
+
+
+
+
+
 class FEMData(object):
     def __init__(self, yname):
         self.yname = yname
@@ -178,4 +213,9 @@ class BerkovichData(object):
 
 def EtoEr(E, nu):
     nu_i, E_i = 0.0691, 1143
+    return 1 / ((1 - nu ** 2) / E + (1 - nu_i ** 2) / E_i)
+
+def EtoEstar(E):
+    nu = 0.3
+    nu_i, E_i = 0.07, 1100
     return 1 / ((1 - nu ** 2) / E + (1 - nu_i ** 2) / E_i)
