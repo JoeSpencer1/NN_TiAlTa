@@ -1380,3 +1380,296 @@ validation_three [TI33_750, TI33_750] 8 sigma_y 2 128 73.65766994898748 40.87070
 validation_three [TI33_750, TI33_750] 20 Estar 2 128 23.457399296903322 2.3754148678495404
 validation_three [TI33_750, TI33_750] 6 sigma_y 2 128 219.81586028000507 137.2693329624366
 validation_three [TI33_750, TI33_750] 10 sigma_y 2 128 46.04432860048136 16.150832253570496
+validation_FEM FEM_70deg 10 202.53723 111.830124
+validation_FEM FEM_70deg 10 35.246094 17.016138
+validation_FEM FEM_70deg 10 142.94608 131.05965
+validation_FEM FEM_70deg 10 29.903488 6.4191046
+
+validation_FEM FEM_70deg 10 26.081533 7.9385333
+validation_FEM FEM_70deg 10 187.26099 73.50473
+validation_FEM FEM_70deg 80 139.2308 112.16671
+validation_FEM FEM_70deg 80 17.906004 10.214874
+
+validation_FEM FEM_70deg 10 28.806488 19.038065
+validation_FEM FEM_70deg 10 144.86531 68.7971
+validation_FEM FEM_70deg 80 74.483505 19.391687
+validation_FEM FEM_70deg 80 34.9927 17.626148
+
+validation_FEM FEM_70deg Estar 10 34.151783 21.242521
+validation_FEM FEM_70deg sigma_y 10 160.71307 51.593483
+validation_FEM FEM_70deg Estar 80 30.950323 21.975967
+validation_FEM FEM_70deg sigma_y 80 77.69342 21.942804
+
+validation_FEM FEM_70deg sigma_y 10 154.79063 73.803696
+validation_FEM FEM_70deg Estar 10 45.17125 38.85699
+validation_FEM FEM_70deg Estar 80 30.03088 12.3414955
+
+validation_FEM FEM_70deg sigma_y 80 91.859795 71.485306
+validation_FEM FEM_70deg sigma_y 80 157.72293 106.27591
+validation_FEM FEM_70deg sigma_y 80 77.96557 28.642859
+validation_FEM FEM_70deg sigma_y 80 46.749184 7.809784
+
+validation_FEM FEM_70deg sigma_y 10 57.765503 14.362265
+validation_FEM FEM_70deg Estar 10 12.4988575 4.4540377
+validation_FEM FEM_70deg Estar 80 4.375411 0.59876174
+validation_FEM FEM_70deg sigma_y 80 47.69948 11.023556
+
+validation_FEM FEM_70deg Estar 10 560.2886 219.59105
+validation_FEM FEM_70deg sigma_y 10 162.55312 43.479008
+validation_FEM FEM_70deg Estar 80 75.76409 33.739395
+validation_FEM FEM_70deg sigma_y 80 83.064896 36.752373
+
+validation_FEM FEM_70deg sigma_y 10 140.18039 58.517258
+validation_FEM FEM_70deg Estar 10 2.2442503 1.0812876
+validation_FEM FEM_70deg Estar 80 0.40073022 0.16264583
+validation_FEM FEM_70deg sigma_y 80 56.056602 11.877615
+
+validation_FEM FEM_70deg sigma_y 10 227.8608 120.7319
+validation_FEM FEM_70deg Estar 10 33.954117 7.891188
+validation_FEM FEM_70deg Estar 80 12.5822 2.3804128
+validation_FEM FEM_70deg sigma_y 80 148.65771 123.50219
+
+validation_FEM FEM_70deg Estar 10 1.668566 0.6442143
+validation_FEM FEM_70deg sigma_y 10 83.80473 34.394424
+validation_FEM FEM_70deg Estar 80 0.16249502 0.053580113
+validation_FEM FEM_70deg sigma_y 80 57.916676 14.567917
+
+validation_FEM FEM_70deg Estar 10 32.98145 9.628444
+validation_FEM FEM_70deg sigma_y 10 268.95868 178.18509
+validation_FEM FEM_70deg Estar 80 11.746234 4.861267
+validation_FEM FEM_70deg sigma_y 80 141.63484 102.66958
+validation_FEM FEM_70deg sigma_y 10 56.93564 0.0
+validation_FEM FEM_70deg Estar 10 13.056976 0.0
+validation_FEM FEM_70deg sigma_y 20 55.34484 7.1108494
+validation_FEM FEM_70deg Estar 20 8.332571 2.825255
+validation_FEM FEM_70deg sigma_y 30 47.664608 5.1515055
+validation_FEM FEM_70deg Estar 30 6.797747 1.5001571
+validation_FEM FEM_70deg Estar 40 5.1792994 0.81381667
+validation_FEM FEM_70deg sigma_y 40 52.077637 9.113821
+validation_FEM FEM_70deg sigma_y 50 44.06505 6.152328
+validation_FEM FEM_70deg Estar 50 5.383933 1.1609943
+validation_FEM FEM_70deg sigma_y 60 46.18886 7.986893
+validation_FEM FEM_70deg Estar 60 4.725172 0.60388464
+validation_FEM FEM_70deg sigma_y 70 48.01137 7.5095196
+validation_FEM FEM_70deg Estar 70 4.840385 0.9856369
+validation_FEM FEM_70deg sigma_y 80 50.636192 10.814419
+validation_FEM FEM_70deg Estar 80 4.899353 1.0147204
+
+validation_FEM FEM_70deg sigma_y 10 50.048286 3.1129436
+validation_FEM FEM_70deg Estar 10 7.8725786 1.7482728
+validation_FEM FEM_70deg Estar 20 6.773023 0.43645006
+validation_FEM FEM_70deg sigma_y 20 60.069168 7.4399123
+validation_FEM FEM_70deg Estar 30 6.5289474 1.3665262
+validation_FEM FEM_70deg sigma_y 30 53.12611 8.440422
+validation_FEM FEM_70deg Estar 40 5.7982454 1.0454652
+validation_FEM FEM_70deg sigma_y 40 52.72846 8.272337
+validation_FEM FEM_70deg Estar 50 5.4353566 1.4891164
+validation_FEM FEM_70deg sigma_y 50 49.724327 8.078084
+validation_FEM FEM_70deg Estar 80 4.6478586 0.5605198
+validation_FEM FEM_70deg sigma_y 80 48.09626 7.0905156
+validation_FEM FEM_70deg Estar 60 4.794185 0.7939196
+validation_FEM FEM_70deg sigma_y 60 50.639652 15.634255
+validation_FEM FEM_70deg Estar 70 4.600108 0.678899
+validation_FEM FEM_70deg sigma_y 70 44.77078 8.033843
+
+validation_FEM FEM_70deg sigma_y 10 52.53666 0.0
+validation_FEM FEM_70deg Estar 10 10.515438 0.0
+validation_FEM FEM_70deg sigma_y 20 57.276005 2.256424
+validation_FEM FEM_70deg Estar 20 8.14485 2.7284307
+validation_FEM FEM_70deg sigma_y 30 51.383327 4.314616
+validation_FEM FEM_70deg Estar 30 5.656012 0.605212
+validation_FEM FEM_70deg Estar 40 5.437237 0.4597397
+validation_FEM FEM_70deg sigma_y 40 56.635937 12.896476
+validation_FEM FEM_70deg Estar 50 5.378427 0.579305
+validation_FEM FEM_70deg sigma_y 50 49.45991 8.814364
+validation_FEM FEM_70deg sigma_y 60 45.15982 4.0601974
+validation_FEM FEM_70deg Estar 60 4.5455465 0.17955175
+validation_FEM FEM_70deg sigma_y 70 48.861115 7.1351933
+validation_FEM FEM_70deg Estar 70 4.470086 0.870698
+validation_FEM FEM_70deg sigma_y 80 52.278667 8.023133
+validation_FEM FEM_70deg Estar 80 4.502595 0.7264036
+
+validation_FEM FEM_70deg sigma_y 10 49.42109 4.8625755
+validation_FEM FEM_70deg Estar 10 7.0593996 0.7332876
+validation_FEM FEM_70deg Estar 20 8.549069 2.282586
+validation_FEM FEM_70deg sigma_y 20 57.95039 5.359189
+validation_FEM FEM_70deg Estar 30 7.6761346 2.7174678
+validation_FEM FEM_70deg sigma_y 30 54.99486 5.8597918
+validation_FEM FEM_70deg Estar 40 6.1278954 1.7260756
+validation_FEM FEM_70deg sigma_y 40 57.401234 13.18258
+validation_FEM FEM_70deg sigma_y 80 47.159412 8.140121
+validation_FEM FEM_70deg Estar 80 4.71354 1.7486593
+validation_FEM FEM_70deg sigma_y 50 52.212173 10.585389
+validation_FEM FEM_70deg Estar 50 5.522537 1.1120763
+validation_FEM FEM_70deg Estar 60 5.1453643 0.94296247
+validation_FEM FEM_70deg sigma_y 60 49.556763 9.708477
+validation_FEM FEM_70deg Estar 70 4.8168335 1.0723617
+validation_FEM FEM_70deg sigma_y 70 47.766655 12.253668
+
+validation_FEM FEM_70deg Estar 10 10.584299 2.5004203
+validation_FEM FEM_70deg sigma_y 10 57.374138 10.249546
+validation_FEM FEM_70deg Estar 20 8.377541 3.2217023
+validation_FEM FEM_70deg sigma_y 20 56.58541 8.53102
+validation_FEM FEM_70deg sigma_y 80 49.023746 8.617375
+validation_FEM FEM_70deg Estar 80 4.9705706 1.3766286
+validation_FEM FEM_70deg Estar 30 6.415753 1.966668
+validation_FEM FEM_70deg sigma_y 30 54.652607 8.28525
+validation_FEM FEM_70deg sigma_y 40 57.39137 13.237012
+validation_FEM FEM_70deg Estar 40 6.9892015 1.8997778
+validation_FEM FEM_70deg Estar 50 5.481539 1.0945446
+validation_FEM FEM_70deg sigma_y 50 51.4421 11.7113905
+validation_FEM FEM_70deg Estar 60 5.221605 1.1425116
+validation_FEM FEM_70deg sigma_y 60 52.030643 12.530899
+validation_FEM FEM_70deg sigma_y 70 46.505985 10.368778
+validation_FEM FEM_70deg Estar 70 4.690008 1.05139
+
+validation_FEM FEM_70deg Estar 10 12.261096 4.472022
+validation_FEM FEM_70deg sigma_y 10 71.71611 28.286701
+validation_FEM FEM_70deg Estar 80 4.654879 1.1376487
+validation_FEM FEM_70deg sigma_y 80 47.212383 6.8632827
+
+validation_FEM FEM_70deg Estar 80 4.5402083 0.74319
+validation_FEM FEM_70deg sigma_y 80 49.38392 6.085715
+validation_FEM FEM_70deg Estar 10 15.951569 8.57603
+validation_FEM FEM_70deg sigma_y 10 66.134796 21.857573
+
+validation_FEM FEM_70deg Estar 80 4.8577223 0.8603895
+validation_FEM FEM_70deg sigma_y 80 47.26739 10.767601
+validation_FEM FEM_70deg Estar 10 16.734974 15.132083
+validation_FEM FEM_70deg sigma_y 10 78.790825 62.57703
+
+validation_FEM FEM_70deg Estar 80 4.852197 0.93334484
+validation_FEM FEM_70deg sigma_y 80 48.579685 8.708116
+validation_FEM FEM_70deg Estar 10 14.9587345 9.133229
+validation_FEM FEM_70deg sigma_y 10 88.85099 63.948483
+
+validation_FEM FEM_70deg Estar 80 4.8965483 0.88567066
+validation_FEM FEM_70deg sigma_y 80 47.837013 8.424133
+validation_FEM FEM_70deg Estar 10 14.346977 8.705622
+validation_FEM FEM_70deg sigma_y 10 77.46284 45.652245
+
+validation_FEM FEM_70deg sigma_y 80 47.269417 9.426015
+validation_FEM FEM_70deg Estar 80 4.7249827 1.0107818
+validation_FEM FEM_70deg Estar 10 16.090126 10.872096
+validation_FEM FEM_70deg sigma_y 80 49.46359 7.0705757
+validation_FEM FEM_70deg sigma_y 80 47.71402 7.697021
+
+validation_FEM FEM_70deg sigma_y 80 48.370506 9.613499
+validation_FEM FEM_70deg sigma_y 10 83.67823 55.94071
+
+validation_FEM FEM_70deg sigma_y 10 56.195244 16.41642
+validation_FEM FEM_70deg sigma_y 80 48.99837 5.85699
+
+validation_FEM FEM_70deg sigma_y 10 70.87041 32.523956
+validation_FEM FEM_70deg sigma_y 80 47.63566 9.644088
+
+validation_FEM FEM_70deg Estar 10 12.648984 3.8560576
+validation_FEM FEM_70deg sigma_y 10 73.62251 26.24107
+validation_FEM FEM_70deg sigma_y 30 50.59314 5.557898
+validation_FEM FEM_70deg Estar 20 9.5577135 7.064188
+validation_FEM FEM_70deg sigma_y 20 53.202526 4.2676187
+validation_FEM FEM_70deg Estar 30 6.7679734 2.0868554
+validation_FEM FEM_70deg Estar 40 5.7280016 1.0739278
+validation_FEM FEM_70deg sigma_y 40 57.73517 12.586271
+validation_FEM FEM_70deg Estar 50 5.586049 0.95278955
+validation_FEM FEM_70deg sigma_y 50 54.361336 13.6221485
+validation_FEM FEM_70deg Estar 60 4.8985023 0.6846161
+validation_FEM FEM_70deg sigma_y 60 47.73947 6.298432
+validation_FEM FEM_70deg Estar 70 4.490424 0.58681655
+validation_FEM FEM_70deg Estar 80 4.972573 1.174437
+validation_FEM FEM_70deg sigma_y 70 44.885895 6.0559745
+validation_FEM FEM_70deg sigma_y 80 49.73367 6.996026
+
+validation_FEM FEM_70deg sigma_y 10 54.438465 10.6411295
+validation_FEM FEM_70deg Estar 10 11.418402 3.371728
+validation_FEM FEM_70deg Estar 20 8.920096 2.2530427
+validation_FEM FEM_70deg sigma_y 40 57.977955 11.413103
+validation_FEM FEM_70deg Estar 30 7.2122025 2.553396
+validation_FEM FEM_70deg sigma_y 20 53.331245 5.6745987
+validation_FEM FEM_70deg sigma_y 30 51.697357 5.809079
+validation_FEM FEM_70deg Estar 40 5.674487 1.0584177
+validation_FEM FEM_70deg Estar 50 5.1822076 1.1638528
+validation_FEM FEM_70deg sigma_y 50 50.132256 8.516054
+validation_FEM FEM_70deg Estar 60 4.6345453 0.91615105
+validation_FEM FEM_70deg sigma_y 60 52.4723 18.6952
+validation_FEM FEM_70deg sigma_y 70 47.29453 8.238122
+validation_FEM FEM_70deg sigma_y 80 48.33607 8.956366
+validation_FEM FEM_70deg Estar 70 4.341144 0.6346536
+validation_FEM FEM_70deg Estar 80 4.738268 1.2337534
+
+validation_FEM FEM_70deg sigma_y 10 580936.75 716759.56
+validation_FEM FEM_70deg Estar 10 7597901.5 5035698.5
+validation_FEM FEM_70deg sigma_y 80 53117.867 88072.48
+validation_FEM FEM_70deg Estar 80 925180.9 1275199.6
+
+validation_FEM FEM_70deg Estar 10 11.923149 4.2265677
+validation_FEM FEM_70deg sigma_y 10 70.992714 31.638952
+validation_FEM FEM_70deg Estar 80 4.643054 1.1526104
+validation_FEM FEM_70deg sigma_y 80 48.252113 7.1679344
+
+validation_FEM FEM_70deg Estar 80 4.013473 0.9177209
+validation_FEM FEM_70deg sigma_y 80 68.85868 37.76744
+
+validation_FEM FEM_70deg Estar 10 6.0162153 2.370899
+validation_FEM FEM_70deg sigma_y 10 154.55309 67.06054
+validation_FEM FEM_70deg Estar 80 4.113451 0.93582326
+validation_FEM FEM_70deg sigma_y 80 67.87422 14.0015135
+
+validation_FEM FEM_70deg sigma_y 10 186.75325 145.23845
+validation_FEM FEM_70deg Estar 10 6.3657675 2.3990424
+validation_FEM FEM_70deg Estar 80 4.2149444 0.854414
+validation_FEM FEM_70deg sigma_y 80 76.97015 27.226534
+
+validation_FEM FEM_70deg sigma_y 10 145.54922 55.027542
+validation_FEM FEM_70deg Estar 10 7.018289 2.0710816
+validation_FEM FEM_70deg Estar 80 4.106975 1.3378451
+validation_FEM FEM_70deg sigma_y 80 74.25717 19.733395
+
+validation_FEM FEM_70deg Estar 10 6.5554414 2.1971288
+validation_FEM FEM_70deg sigma_y 10 134.46477 41.170128
+validation_FEM FEM_70deg Estar 80 4.000807 1.0137608
+validation_FEM FEM_70deg sigma_y 80 64.16039 22.532383
+
+validation_FEM TI33_Berkovich Estar 5 6.356293 4.0348086
+validation_FEM TI33_Berkovich sigma_y 5 24.849237 12.3360815
+validation_FEM TI33_Berkovich Estar 10 3.32874 1.4346695
+validation_FEM TI33_Berkovich sigma_y 10 12.879677 14.55843
+
+
+USE FOR THE FIGURES:
+validation_FEM TI33_Berkovich sigma_y 1 36.337273 31.16571
+validation_FEM TI33_Berkovich sigma_y 2 16.587528 8.561503
+validation_FEM TI33_Berkovich sigma_y 3 32.654137 43.09252
+validation_FEM TI33_Berkovich sigma_y 4 26.998251 28.568037
+validation_FEM TI33_Berkovich sigma_y 5 21.507994 24.293598
+validation_FEM TI33_Berkovich sigma_y 10 6.641703 6.7919755
+validation_FEM TI33_Berkovich sigma_y 15 11.909295 10.9536705
+validation_FEM TI33_Berkovich sigma_y 20 27.69657 18.105864
+
+validation_FEM TI33_Berkovich Estar 1 33.29425 12.97419
+validation_FEM TI33_Berkovich Estar 2 14.667213 13.794886
+validation_FEM TI33_Berkovich Estar 3 12.1152315 9.608465
+validation_FEM TI33_Berkovich Estar 4 8.055034 9.460078
+validation_FEM TI33_Berkovich Estar 10 3.2479203 2.6266623
+validation_FEM TI33_Berkovich Estar 5 4.9854064 2.1073222
+validation_FEM TI33_Berkovich Estar 20 2.1973984 1.1200465
+validation_FEM TI33_Berkovich Estar 15 2.2900672 1.3813006
+
+validation_FEM TI33_Berkovich_rough sigma_y 1 31.167276 27.557905
+validation_FEM TI33_Berkovich_rough sigma_y 2 24.943111 26.2535
+validation_FEM TI33_Berkovich_rough sigma_y 3 20.253149 26.97568
+validation_FEM TI33_Berkovich_rough sigma_y 4 15.603119 15.423944
+validation_FEM TI33_Berkovich_rough sigma_y 5 11.571823 10.414749
+validation_FEM TI33_Berkovich_rough sigma_y 6 14.716022 16.37767
+validation_FEM TI33_Berkovich_rough sigma_y 8 25.289545 40.68997
+validation_FEM TI33_Berkovich_rough sigma_y 10 10.5968075 13.132583
+
+validation_FEM TI33_Berkovich_rough Estar 1 25.682007 8.459303
+validation_FEM TI33_Berkovich_rough Estar 2 16.355625 10.0506
+validation_FEM TI33_Berkovich_rough Estar 3 14.56958 10.471922
+validation_FEM TI33_Berkovich_rough Estar 4 6.826603 7.449751
+validation_FEM TI33_Berkovich_rough Estar 5 4.200863 6.624577
+validation_FEM TI33_Berkovich_rough Estar 6 2.6998656 3.3484201
+validation_FEM TI33_Berkovich_rough Estar 8 2.2280948 2.7749627
+validation_FEM TI33_Berkovich_rough Estar 10 2.012631 1.8120223
+

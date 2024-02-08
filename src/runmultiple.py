@@ -9,7 +9,22 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
-        "validation_three('Estar', 0, 'TI33_25', 'TI33_25', lay=2)"
+        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough',1)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough',2)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough',3)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough',4)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough',5)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough',10)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough',6)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough',8)",
+        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough', 1)",
+        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough', 2)",
+        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough', 3)",
+        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough', 4)",
+        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough', 5)",
+        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough', 10)",
+        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough', 6)",
+        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough', 8)"
         ])
     
     processes = []
@@ -24,7 +39,21 @@ if __name__ == '__main__':
         process.join()
         
         '''
-        "validation_FEM('sigma_y', 'FEM_70deg', 10)",
+        
+        "validation_FEM('sigma_y', 'FEM_70deg', 'FEM_70deg', 20)",
+        "validation_FEM('sigma_y', 'FEM_70deg', 'FEM_70deg', 30)",
+        "validation_FEM('sigma_y', 'FEM_70deg', 'FEM_70deg', 40)",
+        "validation_FEM('sigma_y', 'FEM_70deg', 'FEM_70deg', 50)",
+        "validation_FEM('sigma_y', 'FEM_70deg', 'FEM_70deg', 60)",
+        "validation_FEM('sigma_y', 'FEM_70deg', 'FEM_70deg', 70)",
+        "validation_FEM('Estar', 'FEM_70deg', 'FEM_70deg', 20)",
+        "validation_FEM('Estar', 'FEM_70deg', 'FEM_70deg', 30)",
+        "validation_FEM('Estar', 'FEM_70deg', 'FEM_70deg', 40)",
+        "validation_FEM('Estar', 'FEM_70deg', 'FEM_70deg', 50)",
+        "validation_FEM('Estar', 'FEM_70deg', 'FEM_70deg', 60)",
+        "validation_FEM('Estar', 'FEM_70deg', 'FEM_70deg', 70)",
+        
+        ,
         "validation_FEM('Estar', 'FEM_70deg', 10)"
 
 

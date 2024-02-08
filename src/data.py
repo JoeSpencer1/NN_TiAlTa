@@ -12,6 +12,7 @@ class FEM1(object):
 
         self.X = None
         self.y = None
+        self.read_1angle()
 
 
     def read_1angle(self):
@@ -20,7 +21,8 @@ class FEM1(object):
         df = pd.read_csv(name)
         df["Estar (GPa)"] = EtoEstar(df["E (GPa)"])
         df["sy/Estar"] = df["sy (GPa)"] / df["Estar (GPa)"]
-        df = df.loc[~((df["n"] > 0.3) & (df["sy/Estar"] >= 0.03))]
+        if (self.filename == 'FEM_70deg'):
+            df = df.loc[~((df["n"] > 0.3) & (df["sy/Estar"] >= 0.03))]
         # df = df.loc[df["n"] <= 0.3]
         # Scale c* from Conical to Berkovich
         # df["dP/dh (N/m)"] *= 1.167 / 1.128
@@ -31,7 +33,7 @@ class FEM1(object):
         print(df.describe())
 
         self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
-        if self.yname == "E*":
+        if self.yname == "Estar":
             self.y = df["Estar (GPa)"].values[:, None]
         else:
             self.y = df["sy (GPa)"].values[:, None]

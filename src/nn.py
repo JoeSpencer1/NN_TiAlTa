@@ -149,7 +149,7 @@ def data_portion(yname, train_size, div, exp, train, lay=2, wid=128):
             y_hi_train=np.vstack((dataBerk.y, datatrain.y[train_index])),
             X_hi_test=dataexp.X,
             y_hi_test=dataexp.y,
-            standardize=True
+            #standardize=True
         )
         res = dde.utils.apply(mfnn, (data, lay, wid))
         apeG.append(res[:2])
@@ -158,19 +158,29 @@ def data_portion(yname, train_size, div, exp, train, lay=2, wid=128):
         
 
 
-def validation_FEM(yname, filename, train_size):
+def validation_FEM(yname, filename, testname, train_size):
     datafem = FEM1(yname, filename)
+    datatest = FEM1(yname, testname)
     # datafem = BerkovichData(yname)
     '''
-    def normalize(vec):
-        vec = np.array([x for x in vec if x is not None])
-        mean = np.mean(vec)
-        std_dev = np.std(vec)
-        return (vec - mean) / std_dev if std_dev != 0 else vec - mean
+    def normalize(vec, other=None):
+        mean = np.mean(vec, axis=0)
+        most = np.max(vec, axis=0)
+        least = np.min(vec, axis=0)
+        one = np.ones_like(vec)
+        if other == None:
+            #return (vec - least * one) / (most - least)
+            return (vec / most)
+        else:
+            return ((vec - least * one) / (most - least), (other - least * one) / (most - least))
     datafem.y = normalize(datafem.y)
     for i in range(3):
-        datafem.X[int(i)] = normalize(datafem.X[int(i)])
-    '''
+        print('Column ' + str(i))
+        print(datafem.X[:,i])
+        datafem.X[:,int(i)] = normalize(datafem.X[:,int(i)])
+    print(datafem.X)
+    print(datafem.y)'''
+    
     if train_size == 80:
         kf = RepeatedKFold(n_splits=5, n_repeats=2, random_state=0)
     elif train_size == 90:
@@ -179,7 +189,7 @@ def validation_FEM(yname, filename, train_size):
         kf = ShuffleSplit(
             n_splits=10, test_size=len(datafem.X) - train_size, random_state=0
         )
-
+    
     mape = []
     iter = 0
     for train_index, test_index in kf.split(datafem.X):
@@ -193,12 +203,12 @@ def validation_FEM(yname, filename, train_size):
             X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test
         )
 
-        mape.append(dde.apply(nn, (data,)))
+        mape.append(dde.utils.apply(nn, (data,)))
 
     print(mape)
     print(yname, train_size, np.mean(mape), np.std(mape))
     with open('output.txt', 'a') as f:
-        f.write('validation_FEM ', filename, ' ', str(train_size), ' ', str(np.mean(mape)), ' ', str(np.std(mape)), '\n')
+        f.write('validation_FEM ' + filename + ' ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + '\n')
 
 
 
@@ -345,7 +355,7 @@ def validation_two(yname, train_size, exp, low, hi, lay=2, wid=128):
                 y_hi_train=datahigh.y[train_index],
                 X_hi_test=dataexp.X,
                 y_hi_test=dataexp.y,
-                standardize=True
+                #standardize=True
             )
             res = dde.utils.apply(mfnn, (data, lay, wid))
             ape.append(res[:2])
@@ -385,7 +395,7 @@ def validation_three(yname, train_size, train, exp, lay=2, wid=128):
                 y_hi_train=dataBerk.y,
                 X_hi_test=dataexp.X,
                 y_hi_test=dataexp.y,
-                standardize=True
+                #standardize=True
             )
             res = dde.utils.apply(mfnn, (data, lay, wid))
             ape.append(res[:2])
@@ -421,7 +431,7 @@ def validation_three(yname, train_size, train, exp, lay=2, wid=128):
                     y_hi_train=np.vstack((dataBerk.y, datatrain.y[train_index])),
                     X_hi_test=dataexp.X,
                     y_hi_test=dataexp.y,
-                    standardize=True
+                    #standardize=True
                 )
                 res = dde.utils.apply(mfnn, (data, lay, wid))
                 ape.append(res[:2])
