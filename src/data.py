@@ -19,7 +19,8 @@ class FEM1(object):
         name = '../data/' + self.filename + '.csv'
         print('Name=', name)
         df = pd.read_csv(name)
-        df["Estar (GPa)"] = EtoEstar(df["E (GPa)"])
+        if self.filename != 'TI33_25':
+            df["Estar (GPa)"] = EtoEstar(df["E (GPa)"])
         df["sy/Estar"] = df["sy (GPa)"] / df["Estar (GPa)"]
         if (self.filename == 'FEM_70deg'):
             df = df.loc[~((df["n"] > 0.3) & (df["sy/Estar"] >= 0.03))]

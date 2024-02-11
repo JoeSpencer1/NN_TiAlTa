@@ -181,23 +181,48 @@ def validation_FEM(yname, filename, testname, train_size):
     print(datafem.X)
     print(datafem.y)'''
     
-    if train_size == 80:
-        kf = RepeatedKFold(n_splits=5, n_repeats=2, random_state=0)
-    elif train_size == 90:
-        kf = KFold(n_splits=10, shuffle=True, random_state=0)
+    if filename == testname:
+        if train_size == 80:
+            kf = RepeatedKFold(n_splits=5, n_repeats=2, random_state=0)
+        elif train_size == 90:
+            kf = KFold(n_splits=10, shuffle=True, random_state=0)
+        else:
+            kf = ShuffleSplit(
+                n_splits=10, test_size=len(datafem.X) - train_size, random_state=0
+            )
+        train_set = kf.split(datafem.X)
     else:
-        kf = ShuffleSplit(
-            n_splits=10, test_size=len(datafem.X) - train_size, random_state=0
-        )
+        if len(datafem.y) > len(datatest.y):
+            kf = ShuffleSplit(
+                n_splits=10, test_size=len(datatest.X) - train_size, random_state=0
+            )
+            train_set = kf.split(datafem.X)
+        else:
+            kf = ShuffleSplit(
+                n_splits=10, test_size=len(datafem.X) - train_size, random_state=0
+            )
+            train_set = kf.split(datatest.X)
     
     mape = []
     iter = 0
-    for train_index, test_index in kf.split(datafem.X):
+    for train_index, test_index in train_set:
         iter += 1
         print("\nCross-validation iteration: {}".format(iter))
 
-        X_train, X_test = datafem.X[train_index], datafem.X[test_index]
-        y_train, y_test = datafem.y[train_index], datafem.y[test_index]
+        if filename == testname:
+            X_train, X_test = datafem.X[train_index], datafem.X[test_index]
+            y_train, y_test = datafem.y[train_index], datafem.y[test_index]
+        else:
+            l_1 = len(datatest.y)
+            l_2 = len(datafem.y)
+            if l_1 < l_2:
+                t_i = test_index
+                test_index = (t_i * l_1 / l_2).astype(int)
+            else:
+                t_i = train_index
+                train_index = (t_i * l_2 / l_1).astype(int)
+            X_train, X_test = datafem.X[train_index], datatest.X[test_index]
+            y_train, y_test = datafem.y[train_index], datatest.y[test_index]
 
         data = dde.data.DataSet(
             X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test
@@ -208,7 +233,7 @@ def validation_FEM(yname, filename, testname, train_size):
     print(mape)
     print(yname, train_size, np.mean(mape), np.std(mape))
     with open('output.txt', 'a') as f:
-        f.write('validation_FEM ' + filename + ' ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + '\n')
+        f.write('validation_FEM ' + testname + ' ' + filename + ' ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + '\n')
 
 
 

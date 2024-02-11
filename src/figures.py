@@ -326,3 +326,201 @@ ax2.annotate("B: $E_{r}$", xy=(0.15, 0.95), xycoords="axes fraction",
 plt.savefig("/Users/Joe/Desktop/figure1.jpeg", dpi=800, bbox_inches="tight")
 plt.show()
 '''
+'''
+# 2D FEM plot
+n_30 = [5, 10, 15, 20, 25, 30, 35, 40]
+c30σ = [60.18876, 44.969826, 47.465202, 61.82657, 52.733135, 35.656128, 40.851677, 13.14303]
+εc30σ = [41.206966, 27.921497, 38.5343, 68.33482, 49.83972, 44.069607, 53.421883, 3.7868276]
+c30E = [6.7017927, 3.968275, 3.2684226, 3.115778, 3.8301284, 0.48159194, 0.44056806, 0.51108503]
+εc30E = [3.8387244, 4.64504, 5.1517644, 5.197127, 6.792287, 0.16580099, 0.21634454, 0.27333787]
+n_45 = [5, 10, 15, 20, 25, 30, 35, 40]
+c45σ = [47.69543, 36.88656, 49.16212, 69.39226, 38.905285, 35.58552, 39.764732, 13.041214]
+εc45σ = [34.60377, 26.898079, 48.949436, 79.412865, 36.342518, 43.10947, 52.700333, 3.8021903]
+c45E = [6.8221407, 3.6736221, 2.6227307, 2.6362934, 3.6511178, 1.1328148, 1.0110619, 0.94891435]
+εc45E = [4.168493, 4.141034, 3.486758, 3.2869203, 5.257216, 0.4206212, 0.40799123, 0.44324088]
+n_60 = [5, 10, 15, 20, 25, 30, 35, 40]
+c60σ = [56.82661, 59.390118, 43.545666, 62.64787, 57.540466, 34.09452, 37.99452, 12.12359]
+εc60σ = [51.9622, 49.808273, 40.93228, 68.1315, 56.818974, 43.810177, 51.654713, 4.199802]
+c60E = [2.2587574, 1.553577, 1.2308276, 1.1793786, 1.2517836, 0.40467867, 0.46838742, 0.4566309]
+εc60E = [1.823878, 1.6410633, 1.4770961, 1.3812854, 1.595665, 0.15322132, 0.16536641, 0.18179524]
+n_70 = [5, 10, 15, 20, 25, 30, 35, 40]
+c70σ = [62.534313, 46.959476, 44.965855, 42.311863, 67.861046, 46.759636, 47.27385, 16.88904]
+εc70σ = [35.405556, 31.7435, 53.33709, 35.76007, 59.417057, 41.19558, 48.47632, 5.148048]
+c70E = [2.8892665, 2.4597995, 2.64531, 2.3275874, 1.7165909, 1.1549096, 1.2989982, 1.1708868]
+εc70E = [1.680209, 1.8020929, 2.3944137, 2.0285802, 1.329095, 0.542358, 0.5996636, 0.542196]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n_30, c30σ, yerr = εc30σ, color = 'blue', label = "30˚ (n$_{tr}$=58)")
+ax1.errorbar(n_45, c45σ, yerr = εc45σ, color = 'green', label = "45˚ (n$_{tr}$=58)")
+ax1.errorbar(n_60, c60σ, yerr = εc60σ, color = 'grey', label = "60˚ (n$_{tr}$=58)")
+ax1.errorbar(n_70, c70σ, yerr = εc70σ, color = 'red', label = "70.3˚ (n$_{tr}$=58)")
+ax1.set_yscale('linear')
+ax1.set_ylim([0, 120])
+ax1.set_xlim([-0.5, 41])
+ax1.set_xticks([0, 10, 20, 30, 40])
+ax1.set_yticks([0, 20, 40, 60, 80, 100])
+ax1.set_yticklabels([0, 20, 40, 60, 80, 100])
+ax1.legend()
+ax1.set_ylabel("MAPE (%)")
+ax1.set_xlabel("2D FEM training data size")
+ax1.annotate("A: $\sigma_{y}$", xy=(0.15, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(n_30, c30E, yerr = εc30E, color = 'blue', label = "30˚")
+ax2.errorbar(n_45, c45E, yerr = εc45E, color = 'green', label = "45˚")
+ax2.errorbar(n_60, c60E, yerr = εc60E, color = 'grey', label = "60˚")
+ax2.errorbar(n_70, c70E, yerr = εc70E, color = 'red', label = "70.3˚")
+ax2.set_yscale('linear')
+ax2.set_ylim([0, 12])
+ax2.set_xlim([-0.5, 41])
+ax2.set_xticks([0, 10, 20, 30, 40])
+ax2.set_yticks([2, 4, 6, 8, 10])
+ax2.set_yticklabels([2, 4, 6, 8, 10])
+ax2.legend()
+ax2.set_ylabel("MAPE (%)")
+ax2.set_xlabel("2D FEM training data size")
+plt.subplots_adjust(bottom=0.180)
+fig.tight_layout()
+ax2.annotate("B: $E_{r}$", xy=(0.15, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/figure1.jpeg", dpi=800, bbox_inches="tight")
+plt.show()
+''''''
+
+# 3D FEM plot
+r_x = [1, 2, 3, 4, 5, 6, 8, 10]
+r_σ = [31.167276, 24.943111, 20.253149, 15.603119, 11.571823, 14.716022, 25.289545, 10.5968075]
+εr_σ = [27.557905, 26.2535, 26.97568, 15.423944, 10.414749, 16.37767, 40.68997, 13.132583]
+r_E = [25.682007, 16.355625, 14.56958, 6.826603, 4.200863, 2.6998656, 2.2280948, 2.012631]
+εr_E = [8.459303, 10.0506, 10.471922, 7.449751, 6.624577, 3.3484201, 2.7749627, 1.8120223]
+s_x = [1, 2, 3, 4, 5, 10, 15, 20]
+s_σ = [36.33727, 16.587528, 32.654137, 26.998251, 21.507994, 6.641703, 11.909295, 27.69657]
+εs_σ = [31.16571, 8.561503, 43.09252, 28.568037, 24.293598, 6.7919755, 10.9536705, 18.105864]
+s_E = [33.29425, 14.667213, 12.1152315, 8.055034, 4.9854064, 3.2479203, 2.2900672, 2.1973984]
+εs_E = [12.97419, 13.794886, 9.608465, 9.460078, 2.1073222, 2.6266623, 1.3813006, 1.1200465]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(r_x, r_σ, yerr = εr_σ, color = 'blue', label = "Rough (n$_{tr}$=11)")
+ax1.errorbar(s_x, s_σ, yerr = εs_σ, color = 'green', label = "Refined (n$_{tr}$=26)")
+ax1.set_yscale('linear')
+ax1.set_ylim([0, 20])
+ax1.set_xlim([-0.5, 21])
+ax1.set_xticks([0, 5, 10, 15, 20])
+ax1.set_yticks([0, 20, 40, 60])
+ax1.set_yticklabels([0, 20, 40, 60])
+ax1.legend()
+ax1.set_ylabel("MAPE (%)")
+ax1.set_xlabel("3D FEM training data size")
+ax1.annotate("A: $\sigma_{y}$", xy=(0.15, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(r_x, r_E, yerr = εr_E, color = 'blue', label = "Rough")
+ax2.errorbar(s_x, s_E, yerr = εs_E, color = 'green', label = "Refined")
+ax2.set_yscale('linear')
+ax2.set_ylim([0, 50])
+ax2.set_xlim([-0.5, 21])
+ax2.set_xticks([0, 5, 10, 15, 20])
+ax2.set_yticks([10, 20, 30, 40, 50])
+ax2.set_yticklabels([10, 20, 30, 40, 50])
+ax2.legend()
+ax2.set_ylabel("MAPE (%)")
+ax2.set_xlabel("3D FEM training data size")
+plt.subplots_adjust(bottom=0.180)
+fig.tight_layout()
+ax2.annotate("B: $E_{r}$", xy=(0.15, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/figure2.jpeg", dpi=800, bbox_inches="tight")
+plt.show()
+'''
+# Exp data
+ex_x = [2, 4, 6, 8, 10, 12, 14, 16]
+ex_σ = [17.503685, 26.466599, 21.911015, 22.106192, 45.090057, 28.716232, 48.521652, 36.83198]
+εex_σ = [13.739083, 14.606619, 10.539335, 9.395743, 32.86384, 21.917978, 35.697067, 26.285158]
+ex_E = [7.4552474, 5.515073, 4.4371285, 4.143283, 4.210283, 4.4349427, 3.7818809, 3.8236954]
+εex_E = [1.4885967, 2.467008, 1.3652551, 1.0471737, 1.6728787, 1.4284903, 1.4719386, 1.6564999]
+# 3D data
+s_x = [1, 2, 3, 4, 5, 10, 15, 20]
+s_σ = [36.33727, 16.587528, 32.654137, 26.998251, 21.507994, 6.641703, 11.909295, 27.69657]
+εs_σ = [31.16571, 8.561503, 43.09252, 28.568037, 24.293598, 6.7919755, 10.9536705, 18.105864]
+s_E = [33.29425, 14.667213, 12.1152315, 8.055034, 4.9854064, 3.2479203, 2.2900672, 2.1973984]
+εs_E = [12.97419, 13.794886, 9.608465, 9.460078, 2.1073222, 2.6266623, 1.3813006, 1.1200465]
+# 2D data
+n_70 = [5, 10, 15, 20, 25, 30, 35, 40]
+c70σ = [62.534313, 46.959476, 44.965855, 42.311863, 67.861046, 46.759636, 47.27385, 16.88904]
+εc70σ = [35.405556, 31.7435, 53.33709, 35.76007, 59.417057, 41.19558, 48.47632, 5.148048]
+c70E = [2.8892665, 2.4597995, 2.64531, 2.3275874, 1.7165909, 1.1549096, 1.2989982, 1.1708868]
+εc70E = [1.680209, 1.8020929, 2.3944137, 2.0285802, 1.329095, 0.542358, 0.5996636, 0.542196]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n_70, c70σ, yerr = εc70σ, color = 'green', label = "2D FEM (70.3˚)")
+ax1.errorbar(s_x, s_σ, yerr = εs_σ, color = 'red', label = "3D FEM")
+ax1.errorbar(ex_x, ex_σ, yerr = εex_σ, color = 'blue', label = "Experiment")
+ax1.set_yscale('linear')
+ax1.set_ylim([0, 120])
+ax1.set_xlim([-0.5, 41])
+ax1.set_xticks([0, 10, 20, 30, 40])
+ax1.set_yticks([0, 20, 40, 60, 80, 100])
+ax1.set_yticklabels([0, 20, 40, 60, 80, 100])
+ax1.legend()
+ax1.set_ylabel("MAPE (%)")
+ax1.set_xlabel("Experimental training data size")
+ax1.annotate("A: $\sigma_{y}$", xy=(0.15, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(n_70, c70E, yerr = εc70E, color = 'green', label = "2D FEM (n$_{tr}$=58)")
+ax2.errorbar(s_x, s_E, yerr = εs_E, color = 'red', label = "3D FEM (n$_{tr}$=26)")
+ax2.errorbar(ex_x, ex_E, yerr = εex_E, color = 'blue', label = "Experiment (n$_{tr}$=25)")
+ax2.set_yscale('linear')
+ax2.set_ylim([0, 12])
+ax2.set_xlim([-0.5, 41])
+ax2.set_xticks([0, 10, 20, 30, 40])
+ax2.set_yticks([2, 4, 6, 8, 10])
+ax2.set_yticklabels([2, 4, 6, 8, 10])
+ax2.legend()
+ax2.set_ylabel("MAPE (%)")
+ax2.set_xlabel("Experimental training data size")
+plt.subplots_adjust(bottom=0.180)
+fig.tight_layout()
+ax2.annotate("B: $E_{r}$", xy=(0.15, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/trainingsources.jpeg", dpi=800, bbox_inches="tight")
+plt.show()
+
+
+categories = ['Physical', 'Fine 3D FEM', 'Rough 3D FEM', '2D FEM (70.3˚)']
+σvalues = [45.090057, 70.12297, 82.563194, 58.66543]
+σerrors = [32.86384, 22.982897, 28.687885, 19.887922]
+Evalues = [4.210283, 3.5263298, 5.338781, 9.962336]
+Eerrors = [1.6728787, 2.66636, 3.444265, 0.95166034]
+
+colors = ['darkred', 'green', 'gray', 'blue']
+bar_width = 0.15
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.bar(categories, σvalues, yerr=σerrors, capsize=4, color=colors)
+ax1.set_yticks([0, 25, 50, 75, 100])
+ax1.set_yticklabels([0, 25, 50, 75, 100])
+ax1.set_xlabel('Trainind data type')
+ax1.tick_params(axis='x', labelsize=8)
+ax1.set_ylabel('MAPE (%)')
+plt.subplots_adjust(bottom=0.18)
+ax1.annotate("A: $\sigma_{y}$", xy=(0.15, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+ax2.bar(categories, Evalues, yerr=Eerrors, capsize=4, color=colors)
+ax2.set_yticks([0, 2, 4, 6, 8, 10])
+ax2.tick_params(axis='x', labelsize=8)
+ax2.set_yticklabels([0, 2, 4, 6, 8, 10])
+ax2.set_xlabel('Trainind data type')
+ax2.set_ylabel('MAPE (%)')
+plt.subplots_adjust(bottom=0.18)
+ax2.annotate("B: $E_{r}$", xy=(0.15, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/trainingerrors.jpeg", dpi=800, bbox_inches="tight")
+plt.show()

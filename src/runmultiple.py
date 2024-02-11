@@ -9,22 +9,7 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
-        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough',1)",
-        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough',2)",
-        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough',3)",
-        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough',4)",
-        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough',5)",
-        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough',10)",
-        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough',6)",
-        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough',8)",
-        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough', 1)",
-        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough', 2)",
-        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough', 3)",
-        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough', 4)",
-        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough', 5)",
-        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough', 10)",
-        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough', 6)",
-        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_Berkovich_rough', 8)"
+        "validation_FEM('sigma_y', 'TI33_conical_70.3', 'TI33_25', 10)"
         ])
     
     processes = []
@@ -39,6 +24,22 @@ if __name__ == '__main__':
         process.join()
         
         '''
+        ,
+        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_25',4)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_25',6)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_25',8)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_25',10)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_25',12)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_25',14)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_25',16)",
+        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_25', 2)",
+        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_25', 4)",
+        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_25', 6)",
+        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_25', 8)",
+        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_25', 10)",
+        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_25', 12)",
+        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_25', 14)",
+        "validation_FEM('Estar', 'TI33_Berkovich_rough', 'TI33_25', 16)"
         
         "validation_FEM('sigma_y', 'FEM_70deg', 'FEM_70deg', 20)",
         "validation_FEM('sigma_y', 'FEM_70deg', 'FEM_70deg', 30)",
