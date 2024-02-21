@@ -436,6 +436,7 @@ ax2.annotate("B: $E_{r}$", xy=(0.15, 0.95), xycoords="axes fraction",
 plt.savefig("/Users/Joe/Desktop/figure2.jpeg", dpi=800, bbox_inches="tight")
 plt.show()
 '''
+'''
 # Exp data
 ex_x = [2, 4, 6, 8, 10, 12, 14, 16]
 ex_σ = [17.503685, 26.466599, 21.911015, 22.106192, 45.090057, 28.716232, 48.521652, 36.83198]
@@ -524,3 +525,145 @@ ax2.annotate("B: $E_{r}$", xy=(0.15, 0.95), xycoords="axes fraction",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
 plt.savefig("/Users/Joe/Desktop/trainingerrors.jpeg", dpi=800, bbox_inches="tight")
 plt.show()
+'''
+''''''
+# Lu's data, digitized fig. 2 from paper
+n_lu = [10, 20, 30, 40, 50, 60, 70, 80]
+luσ = [126.59981, 74.7933, 49.3204, 48.40326, 43.34291, 38.5812, 40.6214, 39.11309]
+εluσ = [126.59981-126.0069, 74.7933-41.0649, 49.3204-41.6276, 48.40326-37.45651, 43.34291-37.13045, 38.5812-32.6623, 40.6214-33.2250, 39.11309-31.12437]
+luE = [14.31427, 6.67098, 6.20802, 5.507686, 4.74777, 4.4628, 4.3559, 4.54563]
+εluE = [14.31427-7.84565, 6.67098-4.890341, 6.20802-4.902166, 5.507686-4.32074, 4.74777-4.5697, 4.4628-3.9287, 4.3559-3.88121, 4.54563-3.71499]
+# My version of lu's 70.3˚ FEM data
+n_me = [10, 20, 30, 40, 50, 60, 70, 80]
+meσ = [129.715, 74.073235, 52.414314, 41.575752, 49.87278, 38.934593, 39.65153, 40.450726]
+εmeσ = [77.584915, 27.026743, 13.707746, 5.507115, 9.828185, 6.028146, 6.7208185, 8.7345]
+meE = [13.2443695, 8.132007, 6.264584, 5.5313954, 4.8793535, 4.9000173, 4.4977903, 4.7119946]
+εmeE = [3.303954, 3.1866722, 1.7214556, 0.9339477, 0.63589025, 0.47832343, 0.6403632, 1.3723232]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n_lu, luσ, yerr = εluσ, color = 'green', label = "Lu's NN (70.3˚)")
+ax1.errorbar(n_me, meσ, yerr = εmeσ, color = 'red', label = "My replication")
+ax1.set_yscale('linear')
+ax1.set_ylim([0, 150])
+ax1.set_xlim([-0.5, 90])
+ax1.set_xticks([0, 20, 40, 60, 80])
+ax1.set_yticks([0, 20, 40, 60, 80, 100])
+ax1.set_yticklabels([0, 20, 40, 60, 80, 100])
+ax1.legend()
+ax1.set_ylabel("MAPE (%)")
+ax1.set_xlabel("Experimental training data size")
+ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(n_lu, luE, yerr = εluE, color = 'green', label = "Lu's NN (n$_{tr}$=100)")
+ax2.errorbar(n_me, meE, yerr = εmeE, color = 'red', label = "My replication")
+ax2.set_yscale('linear')
+ax2.set_ylim([0, 16])
+ax2.set_xlim([-0.5, 90])
+ax2.set_xticks([0, 20, 40, 60, 80])
+ax2.set_yticks([2, 4, 6, 8, 10])
+ax2.set_yticklabels([2, 4, 6, 8, 10])
+ax2.legend()
+ax2.set_ylabel("MAPE (%)")
+ax2.set_xlabel("Experimental training data size")
+plt.subplots_adjust(bottom=0.180)
+fig.tight_layout()
+ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/lu2D.jpeg", dpi=800, bbox_inches="tight")
+plt.show()
+
+
+# Lu's 3D data
+n_lu3 = [4, 6, 8, 10, 12]
+lu3σ = [330.301, 241, 199.8, 54.2, 44.5]
+εlu3σ = [330.301-302, 241-96.8, 199.8-98.7, 54.2, 44.5-6.39]
+lu3E = [72.177, 41.554, 18.941, 10.971, 8.524]
+εlu3E = [72.177-50.076, 41.554-8.404, 18.941-0, 10.971-3.511, 8.524-2.998]
+# My version of Lu's 3D data
+n_Br = [4, 6, 8, 10, 12]
+Brσ = [409.73468, 178.92538, 226.17464, 73.83698, 58.871986]
+εBrσ = [483.11395, 216.85849, 348.76566, 93.503784, 43.765083]
+BrE = [72.62585, 34.406578, 16.770884, 13.474498, 8.293661]
+εBrE = [58.778774, 40.89992, 6.265485, 9.39406, 5.6520896]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n_lu3, lu3σ, yerr = εlu3σ, color = 'green', label = "Lu's NN (3D FEM)")
+ax1.errorbar(n_Br, Brσ, yerr = εBrσ, color = 'red', label = "My replication")
+ax1.set_yscale('linear')
+ax1.set_ylim([0, 800])
+ax1.set_xlim([0, 13])
+ax1.set_xticks([0, 3, 6, 9, 12])
+ax1.set_yticks([0, 100, 200, 300, 400, 500, 600, 700, 800])
+ax1.set_yticklabels([0, 100, 200, 300, 400, 500, 600, 700, 800])
+ax1.legend()
+ax1.set_ylabel("MAPE (%)")
+ax1.set_xlabel("Experimental training data size")
+ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(n_lu3, lu3E, yerr = εlu3E, color = 'green', label = "Lu's NN (n$_{tr}$=14)")
+ax2.errorbar(n_Br, BrE, yerr = εBrE, color = 'red', label = "My replication")
+ax2.set_yscale('linear')
+ax2.set_ylim([0, 150])
+ax2.set_xlim([-0.5, 15])
+ax2.set_xticks([0, 3, 6, 9, 12, 15])
+ax2.set_yticks([0, 30, 60, 90, 120, 150])
+ax2.set_yticklabels([0, 30, 60, 90, 120, 150])
+ax2.legend()
+ax2.set_ylabel("MAPE (%)")
+ax2.set_xlabel("Experimental training data size")
+plt.subplots_adjust(bottom=0.180)
+fig.tight_layout()
+ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/lu3D.jpeg", dpi=800, bbox_inches="tight")
+plt.show()
+
+
+
+# Lu's experimental data
+n_Ex = [3, 6, 9, 12, 15, 18, 21]
+Exσ = [105.38621, 37.710663, 23.844566, 16.386522, 15.827128, 12.619016, 10.768929]
+εExσ = [39.772045, 16.506422, 8.401395, 5.692606, 8.074784, 4.6316137, 4.239168]
+ExE = [53.26761, 25.274721, 10.545181, 6.2623787, 4.5989795, 3.6774323, 2.4038455]
+εExE = [21.008629, 13.292065, 3.9533153, 4.338378, 2.1332085, 1.5747724, 1.2042903]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n_Ex, Exσ, yerr = εExσ, color = 'green', label = "Lu's indentations on B3090")
+ax1.set_yscale('linear')
+ax1.set_ylim([0, 150])
+ax1.set_xlim([-0.5, 24])
+ax1.set_xticks([0, 3, 6, 9, 12, 15, 18, 21])
+ax1.set_yticks([0, 30, 60, 90, 120, 150])
+ax1.set_yticklabels([0, 30, 60, 90, 120, 150])
+ax1.legend()
+ax1.set_ylabel("MAPE (%)")
+ax1.set_xlabel("Experimental training data size")
+ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(n_Ex, ExE, yerr = εExE, color = 'green', label = "Lu's data (n$_{tr}$=100)")
+ax2.set_yscale('linear')
+ax2.set_ylim([0, 80])
+ax2.set_xlim([-0.5, 24])
+ax2.set_xticks([0, 3, 6, 9, 12, 15, 18, 21])
+ax2.set_yticks([0, 20, 40, 60, 80])
+ax2.set_yticklabels([0, 20, 40, 60, 80])
+ax2.legend()
+ax2.set_ylabel("MAPE (%)")
+ax2.set_xlabel("Experimental training data size")
+plt.subplots_adjust(bottom=0.180)
+fig.tight_layout()
+ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/luexp.jpeg", dpi=800, bbox_inches="tight")
+plt.show()
+
+

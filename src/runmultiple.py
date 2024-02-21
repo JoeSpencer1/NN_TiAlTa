@@ -8,8 +8,9 @@ def run_main(arg):
 
 if __name__ == '__main__':
 
-    arguments = np.array([
-        "validation_FEM('sigma_y', 'TI33_conical_70.3', 'TI33_25', 10)"
+    arguments = np.array([   
+        "validation_exp_cross2('sigma_y', 10, 'Berkovich', 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_exp_cross2('Estar', 10, 'Berkovich', 'FEM_70deg', 'B3090', 'B3090')"        
         ])
     
     processes = []
@@ -24,7 +25,106 @@ if __name__ == '__main__':
         process.join()
         
         '''
-        ,
+        "validation_mf('sigma_y', 3, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('Estar', 3, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('sigma_y', 6, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('Estar', 6, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('sigma_y', 9, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('Estar', 9, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('sigma_y', 12, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('Estar', 12, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('sigma_y', 15, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('Estar', 15, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('sigma_y', 18, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('Estar', 18, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('sigma_y', 21, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('Estar', 21, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('sigma_y', 24, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('Estar', 24, 'TI33_Berkovich', 'TI33_25', 'TI33_25')"
+
+
+        "validation_mf('sigma_y', 3, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('Estar', 3, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('sigma_y', 6, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('Estar', 6, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('sigma_y', 9, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('Estar', 9, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('sigma_y', 12, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('Estar', 12, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('sigma_y', 15, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('Estar', 15, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('sigma_y', 18, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('Estar', 18, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('sigma_y', 21, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('Estar', 21, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('sigma_y', 24, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
+        "validation_mf('Estar', 24, 'TI33_Berkovich', 'TI33_25', 'TI33_25')"
+
+
+        "validation_exp_cross2('Estar', 2, 'Berkovich', 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_exp_cross2('Estar', 3, 'Berkovich', 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_exp_cross2('Estar', 4, 'Berkovich', 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_exp_cross2('Estar', 5, 'Berkovich', 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_exp_cross2('Estar', 8, 'Berkovich', 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_exp_cross2('Estar', 10, 'Berkovich', 'FEM_70deg', 'B3090', 'B3090')",
+
+        "validation_exp_cross2('sigma_y', 2, 'Berkovich', 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_exp_cross2('sigma_y', 3, 'Berkovich', 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_exp_cross2('sigma_y', 4, 'Berkovich', 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_exp_cross2('sigma_y', 5, 'Berkovich', 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_exp_cross2('sigma_y', 8, 'Berkovich', 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_exp_cross2('sigma_y', 10, 'Berkovich', 'FEM_70deg', 'B3090', 'B3090')",
+
+        "validation_FEM('sigma_y', 'TI33_25', 'TI33_25',3)",
+        "validation_FEM('sigma_y', 'TI33_25', 'TI33_25',6)",
+        "validation_FEM('sigma_y', 'TI33_25', 'TI33_25',9)",
+        "validation_FEM('sigma_y', 'TI33_25', 'TI33_25',12)",
+        "validation_FEM('sigma_y', 'TI33_25', 'TI33_25',15)",
+        "validation_FEM('sigma_y', 'TI33_25', 'TI33_25',18)",
+        "validation_FEM('sigma_y', 'TI33_25', 'TI33_25',21)",
+        "validation_FEM('Estar', 'TI33_25', 'TI33_25', 3)",
+        "validation_FEM('Estar', 'TI33_25', 'TI33_25', 6)",
+        "validation_FEM('Estar', 'TI33_25', 'TI33_25', 9)",
+        "validation_FEM('Estar', 'TI33_25', 'TI33_25', 12)",
+        "validation_FEM('Estar', 'TI33_25', 'TI33_25', 15)",
+        "validation_FEM('Estar', 'TI33_25', 'TI33_25', 18)",
+        "validation_FEM('Estar', 'TI33_25', 'TI33_25', 21)"
+
+
+        "validation_mf('sigma_y', 10, 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_mf('Estar', 10, 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_mf('sigma_y', 20, 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_mf('Estar', 20, 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_mf('sigma_y', 40, 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_mf('Estar', 40, 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_mf('sigma_y', 50, 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_mf('Estar', 50, 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_mf('sigma_y', 60, 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_mf('Estar', 60, 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_mf('sigma_y', 70, 'FEM_70deg', 'B3090', 'B3090')",
+        "validation_mf('Estar', 70, 'FEM_70deg', 'B3090', 'B3090')"
+
+
+        
+        "validation_FEM('sigma_y', 'TI33_Berkovich', 'TI33_25',4)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich', 'TI33_25',6)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich', 'TI33_25',8)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich', 'TI33_25',10)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich', 'TI33_25',12)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich', 'TI33_25',14)",
+        "validation_FEM('sigma_y', 'TI33_Berkovich', 'TI33_25',16)",
+        "validation_FEM('Estar', 'TI33_Berkovich', 'TI33_25', 2)",
+        "validation_FEM('Estar', 'TI33_Berkovich', 'TI33_25', 4)",
+        "validation_FEM('Estar', 'TI33_Berkovich', 'TI33_25', 6)",
+        "validation_FEM('Estar', 'TI33_Berkovich', 'TI33_25', 8)",
+        "validation_FEM('Estar', 'TI33_Berkovich', 'TI33_25', 10)",
+        "validation_FEM('Estar', 'TI33_Berkovich', 'TI33_25', 12)",
+        "validation_FEM('Estar', 'TI33_Berkovich', 'TI33_25', 14)",
+        
+        "validation_FEM('sigma_y', 'FEM_70deg', 'FEM_70deg', 10)",
+        "validation_FEM('sigma_y', 'FEM_70deg', 'FEM_70deg', 70)",
+        "validation_FEM('Estar', 'FEM_70deg', 'FEM_70deg', 10)",
+        "validation_FEM('Estar', 'FEM_70deg', 'FEM_70deg', 70)",
         "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_25',4)",
         "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_25',6)",
         "validation_FEM('sigma_y', 'TI33_Berkovich_rough', 'TI33_25',8)",

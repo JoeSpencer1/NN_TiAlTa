@@ -9,7 +9,7 @@ from sklearn.svm import SVR
 from sklearn.model_selection import KFold, LeaveOneOut, RepeatedKFold, ShuffleSplit
 
 import deepxde as dde
-from data import BerkovichData, FEMData, ExpDataT, ExpData, FEM1
+from data import BerkovichData, FEMData, ExpDataT, ExpData, Data1, FEMData0, FEMDataC, BerkovichDataC, ExpDataC
 import tensorflow as tf
 tf.config.run_functions_eagerly(False)
 from tensorflow.keras import layers, models
@@ -35,7 +35,7 @@ def mfgp(data):
     return dde.metrics.get("MAPE")(data.y_hi_test, y_pred)
 
 
-def nn(data, lay=9, wid=32):
+def nn(data, lay=2, wid=32):
     layer_size = [data.train_x.shape[1]] + [wid] * lay + [1]
     activation = "selu"
     initializer = "LeCun normal"
@@ -89,7 +89,7 @@ def mfnn(data, lay=2, wid=128):
     model = dde.Model(data, net)
     model.compile("adam", lr=0.0001, loss="MAPE", metrics=["MAPE", "APE SD"])
     # Set weight of high-fidelity and low-fidelity data to 50%
-    model.set_weights = [0.5, 0.5]
+    #model.set_weights = [0.5, 0.5]
     losshistory, train_state = model.train(epochs=30000)
 
     dde.saveplot(losshistory, train_state, issave=True, isplot=False)
@@ -156,11 +156,43 @@ def data_portion(yname, train_size, div, exp, train, lay=2, wid=128):
         yG.append(res[2])
     return
         
+def validation_FEM_unedited(yname, angles, train_size):
+    datafem = FEMData0(yname, angles)
+    # datafem = BerkovichData(yname)
 
+    if train_size == 80:
+        kf = RepeatedKFold(n_splits=5, n_repeats=2, random_state=0)
+    elif train_size == 90:
+        kf = KFold(n_splits=10, shuffle=True, random_state=0)
+    else:
+        kf = ShuffleSplit(
+            n_splits=10, test_size=len(datafem.X) - train_size, random_state=0
+        )
+
+    mape = []
+    iter = 0
+    for train_index, test_index in kf.split(datafem.X):
+        iter += 1
+        print("\nCross-validation iteration: {}".format(iter))
+
+        X_train, X_test = datafem.X[train_index], datafem.X[test_index]
+        y_train, y_test = datafem.y[train_index], datafem.y[test_index]
+
+        data = dde.data.DataSet(
+#            X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test
+            X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, standardize=True
+        )
+
+        mape.append(dde.utils.apply(nn, (data,)))
+
+    print(mape)
+    print(yname, train_size, np.mean(mape), np.std(mape))
+    with open('output.txt', 'a') as f:
+        f.write('validation_FEM_unedited ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + '\n')
 
 def validation_FEM(yname, filename, testname, train_size):
-    datafem = FEM1(yname, filename)
-    datatest = FEM1(yname, testname)
+    datafem = Data1(yname, filename)
+    datatest = Data1(yname, testname)
     # datafem = BerkovichData(yname)
     '''
     def normalize(vec, other=None):
@@ -225,7 +257,8 @@ def validation_FEM(yname, filename, testname, train_size):
             y_train, y_test = datafem.y[train_index], datatest.y[test_index]
 
         data = dde.data.DataSet(
-            X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test
+            #X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test
+            X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, standardize=True
         )
 
         mape.append(dde.utils.apply(nn, (data,)))
@@ -235,9 +268,72 @@ def validation_FEM(yname, filename, testname, train_size):
     with open('output.txt', 'a') as f:
         f.write('validation_FEM ' + testname + ' ' + filename + ' ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + '\n')
 
+def validation_mf(yname, train_size, dlow, dhigh, dexp):
+    #datalow = FEMDataC(yname, dlow)
+    #datahigh = BerkovichDataC(yname, dhigh)
+    #dataexp = ExpDataC(yname, dexp)
+    datalow = Data1(yname, dlow)
+    datahigh = Data1(yname, dhigh)
+    dataexp = Data1(yname, dexp)
 
+    kf = ShuffleSplit(
+        n_splits=10, test_size=len(datahigh.X) - train_size, random_state=0
+        #n_splits=10, train_size=train_size, random_state=0
+    )
 
+    mape = []
+    iter = 0
+    for train_index, test_index in kf.split(datahigh.X):
+        iter += 1
+        print("\nCross-validation iteration: {}".format(iter), flush=True)
 
+        data = dde.data.MfDataSet(
+            X_lo_train=datalow.X,
+            X_hi_train=datahigh.X[train_index],
+            y_lo_train=datalow.y,
+            y_hi_train=datahigh.y[train_index],
+            X_hi_test=dataexp.X[test_index],
+            y_hi_test=dataexp.y[test_index],
+            standardize=True
+        )
+        mape.append(dde.utils.apply(mfnn, (data,))[0])
+        #mape.append(dde.utils.apply(mfgp, (data,)))
+
+    with open('Output.txt', 'a') as f:
+        f.write("mf " + yname + ' ' + dlow + ' ' + dhigh + ' ' + dexp + ' ' + str(train_size) + ' ' + str(np.mean(mape, axis=0)) + ' ' + str(np.std(mape, axis=0)) + '\n')
+    print(mape)
+    print(yname, "validation_mf ", dlow, ' ', dhigh, ' ', train_size, ' ', np.mean(mape), np.std(mape))
+
+def validation_exp_cross2(yname, train_size, dlow, dhig, dexp1, dexp2, typ='err'):
+    datalow = FEMDataC(yname, dlow)
+    dataBerkovich = BerkovichDataC(yname, dhig)
+    dataexp1 = ExpDataC(yname, dexp1)
+    dataexp2 = ExpDataC(yname, dexp2)
+
+    ape = []
+    y = []
+
+    kf = ShuffleSplit(n_splits=10, train_size=train_size, random_state=0)
+    for train_index, _ in kf.split(dataexp1.X):
+        print("\nIteration: {}".format(len(ape)))
+        print(train_index)
+        data = dde.data.MfDataSet(
+            X_lo_train=datalow.X,
+            X_hi_train=np.vstack((dataBerkovich.X, dataexp1.X[train_index])),
+            y_lo_train=datalow.y,
+            y_hi_train=np.vstack((dataBerkovich.y, dataexp1.y[train_index])),
+            X_hi_test=dataexp2.X,
+            y_hi_test=dataexp2.y,
+            standardize=True
+        )
+        res = dde.utils.apply(mfnn, (data,))
+        ape.append(res[:2])
+        y.append(res[2])
+
+    print(yname, "validation_exp_cross2", train_size, np.mean(ape, axis=0), np.std(ape, axis=0))
+    with open('Output.txt', 'a') as f:
+        f.write("cross2 " + dhig + ' ' + dlow + ' ' + dexp1 + ' ' + dexp2 + ' ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(ape)) + ' ' + str(np.std(ape)) + '\n')
+    
 
 
 

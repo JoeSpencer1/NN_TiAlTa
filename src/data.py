@@ -5,7 +5,48 @@ from __future__ import print_function
 import numpy as np
 import pandas as pd
 
-class FEM1(object):
+class FEMData0(object):
+    def __init__(self, yname, angles):
+        self.yname = yname
+        self.angles = angles
+
+        self.X = None
+        self.y = None
+
+        if len(angles) == 1:
+            self.read_1angle()
+        elif len(angles) == 2:
+            self.read_2angles()
+        elif len(angles) == 4:
+            self.read_4angles()
+
+    def read_1angle(self):
+        df = pd.read_csv("../data/FEM_{}deg.csv".format(self.angles[0]))
+        df["Estar (GPa)"] = EtoEstar(df["E (GPa)"])
+        df["sy/Estar"] = df["sy (GPa)"] / df["Estar (GPa)"]
+        df = df.loc[~((df["n"] > 0.3) & (df["sy/Estar"] >= 0.03))]
+        # df = df.loc[df["n"] <= 0.3]
+        # Scale c* from Conical to Berkovich
+        # df["dP/dh (N/m)"] *= 1.167 / 1.128
+        # Add noise
+        # sigma = 0.2
+        # df["E* (GPa)"] *= 1 + sigma * np.random.randn(len(df))
+        # df["sy (GPa)"] *= 1 + sigma * np.random.randn(len(df))
+        print(df.describe())
+
+        self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
+        if self.yname == "Estar":
+            self.y = df["Estar (GPa)"].values[:, None]
+        elif self.yname == "sigma_y":
+            self.y = df["sy (GPa)"].values[:, None]
+        elif self.yname.startswith("sigma_"):
+            e_plastic = float(self.yname[6:])
+            self.y = (
+                df["sy (GPa)"]
+                * (1 + e_plastic * df["E (GPa)"] / df["sy (GPa)"]) ** df["n"]
+            ).values[:, None]
+
+class Data1(object):
     def __init__(self, yname, filename):
         self.yname = yname
         self.filename = filename
@@ -19,11 +60,19 @@ class FEM1(object):
         name = '../data/' + self.filename + '.csv'
         print('Name=', name)
         df = pd.read_csv(name)
-        if self.filename != 'TI33_25':
-            df["Estar (GPa)"] = EtoEstar(df["E (GPa)"])
-        df["sy/Estar"] = df["sy (GPa)"] / df["Estar (GPa)"]
-        if (self.filename == 'FEM_70deg'):
-            df = df.loc[~((df["n"] > 0.3) & (df["sy/Estar"] >= 0.03))]
+        if 'Estar (GPa)' not in df:
+            df['Estar (GPa)'] = EtoEstar(df['E (GPa)'])
+            #df["Estar (GPa)"] = EtoEr(df['E (GPa)'].values, df['nu'].values)[:, None]
+        df['sy/Estar'] = df['sy (GPa)'] / df["Estar (GPa)"]
+        if self.filename == 'FEM_70deg':
+            #df = df.loc[~((df["n"] > 0.3) & (df["sy/Estar"] >= 0.03))]
+            df = df.loc[df['n'] <= 0.3]
+        if self.filename == 'TI33_25':
+            df['dP/dh (N/m)'] *= 200 / df['hmax(nm)']
+        if self.filename == 'B3090':
+            df["dP/dh (N/m)"] *= 200 / df["hmax(nm)"]
+        if self.filename == 'Berkovich':
+            self.y = EtoEstar(df['E (GPa)'].values)[:, None]
         # df = df.loc[df["n"] <= 0.3]
         # Scale c* from Conical to Berkovich
         # df["dP/dh (N/m)"] *= 1.167 / 1.128
@@ -38,6 +87,163 @@ class FEM1(object):
             self.y = df["Estar (GPa)"].values[:, None]
         else:
             self.y = df["sy (GPa)"].values[:, None]
+
+class FEMDataC(object):
+    def __init__(self, yname, filename):
+        self.yname = yname
+        self.filename = filename
+
+        self.X = None
+        self.y = None
+
+        self.read_1angle()
+
+    def read_1angle(self):
+        df = pd.read_csv('../data/'+self.filename+'.csv')
+        df["Estar (GPa)"] = EtoEstar(df["E (GPa)"])
+        df["sy/Estar"] = df["sy (GPa)"] / df["Estar (GPa)"]
+        #
+        if self.filename == 'FEM_70deg':
+            df = df.loc[~((df["n"] > 0.3) & (df["sy/Estar"] >= 0.03))]
+        #
+        #df = df.loc[df["n"] <= 0.3]
+        # Scale c* from Conical to Berkovich
+        # df["dP/dh (N/m)"] *= 1.167 / 1.128
+        # Add noise
+        # sigma = 0.2
+        # df["E* (GPa)"] *= 1 + sigma * np.random.randn(len(df))
+        # df["sy (GPa)"] *= 1 + sigma * np.random.randn(len(df))
+        #
+        print(df.describe())
+
+        self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
+        if self.yname == "Estar":
+            self.y = df["Estar (GPa)"].values[:, None]
+        elif self.yname == "sigma_y":
+            self.y = df["sy (GPa)"].values[:, None]
+        elif self.yname.startswith("sigma_"):
+            e_plastic = float(self.yname[6:])
+            self.y = (
+                df["sy (GPa)"]
+                * (1 + e_plastic * df["E (GPa)"] / df["sy (GPa)"]) ** df["n"]
+            ).values[:, None]
+
+class ExpDataC(object):
+    def __init__(self, yname, filename):
+        '''
+        ExpData reads in data from an experimental data file. It intakes values \
+            for C, E*, sy, and s for varying plastic strains. The filename it \
+            receives as an argument is the experimental data file that will be \
+            read.
+        '''
+        self.filename = filename
+        self.yname = yname
+
+        self.X = None
+        self.y = None
+
+        self.read()
+
+    def read(self):
+        df = pd.read_csv('../data/'+self.filename+'.csv')
+
+        #
+        # Scale nm to um for Ti33 files
+        # I'M PRETTY SURE THESE MULTI-LINE COMMENTED CAN BE DELETED.
+        '''
+        df["hm (um)"] = df["hmax(nm)"] / 1000
+        df["C (GPA)"] = df["H(GPa)"] * df["hm (um)"] ** 2
+        df["H(GPa)"]
+        df["hc(nm)"]
+        df["hf(nm)"]
+        self.X = df[["hmax(nm)", "H(GPa)", "hc(nm)"]].values
+        '''
+        # Scale dP/dh from 3N to hm = 0.2um
+
+# This is for Al alloys
+#        df["dP/dh (N/m)"] *= 0.2 * (df["C (GPa)"] / 3) ** 0.5 * 10 ** (-1.5)
+
+        
+        # Scale dP/dh from Pm to hm = 0.2um
+        # df["dP/dh (N/m)"] *= 0.2 * (df["C (GPa)"] / df["Pm (N)"]) ** 0.5 * 10 ** (-1.5)
+        # Scale dP/dh from hm to hm = 0.2um 
+
+# This is for Ti alloys
+        #if self.filename == 'B3090':
+        #    df["dP/dh (N/m)"] *= 200 / df["hmax(nm)"]
+# This is for the Yanbo's Ti alloys
+        if self.filename == 'TI33_25':
+            df["dP/dh (N/m)"] *= 0.2 * 1000 / df["hmax(nm)"]
+
+        # Scale c* from Berkovich to Conical
+#        df["dP/dh (N/m)"] *= 1.128 / 1.167
+        #
+
+        print(df.describe())
+
+# I just commented this line for my own work.
+        self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
+        if self.yname == "Estar":
+            self.y = df["Estar (GPa)"].values[:, None]
+        elif self.yname == "sigma_y":
+            self.y = df["sy (GPa)"].values[:, None]
+        elif self.yname.startswith("sigma_"):
+            e_plastic = self.yname[6:]
+            self.y = df["s" + e_plastic + " (GPa)"].values[:, None]
+
+
+class BerkovichDataC(object):
+    def __init__(self, yname, filename, scale_c=False):
+        self.yname = yname
+        self.filename=filename
+        self.scale_c = scale_c
+
+        self.X = None
+        self.y = None
+
+        self.read()
+
+    def read(self):
+        df = pd.read_csv('../data/'+self.filename+'.csv')
+        # Scale c* from Berkovich to Conical
+        if self.scale_c:
+            df["dP/dh (N/m)"] *= 1.128 / 1.167
+        print(df.describe())
+
+        self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
+        if self.yname == "Estar":
+            if self.filename == 'B3090':
+                self.y = EtoEstar(df["E (GPa)"].values)[:, None]
+            else:
+                self.y = df['Estar (GPa)']
+        elif self.yname == "sigma_y":
+            self.y = df["sy (GPa)"].values[:, None]
+        elif self.yname == "n":
+            self.y = df["n"].values[:, None]
+        elif self.yname.startswith("sigma_"):
+            e_plastic = float(self.yname[6:])
+            self.y = (
+                df["sy (GPa)"]
+                * (1 + e_plastic * df["E (GPa)"] / df["sy (GPa)"]) ** df["n"]
+            ).values[:, None]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
