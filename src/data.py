@@ -22,17 +22,18 @@ class FileData(object):
         df = pd.read_csv('../data/' + self.filename + '.csv')
 
         # This is for Al alloys
-        if self.filename == 'Al7075' or self.filename == 'Al6061':
+        if self.filename in ('Al7075', 'Al6061'):
             df["dP/dh (N/m)"] *= 0.2 * (df["C (GPa)"] / 3) ** 0.5 * 10 ** (-1.5)
         # This is for Ti alloys
-        if self.filename == 'B3090':
-            df["dP/dh (N/m)"] *= 0.2 / df["hm (um)"]
+        if self.filename in ('B3090'):
+            df["dP/dh (N/m)"] *= 0.2 / df["hmax(um)"]
         # Scale c* from Conical to Berkovich
-        if self.filename == 'FEM_70deg' or self.filename == 'Berkovich':
+        if self.filename in ('FEM_70deg', 'Berkovich'):
             df["dP/dh (N/m)"] *= 1.167 / 1.128
         # Get Estar if none provided
-        if self.filename == 'Berkovich':
-            df['Estar (GPa)'] = EtoEr(df['E (GPa)'])
+        if self.filename in ('FEM_70deg', 'Berkovich'):
+            df["Estar (GPa)"] = EtoEr(df['E (GPa)'].values, df['nu'].values)[:, None]
+            #df['Estar (GPa)'] = EtoEstar(df['E (GPa)'])
 
         print(df.describe())
 
@@ -44,6 +45,16 @@ class FileData(object):
         elif self.yname.startswith("sigma_"):
             e_plastic = self.yname[6:]
             self.y = df["s" + e_plastic + " (GPa)"].values[:, None]
+
+
+
+
+
+
+
+
+
+
 
 
 

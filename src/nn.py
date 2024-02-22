@@ -9,7 +9,7 @@ from sklearn.svm import SVR
 from sklearn.model_selection import KFold, LeaveOneOut, RepeatedKFold, ShuffleSplit
 
 import deepxde as dde
-from data import BerkovichData, FEMData, ExpDataT, ExpData, Data1, FEMData0, FEMDataC, BerkovichDataC, ExpDataC, FEMData2, BerkovichData2, ExpData2
+from data import BerkovichData, FEMData, ExpDataT, ExpData, Data1, FEMData0, FEMDataC, BerkovichDataC, ExpDataC, FEMData2, BerkovichData2, ExpData2, FileData
 import tensorflow as tf
 tf.config.run_functions_eagerly(False)
 from tensorflow.keras import layers, models
@@ -307,10 +307,7 @@ def validation_mf(yname, train_size, dlow, dhigh, dexp):
     print(mape)
     print(yname, "validation_mf ", dlow, ' ', dhigh, ' ', train_size, ' ', np.mean(mape), np.std(mape))
 
-def validation_exp_cross2(yname, train_size, data1, data2):
-    '''
-    This function uses a data from both FEM tests and Berkovich (3D indentation) \
-        tests and then trains them against data from experiments (method 4).
+def validation_exp_cross2(yname, train_size, datalo, datahi, data1, data2):
     '''
     datalow = FEMData2(yname, [70])
     dataBerkovich = BerkovichData2(yname)
@@ -318,6 +315,11 @@ def validation_exp_cross2(yname, train_size, data1, data2):
         dataexp1 = ExpData2("../data/B30901.csv", yname)
     if data2 == "B30901":
         dataexp2 = ExpData2("../data/B30901.csv", yname)
+    '''
+    datalow = FileData(datalo, yname)
+    dataBerkovich = FileData(datahi, yname)
+    dataexp1 = FileData(data1, yname)
+    dataexp2 = FileData(data2, yname)
 
     ape = []
     y = []
@@ -357,7 +359,7 @@ def validation_exp_cross2(yname, train_size, data1, data2):
 
     print(yname, "validation_exp_cross2", train_size, np.mean(ape, axis=0), np.std(ape, axis=0))
     with open('output.txt', 'a') as f:
-        f.write("cross2 " + data1 + " " + data2 + yname + " " + str(train_size) + str(np.mean(ape, axis=0)) + str(np.std(ape, axis=0)) + '\n')
+        f.write("cross2 " + data1 + " " + datalo + " " + datahi + " " + data2 + " " + yname + " " + str(train_size) + str(np.mean(ape, axis=0)) + str(np.std(ape, axis=0)) + '\n')
     print("Saved to ", yname, ".dat.")
     np.savetxt(yname + ".dat", np.hstack(y).T)    
 
