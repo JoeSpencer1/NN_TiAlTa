@@ -190,9 +190,9 @@ def validation_FEM_unedited(yname, angles, train_size):
     with open('output.txt', 'a') as f:
         f.write('validation_FEM_unedited ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + '\n')
 
-def validation_one(yname, filename, testname, train_size):
-    datafem = FileData(filename, yname)
-    datatest = FileData(testname, yname)
+def validation_FEM(yname, filename, testname, train_size):
+    datafem = Data1(yname, filename)
+    datatest = Data1(yname, testname)
     # datafem = BerkovichData(yname)
     '''
     def normalize(vec, other=None):
@@ -266,7 +266,7 @@ def validation_one(yname, filename, testname, train_size):
     print(mape)
     print(yname, train_size, np.mean(mape), np.std(mape))
     with open('output.txt', 'a') as f:
-        f.write('validation_one ' + testname + ' ' + filename + ' ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + '\n')
+        f.write('validation_FEM ' + testname + ' ' + filename + ' ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + '\n')
 
 def validation_mf(yname, train_size, dlow, dhigh, dexp):
     #datalow = FEMData2(yname, [70])
@@ -412,7 +412,7 @@ def validation_exp_cross2(yname, train_size, datalo, datahi, data1, data2):
 
 
         
-def validation_one1(yname, trnames, tstname, type, train_size, lay=9, wid=32):
+def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32):
     
     data = []
     if type == 'FEM':

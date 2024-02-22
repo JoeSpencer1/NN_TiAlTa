@@ -31,10 +31,10 @@ class FileData(object):
         if 'TI33' in self.filename:
             # For 25˚ case
             df['dP/dh (N/m)'] *= 0.2 / df['hmax(um)']
-        # Scale c* from Conical to Berkovich with small deformations
+        # Scale c* from Conical to Berkovich with small deformation
         if 'FEM_70deg' in self.filename:
             df["dP/dh (N/m)"] *= 1.167 / 1.128
-        # Scale c* from Conical to Berkovich with large deformations
+        # Scale c* from Conical to Berkovich with large deformation
         if 'conical' in self.filename:
             df['dP/dh (N/m)'] *= 1.2370 / 1.1957
         # Get Estar if none provided

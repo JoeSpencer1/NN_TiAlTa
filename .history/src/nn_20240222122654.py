@@ -191,8 +191,8 @@ def validation_FEM_unedited(yname, angles, train_size):
         f.write('validation_FEM_unedited ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + '\n')
 
 def validation_one(yname, filename, testname, train_size):
-    datafem = FileData(filename, yname)
-    datatest = FileData(testname, yname)
+    datafem = FileData(yname, filename)
+    datatest = FileData(yname, testname)
     # datafem = BerkovichData(yname)
     '''
     def normalize(vec, other=None):

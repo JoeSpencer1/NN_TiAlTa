@@ -190,9 +190,9 @@ def validation_FEM_unedited(yname, angles, train_size):
     with open('output.txt', 'a') as f:
         f.write('validation_FEM_unedited ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + '\n')
 
-def validation_one(yname, filename, testname, train_size):
-    datafem = FileData(filename, yname)
-    datatest = FileData(testname, yname)
+def validation_FEM(yname, filename, testname, train_size):
+    datafem = Data1(yname, filename)
+    datatest = Data1(yname, testname)
     # datafem = BerkovichData(yname)
     '''
     def normalize(vec, other=None):
@@ -266,7 +266,7 @@ def validation_one(yname, filename, testname, train_size):
     print(mape)
     print(yname, train_size, np.mean(mape), np.std(mape))
     with open('output.txt', 'a') as f:
-        f.write('validation_one ' + testname + ' ' + filename + ' ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + '\n')
+        f.write('validation_FEM ' + testname + ' ' + filename + ' ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + '\n')
 
 def validation_mf(yname, train_size, dlow, dhigh, dexp):
     #datalow = FEMData2(yname, [70])
@@ -284,14 +284,7 @@ def validation_mf(yname, train_size, dlow, dhigh, dexp):
         #n_splits=10, train_size=train_size, random_state=0
     )
 
-    if train_size == 0:
-        for train_index, test_index in kf.split(datalow.X):
-            data = dde.data.DataSet(
-                X_train=datalow.X, y_train=datalow.y, X_test=dataexp.X, y_test=dataexp.y, standardize=True
-            )
-            mape.append(dde.utils.apply(nn, (data,)))
-
-    else:
+    if train_size > 0:
         for train_index, test_index in kf.split(datahigh.X):
             iter += 1
             print("\nCross-validation iteration: {}".format(iter), flush=True)
@@ -307,6 +300,12 @@ def validation_mf(yname, train_size, dlow, dhigh, dexp):
             )
             mape.append(dde.utils.apply(mfnn, (data,))[0])
             #mape.append(dde.utils.apply(mfgp, (data,)))
+    else:
+        data = dde.data.DataSet(
+            X_train=datalow.X, y_train=datalow.y, X_test=dataexp.X, y_test=dataexp.y, standardize=True
+        )
+
+        mape.append(dde.utils.apply(nn, (data,)))
 
     with open('Output.txt', 'a') as f:
         f.write("mf " + yname + ' ' + dlow + ' ' + dhigh + ' ' + dexp + ' ' + str(train_size) + ' ' + str(np.mean(mape, axis=0)) + ' ' + str(np.std(mape, axis=0)) + '\n')
@@ -412,7 +411,7 @@ def validation_exp_cross2(yname, train_size, datalo, datahi, data1, data2):
 
 
         
-def validation_one1(yname, trnames, tstname, type, train_size, lay=9, wid=32):
+def validation_one(yname, trnames, tstname, type, train_size, lay=9, wid=32):
     
     data = []
     if type == 'FEM':

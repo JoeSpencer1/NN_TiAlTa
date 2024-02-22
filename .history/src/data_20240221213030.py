@@ -27,18 +27,11 @@ class FileData(object):
         # This is for Ti alloys
         if self.filename in ('B3090'):
             df["dP/dh (N/m)"] *= 0.2 / df["hmax(um)"]
-        # Scale TI33 to hm=0.2μm
-        if 'TI33' in self.filename:
-            # For 25˚ case
-            df['dP/dh (N/m)'] *= 0.2 / df['hmax(um)']
-        # Scale c* from Conical to Berkovich with small deformations
-        if 'FEM_70deg' in self.filename:
+        # Scale c* from Conical to Berkovich
+        if self.filename in ('FEM_70deg', 'Berkovich'):
             df["dP/dh (N/m)"] *= 1.167 / 1.128
-        # Scale c* from Conical to Berkovich with large deformations
-        if 'conical' in self.filename:
-            df['dP/dh (N/m)'] *= 1.2370 / 1.1957
         # Get Estar if none provided
-        if self.filename == 'FEM_70deg' or 'Berkovich' in self.filename or 'conical' in self.filename:
+        if self.filename in ('FEM_70deg', 'Berkovich', 'TI33_conical_70.3', 'TI33_Berkovich'):
             df["Estar (GPa)"] = EtoEr(df['E (GPa)'].values, df['nu'].values)[:, None]
 
         print(df.describe())
