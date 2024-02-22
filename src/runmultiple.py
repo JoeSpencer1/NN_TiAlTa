@@ -9,8 +9,26 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([   
-        "validation_exp_cross2('sigma_y', 10, 'Berkovich', 'FEM_70deg', 'B3090', 'B3090')",
-        "validation_exp_cross2('Estar', 10, 'Berkovich', 'FEM_70deg', 'B3090', 'B3090')"        
+        "validation_exp_cross2('sigma_y', 0, 'B30901', 'B30901')",
+        "validation_exp_cross2('Estar', 0, 'B30901', 'B30901')",
+        "validation_exp_cross2('sigma_y', 1, 'B30901', 'B30901')",
+        "validation_exp_cross2('Estar', 1, 'B30901', 'B30901')",'''
+        "validation_exp_cross2('sigma_y', 2, 'B30901', 'B30901')",
+        "validation_exp_cross2('Estar', 2, 'B30901', 'B30901')",
+        "validation_exp_cross2('sigma_y', 3, 'B30901', 'B30901')",
+        "validation_exp_cross2('Estar', 3, 'B30901', 'B30901')",
+        "validation_exp_cross2('sigma_y', 4, 'B30901', 'B30901')",
+        "validation_exp_cross2('Estar', 4, 'B30901', 'B30901')",
+        "validation_exp_cross2('sigma_y', 5, 'B30901', 'B30901')",
+        "validation_exp_cross2('Estar', 5, 'B30901', 'B30901')",
+        "validation_exp_cross2('sigma_y', 6, 'B30901', 'B30901')",
+        "validation_exp_cross2('Estar', 6, 'B30901', 'B30901')",
+        "validation_exp_cross2('sigma_y', 8, 'B30901', 'B30901')",
+        "validation_exp_cross2('Estar', 8, 'B30901', 'B30901')",
+        "validation_exp_cross2('sigma_y', 10, 'B30901', 'B30901')",
+        "validation_exp_cross2('Estar', 10, 'B30901', 'B30901')",'''
+        "validation_exp_cross2('sigma_y', 20, 'B30901', 'B30901')",
+        "validation_exp_cross2('Estar', 20, 'B30901', 'B30901')"           
         ])
     
     processes = []
@@ -24,6 +42,34 @@ if __name__ == '__main__':
     for process in processes:
         process.join()
         
+
+        '''
+    import multiprocessing
+    import resource
+    import os
+
+    # Function to execute a Python script
+    def execute_script(script_path):
+        os.system(f"python {script_path}")
+
+    if __name__ == "__main__":
+        # List of Python scripts to execute in parallel
+        script_paths = ["script1.py", "script2.py", "script3.py"]
+
+        # Set resource limits (adjust as needed)
+        resource.setrlimit(resource.RLIMIT_AS, (2**32, 2**32))  # Set maximum virtual memory size
+
+        # Create a pool of worker processes
+        pool = multiprocessing.Pool(processes=len(script_paths))
+
+        # Execute scripts in parallel
+        pool.map(execute_script, script_paths)
+
+        # Close the pool
+        pool.close()
+        pool.join()
+
+        '''
         '''
         "validation_mf('sigma_y', 3, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",
         "validation_mf('Estar', 3, 'TI33_Berkovich', 'TI33_25', 'TI33_25')",

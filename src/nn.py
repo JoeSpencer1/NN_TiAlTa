@@ -9,7 +9,7 @@ from sklearn.svm import SVR
 from sklearn.model_selection import KFold, LeaveOneOut, RepeatedKFold, ShuffleSplit
 
 import deepxde as dde
-from data import BerkovichData, FEMData, ExpDataT, ExpData, Data1, FEMData0, FEMDataC, BerkovichDataC, ExpDataC
+from data import BerkovichData, FEMData, ExpDataT, ExpData, Data1, FEMData0, FEMDataC, BerkovichDataC, ExpDataC, FEMData2, BerkovichData2, ExpData2
 import tensorflow as tf
 tf.config.run_functions_eagerly(False)
 from tensorflow.keras import layers, models
@@ -272,9 +272,12 @@ def validation_mf(yname, train_size, dlow, dhigh, dexp):
     #datalow = FEMDataC(yname, dlow)
     #datahigh = BerkovichDataC(yname, dhigh)
     #dataexp = ExpDataC(yname, dexp)
-    datalow = Data1(yname, dlow)
-    datahigh = Data1(yname, dhigh)
-    dataexp = Data1(yname, dexp)
+    #datalow = Data1(yname, dlow)
+    #datahigh = Data1(yname, dhigh)
+    #dataexp = Data1(yname, dexp)
+    datalow = FEMData2(yname, [70])
+    datahigh = BerkovichData2(yname)
+    dataexp = ExpData2('../data/B30671.csv', yname)
 
     kf = ShuffleSplit(
         n_splits=10, test_size=len(datahigh.X) - train_size, random_state=0
@@ -304,36 +307,59 @@ def validation_mf(yname, train_size, dlow, dhigh, dexp):
     print(mape)
     print(yname, "validation_mf ", dlow, ' ', dhigh, ' ', train_size, ' ', np.mean(mape), np.std(mape))
 
-def validation_exp_cross2(yname, train_size, dlow, dhig, dexp1, dexp2, typ='err'):
-    datalow = FEMDataC(yname, dlow)
-    dataBerkovich = BerkovichDataC(yname, dhig)
-    dataexp1 = ExpDataC(yname, dexp1)
-    dataexp2 = ExpDataC(yname, dexp2)
+def validation_exp_cross2(yname, train_size, data1, data2):
+    '''
+    This function uses a data from both FEM tests and Berkovich (3D indentation) \
+        tests and then trains them against data from experiments (method 4).
+    '''
+    datalow = FEMData2(yname, [70])
+    dataBerkovich = BerkovichData2(yname)
+    if data1 == "B30901":
+        dataexp1 = ExpData2("../data/B30901.csv", yname)
+    if data2 == "B30901":
+        dataexp2 = ExpData2("../data/B30901.csv", yname)
 
     ape = []
     y = []
 
-    kf = ShuffleSplit(n_splits=10, train_size=train_size, random_state=0)
-    for train_index, _ in kf.split(dataexp1.X):
-        print("\nIteration: {}".format(len(ape)))
-        print(train_index)
-        data = dde.data.MfDataSet(
-            X_lo_train=datalow.X,
-            X_hi_train=np.vstack((dataBerkovich.X, dataexp1.X[train_index])),
-            y_lo_train=datalow.y,
-            y_hi_train=np.vstack((dataBerkovich.y, dataexp1.y[train_index])),
-            X_hi_test=dataexp2.X,
-            y_hi_test=dataexp2.y,
-            standardize=True
-        )
-        res = dde.utils.apply(mfnn, (data,))
-        ape.append(res[:2])
-        y.append(res[2])
+    if train_size == 0:
+        for iter in range(10):
+            print("\nIteration: {}".format(iter))
+            data = dde.data.MfDataSet(
+                X_lo_train=datalow.X,
+                X_hi_train=dataBerkovich.X,
+                y_lo_train=datalow.y,
+                y_hi_train=dataBerkovich.y,
+                X_hi_test=dataexp2.X,
+                y_hi_test=dataexp2.y,
+                standardize=True
+            )
+            res = dde.utils.apply(mfnn, (data,))
+            ape.append(res[:2])
+            y.append(res[2])
+    else:
+        kf = ShuffleSplit(n_splits=10, train_size=train_size, random_state=0)
+        for train_index, _ in kf.split(dataexp1.X):
+            print("\nIteration: {}".format(len(ape)))
+            print(train_index)
+            data = dde.data.MfDataSet(
+                X_lo_train=datalow.X,
+                X_hi_train=np.vstack((dataBerkovich.X, dataexp1.X[train_index])),
+                y_lo_train=datalow.y,
+                y_hi_train=np.vstack((dataBerkovich.y, dataexp1.y[train_index])),
+                X_hi_test=dataexp2.X,
+                y_hi_test=dataexp2.y,
+                standardize=True
+            )
+            res = dde.utils.apply(mfnn, (data,))
+            ape.append(res[:2])
+            y.append(res[2])
 
     print(yname, "validation_exp_cross2", train_size, np.mean(ape, axis=0), np.std(ape, axis=0))
-    with open('Output.txt', 'a') as f:
-        f.write("cross2 " + dhig + ' ' + dlow + ' ' + dexp1 + ' ' + dexp2 + ' ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(ape)) + ' ' + str(np.std(ape)) + '\n')
-    
+    with open('output.txt', 'a') as f:
+        f.write("cross2 " + data1 + " " + data2 + yname + " " + str(train_size) + str(np.mean(ape, axis=0)) + str(np.std(ape, axis=0)) + '\n')
+    print("Saved to ", yname, ".dat.")
+    np.savetxt(yname + ".dat", np.hstack(y).T)    
 
 
 

@@ -551,7 +551,7 @@ ax1.set_yticks([0, 20, 40, 60, 80, 100])
 ax1.set_yticklabels([0, 20, 40, 60, 80, 100])
 ax1.legend()
 ax1.set_ylabel("MAPE (%)")
-ax1.set_xlabel("Experimental training data size")
+ax1.set_xlabel("2D FEM training data size")
 ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
               fontsize=12, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
@@ -566,7 +566,7 @@ ax2.set_yticks([2, 4, 6, 8, 10])
 ax2.set_yticklabels([2, 4, 6, 8, 10])
 ax2.legend()
 ax2.set_ylabel("MAPE (%)")
-ax2.set_xlabel("Experimental training data size")
+ax2.set_xlabel("2D FEM training data size")
 plt.subplots_adjust(bottom=0.180)
 fig.tight_layout()
 ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
@@ -600,7 +600,7 @@ ax1.set_yticks([0, 100, 200, 300, 400, 500, 600, 700, 800])
 ax1.set_yticklabels([0, 100, 200, 300, 400, 500, 600, 700, 800])
 ax1.legend()
 ax1.set_ylabel("MAPE (%)")
-ax1.set_xlabel("Experimental training data size")
+ax1.set_xlabel("3D FEM training data size")
 ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
               fontsize=12, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
@@ -615,7 +615,7 @@ ax2.set_yticks([0, 30, 60, 90, 120, 150])
 ax2.set_yticklabels([0, 30, 60, 90, 120, 150])
 ax2.legend()
 ax2.set_ylabel("MAPE (%)")
-ax2.set_xlabel("Experimental training data size")
+ax2.set_xlabel("3D FEM training data size")
 plt.subplots_adjust(bottom=0.180)
 fig.tight_layout()
 ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
@@ -623,7 +623,6 @@ ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
 plt.savefig("/Users/Joe/Desktop/lu3D.jpeg", dpi=800, bbox_inches="tight")
 plt.show()
-
 
 
 # Lu's experimental data
@@ -667,3 +666,37 @@ plt.savefig("/Users/Joe/Desktop/luexp.jpeg", dpi=800, bbox_inches="tight")
 plt.show()
 
 
+n_2Dexp = [10, 20, 30, 40, 50, 60, 70]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n_Ex, Exσ, yerr = εExσ, color = 'green', label = "Lu's indentations on B3090")
+ax1.set_yscale('linear')
+ax1.set_ylim([0, 150])
+ax1.set_xlim([-0.5, 24])
+ax1.set_xticks([0, 3, 6, 9, 12, 15, 18, 21])
+ax1.set_yticks([0, 30, 60, 90, 120, 150])
+ax1.set_yticklabels([0, 30, 60, 90, 120, 150])
+ax1.legend()
+ax1.set_ylabel("MAPE (%)")
+ax1.set_xlabel("Experimental training data size")
+ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(n_Ex, ExE, yerr = εExE, color = 'green', label = "Lu's data (n$_{tr}$=100)")
+ax2.set_yscale('linear')
+ax2.set_ylim([0, 80])
+ax2.set_xlim([-0.5, 24])
+ax2.set_xticks([0, 3, 6, 9, 12, 15, 18, 21])
+ax2.set_yticks([0, 20, 40, 60, 80])
+ax2.set_yticklabels([0, 20, 40, 60, 80])
+ax2.legend()
+ax2.set_ylabel("MAPE (%)")
+ax2.set_xlabel("Experimental training data size")
+plt.subplots_adjust(bottom=0.180)
+fig.tight_layout()
+ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/lu2Dexp.jpeg", dpi=800, bbox_inches="tight")
+plt.show()

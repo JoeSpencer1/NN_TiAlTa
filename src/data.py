@@ -5,6 +5,81 @@ from __future__ import print_function
 import numpy as np
 import pandas as pd
 
+
+
+class FileData(object):
+    def __init__(self, filename, yname):
+        
+        self.filename = filename
+        self.yname = yname
+
+        self.X = None
+        self.y = None
+
+        self.read()
+
+    def read(self):
+        df = pd.read_csv('../data/' + self.filename + '.csv')
+
+        # This is for Al alloys
+        if self.filename == 'Al7075' or self.filename == 'Al6061':
+            df["dP/dh (N/m)"] *= 0.2 * (df["C (GPa)"] / 3) ** 0.5 * 10 ** (-1.5)
+        # This is for Ti alloys
+        if self.filename == 'B3090':
+            df["dP/dh (N/m)"] *= 0.2 / df["hm (um)"]
+        # Scale c* from Conical to Berkovich
+        if self.filename == 'FEM_70deg' or self.filename == 'Berkovich':
+            df["dP/dh (N/m)"] *= 1.167 / 1.128
+        # Get Estar if none provided
+        if self.filename == 'Berkovich':
+            df['Estar (GPa)'] = EtoEr(df['E (GPa)'])
+
+        print(df.describe())
+
+        self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
+        if self.yname == "Estar":
+            self.y = df["Estar (GPa)"].values[:, None]
+        elif self.yname == "sigma_y":
+            self.y = df["sy (GPa)"].values[:, None]
+        elif self.yname.startswith("sigma_"):
+            e_plastic = self.yname[6:]
+            self.y = df["s" + e_plastic + " (GPa)"].values[:, None]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class FEMData0(object):
     def __init__(self, yname, angles):
         self.yname = yname
@@ -30,7 +105,7 @@ class FEMData0(object):
         # df["dP/dh (N/m)"] *= 1.167 / 1.128
         # Add noise
         # sigma = 0.2
-        # df["E* (GPa)"] *= 1 + sigma * np.random.randn(len(df))
+        # df["Estar (GPa)"] *= 1 + sigma * np.random.randn(len(df))
         # df["sy (GPa)"] *= 1 + sigma * np.random.randn(len(df))
         print(df.describe())
 
@@ -78,7 +153,7 @@ class Data1(object):
         # df["dP/dh (N/m)"] *= 1.167 / 1.128
         # Add noise
         # sigma = 0.2
-        # df["E* (GPa)"] *= 1 + sigma * np.random.randn(len(df))
+        # df["Estar (GPa)"] *= 1 + sigma * np.random.randn(len(df))
         # df["sy (GPa)"] *= 1 + sigma * np.random.randn(len(df))
         print(df.describe())
 
@@ -106,12 +181,11 @@ class FEMDataC(object):
         if self.filename == 'FEM_70deg':
             df = df.loc[~((df["n"] > 0.3) & (df["sy/Estar"] >= 0.03))]
         #
-        #df = df.loc[df["n"] <= 0.3]
         # Scale c* from Conical to Berkovich
         # df["dP/dh (N/m)"] *= 1.167 / 1.128
         # Add noise
         # sigma = 0.2
-        # df["E* (GPa)"] *= 1 + sigma * np.random.randn(len(df))
+        # df["Estar (GPa)"] *= 1 + sigma * np.random.randn(len(df))
         # df["sy (GPa)"] *= 1 + sigma * np.random.randn(len(df))
         #
         print(df.describe())
@@ -132,7 +206,7 @@ class ExpDataC(object):
     def __init__(self, yname, filename):
         '''
         ExpData reads in data from an experimental data file. It intakes values \
-            for C, E*, sy, and s for varying plastic strains. The filename it \
+            for C, Estar, sy, and s for varying plastic strains. The filename it \
             receives as an argument is the experimental data file that will be \
             read.
         '''
@@ -169,19 +243,18 @@ class ExpDataC(object):
         # Scale dP/dh from hm to hm = 0.2um 
 
 # This is for Ti alloys
-        #if self.filename == 'B3090':
-        #    df["dP/dh (N/m)"] *= 200 / df["hmax(nm)"]
+        if self.filename == 'B3090':
+            df["dP/dh (N/m)"] *= 0.2 / df["hmax(um)"]
 # This is for the Yanbo's Ti alloys
         if self.filename == 'TI33_25':
-            df["dP/dh (N/m)"] *= 0.2 * 1000 / df["hmax(nm)"]
+            df["dP/dh (N/m)"] *= 0.2 / df["hmax(um)"]
 
         # Scale c* from Berkovich to Conical
-#        df["dP/dh (N/m)"] *= 1.128 / 1.167
+        df["dP/dh (N/m)"] *= 1.128 / 1.167
         #
 
         print(df.describe())
 
-# I just commented this line for my own work.
         self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
         if self.yname == "Estar":
             self.y = df["Estar (GPa)"].values[:, None]
@@ -212,10 +285,7 @@ class BerkovichDataC(object):
 
         self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
         if self.yname == "Estar":
-            if self.filename == 'B3090':
-                self.y = EtoEstar(df["E (GPa)"].values)[:, None]
-            else:
-                self.y = df['Estar (GPa)']
+            self.y = EtoEstar(df['E (GPa)'])
         elif self.yname == "sigma_y":
             self.y = df["sy (GPa)"].values[:, None]
         elif self.yname == "n":
@@ -227,9 +297,148 @@ class BerkovichDataC(object):
                 * (1 + e_plastic * df["E (GPa)"] / df["sy (GPa)"]) ** df["n"]
             ).values[:, None]
 
+class FEMData2(object):
+    def __init__(self, yname, angles):
+        '''
+        __init__ takes in a name and a quantity of angles. The number in [] is \
+            passed to self.angles, which is the angle of the indentation. This \
+            indentation angle is then used to find the correct file to read \
+            to obtain the data. \n
+        The class FEMData has member functions init, read_1angle, read_2angles, \
+            and read_4angles. The half-included tip angles used for the read_angle \
+            functions were 70.3˚, 60˚, 50˚, and 80˚. 70.3˚ was used in all \
+            three and 60˚ was used in the last two. The same accuracy could be \
+            achieved with a smaller training data set size for more indentors, \
+            but only one indenter was used to train the single-fidelity NN.
+        '''
+        self.yname = yname
+        self.angles = angles
+
+        self.X = None
+        self.y = None
+
+        if len(angles) == 1:
+            self.read_1angle()
+        elif len(angles) == 2:
+            self.read_2angles()
+        elif len(angles) == 4:
+            self.read_4angles()
+
+    def read_1angle(self):
+        df = pd.read_csv("../data/FEM_{}deg1.csv".format(self.angles[0]))
+        df["Estar (GPa)"] = EtoEstar(df["E (GPa)"])
+        df["sy/Estar"] = df["sy (GPa)"] / df["Estar (GPa)"]
+        df = df.loc[~((df["n"] > 0.3) & (df["sy/Estar"] >= 0.03))]
+        #
+        # df = df.loc[df["n"] <= 0.3]
+        # Scale c* from Conical to Berkovich
+        # df["dP/dh (N/m)"] *= 1.167 / 1.128
+        # Add noise
+        # sigma = 0.2
+        # df["Estar (GPa)"] *= 1 + sigma * np.random.randn(len(df))
+        # df["sy (GPa)"] *= 1 + sigma * np.random.randn(len(df))
+        print(df.describe())
+
+        self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
+        if self.yname == "Estar":
+            self.y = df["Estar (GPa)"].values[:, None]
+        elif self.yname == "sigma_y":
+            self.y = df["sy (GPa)"].values[:, None]
+        elif self.yname.startswith("sigma_"):
+            e_plastic = float(self.yname[6:])
+            self.y = (
+                df["sy (GPa)"]
+                * (1 + e_plastic * df["E (GPa)"] / df["sy (GPa)"]) ** df["n"]
+            ).values[:, None]
+
+class ExpData2(object):
+    def __init__(self, filename, yname):
+        '''
+        ExpData reads in data from an experimental data file. It intakes values \
+            for C, Estar, sy, and s for varying plastic strains. The filename it \
+            receives as an argument is the experimental data file that will be \
+            read.
+        '''
+        self.filename = filename
+        self.yname = yname
+
+        self.X = None
+        self.y = None
+
+        self.read()
+
+    def read(self):
+        df = pd.read_csv(self.filename)
+
+        #
+        # Scale dP/dh from 3N to hm = 0.2um
+
+# This is for Al alloys
+#        df["dP/dh (N/m)"] *= 0.2 * (df["C (GPa)"] / 3) ** 0.5 * 10 ** (-1.5)
+
+        
+        # Scale dP/dh from Pm to hm = 0.2um
+        # df["dP/dh (N/m)"] *= 0.2 * (df["C (GPa)"] / df["Pm (N)"]) ** 0.5 * 10 ** (-1.5)
+        # Scale dP/dh from hm to hm = 0.2um 
+
+# This is for Ti alloys
+        df["dP/dh (N/m)"] *= 0.2 / df["hm (um)"]
 
 
+        # Scale c* from Berkovich to Conical
+        df["dP/dh (N/m)"] *= 1.128 / 1.167
+        #
 
+        print(df.describe())
+
+        self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
+        if self.yname == "Estar":
+            self.y = df["Estar (GPa)"].values[:, None]
+        elif self.yname == "sigma_y":
+            self.y = df["sy (GPa)"].values[:, None]
+        elif self.yname.startswith("sigma_"):
+            e_plastic = self.yname[6:]
+            self.y = df["s" + e_plastic + " (GPa)"].values[:, None]
+
+class BerkovichData2(object):
+    def __init__(self, yname, scale_c=False):
+        '''
+        The class BerkovichData reads a file from a Berkovich indentation test. \
+            It has member functions init and read. init sets the scale and the \
+            name of the dependent variables. read reads the csv of the given name \
+            and stores its C, Estar, sy, and n. It can also store dP/dh if scale is \
+            listed as being true. \n
+        The Berkovich indenter has a half angle of 65.3˚ from the tip to the pyramid \
+            surface.
+        '''
+        self.yname = yname
+        self.scale_c = scale_c
+
+        self.X = None
+        self.y = None
+
+        self.read()
+
+    def read(self):
+        df = pd.read_csv("../data/Berkovich1.csv")
+        # Scale c* from Berkovich to Conical
+        if self.scale_c:
+            df["dP/dh (N/m)"] *= 1.128 / 1.167
+        print(df.describe())
+
+        self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
+        if self.yname == "Estar":
+            self.y = EtoEstar(df["E (GPa)"].values)[:, None]
+        elif self.yname == "sigma_y":
+            self.y = df["sy (GPa)"].values[:, None]
+        elif self.yname == "n":
+            self.y = df["n"].values[:, None]
+        elif self.yname.startswith("sigma_"):
+            e_plastic = float(self.yname[6:])
+            self.y = (
+                df["sy (GPa)"]
+                * (1 + e_plastic * df["E (GPa)"] / df["sy (GPa)"]) ** df["n"]
+            ).values[:, None]
 
 
 
