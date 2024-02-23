@@ -193,25 +193,6 @@ def validation_FEM_unedited(yname, angles, train_size):
 def validation_one(yname, filename, testname, train_size):
     datafem = FileData(filename, yname)
     datatest = FileData(testname, yname)
-    # datafem = BerkovichData(yname)
-    '''
-    def normalize(vec, other=None):
-        mean = np.mean(vec, axis=0)
-        most = np.max(vec, axis=0)
-        least = np.min(vec, axis=0)
-        one = np.ones_like(vec)
-        if other == None:
-            #return (vec - least * one) / (most - least)
-            return (vec / most)
-        else:
-            return ((vec - least * one) / (most - least), (other - least * one) / (most - least))
-    datafem.y = normalize(datafem.y)
-    for i in range(3):
-        print('Column ' + str(i))
-        print(datafem.X[:,i])
-        datafem.X[:,int(i)] = normalize(datafem.X[:,int(i)])
-    print(datafem.X)
-    print(datafem.y)'''
     
     if filename == testname:
         if train_size == 80:
@@ -269,9 +250,6 @@ def validation_one(yname, filename, testname, train_size):
         f.write('validation_one ' + testname + ' ' + filename + ' ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + '\n')
 
 def validation_mf(yname, train_size, dlow, dhigh, dexp):
-    #datalow = FEMData2(yname, [70])
-    #datahigh = BerkovichData2(yname)
-    #dataexp = ExpData2('../data/B30671.csv', yname)
     datalow = FileData(dlow, yname)
     datahigh = FileData(dhigh, yname)
     dataexp = FileData(dexp, yname)
@@ -365,7 +343,7 @@ def validation_exp_cross2(yname, train_size, datalo, datahi, data1, data2):
 
     print(yname, "validation_exp_cross2", train_size, np.mean(ape, axis=0), np.std(ape, axis=0))
     with open('output.txt', 'a') as f:
-        f.write("cross2 " + data1 + " " + datalo + " " + datahi + " " + data2 + " " + yname + " " + str(train_size) + str(np.mean(ape, axis=0)) + str(np.std(ape, axis=0)) + '\n')
+        f.write("cross2 " + data1 + " " + datalo + " " + datahi + " " + data2 + " " + yname + " " + str(train_size) + str(np.mean(ape, axis=0)[0]) + " " + str(np.std(ape, axis=0)[0]) + '\n')
     print("Saved to ", yname, ".dat.")
     np.savetxt(yname + ".dat", np.hstack(y).T)    
 

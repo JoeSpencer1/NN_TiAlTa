@@ -11,6 +11,7 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([  
+        "validation_exp_cross2('sigma_y', 1, 'TI33_conical_70.3', 'TI33_Berkovich', 'TI33_25', 'TI33_25')"
         ])
     
     processes = []

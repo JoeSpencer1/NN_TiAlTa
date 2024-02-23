@@ -2009,7 +2009,7 @@ mf Estar FEM_70deg B3090 B3090 3 1.6219183265376143 0.5585803534905526
 mf Estar FEM_70deg B3090 B3090 4 1.557228150514812 0.4803461648995692
 mf Estar FEM_70deg B3090 B3090 5 1.2657623943780592 0.47507417407693564
 mf Estar FEM_70deg B3090 B3090 8 1.123555123730203 0.1597705074954198
-mf Estar FEM_70deg B3090 B3090 10 1.1112026038692304 0.2921788340443978
+mf Estar FEM_70deg B3090 B3090 10 1.1112026038692304 0.1597705074954198
 mf Estar FEM_70deg B3090 B3090 20 0.9507400282322637 0.0680595017707608
 
 mf sigma_y Berkovich B3090 B3090 1 34.46453051282312 22.360254865142583
@@ -2298,6 +2298,7 @@ mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 15 3975.107764738152 3487.537207550
 mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 18 5489.875816371478 4829.445626614299
 mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 21 4396.6893801057195 2751.0796446957625
 mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 24 4354.575450161853 3347.7266554341827
+
 mf sigma_y TI33_Berkovich TI33_25 TI33_25 3 2523.2200350087683 2307.730819411314
 mf sigma_y TI33_Berkovich TI33_25 TI33_25 6 3236.037207550842 2782.295748264183
 mf sigma_y TI33_Berkovich TI33_25 TI33_25 12 4398.505882107626 4639.148053048478
@@ -2306,6 +2307,7 @@ mf sigma_y TI33_Berkovich TI33_25 TI33_25 15 3857.670134762684 2285.397987300220
 mf sigma_y TI33_Berkovich TI33_25 TI33_25 18 4992.601769032043 4837.134930129186
 mf sigma_y TI33_Berkovich TI33_25 TI33_25 21 3208.2090705848605 2694.3117980765246
 mf sigma_y TI33_Berkovich TI33_25 TI33_25 24 3757.1335948806213 2150.111948558095
+
 mf sigma_y Berkovich B3090 B3090 24 3363.578078703249 1807.7323724091893
 validation_FEM TI33_25 TI33_25 Estar 21 1.1424935 0.7516151
 mf sigma_y TI33_Berkovich TI33_25 TI33_25 3 60.484765887072754 19.166655296646766
@@ -2356,39 +2358,27 @@ cross2 B30901 B30901sigma_y 10[2.5206918  2.70842584][0.59927561 0.99298333]
 cross2 B30901 B30901Estar 19[1.4077493  1.47125724][0.32334683 0.24444024]
 cross2 B30901 B30901sigma_y 16[1.92154405 2.45983007][0.47955105 0.84746952]
 
-cross2 B30901 B30901sigma_y 6[3.23702025 3.43653634][0.69103869 0.86505109]
-cross2 B30901 B30901sigma_y 2[9.24876582 5.74033059][7.71808326 2.19815895]
-cross2 B30901 B30901Estar 1[13.07091517  3.73008436][3.11706244 0.41536095]
 cross2 B30901 B30901sigma_y 0[96.79690387 13.59132722][11.25956148  1.4423388 ]
-cross2 B30901 B30901Estar 0[18.6240671   4.64610029][2.33293523 0.37702612]
-cross2 B30901 B30901Estar 6[2.40618551 2.21255802][0.2885574  0.19734683]
-cross2 B30901 B30901Estar 2[7.31385745 3.00889616][3.33082938 0.34999992]
 cross2 B30901 B30901sigma_y 1[28.58358372  8.89954458][22.34089011  4.49527864]
-cross2 B30901 B30901sigma_y 5[3.50299734 3.5111653 ][0.68240353 0.83805139]
-cross2 B30901 B30901Estar 8[2.15384257 1.98946586][0.57204409 0.34560587]
-cross2 B30901 B30901Estar 3[4.43640207 2.59612146][2.44876053 0.38716157]
-cross2 B30901 B30901Estar 5[2.34980973 2.19494994][0.35729243 0.21726991]
+cross2 B30901 B30901sigma_y 2[9.24876582 5.74033059][7.71808326 2.19815895]
 cross2 B30901 B30901sigma_y 3[5.11659125 4.44269189][1.93115789 1.18449274]
-cross2 B30901 B30901Estar 4[3.11487904 2.3062312 ][1.52205441 0.34288266]
-cross2 B30901 B30901Estar 10[1.90070402 1.76460587][0.47060894 0.31961427]
-cross2 B30901 B30901sigma_y 8[2.95160297 3.3300116 ][0.66872058 0.78151008]
-cross2 B30901 B30901Estar 20[1.42353008 1.47990396][0.2238147  0.20698518]
 cross2 B30901 B30901sigma_y 4[4.20444411 4.06896021][1.07910404 1.02843798]
+cross2 B30901 B30901sigma_y 5[3.50299734 3.5111653 ][0.68240353 0.83805139]
+cross2 B30901 B30901sigma_y 6[3.23702025 3.43653634][0.69103869 0.86505109]
+cross2 B30901 B30901sigma_y 8[2.95160297 3.3300116 ][0.66872058 0.78151008]
 cross2 B30901 B30901sigma_y 10[2.63655563 2.87190672][0.41617703 0.77320433]
 cross2 B30901 B30901sigma_y 20[1.30540101 1.88628369][0.30860011 0.74902353]
 
-cross2 B30901 B30901Estar 0[18.54622729  4.56279281][1.2936054 0.2518347]
-cross2 B30901 B30901Estar 1[13.33142971  3.68190463][2.86336084 0.39305053]
-cross2 B30901 B30901sigma_y 0[108.00368935  16.21510691][10.13022354  1.96154717]
-cross2 B30901 B30901sigma_y 1[28.87782463  7.82186251][23.05297711  4.230344  ]
-cross2 B30901 B30901Estar 20[1.48784437 1.52050564][0.17329339 0.17391948]
-cross2 B30901 B30901sigma_y 20[1.29574103 2.07439983][0.28875849 0.69796525]
-cross2 B30901 B30901Estar 0[18.97865535  4.62831743][1.55391401 0.214361  ]
-cross2 B30901 B30901Estar 1[13.17776551  3.75268874][3.03130755 0.32347078]
-cross2 B30901 B30901sigma_y 0[105.30420881  16.20744818][6.97956474 1.6971933 ]
-cross2 B30901 B30901sigma_y 1[30.6629987   8.68285747][18.44779508  3.7788934 ]
-cross2 B30901 B30901sigma_y 20[1.41812826 2.05725006][0.35375225 0.45093264]
-cross2 B30901 B30901Estar 20[1.52917295 1.50702507][0.26596843 0.19909256]
+cross2 B30901 B30901Estar 0[18.6240671   4.64610029][2.33293523 0.37702612]
+cross2 B30901 B30901Estar 1[13.07091517  3.73008436][3.11706244 0.41536095]
+cross2 B30901 B30901Estar 2[7.31385745 3.00889616][3.33082938 0.34999992]
+cross2 B30901 B30901Estar 3[4.43640207 2.59612146][2.44876053 0.38716157]
+cross2 B30901 B30901Estar 4[3.11487904 2.3062312 ][1.52205441 0.34288266]
+cross2 B30901 B30901Estar 5[2.34980973 2.19494994][0.35729243 0.21726991]
+cross2 B30901 B30901Estar 6[2.40618551 2.21255802][0.2885574  0.19734683]
+cross2 B30901 B30901Estar 8[2.15384257 1.98946586][0.57204409 0.34560587]
+cross2 B30901 B30901Estar 10[1.90070402 1.76460587][0.47060894 0.31961427]
+cross2 B30901 B30901Estar 20[1.42353008 1.47990396][0.2238147  0.20698518]
 
 Data for the paper:
 
@@ -2414,107 +2404,239 @@ cross2 TI33_25 TI33_conical_70.3 TI33_Berkovich TI33_25 Estar 8[3.01875205 2.656
 cross2 TI33_25 TI33_conical_70.3 TI33_Berkovich TI33_25 Estar 10[2.59431586 2.43239568][0.6901903  0.60266564]
 cross2 TI33_25 TI33_conical_70.3 TI33_Berkovich TI33_25 Estar 20[1.41630972 1.77611859][0.36744165 0.45374857]
 
-mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 0 211.19061 0.0
-mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 2 78.3082464897411 62.730172245965115
+mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 0 188.76663 73.153694
 mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 1 154.20173428824592 79.92413546007766
-mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 10 11.690476587977276 3.6348027296795666
-
-mf Estar TI33_conical_70.3 TI33_25 TI33_25 0 25.254963 0.0
-mf Estar TI33_conical_70.3 TI33_25 TI33_25 8 2.197175867417279 1.8572451334679358
-mf Estar TI33_conical_70.3 TI33_25 TI33_25 3 8.260459261077441 3.228362235728788
+mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 2 78.3082464897411 62.730172245965115
 mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 3 41.47165045244181 29.708274889841665
-mf Estar TI33_conical_70.3 TI33_25 TI33_25 4 5.495338105318839 3.749041890960514
-mf Estar TI33_conical_70.3 TI33_25 TI33_25 6 2.8897191414872694 2.616692039808479
-mf Estar TI33_conical_70.3 TI33_25 TI33_25 2 11.71247997327582 4.785541171473919
-mf Estar TI33_conical_70.3 TI33_25 TI33_25 1 11.911197628891259 2.8615605474781947
-mf Estar TI33_conical_70.3 TI33_25 TI33_25 5 4.5959625244140625 3.321718063210472
-mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 6 16.01009668015799 4.786572368712445
-mf Estar TI33_conical_70.3 TI33_25 TI33_25 10 1.4655314663000272 0.7337463152562037
 mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 4 41.614586426585284 47.47260623203874
 mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 5 24.020951814410918 14.345424254023872
-mf Estar TI33_conical_70.3 TI33_25 TI33_25 20 0.6900146885922082 0.2807680475152868
+mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 6 16.01009668015799 4.786572368712445
 mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 8 12.963233176568654 4.71760099220327
+mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 10 11.690476587977276 3.6348027296795666
 mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 20 3.756761872624776 3.1225136080466225
-mf sigma_y TI33_conical_70.3 TI33_25 TI33_25 0 188.76663 73.153694
+
 mf Estar TI33_conical_70.3 TI33_25 TI33_25 0 21.675121 2.4844365
+mf Estar TI33_conical_70.3 TI33_25 TI33_25 1 11.911197628891259 2.8615605474781947
+mf Estar TI33_conical_70.3 TI33_25 TI33_25 2 11.71247997327582 4.785541171473919
+mf Estar TI33_conical_70.3 TI33_25 TI33_25 3 8.260459261077441 3.228362235728788
+mf Estar TI33_conical_70.3 TI33_25 TI33_25 4 5.495338105318839 3.749041890960514
+mf Estar TI33_conical_70.3 TI33_25 TI33_25 5 4.5959625244140625 3.321718063210472
+mf Estar TI33_conical_70.3 TI33_25 TI33_25 6 2.8897191414872694 2.616692039808479
+mf Estar TI33_conical_70.3 TI33_25 TI33_25 8 2.197175867417279 1.8572451334679358
+mf Estar TI33_conical_70.3 TI33_25 TI33_25 10 1.4655314663000272 0.7337463152562037
+mf Estar TI33_conical_70.3 TI33_25 TI33_25 20 0.6900146885922082 0.2807680475152868
 
-
-mf Estar TI33_Berkovich TI33_25 TI33_25 2 39.56390138391568 42.47677824178318
-mf Estar TI33_Berkovich TI33_25 TI33_25 4 13.728113637532207 6.576843079788938
-mf sigma_y TI33_Berkovich TI33_25 TI33_25 6 31.63647519555663 11.365757092762063
-mf sigma_y TI33_Berkovich TI33_25 TI33_25 1 247.22847294621542 183.4383555933049
-mf sigma_y TI33_Berkovich TI33_25 TI33_25 4 73.56101125957497 55.563140776760854
-mf Estar TI33_Berkovich TI33_25 TI33_25 5 9.579535848216008 3.0702997131931067
-mf sigma_y TI33_Berkovich TI33_25 TI33_25 2 264.3965775960634 301.76505621329704
-mf Estar TI33_Berkovich TI33_25 TI33_25 3 17.887449469862943 4.85255655659031
-mf Estar TI33_Berkovich TI33_25 TI33_25 6 9.906173009951688 3.987283246851966
-mf sigma_y TI33_Berkovich TI33_25 TI33_25 8 29.333391616967116 10.17128621708138
-mf Estar TI33_Berkovich TI33_25 TI33_25 1 34.83283826133661 20.70156720054496
-mf sigma_y TI33_Berkovich TI33_25 TI33_25 3 55.529762281335465 24.501826960402603
-mf Estar TI33_Berkovich TI33_25 TI33_25 8 8.388153775926716 5.579911914815005
-mf sigma_y TI33_Berkovich TI33_25 TI33_25 5 39.706774422292966 14.042678593951647
-mf Estar TI33_Berkovich TI33_25 TI33_25 10 3.5162076782761957 2.173199879706948
-mf sigma_y TI33_Berkovich TI33_25 TI33_25 10 17.63436378197498 7.817827789945134
-mf Estar TI33_Berkovich TI33_25 TI33_25 20 2.646672499807258 3.9085836345128535
-mf sigma_y TI33_Berkovich TI33_25 TI33_25 20 11.49995381860848 14.059263603295284
-mf Estar TI33_Berkovich TI33_25 TI33_25 0 154.48647 80.628624
 mf sigma_y TI33_Berkovich TI33_25 TI33_25 0 576.5542 446.05533
+mf sigma_y TI33_Berkovich TI33_25 TI33_25 1 247.22847294621542 183.4383555933049
+mf sigma_y TI33_Berkovich TI33_25 TI33_25 2 264.3965775960634 301.76505621329704
+mf sigma_y TI33_Berkovich TI33_25 TI33_25 3 55.529762281335465 24.501826960402603
+mf sigma_y TI33_Berkovich TI33_25 TI33_25 4 73.56101125957497 55.563140776760854
+mf sigma_y TI33_Berkovich TI33_25 TI33_25 5 39.706774422292966 14.042678593951647
+mf sigma_y TI33_Berkovich TI33_25 TI33_25 6 31.63647519555663 11.365757092762063
+mf sigma_y TI33_Berkovich TI33_25 TI33_25 8 29.333391616967116 10.17128621708138
+mf sigma_y TI33_Berkovich TI33_25 TI33_25 10 17.63436378197498 7.817827789945134
+mf sigma_y TI33_Berkovich TI33_25 TI33_25 20 11.49995381860848 14.059263603295284
+
+mf Estar TI33_Berkovich TI33_25 TI33_25 0 154.48647 80.628624
+mf Estar TI33_Berkovich TI33_25 TI33_25 1 34.83283826133661 20.70156720054496
+mf Estar TI33_Berkovich TI33_25 TI33_25 2 39.56390138391568 42.47677824178318
+mf Estar TI33_Berkovich TI33_25 TI33_25 3 17.887449469862943 4.85255655659031
+mf Estar TI33_Berkovich TI33_25 TI33_25 4 13.728113637532207 6.576843079788938
+mf Estar TI33_Berkovich TI33_25 TI33_25 5 9.579535848216008 3.0702997131931067
+mf Estar TI33_Berkovich TI33_25 TI33_25 6 9.906173009951688 3.987283246851966
+mf Estar TI33_Berkovich TI33_25 TI33_25 8 8.388153775926716 5.579911914815005
+mf Estar TI33_Berkovich TI33_25 TI33_25 10 3.5162076782761957 2.173199879706948
+mf Estar TI33_Berkovich TI33_25 TI33_25 20 2.646672499807258 3.9085836345128535
 
 
-validation_one TI33_25 TI33_25 sigma_y 6 23.89855 14.91269
+validation_one TI33_25 TI33_25 sigma_y 1 1825.9717 5477.894
 validation_one TI33_25 TI33_25 sigma_y 2 861.10126 1933.915
 validation_one TI33_25 TI33_25 sigma_y 3 82.19835 40.28174
-validation_one TI33_25 TI33_25 Estar 5 16.96242 12.064427
-validation_one TI33_25 TI33_25 Estar 1 0.004637869 0.0037915248
-validation_one TI33_25 TI33_25 Estar 10 3.7717087 2.0475862
-validation_one TI33_25 TI33_25 sigma_y 10 14.455053 15.16982
 validation_one TI33_25 TI33_25 sigma_y 4 50.26911 22.32007
 validation_one TI33_25 TI33_25 sigma_y 5 40.918686 16.531126
-validation_one TI33_25 TI33_25 Estar 4 21.027987 16.89436
-validation_one TI33_25 TI33_25 Estar 6 10.253847 6.9805694
-validation_one TI33_25 TI33_25 Estar 20 1.7349592 0.8986498
-validation_one TI33_25 TI33_25 Estar 8 6.8848433 7.832006
-validation_one TI33_25 TI33_25 sigma_y 1 1825.9717 5477.894
-validation_one TI33_25 TI33_25 Estar 3 33.25544 21.188744
-validation_one TI33_25 TI33_25 Estar 2 174.80925 276.84796
+validation_one TI33_25 TI33_25 sigma_y 6 23.89855 14.91269
 validation_one TI33_25 TI33_25 sigma_y 8 16.746403 10.046402
+validation_one TI33_25 TI33_25 sigma_y 10 14.455053 15.16982
 validation_one TI33_25 TI33_25 sigma_y 20 6.0831113 2.1733255
 
-validation_one TI33_Berkovich TI33_Berkovich Estar 1 0.005757347 0.0038634643
-validation_one TI33_Berkovich TI33_Berkovich sigma_y 10 4.876452 1.5463201
-validation_one TI33_Berkovich TI33_Berkovich sigma_y 20 2.347382 1.5109531
-validation_one TI33_Berkovich TI33_Berkovich sigma_y 2 306.434 462.04684
-validation_one TI33_Berkovich TI33_Berkovich Estar 4 25.77123 34.00265
+validation_one TI33_25 TI33_25 Estar 1 0.004637869 0.0037915248
+validation_one TI33_25 TI33_25 Estar 2 174.80925 276.84796
+validation_one TI33_25 TI33_25 Estar 3 33.25544 21.188744
+validation_one TI33_25 TI33_25 Estar 4 21.027987 16.89436
+validation_one TI33_25 TI33_25 Estar 5 16.96242 12.064427
+validation_one TI33_25 TI33_25 Estar 6 10.253847 6.9805694
+validation_one TI33_25 TI33_25 Estar 8 6.8848433 7.832006
+validation_one TI33_25 TI33_25 Estar 10 3.7717087 2.0475862
+validation_one TI33_25 TI33_25 Estar 20 1.7349592 0.8986498
+
 validation_one TI33_Berkovich TI33_Berkovich sigma_y 1 1102.8345 3308.482
+validation_one TI33_Berkovich TI33_Berkovich sigma_y 2 306.434 462.04684
+validation_one TI33_Berkovich TI33_Berkovich sigma_y 3 129.54672 301.2473
 validation_one TI33_Berkovich TI33_Berkovich sigma_y 4 34.51094 38.2321
-validation_one TI33_Berkovich TI33_Berkovich Estar 5 6.2397795 4.2889166
-validation_one TI33_Berkovich TI33_Berkovich Estar 2 414.90146 679.3465
+validation_one TI33_Berkovich TI33_Berkovich sigma_y 5 16.30294 8.546992
 validation_one TI33_Berkovich TI33_Berkovich sigma_y 6 11.011082 6.949768
 validation_one TI33_Berkovich TI33_Berkovich sigma_y 8 12.529177 8.489592
+validation_one TI33_Berkovich TI33_Berkovich sigma_y 10 4.876452 1.5463201
+validation_one TI33_Berkovich TI33_Berkovich sigma_y 20 2.347382 1.5109531
+
+validation_one TI33_Berkovich TI33_Berkovich Estar 1 0.005757347 0.0038634643
+validation_one TI33_Berkovich TI33_Berkovich Estar 2 414.90146 679.3465
 validation_one TI33_Berkovich TI33_Berkovich Estar 3 44.883656 52.76924
-validation_one TI33_Berkovich TI33_Berkovich sigma_y 3 129.54672 301.2473
+validation_one TI33_Berkovich TI33_Berkovich Estar 4 25.77123 34.00265
+validation_one TI33_Berkovich TI33_Berkovich Estar 5 6.2397795 4.2889166
 validation_one TI33_Berkovich TI33_Berkovich Estar 6 4.729158 3.1390753
 validation_one TI33_Berkovich TI33_Berkovich Estar 8 3.1615417 2.3401568
-validation_one TI33_Berkovich TI33_Berkovich sigma_y 5 16.30294 8.546992
-validation_one TI33_Berkovich TI33_Berkovich Estar 20 1.073872 0.42710212
 validation_one TI33_Berkovich TI33_Berkovich Estar 10 1.646418 1.1024133
+validation_one TI33_Berkovich TI33_Berkovich Estar 20 1.073872 0.42710212
 
-validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 2 8090.0415 11720.051
-validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 3 991.31445 967.50916
-validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 8 125.59302 149.71326
-validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 1 101.40326 6.8939376
 validation_one TI33_conical_70.3 TI33_conical_70.3 sigma_y 1 61.162453 4.3460784
-validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 5 326.1167 210.22432
-validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 10 66.22455 96.903496
-validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 6 248.37798 222.88261
-validation_one TI33_conical_70.3 TI33_conical_70.3 sigma_y 10 63.648335 56.214767
-validation_one TI33_conical_70.3 TI33_conical_70.3 sigma_y 5 147.7874 95.840645
-validation_one TI33_conical_70.3 TI33_conical_70.3 sigma_y 20 75.27569 106.56933
-validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 20 33.23458 62.391518
-validation_one TI33_conical_70.3 TI33_conical_70.3 sigma_y 3 821.8509 896.3369
 validation_one TI33_conical_70.3 TI33_conical_70.3 sigma_y 2 3489.3862 6518.8833
+validation_one TI33_conical_70.3 TI33_conical_70.3 sigma_y 3 821.8509 896.3369
+validation_one TI33_conical_70.3 TI33_conical_70.3 sigma_y 4 532.2977 616.8876
+validation_one TI33_conical_70.3 TI33_conical_70.3 sigma_y 5 147.7874 95.840645
 validation_one TI33_conical_70.3 TI33_conical_70.3 sigma_y 6 176.04375 127.86598
 validation_one TI33_conical_70.3 TI33_conical_70.3 sigma_y 8 71.907486 82.1405
-validation_one TI33_conical_70.3 TI33_conical_70.3 sigma_y 4 532.2977 616.8876
-validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 4 569.72626 418.35547
+validation_one TI33_conical_70.3 TI33_conical_70.3 sigma_y 10 63.648335 56.214767
+validation_one TI33_conical_70.3 TI33_conical_70.3 sigma_y 20 75.27569 106.56933
 
+validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 1 101.40326 6.8939376
+validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 2 8090.0415 11720.051
+validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 3 991.31445 967.50916
+validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 4 569.72626 418.35547
+validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 5 326.1167 210.22432
+validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 6 248.37798 222.88261
+validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 8 125.59302 149.71326
+validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 10 66.22455 96.903496
+validation_one TI33_conical_70.3 TI33_conical_70.3 Estar 20 33.23458 62.391518
+
+validation_one TI33_conical_60 TI33_conical_60 sigma_y 1 56.781788 14.402582
+validation_one TI33_conical_60 TI33_conical_60 sigma_y 2 4200.5493 6976.8125
+validation_one TI33_conical_60 TI33_conical_60 sigma_y 3 526.8063 519.221
+validation_one TI33_conical_60 TI33_conical_60 sigma_y 4 380.36502 427.14392
+validation_one TI33_conical_60 TI33_conical_60 sigma_y 5 168.2655 118.69308
+validation_one TI33_conical_60 TI33_conical_60 sigma_y 6 169.8977 173.34337
+validation_one TI33_conical_60 TI33_conical_60 sigma_y 8 91.55192 77.45191
+validation_one TI33_conical_60 TI33_conical_60 sigma_y 10 64.54789 49.358387
+validation_one TI33_conical_60 TI33_conical_60 sigma_y 20 38.680275 53.730602
+
+validation_one TI33_conical_60 TI33_conical_60 Estar 1 101.397995 6.884638
+validation_one TI33_conical_60 TI33_conical_60 Estar 2 3208.438 4754.098
+validation_one TI33_conical_60 TI33_conical_60 Estar 3 849.90106 982.3889
+validation_one TI33_conical_60 TI33_conical_60 Estar 4 569.96576 391.58392
+validation_one TI33_conical_60 TI33_conical_60 Estar 5 340.64316 315.78214
+validation_one TI33_conical_60 TI33_conical_60 Estar 6 264.78888 248.18668
+validation_one TI33_conical_60 TI33_conical_60 Estar 8 152.801 204.57101
+validation_one TI33_conical_60 TI33_conical_60 Estar 10 58.766777 64.27664
+validation_one TI33_conical_60 TI33_conical_60 Estar 20 15.701685 17.199352
+
+validation_one TI33_conical_30 TI33_conical_30 sigma_y 1 61.164734 4.350728
+validation_one TI33_conical_30 TI33_conical_30 sigma_y 2 40875.324 69406.29
+validation_one TI33_conical_30 TI33_conical_30 sigma_y 3 4872.1514 12931.154
+validation_one TI33_conical_30 TI33_conical_30 sigma_y 4 647.3356 1261.6344
+validation_one TI33_conical_30 TI33_conical_30 sigma_y 5 200.94142 173.5302
+validation_one TI33_conical_30 TI33_conical_30 sigma_y 6 203.58102 247.86087
+validation_one TI33_conical_30 TI33_conical_30 sigma_y 8 76.576065 73.78818
+validation_one TI33_conical_30 TI33_conical_30 sigma_y 10 82.112045 99.86272
+validation_one TI33_conical_30 TI33_conical_30 sigma_y 20 93.9032 166.81877
+
+validation_one TI33_conical_30 TI33_conical_30 Estar 1 101.39911 6.8888545
+validation_one TI33_conical_30 TI33_conical_30 Estar 2 40639.508 90104.72
+validation_one TI33_conical_30 TI33_conical_30 Estar 3 3272.0854 7751.159
+validation_one TI33_conical_30 TI33_conical_30 Estar 4 927.80927 1373.6709
+validation_one TI33_conical_30 TI33_conical_30 Estar 5 350.69397 253.347
+validation_one TI33_conical_30 TI33_conical_30 Estar 6 292.31976 237.52019
+validation_one TI33_conical_30 TI33_conical_30 Estar 8 114.078 132.54527
+validation_one TI33_conical_30 TI33_conical_30 Estar 10 27.088501 49.441574
+validation_one TI33_conical_30 TI33_conical_30 Estar 20 35.444653 73.06939
+
+validation_one TI33_conical_45 TI33_conical_45 sigma_y 1 61.164196 4.3525114
+validation_one TI33_conical_45 TI33_conical_45 sigma_y 2 2711.623 4139.1577
+validation_one TI33_conical_45 TI33_conical_45 sigma_y 3 721.91565 690.4832
+validation_one TI33_conical_45 TI33_conical_45 sigma_y 4 225.70438 277.5926
+validation_one TI33_conical_45 TI33_conical_45 sigma_y 5 182.94632 198.24997
+validation_one TI33_conical_45 TI33_conical_45 sigma_y 6 165.86415 154.52469
+validation_one TI33_conical_45 TI33_conical_45 sigma_y 8 72.936485 59.45031
+validation_one TI33_conical_45 TI33_conical_45 sigma_y 10 62.22284 47.481037
+validation_one TI33_conical_45 TI33_conical_45 sigma_y 20 54.703197 69.84109
+
+validation_one TI33_conical_45 TI33_conical_45 Estar 1 101.399025 6.8881583
+validation_one TI33_conical_45 TI33_conical_45 Estar 2 10836.508 24999.756
+validation_one TI33_conical_45 TI33_conical_45 Estar 3 606.45856 510.1129
+validation_one TI33_conical_45 TI33_conical_45 Estar 4 482.56772 353.2605
+validation_one TI33_conical_45 TI33_conical_45 Estar 5 286.9077 198.3432
+validation_one TI33_conical_45 TI33_conical_45 Estar 6 219.51144 152.68678
+validation_one TI33_conical_45 TI33_conical_45 Estar 8 161.62355 226.49715
+validation_one TI33_conical_45 TI33_conical_45 Estar 10 98.71296 121.72275
+validation_one TI33_conical_45 TI33_conical_45 Estar 20 66.967896 122.319695
+
+validation_one TI33_conical_45 TI33_conical_45_i sigma_y 1 2471.466 1066.2625
+validation_one TI33_conical_45 TI33_conical_45_i sigma_y 2 3367.7449 2066.6565
+validation_one TI33_conical_45 TI33_conical_45_i sigma_y 3 2627.2583 1528.8055
+validation_one TI33_conical_45 TI33_conical_45_i sigma_y 4 4192.438 1166.4432
+validation_one TI33_conical_45 TI33_conical_45_i sigma_y 5 4053.3965 2851.175
+validation_one TI33_conical_45 TI33_conical_45_i sigma_y 6 2380.108 1768.9067
+validation_one TI33_conical_45 TI33_conical_45_i sigma_y 8 3952.5645 1684.9161
+validation_one TI33_conical_45 TI33_conical_45_i sigma_y 10 2116.412 1633.2517
+
+validation_one TI33_conical_45 TI33_conical_45_i Estar 1 297.1423 248.88388
+validation_one TI33_conical_45 TI33_conical_45_i Estar 2 276.05527 92.909454
+validation_one TI33_conical_45 TI33_conical_45_i Estar 3 248.39194 158.964
+validation_one TI33_conical_45 TI33_conical_45_i Estar 4 324.01263 168.5001
+validation_one TI33_conical_45 TI33_conical_45_i Estar 5 306.36908 242.35793
+validation_one TI33_conical_45 TI33_conical_45_i Estar 6 232.31836 124.19452
+validation_one TI33_conical_45 TI33_conical_45_i Estar 8 302.92584 246.40025
+validation_one TI33_conical_45 TI33_conical_45_i Estar 10 174.34741 93.438286
+
+validation_one TI33_conical_30 TI33_conical_30_i sigma_y 1 446.1936 278.44623
+validation_one TI33_conical_30 TI33_conical_30_i sigma_y 2 437.7916 350.8021
+validation_one TI33_conical_30 TI33_conical_30_i sigma_y 3 476.81366 268.03876
+validation_one TI33_conical_30 TI33_conical_30_i sigma_y 4 316.43503 272.77167
+validation_one TI33_conical_30 TI33_conical_30_i sigma_y 5 463.89447 315.70547
+validation_one TI33_conical_30 TI33_conical_30_i sigma_y 6 556.62885 422.95966
+validation_one TI33_conical_30 TI33_conical_30_i sigma_y 8 539.23315 525.41785
+validation_one TI33_conical_30 TI33_conical_30_i sigma_y 10 368.4364 442.56662
+
+validation_one TI33_conical_30 TI33_conical_30_i Estar 1 272.82565 196.74901
+validation_one TI33_conical_30 TI33_conical_30_i Estar 2 225.15495 147.09894
+validation_one TI33_conical_30 TI33_conical_30_i Estar 3 247.47757 175.60106
+validation_one TI33_conical_30 TI33_conical_30_i Estar 4 280.2082 233.09277
+validation_one TI33_conical_30 TI33_conical_30_i Estar 5 316.80682 241.25885
+validation_one TI33_conical_30 TI33_conical_30_i Estar 6 415.0851 356.10416
+validation_one TI33_conical_30 TI33_conical_30_i Estar 8 227.14896 176.1444
+validation_one TI33_conical_30 TI33_conical_30_i Estar 10 215.65068 191.58337
+
+validation_one TI33_conical_60 TI33_conical_60_i sigma_y 1 364.34982 182.62218
+validation_one TI33_conical_60 TI33_conical_60_i sigma_y 2 311.10785 359.38074
+validation_one TI33_conical_60 TI33_conical_60_i sigma_y 3 448.8676 293.00198
+validation_one TI33_conical_60 TI33_conical_60_i sigma_y 4 374.02963 226.41072
+validation_one TI33_conical_60 TI33_conical_60_i sigma_y 5 370.30548 362.5988
+validation_one TI33_conical_60 TI33_conical_60_i sigma_y 6 372.08267 353.68384
+validation_one TI33_conical_60 TI33_conical_60_i sigma_y 8 380.42862 241.37292
+validation_one TI33_conical_60 TI33_conical_60_i sigma_y 10 253.73442 143.58322
+
+validation_one TI33_conical_60 TI33_conical_60_i Estar 1 235.99861 168.32405
+validation_one TI33_conical_60 TI33_conical_60_i Estar 2 205.91263 180.41512
+validation_one TI33_conical_60 TI33_conical_60_i Estar 3 382.17416 306.19788
+validation_one TI33_conical_60 TI33_conical_60_i Estar 4 264.4173 182.81075
+validation_one TI33_conical_60 TI33_conical_60_i Estar 5 265.08725 200.02649
+validation_one TI33_conical_60 TI33_conical_60_i Estar 6 275.69626 210.8948
+validation_one TI33_conical_60 TI33_conical_60_i Estar 8 214.23703 143.58408
+validation_one TI33_conical_60 TI33_conical_60_i Estar 10 197.72269 181.44707
+
+validation_one TI33_Berkovich TI33_Berkovich_rough sigma_y 1 185.68034 94.66578
+validation_one TI33_Berkovich TI33_Berkovich_rough sigma_y 2 222.84956 213.69847
+validation_one TI33_Berkovich TI33_Berkovich_rough sigma_y 3 155.66293 112.16351
+validation_one TI33_Berkovich TI33_Berkovich_rough sigma_y 4 236.7647 132.68126
+validation_one TI33_Berkovich TI33_Berkovich_rough sigma_y 5 216.00008 83.09273
+validation_one TI33_Berkovich TI33_Berkovich_rough sigma_y 6 148.31773 182.30406
+validation_one TI33_Berkovich TI33_Berkovich_rough sigma_y 8 247.38887 100.73442
+validation_one TI33_Berkovich TI33_Berkovich_rough sigma_y 10 237.3854 136.23886
+
+validation_one TI33_Berkovich TI33_Berkovich_rough Estar 1 136.1349 44.878254
+validation_one TI33_Berkovich TI33_Berkovich_rough Estar 2 145.74281 61.073906
+validation_one TI33_Berkovich TI33_Berkovich_rough Estar 3 147.60287 62.129875
+validation_one TI33_Berkovich TI33_Berkovich_rough Estar 4 102.889626 59.65944
+validation_one TI33_Berkovich TI33_Berkovich_rough Estar 5 115.88994 60.001347
+validation_one TI33_Berkovich TI33_Berkovich_rough Estar 6 120.746544 50.15582
+validation_one TI33_Berkovich TI33_Berkovich_rough Estar 8 132.4818 48.955044
+validation_one TI33_Berkovich TI33_Berkovich_rough Estar 10 155.18082 42.35498

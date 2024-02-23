@@ -526,7 +526,7 @@ ax2.annotate("B: $E_{r}$", xy=(0.15, 0.95), xycoords="axes fraction",
 plt.savefig("/Users/Joe/Desktop/trainingerrors.jpeg", dpi=800, bbox_inches="tight")
 plt.show()
 '''
-''''''
+'''
 # Lu's data, digitized fig. 2 from paper
 n_lu = [10, 20, 30, 40, 50, 60, 70, 80]
 luσ = [126.59981, 74.7933, 49.3204, 48.40326, 43.34291, 38.5812, 40.6214, 39.11309]
@@ -541,8 +541,8 @@ meE = [13.2443695, 8.132007, 6.264584, 5.5313954, 4.8793535, 4.9000173, 4.497790
 εmeE = [3.303954, 3.1866722, 1.7214556, 0.9339477, 0.63589025, 0.47832343, 0.6403632, 1.3723232]
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n_me, meσ, yerr = εmeσ, linestyle = '--', color = 'red', label = "My replication")
 ax1.errorbar(n_lu, luσ, yerr = εluσ, color = 'green', label = "Lu's NN (70.3˚)")
-ax1.errorbar(n_me, meσ, yerr = εmeσ, color = 'red', label = "My replication")
 ax1.set_yscale('linear')
 ax1.set_ylim([0, 150])
 ax1.set_xlim([-0.5, 90])
@@ -556,8 +556,8 @@ ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
               fontsize=12, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
 
+ax2.errorbar(n_me, meE, yerr = εmeE, linestyle = '--', color = 'red', label = "My replication")
 ax2.errorbar(n_lu, luE, yerr = εluE, color = 'green', label = "Lu's NN (n$_{tr}$=100)")
-ax2.errorbar(n_me, meE, yerr = εmeE, color = 'red', label = "My replication")
 ax2.set_yscale('linear')
 ax2.set_ylim([0, 16])
 ax2.set_xlim([-0.5, 90])
@@ -572,7 +572,7 @@ fig.tight_layout()
 ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
               fontsize=12, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
-plt.savefig("/Users/Joe/Desktop/lu2D.jpeg", dpi=800, bbox_inches="tight")
+plt.savefig("/Users/Joe/Desktop/NN_graphs/lu2D.jpeg", dpi=800, bbox_inches="tight")
 plt.show()
 
 
@@ -590,8 +590,8 @@ BrE = [72.62585, 34.406578, 16.770884, 13.474498, 8.293661]
 εBrE = [58.778774, 40.89992, 6.265485, 9.39406, 5.6520896]
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n_Br, Brσ, yerr = εBrσ, linestyle = '--', color = 'red', label = "My replication")
 ax1.errorbar(n_lu3, lu3σ, yerr = εlu3σ, color = 'green', label = "Lu's NN (3D FEM)")
-ax1.errorbar(n_Br, Brσ, yerr = εBrσ, color = 'red', label = "My replication")
 ax1.set_yscale('linear')
 ax1.set_ylim([0, 800])
 ax1.set_xlim([0, 13])
@@ -605,8 +605,8 @@ ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
               fontsize=12, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
 
+ax2.errorbar(n_Br, BrE, yerr = εBrE, linestyle = '--', color = 'red', label = "My replication")
 ax2.errorbar(n_lu3, lu3E, yerr = εlu3E, color = 'green', label = "Lu's NN (n$_{tr}$=14)")
-ax2.errorbar(n_Br, BrE, yerr = εBrE, color = 'red', label = "My replication")
 ax2.set_yscale('linear')
 ax2.set_ylim([0, 150])
 ax2.set_xlim([-0.5, 15])
@@ -621,7 +621,7 @@ fig.tight_layout()
 ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
               fontsize=12, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
-plt.savefig("/Users/Joe/Desktop/lu3D.jpeg", dpi=800, bbox_inches="tight")
+plt.savefig("/Users/Joe/Desktop/NN_graphs/lu3D.jpeg", dpi=800, bbox_inches="tight")
 plt.show()
 
 
@@ -633,7 +633,7 @@ ExE = [53.26761, 25.274721, 10.545181, 6.2623787, 4.5989795, 3.6774323, 2.403845
 εExE = [21.008629, 13.292065, 3.9533153, 4.338378, 2.1332085, 1.5747724, 1.2042903]
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-ax1.errorbar(n_Ex, Exσ, yerr = εExσ, color = 'green', label = "Lu's indentations on B3090")
+ax1.errorbar(n_Ex, Exσ, yerr = εExσ, color = 'green', label = "Indentations on B3090")
 ax1.set_yscale('linear')
 ax1.set_ylim([0, 150])
 ax1.set_xlim([-0.5, 24])
@@ -647,7 +647,7 @@ ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
               fontsize=12, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
 
-ax2.errorbar(n_Ex, ExE, yerr = εExE, color = 'green', label = "Lu's data (n$_{tr}$=100)")
+ax2.errorbar(n_Ex, ExE, yerr = εExE, color = 'green', label = "B3090 data (n$_{tr}$=144)")
 ax2.set_yscale('linear')
 ax2.set_ylim([0, 80])
 ax2.set_xlim([-0.5, 24])
@@ -662,18 +662,252 @@ fig.tight_layout()
 ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
               fontsize=12, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
-plt.savefig("/Users/Joe/Desktop/luexp.jpeg", dpi=800, bbox_inches="tight")
+plt.savefig("/Users/Joe/Desktop/NN_graphs/luexp.jpeg", dpi=800, bbox_inches="tight")
 plt.show()
 
 
-n_2Dexp = [10, 20, 30, 40, 50, 60, 70]
+# Lu's MINN with all 3 data
+n_lua = [0, 1, 2, 3, 4, 5, 6, 8, 10, 20]
+meluσ = [96.79690387, 28.58358372, 9.24876582, 5.11659125, 4.20444411, 3.50299734, 3.23702025, 2.95160297, 2.63655563, 1.30540101]
+εmeluσ = [11.25956148, 22.34089011, 7.71808326, 1.93115789, 1.07910404, 0.68240353, 0.69103869, 0.66872058, 0.41617703, 0.30860011]
+meluE = [18.6240671, 13.07091517, 7.31385745, 4.43640207, 3.11487904, 2.34980973, 2.40618551, 2.15384257, 1.90070402, 1.42353008]
+εmeluE = [2.33293523, 3.11706244, 3.33082938, 2.44876053, 1.52205441, 0.35729243, 0.2885574, 0.57204409, 0.47060894, 0.2238147]
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-ax1.errorbar(n_Ex, Exσ, yerr = εExσ, color = 'green', label = "Lu's indentations on B3090")
+ax1.errorbar(n_lua, meluσ, yerr = εmeluσ, color = 'green', label = "Lu's indentations on B3090")
+ax1.set_yscale('log')
+ax1.set_ylim([1, 120])
+ax1.set_xlim([-0.5, 21])
+ax1.set_xticks([0, 5, 10, 15, 20])
+ax1.set_yticks([1, 5, 10, 20, 40, 80, 120])
+ax1.set_yticklabels([1, 5, 10, 20, 40, 80, 120])
+ax1.legend()
+ax1.set_ylabel("MAPE (%)")
+ax1.set_xlabel("Experimental training data size")
+ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(n_lua, meluE, yerr = εmeluE, color = 'green', label = "Lu's data (n$_{tr}$=144)")
+ax2.set_yscale('log')
+ax2.set_ylim([0, 20])
+ax2.set_xlim([-0.5, 21])
+ax2.set_xticks([0, 5, 10, 15, 20])
+ax2.set_yticks([1, 2, 4, 8, 16])
+ax2.set_yticklabels([1, 2, 4, 8, 16])
+ax2.legend()
+ax2.set_ylabel("MAPE (%)")
+ax2.set_xlabel("Experimental training data size")
+plt.subplots_adjust(bottom=0.180)
+fig.tight_layout()
+ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/NN_graphs/luMINN.jpeg", dpi=800, bbox_inches="tight")
+plt.show()
+
+
+# Lu's MINN with 2D+exp
+n_lub = [1, 2, 3, 4, 5, 8, 10, 20]
+luFEMσ = [34.76187049381707, 15.666057266762687, 6.996018572793789, 5.247694673209859, 4.675818271982714, 2.8224066143898994, 1.7193101447336872, 1.1601397290108126]
+εluFEMσ = [10.740497950208871, 11.320466708732308, 3.6585756140059877, 2.428309380448281, 1.830393016684322, 0.7991033526928624, 0.5419118098670546, 0.6601813023072108]
+luFEME = [6.277749365665346, 1.8816316858388151, 1.6219183265376143, 1.557228150514812, 1.2657623943780592, 1.123555123730203, 1.1112026038692304, 0.9507400282322637]
+εluFEME = [6.320663598962627, 0.5880917816388127, 0.5585803534905526, 0.4803461648995692, 0.47507417407693564, 0.1597705074954198, 0.1597705074954198, 0.0680595017707608]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n_lub, luFEMσ, yerr = εluFEMσ, color = 'green', label = "Lu's indentations on B3090")
+ax1.set_yscale('log')
+ax1.set_ylim([1, 120])
+ax1.set_xlim([-0.5, 21])
+ax1.set_xticks([0, 5, 10, 15, 20])
+ax1.set_yticks([1, 5, 10, 20, 40, 80, 120])
+ax1.set_yticklabels([1, 5, 10, 20, 40, 80, 120])
+ax1.legend()
+ax1.set_ylabel("MAPE (%)")
+ax1.set_xlabel("Experimental training data size")
+ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(n_lub, luFEME, yerr = εluFEME, color = 'green', label = "Lu's data (n$_{tr}$=144)")
+ax2.set_yscale('log')
+ax2.set_ylim([0, 20])
+ax2.set_xlim([-0.5, 21])
+ax2.set_xticks([0, 5, 10, 15, 20])
+ax2.set_yticks([1, 2, 4, 8, 16])
+ax2.set_yticklabels([1, 2, 4, 8, 16])
+ax2.legend()
+ax2.set_ylabel("MAPE (%)")
+ax2.set_xlabel("Experimental training data size")
+plt.subplots_adjust(bottom=0.180)
+fig.tight_layout()
+ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/NN_graphs/lu2Dexp.jpeg", dpi=800, bbox_inches="tight")
+plt.show()
+
+
+# Lu's MINN with 2D+exp
+n_luc = [1, 2, 3, 4, 5, 8, 10, 20]
+luBerσ = [34.46453051282312, 14.430444813050446, 4.12398763020509, 3.5314341279625197, 3.0907205609813806, 2.2920436100804644, 1.6357738399610426, 1.2500409733864575]
+εluBerσ = [22.360254865142583, 16.21183822544672, 2.0996833241547526, 1.9046035329593554, 1.8479607014761543, 0.49586585507229414, 0.3743748266099369, 0.36509353711279496]
+luBerE = [4.628239397540119, 2.168147958579157, 1.8880737007128954, 1.8663205341038818, 1.611583831030046, 1.4588801771554758, 1.2661804874699487, 1.1079451346891076]
+εluBerE = [3.9533561705442333, 0.5840393763292222, 0.6678048947524333, 0.5832767462508341, 0.45644151049291987, 0.44005901074087317, 0.3163713164786633, 0.07301838539300094]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n_luc, luBerσ, yerr = εluBerσ, color = 'green', label = "Lu's indentations on B3090")
+ax1.set_yscale('log')
+ax1.set_ylim([1, 120])
+ax1.set_xlim([-0.5, 21])
+ax1.set_xticks([0, 5, 10, 15, 20])
+ax1.set_yticks([1, 5, 10, 20, 40, 80, 120])
+ax1.set_yticklabels([1, 5, 10, 20, 40, 80, 120])
+ax1.legend()
+ax1.set_ylabel("MAPE (%)")
+ax1.set_xlabel("Experimental training data size")
+ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(n_luc, luBerE, yerr = εluBerE, color = 'green', label = "Lu's data (n$_{tr}$=144)")
+ax2.set_yscale('log')
+ax2.set_ylim([0, 20])
+ax2.set_xlim([-0.5, 21])
+ax2.set_xticks([0, 5, 10, 15, 20])
+ax2.set_yticks([1, 2, 4, 8, 16])
+ax2.set_yticklabels([1, 2, 4, 8, 16])
+ax2.legend()
+ax2.set_ylabel("MAPE (%)")
+ax2.set_xlabel("Experimental training data size")
+plt.subplots_adjust(bottom=0.180)
+fig.tight_layout()
+ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/NN_graphs/lu3Dexp.jpeg", dpi=800, bbox_inches="tight")
+plt.show()
+'''
+
+# My 70˚ data
+n_a70 = [1, 2, 3, 4, 5, 6, 8, 10, 20]
+a70σ = [61.162453, 3489.3862, 821.8509, 532.2977, 147.7874, 176.04375, 71.907486, 63.648335, 75.27569]
+εa70σ = [4.3460784, 6518.8833, 896.3369, 616.8876, 95.840645, 127.86598, 82.1405, 56.214767, 106.56933]
+a70E = [101.40326, 8090.0415, 991.31445, 569.72626, 326.1167, 248.37798, 125.59302, 66.22455, 33.23458]
+εa70E = [6.8939376, 11720.051, 967.50916, 418.35547, 210.22432, 222.88261, 149.71326, 96.903496, 62.391518]
+# rough 60˚ data
+n_a60 = [1, 2, 3, 4, 5, 6, 8, 10, 20]
+a60σ = [56.781788, 4200.5493, 526.8063, 380.36502, 168.2655, 169.8977, 91.55192, 64.54789, 38.680275]
+εa60σ = [14.402582, 6976.8125, 519.221, 427.14392, 118.69308, 173.34337, 77.45191, 49.358387, 53.730602]
+a60E = [101.397995, 3208.438, 849.90106, 569.96576, 340.64316, 264.78888, 152.801, 58.766777, 15.701685]
+εa60E = [6.884638, 4754.098, 982.3889, 391.58392, 315.78214, 248.18668, 204.57101, 64.27664, 17.199352]
+# fine 60˚ data
+n_b60 = [1, 2, 3, 4, 5, 6, 8, 10]
+b60σ = [364.34982, 311.10785, 448.8676, 374.02963, 370.30548, 372.08267, 380.42862, 253.73442]
+εb60σ = [182.62218, 359.38074, 293.00198, 226.41072, 362.5988, 353.68384, 241.37292, 143.58322]
+b60E = [235.99861, 205.91263, 382.17416, 264.4173, 265.08725, 275.69626, 214.23703, 197.72269]
+εb60E = [168.32405, 180.41512, 306.19788, 182.81075, 200.02649, 210.8948, 143.58408, 181.44707]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n_a70, a70σ, yerr = εa70σ, linestyle = '--', color = 'red', label = "70.3˚")
+ax1.errorbar(n_a60, a60σ, yerr = εa60σ, color = 'green', label = "fine mesh 60˚")
+ax1.errorbar(n_b60, b60σ, yerr = εb60σ, linestyle = ':', color = 'black', label = "coarse mesh 60˚")
+ax1.set_yscale('log')
+ax1.set_ylim([1, 10000])
+ax1.set_xlim([-0.5, 21])
+ax1.set_xticks([0, 5, 10, 15, 20])
+ax1.set_yticks([1, 100, 1000, 10000])
+ax1.set_yticklabels([1, 100, 1000, 10000])
+ax1.legend()
+ax1.set_ylabel("MAPE (%)")
+ax1.set_xlabel("2D FEM training data size")
+ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(n_a70, a70E, yerr = εa70E, linestyle = '--', color = 'red', label = "70.3˚ (n$_{tr}$=58)")
+ax2.errorbar(n_a60, a60E, yerr = εa60E, color = 'green', label = "60˚ (n$_{tr}$=58)")
+ax2.errorbar(n_b60, b60E, yerr = εb60E, linestyle = ':', color = 'black', label = "coarse 60˚ (n$_{tr}$=17)")
+ax2.set_yscale('log')
+ax2.set_ylim([1, 10000])
+ax2.set_xlim([-0.5, 21])
+ax2.set_xticks([0, 5, 10, 15, 20])
+ax2.set_yticks([1, 100, 1000, 10000])
+ax2.set_yticklabels([1, 100, 1000, 10000])
+ax2.legend()
+ax2.set_ylabel("MAPE (%)")
+ax2.set_xlabel("2D FEM training data size")
+plt.subplots_adjust(bottom=0.180)
+fig.tight_layout()
+ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/NN_graphs/my2D.jpeg", dpi=800, bbox_inches="tight")
+plt.show()
+
+
+# My fine 3D data
+n_me3 = [2, 3, 4, 5, 6, 8, 10, 20]
+me3σ = [306.434, 129.54672, 34.51094, 16.30294, 11.011082, 12.529177, 4.876452, 2.347382]
+εme3σ = [462.04684, 301.2473, 38.2321, 8.546992, 6.949768, 8.489592, 1.5463201, 1.5109531]
+me3E = [414.90146, 44.883656, 25.77123, 6.2397795, 4.729158, 3.1615417, 1.646418, 1.073872]
+εme3E = [679.3465, 52.76924, 34.00265, 4.2889166, 3.1390753, 2.3401568, 1.1024133, 0.42710212]
+# My coarse 3D data
+n_mr = [1, 2, 3, 4, 5, 6, 8, 10]
+mrσ = [185.68034, 222.84956, 155.66293, 236.7647, 216.00008, 148.31773, 247.38887, 237.3854]
+εmrσ = [94.66578, 213.69847, 112.16351, 132.68126, 83.09273, 182.30406, 100.73442, 136.23886]
+mrE = [136.1349, 145.74281, 147.60287, 102.889626, 115.88994, 120.746544, 132.4818, 155.18082]
+εmrE = [44.878254, 61.073906, 62.129875, 59.65944, 60.001347, 50.15582, 48.955044, 42.35498]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n_me3, me3σ, yerr = εme3σ, linestyle = '--', color = 'red', label = "TiAlTa 3D FEM")
+ax1.errorbar(n_mr, mrσ, yerr = εmrσ, color = 'green', label = "Rough mesh")
+ax1.set_yscale('linear')
+ax1.set_ylim([0, 800])
+ax1.set_xlim([0, 13])
+ax1.set_xticks([0, 3, 6, 9, 12])
+ax1.set_yticks([0, 200, 400, 600, 800])
+ax1.set_yticklabels([0, 200, 400, 600, 800])
+ax1.legend()
+ax1.set_ylabel("MAPE (%)")
+ax1.set_xlabel("3D FEM training data size")
+ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(n_me3, me3E, yerr = εme3E, linestyle = '--', color = 'red', label = "33% TiAlTa (n$_{tr}$=26)")
+ax2.errorbar(n_mr, mrE, yerr = εmrE, color = 'green', label = "Rough (n$_{tr}$=11)")
+ax2.set_yscale('linear')
+ax2.set_ylim([0, 200])
+ax2.set_xlim([-0.5, 15])
+ax2.set_xticks([0, 3, 6, 9, 12, 15])
+ax2.set_yticks([0, 50, 100, 150, 200])
+ax2.set_yticklabels([0, 50, 100, 150, 200])
+ax2.legend()
+ax2.set_ylabel("MAPE (%)")
+ax2.set_xlabel("3D FEM training data size")
+plt.subplots_adjust(bottom=0.180)
+fig.tight_layout()
+ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/NN_graphs/TiAlTa3D.jpeg", dpi=800, bbox_inches="tight")
+plt.show()
+
+
+# My experimental data
+n_Ex = [2, 3, 4, 5, 6, 8, 10, 20]
+Exσ = [861.10126, 82.19835, 50.26911, 40.918686, 23.89855, 16.746403, 14.455053, 6.0831113]
+εExσ = [1933.915, 40.28174, 22.32007, 16.531126, 14.91269, 10.046402, 15.16982, 2.1733255]
+ExE = [174.80925, 33.25544, 21.027987, 16.96242, 10.253847, 6.8848433, 3.7717087, 1.7349592]
+εExE = [276.84796, 21.188744, 16.89436, 12.064427, 6.9805694, 7.832006, 2.0475862, 0.8986498]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n_Ex, Exσ, yerr = εExσ, color = 'green', label = "Indentations on 33% TiAlTa")
 ax1.set_yscale('linear')
 ax1.set_ylim([0, 150])
-ax1.set_xlim([-0.5, 24])
-ax1.set_xticks([0, 3, 6, 9, 12, 15, 18, 21])
+ax1.set_xlim([-0.5, 20])
+ax1.set_xticks([0, 5, 10, 15, 20])
 ax1.set_yticks([0, 30, 60, 90, 120, 150])
 ax1.set_yticklabels([0, 30, 60, 90, 120, 150])
 ax1.legend()
@@ -683,11 +917,11 @@ ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
               fontsize=12, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
 
-ax2.errorbar(n_Ex, ExE, yerr = εExE, color = 'green', label = "Lu's data (n$_{tr}$=100)")
+ax2.errorbar(n_Ex, ExE, yerr = εExE, color = 'green', label = "TiAlTa data (n$_{tr}$=144)")
 ax2.set_yscale('linear')
 ax2.set_ylim([0, 80])
-ax2.set_xlim([-0.5, 24])
-ax2.set_xticks([0, 3, 6, 9, 12, 15, 18, 21])
+ax2.set_xlim([-0.5, 20])
+ax2.set_xticks([0, 5, 10, 15, 20])
 ax2.set_yticks([0, 20, 40, 60, 80])
 ax2.set_yticklabels([0, 20, 40, 60, 80])
 ax2.legend()
@@ -698,5 +932,128 @@ fig.tight_layout()
 ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
               fontsize=12, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
-plt.savefig("/Users/Joe/Desktop/lu2Dexp.jpeg", dpi=800, bbox_inches="tight")
+plt.savefig("/Users/Joe/Desktop/NN_graphs/TiAlTaexp.jpeg", dpi=800, bbox_inches="tight")
+plt.show()
+
+
+# My MINN with all 3 data
+n_MFa = [0, 1, 2, 3, 4, 5, 6, 8, 10, 20]
+MFσ = [127.48970342, 95.18143722, 64.80104188, 36.19212082, 25.03781424, 15.82539208, 10.80078742, 7.46391443, 4.72507616, 1.01443709]
+εMFσ = [24.53927427, 49.95136498, 48.40308968, 16.72142493, 21.51747504, 7.83671192, 2.85249597, 2.49897764, 1.90289354, 0.7769228]
+MFE = [15.49784865, 12.78939787, 9.78318706, 6.0482391, 5.23448426, 4.27339502, 3.70077137, 3.01875205, 2.59431586, 1.41630972]
+εMFE = [2.17359148, 4.35156782, 4.68156232, 2.24705721, 2.15758203, 0.92218672, 0.99049607, 0.73373167, 0.6901903, 0.36744165]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n_MFa, MFσ, yerr = εMFσ, color = 'green', label = "MINN with 33% TiAlTa")
+ax1.set_yscale('log')
+ax1.set_ylim([1, 120])
+ax1.set_xlim([-0.5, 21])
+ax1.set_xticks([0, 5, 10, 15, 20])
+ax1.set_yticks([1, 5, 10, 20, 40, 80, 120])
+ax1.set_yticklabels([1, 5, 10, 20, 40, 80, 120])
+ax1.legend()
+ax1.set_ylabel("MAPE (%)")
+ax1.set_xlabel("Experimental training data size")
+ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(n_MFa, MFE, yerr = εMFE, color = 'green', label = "Room temperature (n$_{tr}$=25)")
+ax2.set_yscale('log')
+ax2.set_ylim([0, 20])
+ax2.set_xlim([-0.5, 21])
+ax2.set_xticks([0, 5, 10, 15, 20])
+ax2.set_yticks([1, 2, 4, 8, 16])
+ax2.set_yticklabels([1, 2, 4, 8, 16])
+ax2.legend()
+ax2.set_ylabel("MAPE (%)")
+ax2.set_xlabel("Experimental training data size")
+plt.subplots_adjust(bottom=0.180)
+fig.tight_layout()
+ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/NN_graphs/TiAlTaMINN.jpeg", dpi=800, bbox_inches="tight")
+plt.show()
+
+
+# Lu's MINN with 2D+exp
+n_2Db = [0, 1, 2, 3, 4, 5, 6, 7, 10, 20]
+FEMσ = [188.76663, 154.20173428824592, 78.3082464897411, 41.47165045244181, 41.614586426585284, 24.020951814410918, 16.01009668015799, 12.963233176568654, 11.690476587977276, 3.756761872624776]
+εFEMσ = [73.153694, 79.92413546007766, 62.730172245965115, 29.708274889841665, 47.47260623203874, 14.345424254023872, 4.786572368712445, 4.71760099220327, 3.6348027296795666, 3.1225136080466225]
+FEME = [21.675121, 11.911197628891259, 11.71247997327582, 8.260459261077441, 5.495338105318839, 4.5959625244140625, 2.8897191414872694, 2.197175867417279, 1.4655314663000272, 0.6900146885922082]
+εFEME = [2.4844365, 2.8615605474781947, 4.785541171473919, 3.228362235728788, 3.749041890960514, 3.321718063210472, 2.616692039808479, 1.8572451334679358, 0.7337463152562037, 0.2807680475152868]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n_2Db, FEMσ, yerr = εFEMσ, color = 'green', label = "2D FEM and physical indentation")
+ax1.set_yscale('log')
+ax1.set_ylim([1, 120])
+ax1.set_xlim([-0.5, 21])
+ax1.set_xticks([0, 5, 10, 15, 20])
+ax1.set_yticks([1, 5, 10, 20, 40, 80, 120])
+ax1.set_yticklabels([1, 5, 10, 20, 40, 80, 120])
+ax1.legend()
+ax1.set_ylabel("MAPE (%)")
+ax1.set_xlabel("Experimental training data size")
+ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(n_2Db, FEME, yerr = εFEME, color = 'green', label = "33% TiAlTa data (n$_{tr}$=25)")
+ax2.set_yscale('log')
+ax2.set_ylim([0, 20])
+ax2.set_xlim([-0.5, 21])
+ax2.set_xticks([0, 5, 10, 15, 20])
+ax2.set_yticks([1, 2, 4, 8, 16])
+ax2.set_yticklabels([1, 2, 4, 8, 16])
+ax2.legend()
+ax2.set_ylabel("MAPE (%)")
+ax2.set_xlabel("Experimental training data size")
+plt.subplots_adjust(bottom=0.180)
+fig.tight_layout()
+ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/NN_graphs/TiAlTa2Dexp.jpeg", dpi=800, bbox_inches="tight")
+plt.show()
+
+
+# Lu's MINN with 2D+exp
+n_mec = [0, 1, 2, 3, 4, 5, 6, 7, 10, 20]
+meBerσ = [576.5542, 247.22847294621542, 264.3965775960634, 55.529762281335465, 73.56101125957497, 39.706774422292966, 31.63647519555663, 29.333391616967116, 17.63436378197498, 11.49995381860848]
+εmeBerσ = [446.05533, 183.4383555933049, 301.76505621329704, 24.501826960402603, 55.563140776760854, 14.042678593951647, 11.365757092762063, 10.17128621708138, 7.817827789945134, 14.059263603295284]
+meBerE = [154.48647, 34.83283826133661, 39.56390138391568, 17.887449469862943, 13.728113637532207, 9.579535848216008, 9.906173009951688, 8.388153775926716, 3.5162076782761957, 2.646672499807258]
+εmeBerE = [80.628624, 20.70156720054496, 42.47677824178318, 4.85255655659031, 6.576843079788938, 3.0702997131931067, 3.987283246851966, 5.579911914815005, 2.173199879706948, 3.9085836345128535]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n_mec, meBerσ, yerr = εmeBerσ, color = 'green', label = "Lu's indentations on B3090")
+ax1.set_yscale('log')
+ax1.set_ylim([1, 1000])
+ax1.set_xlim([-0.5, 21])
+ax1.set_xticks([0, 5, 10, 15, 20])
+ax1.set_yticks([1, 10, 100, 1000])
+ax1.set_yticklabels([1, 10, 100, 1000])
+ax1.legend()
+ax1.set_ylabel("MAPE (%)")
+ax1.set_xlabel("Experimental training data size")
+ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(n_mec, meBerE, yerr = εmeBerE, color = 'green', label = "Lu's data (n$_{tr}$=144)")
+ax2.set_yscale('log')
+ax2.set_ylim([0, 200])
+ax2.set_xlim([-0.5, 21])
+ax2.set_xticks([0, 5, 10, 15, 20])
+ax2.set_yticks([1, 10, 100, 200])
+ax2.set_yticklabels([1, 10, 100, 200])
+ax2.legend()
+ax2.set_ylabel("MAPE (%)")
+ax2.set_xlabel("Experimental training data size")
+plt.subplots_adjust(bottom=0.180)
+fig.tight_layout()
+ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
+              fontsize=12, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/NN_graphs/TiAlTa3Dexp.jpeg", dpi=800, bbox_inches="tight")
 plt.show()
