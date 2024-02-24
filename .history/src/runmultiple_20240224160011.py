@@ -84,8 +84,6 @@ if __name__ == '__main__':
         "validation_two('Estar', 20, 'TI33_3D', 'TI33_25', 'TI33_25')"
         
         (1 data type)  
-
-        ('TI33_2D_70.3', 'TI33_2D_60', 'TI33_2D_45', 'TI33_2D_30')
         "validation_one('sigma_y', 'TI33_2D_70.3', 'TI33_2D_70.3', 1)",
         "validation_one('Estar', 'TI33_2D_70.3', 'TI33_2D_70.3', 1)",
         "validation_one('sigma_y', 'TI33_2D_70.3', 'TI33_2D_70.3', 2)",

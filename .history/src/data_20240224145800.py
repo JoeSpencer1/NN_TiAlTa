@@ -37,7 +37,7 @@ class FileData(object):
         # Scale from Conical to Berkovich with small deformations
         if 'FEM_70deg' in name:
             df["dP/dh (N/m)"] *= 1.167 / 1.128
-        # Scale from Conical to Berkovich with large deformations (See )
+        # Scale from Conical to Berkovich with large deformations
         if '2D' in name:
             df['dP/dh (N/m)'] *= 1.2370 / 1.1957
         # Get Estar if none provided

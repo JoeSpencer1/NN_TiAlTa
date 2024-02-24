@@ -5,6 +5,8 @@ from __future__ import print_function
 import numpy as np
 import pandas as pd
 
+n = ('apple',)
+print(len(n))
 class FileData(object):
     def __init__(self, filename, yname):
         
@@ -14,58 +16,43 @@ class FileData(object):
         self.X = None
         self.y = None
 
-        if type(self.filename) is tuple:
-            for i in range(len(self.filename)):
-                self.read(self.filename[i])
+        self.read()
+        # Instead, set function to read the data from each individual file and extract it
+        # Next, make the function vstack the X and y values for each filename.
 
-        else:
-            self.read(self.filename)
-
-    def read(self, name):
-        df = pd.read_csv('../data/' + name + '.csv')
+    def read(self):
+        df = pd.read_csv('../data/' + self.filename + '.csv')
 
         # This is for Al alloys
-        if name in ('Al7075', 'Al6061'):
+        if self.filename in ('Al7075', 'Al6061'):
             df["dP/dh (N/m)"] *= 0.2 * (df["C (GPa)"] / 3) ** 0.5 * 10 ** (-1.5)
         # This is for Ti alloys
-        if name in ('B3090'):
+        if self.filename in ('B3090'):
             df["dP/dh (N/m)"] *= 0.2 / df["hmax(um)"]
         # Scale TI33 to hm=0.2μm
-        if 'TI33' in name:
+        if 'TI33' in self.filename:
             # For 25˚ case
             df['dP/dh (N/m)'] *= 0.2 / df['hmax(um)']
-        # Scale from Conical to Berkovich with small deformations
-        if 'FEM_70deg' in name:
+        # Scale c* from Conical to Berkovich with small deformations
+        if 'FEM_70deg' in self.filename:
             df["dP/dh (N/m)"] *= 1.167 / 1.128
-        # Scale from Conical to Berkovich with large deformations (See )
-        if '2D' in name:
+        # Scale c* from Conical to Berkovich with large deformations
+        if 'conical' in self.filename:
             df['dP/dh (N/m)'] *= 1.2370 / 1.1957
         # Get Estar if none provided
-        if name == 'FEM_70deg' or 'Berkovich' in name or '2D' in name or '3D' in name:
+        if self.filename == 'FEM_70deg' or 'Berkovich' in self.filename or 'conical' in self.filename:
             df["Estar (GPa)"] = EtoEr(df['E (GPa)'].values, df['nu'].values)[:, None]
 
         print(df.describe())
 
-        if self.X is None:
-            self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
-        else:
-            self.X = np.vstack((self.X, df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values))
+        self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
         if self.yname == "Estar":
-            if self.y is None:
-                self.y = df["Estar (GPa)"].values[:, None]
-            else:
-                self.y = np.vstack((self.y, df["Estar (GPa)"].values[:, None]))
+            self.y = df["Estar (GPa)"].values[:, None]
         elif self.yname == "sigma_y":
-            if self.y is None:
-                self.y = df["sy (GPa)"].values[:, None]
-            else:
-                self.y = np.vstack((self.y, df["sy (GPa)"].values[:, None]))
+            self.y = df["sy (GPa)"].values[:, None]
         elif self.yname.startswith("sigma_"):
             e_plastic = self.yname[6:]
-            if self.y is None:
-                self.y = df["s" + e_plastic + " (GPa)"].values[:, None]
-            else:
-                self.y = np.vstack((self.y, df["s" + e_plastic + " (GPa)"].values[:, None]))
+            self.y = df["s" + e_plastic + " (GPa)"].values[:, None]
 
 
 

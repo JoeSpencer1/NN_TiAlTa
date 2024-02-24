@@ -5,6 +5,10 @@ from __future__ import print_function
 import numpy as np
 import pandas as pd
 
+my_tuple = ('Hello', 'world', '!')
+concatenated_string = ','.join(my_tuple)
+print(concatenated_string)
+
 class FileData(object):
     def __init__(self, filename, yname):
         
@@ -34,14 +38,14 @@ class FileData(object):
         if 'TI33' in name:
             # For 25˚ case
             df['dP/dh (N/m)'] *= 0.2 / df['hmax(um)']
-        # Scale from Conical to Berkovich with small deformations
+        # Scale c* from Conical to Berkovich with small deformations
         if 'FEM_70deg' in name:
             df["dP/dh (N/m)"] *= 1.167 / 1.128
-        # Scale from Conical to Berkovich with large deformations (See )
-        if '2D' in name:
+        # Scale c* from Conical to Berkovich with large deformations
+        if 'conical' in name:
             df['dP/dh (N/m)'] *= 1.2370 / 1.1957
         # Get Estar if none provided
-        if name == 'FEM_70deg' or 'Berkovich' in name or '2D' in name or '3D' in name:
+        if name == 'FEM_70deg' or 'Berkovich' in name or 'conical' in name:
             df["Estar (GPa)"] = EtoEr(df['E (GPa)'].values, df['nu'].values)[:, None]
 
         print(df.describe())

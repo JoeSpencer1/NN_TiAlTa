@@ -94,10 +94,27 @@ def validation_one(yname, train_size, testname, trainname):
     datatrain = FileData(trainname, yname)
     datatest = FileData(testname, yname)
     
-    kf = ShuffleSplit(
-        n_splits=10, train_size = train_size, test_size=len(datatest.X), random_state=0
-    )
-    train_set = kf.split(datatrain.X)
+    if trainname == testname:
+        if train_size == 80:
+            kf = RepeatedKFold(n_splits=5, n_repeats=2, random_state=0)
+        elif train_size == 90:
+            kf = KFold(n_splits=10, shuffle=True, random_state=0)
+        else:
+            kf = ShuffleSplit(
+                n_splits=10, test_size=len(datatrain.X) - train_size, random_state=0
+            )
+        train_set = kf.split(datatrain.X)
+    else:
+        #if len(datatrain.y) > len(datatest.y):
+        kf = ShuffleSplit(
+            n_splits=10, train_size = train_size, test_size=len(datatest.X), random_state=0
+        )
+        train_set = kf.split(datatrain.X)
+        '''else:
+            kf = ShuffleSplit(
+                n_splits=10, test_size=len(datatrain.X) - train_size, random_state=0
+            )
+            train_set = kf.split(datatest.X)'''
     
     mape = []
     iter = 0

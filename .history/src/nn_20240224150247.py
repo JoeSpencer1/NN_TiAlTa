@@ -94,10 +94,27 @@ def validation_one(yname, train_size, testname, trainname):
     datatrain = FileData(trainname, yname)
     datatest = FileData(testname, yname)
     
-    kf = ShuffleSplit(
-        n_splits=10, train_size = train_size, test_size=len(datatest.X), random_state=0
-    )
-    train_set = kf.split(datatrain.X)
+    if trainname == testname:
+        if train_size == 80:
+            kf = RepeatedKFold(n_splits=5, n_repeats=2, random_state=0)
+        elif train_size == 90:
+            kf = KFold(n_splits=10, shuffle=True, random_state=0)
+        else:
+            kf = ShuffleSplit(
+                n_splits=10, test_size=len(datatrain.X) - train_size, random_state=0
+            )
+        train_set = kf.split(datatrain.X)
+    else:
+        if len(datatrain.y) > len(datatest.y):
+            kf = ShuffleSplit(
+                n_splits=10, test_size=len(datatest.X) - train_size, random_state=0
+            )
+            train_set = kf.split(datatrain.X)
+        else:
+            kf = ShuffleSplit(
+                n_splits=10, test_size=len(datatrain.X) - train_size, random_state=0
+            )
+            train_set = kf.split(datatest.X)
     
     mape = []
     iter = 0
@@ -132,7 +149,7 @@ def validation_one(yname, train_size, testname, trainname):
     with open('output.txt', 'a') as f:
         f.write('validation_one ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + ' ' + t2s(testname) + ' ' + t2s(trainname) + '\n')
 
-def validation_two(yname, train_size, testname, trainhigh, trainlow):
+def validation_two(yname, train_size, trainlow, trainhigh, testname):
     datalow = FileData(trainlow, yname)
     datahigh = FileData(trainhigh, yname)
     dataexp = FileData(testname, yname)
@@ -174,7 +191,7 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow):
     print(mape)
     print(yname, "validation_two ", t2s(trainlow), ' ', t2s(trainhigh), ' ', train_size, ' ', np.mean(mape), np.std(mape))
 
-def validation_three(yname, train_size, testname, trainexp, trainhigh, trainlow):
+def validation_three(yname, train_size, trainlow, trainhigh, trainexp, testname):
     datalow = FileData(trainlow, yname)
     datahigh = FileData(trainhigh, yname)
     dataexp = FileData(trainexp, yname)

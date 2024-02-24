@@ -33,11 +33,6 @@ def mfgp(data):
     _, _, y_pred, _ = model.predict(data.X_hi_test)
     return dde.metrics.get("MAPE")(data.y_hi_test, y_pred)
 
-def t2s(names):
-    if type(names) is str:
-        return names
-    else:
-        return '[' + ','.join(names) + ']'
 
 def nn(data, lay=2, wid=32):
     layer_size = [data.train_x.shape[1]] + [wid] * lay + [1]
@@ -61,7 +56,7 @@ def nn(data, lay=2, wid=32):
     dde.saveplot(losshistory, train_state, issave=True, isplot=False)
     return train_state.best_metrics[0]
 
-def mfnn(data, lay=2, wid=128, whigh = 0.5):
+def mfnn(data, lay=2, wid=128):
     x_dim, y_dim = 3, 1
     activation = "selu"
     initializer = "LeCun normal"
@@ -80,7 +75,7 @@ def mfnn(data, lay=2, wid=128, whigh = 0.5):
     model = dde.Model(data, net)
     model.compile("adam", lr=0.0001, loss="MAPE", metrics=["MAPE", "APE SD"])
     # Set weight of high-fidelity and low-fidelity data to 50%
-    model.set_weights = [1 - whigh, whigh]
+    model.set_weights = [0.5, 0.5]
     losshistory, train_state = model.train(epochs=30000)
 
     dde.saveplot(losshistory, train_state, issave=True, isplot=False)
@@ -90,14 +85,31 @@ def mfnn(data, lay=2, wid=128, whigh = 0.5):
         train_state.best_y[1],
     )
 
-def validation_one(yname, train_size, testname, trainname):
+def validation_one(yname, trainname, testname, train_size):
     datatrain = FileData(trainname, yname)
     datatest = FileData(testname, yname)
     
-    kf = ShuffleSplit(
-        n_splits=10, train_size = train_size, test_size=len(datatest.X), random_state=0
-    )
-    train_set = kf.split(datatrain.X)
+    if trainname == testname:
+        if train_size == 80:
+            kf = RepeatedKFold(n_splits=5, n_repeats=2, random_state=0)
+        elif train_size == 90:
+            kf = KFold(n_splits=10, shuffle=True, random_state=0)
+        else:
+            kf = ShuffleSplit(
+                n_splits=10, test_size=len(datatrain.X) - train_size, random_state=0
+            )
+        train_set = kf.split(datatrain.X)
+    else:
+        if len(datatrain.y) > len(datatest.y):
+            kf = ShuffleSplit(
+                n_splits=10, test_size=len(datatest.X) - train_size, random_state=0
+            )
+            train_set = kf.split(datatrain.X)
+        else:
+            kf = ShuffleSplit(
+                n_splits=10, test_size=len(datatrain.X) - train_size, random_state=0
+            )
+            train_set = kf.split(datatest.X)
     
     mape = []
     iter = 0
@@ -130,9 +142,9 @@ def validation_one(yname, train_size, testname, trainname):
     print(mape)
     print(yname, train_size, np.mean(mape), np.std(mape))
     with open('output.txt', 'a') as f:
-        f.write('validation_one ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + ' ' + t2s(testname) + ' ' + t2s(trainname) + '\n')
+        f.write('validation_one ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + ' ' + testname + ' ' + trainname + '\n')
 
-def validation_two(yname, train_size, testname, trainhigh, trainlow):
+def validation_two(yname, train_size, trainlow, trainhigh, testname):
     datalow = FileData(trainlow, yname)
     datahigh = FileData(trainhigh, yname)
     dataexp = FileData(testname, yname)
@@ -170,11 +182,11 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow):
             #mape.append(dde.utils.apply(mfgp, (data,)))
 
     with open('Output.txt', 'a') as f:
-        f.write('validation_two ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape, axis=0)[0]) + ' ' + str(np.std(mape, axis=0)[0]) + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + t2s(trainlow) + '\n')
+        f.write('validation_two ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape, axis=0)[0]) + ' ' + str(np.std(mape, axis=0)[0]) + ' ' + testname + ' ' + trainlow + ' ' + trainhigh + '\n')
     print(mape)
-    print(yname, "validation_two ", t2s(trainlow), ' ', t2s(trainhigh), ' ', train_size, ' ', np.mean(mape), np.std(mape))
+    print(yname, "validation_two ", trainlow, ' ', trainhigh, ' ', train_size, ' ', np.mean(mape), np.std(mape))
 
-def validation_three(yname, train_size, testname, trainexp, trainhigh, trainlow):
+def validation_three(yname, train_size, trainlow, trainhigh, trainexp, testname):
     datalow = FileData(trainlow, yname)
     datahigh = FileData(trainhigh, yname)
     dataexp = FileData(trainexp, yname)
@@ -218,7 +230,7 @@ def validation_three(yname, train_size, testname, trainexp, trainhigh, trainlow)
 
     print(yname, "validation_exp_cross2", train_size, np.mean(ape, axis=0), np.std(ape, axis=0))
     with open('output.txt', 'a') as f:
-        f.write('validation_three ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(ape, axis=0)[0]) + ' ' + str(np.std(ape, axis=0)[0]) + ' ' + t2s(testname) + ' ' + t2s(trainexp) + ' ' + t2s(trainhigh) + ' ' + t2s(trainlow) + '\n')
+        f.write('validation_three ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(ape, axis=0)[0]) + ' ' + str(np.std(ape, axis=0)[0]) + ' ' + testname + ' ' + trainlow + ' ' + trainhigh + ' ' + trainexp + '\n')
     print("Saved to ", yname, ".dat.")
     np.savetxt(yname + ".dat", np.hstack(y).T)  
 
