@@ -11,7 +11,14 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([  
-        "validation_exp_cross2('sigma_y', 1, 'TI33_conical_70.3', 'TI33_Berkovich', 'TI33_25', 'TI33_25')"
+        "validation_one('sigma_y', 'FEM_70deg', 'FEM_70deg', 1)",
+        "validation_one('Estar', 'FEM_70deg', 'FEM_70deg', 1)",
+        "validation_one('sigma_y', 'FEM_70deg', 'FEM_70deg', 2)",
+        "validation_one('Estar', 'FEM_70deg', 'FEM_70deg', 2)",
+        "validation_one('sigma_y', 'FEM_70deg', 'FEM_70deg', 10)",
+        "validation_one('Estar', 'FEM_70deg', 'FEM_70deg', 10)",
+        "validation_one('sigma_y', 'FEM_70deg', 'FEM_70deg', 20)",
+        "validation_one('Estar', 'FEM_70deg', 'FEM_70deg', 20)"
         ])
     
     processes = []

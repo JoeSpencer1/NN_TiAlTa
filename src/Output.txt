@@ -2640,3 +2640,11 @@ validation_one TI33_Berkovich TI33_Berkovich_rough Estar 5 115.88994 60.001347
 validation_one TI33_Berkovich TI33_Berkovich_rough Estar 6 120.746544 50.15582
 validation_one TI33_Berkovich TI33_Berkovich_rough Estar 8 132.4818 48.955044
 validation_one TI33_Berkovich TI33_Berkovich_rough Estar 10 155.18082 42.35498
+validation_one FEM_70deg FEM_70deg sigma_y 1 519.7231 473.3011
+validation_one FEM_70deg FEM_70deg Estar 10 18.189966 9.800172
+validation_one FEM_70deg FEM_70deg Estar 2 5990.6494 15451.868
+validation_one FEM_70deg FEM_70deg sigma_y 20 61.963665 16.758545
+validation_one FEM_70deg FEM_70deg sigma_y 10 140.57831 117.10753
+validation_one FEM_70deg FEM_70deg sigma_y 2 11072.351 26537.32
+validation_one FEM_70deg FEM_70deg Estar 1 173.96712 74.34817
+validation_one FEM_70deg FEM_70deg Estar 20 7.2431602 1.8886974
