@@ -81,7 +81,7 @@ def mfnn(data, lay=2, wid=128, whigh = 0.5):
         train_state.best_y[1],
     )
 
-def validation_one(yname, train_size, testname, trainname, lay=2, wid=128, wei=0.5):
+def validation_one(yname, train_size, testname, trainname):
     datatrain = FileData(trainname, yname)
     datatest = FileData(testname, yname)
     
@@ -122,7 +122,7 @@ def validation_one(yname, train_size, testname, trainname, lay=2, wid=128, wei=0
     with open('output.txt', 'a') as f:
         f.write('validation_one ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + ' ' + t2s(testname) + ' ' + t2s(trainname) + '\n')
 
-def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=128, wei=0.5):
+def validation_two(yname, train_size, testname, trainhigh, trainlow):
     datalow = FileData(trainlow, yname)
     datahigh = FileData(trainhigh, yname)
     dataexp = FileData(testname, yname)
@@ -162,7 +162,7 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=
     print(mape)
     print(yname, "validation_two ", t2s(trainlow), ' ', t2s(trainhigh), ' ', train_size, ' ', np.mean(mape), np.std(mape))
 
-def validation_three(yname, train_size, testname, trainexp, trainhigh, trainlow, lay=2, wid=128, wei=0.5):
+def validation_three(yname, train_size, testname, trainexp, trainhigh, trainlow):
     datalow = FileData(trainlow, yname)
     datahigh = FileData(trainhigh, yname)
     dataexp = FileData(trainexp, yname)

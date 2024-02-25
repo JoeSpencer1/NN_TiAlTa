@@ -11,16 +11,16 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
-        "validation_one('sigma_y', 10, 'TI33_2D_70.3', 'TI33_2D_70.3')",
-        "validation_one('Estar', 10, 'TI33_2D_70.3', 'TI33_2D_70.3')",
-        "validation_one('sigma_y', 10, ('TI33_2D_70.3', 'TI33_2D_60', 'TI33_2D_45', 'TI33_2D_30'), ('TI33_2D_70.3', 'TI33_2D_60', 'TI33_2D_45', 'TI33_2D_30'))",
-        "validation_one('Estar', 10, ('TI33_2D_70.3', 'TI33_2D_60', 'TI33_2D_45', 'TI33_2D_30'), ('TI33_2D_70.3', 'TI33_2D_60', 'TI33_2D_45', 'TI33_2D_30'))",
-        "validation_one('sigma_y', 10, 'TI33_3D', 'TI33_3D')",
-        "validation_one('Estar', 10, 'TI33_3D', 'TI33_3D')",
-        "validation_one('sigma_y', 10, 'TI33_3D_rough', 'TI33_3D_rough')",
-        "validation_one('Estar', 10, 'TI33_3D_rough', 'TI33_3D_rough')",
-        "validation_one('sigma_y', 10, 'TI33_25', 'TI33_25')",
-        "validation_one('Estar', 10, 'TI33_25', 'TI33_25')"
+        "validation_one('sigma_y', 10, 'TI33_25', 'TI33_2D_70.3', lay=6)",
+        "validation_one('Estar', 10, 'TI33_25', 'TI33_2D_70.3', lay=6)",
+        "validation_one('sigma_y', 10, 'TI33_25', ('TI33_2D_70.3', 'TI33_2D_60', 'TI33_2D_45', 'TI33_2D_30'), lay=6)",
+        "validation_one('Estar', 10, 'TI33_25', ('TI33_2D_70.3', 'TI33_2D_60', 'TI33_2D_45', 'TI33_2D_30'), lay=6)",
+        "validation_one('sigma_y', 10, 'TI33_25', 'TI33_3D', lay=6)",
+        "validation_one('Estar', 10, 'TI33_25', 'TI33_3D', lay=6)",
+        "validation_one('sigma_y', 10, 'TI33_25', 'TI33_3D_rough', lay=6)",
+        "validation_one('Estar', 10, 'TI33_25', 'TI33_3D_rough', lay=6)",
+        "validation_one('sigma_y', 10, 'TI33_25', 'TI33_25', lay=6)",
+        "validation_one('Estar', 10, 'TI33_25', 'TI33_25', lay=6)"
         ])
     
     processes = []

@@ -81,13 +81,15 @@ def mfnn(data, lay=2, wid=128, whigh = 0.5):
         train_state.best_y[1],
     )
 
-def validation_one(yname, train_size, testname, trainname, lay=2, wid=128, wei=0.5):
+def validation_one(yname, train_size, testname, trainname):
     datatrain = FileData(trainname, yname)
     datatest = FileData(testname, yname)
     
+    minlength = len(datatest.X)
+    if len(datatest.X) > len(datatrain.X)
+        minlength = len(datatrain.X)
     kf = ShuffleSplit(
-        #n_splits=10, train_size=train_size, test_size=minlength-train_size, random_state=0
-        n_splits=10, train_size=train_size, random_state=0
+        n_splits=10, train_size=train_size, test_size=len(datatest.X)-train_size, random_state=0
     )
     train_set = kf.split(datatrain.X)
     
@@ -96,6 +98,7 @@ def validation_one(yname, train_size, testname, trainname, lay=2, wid=128, wei=0
     for train_index, test_index in train_set:
         iter += 1
         print("\nCross-validation iteration: {}".format(iter))
+
         if trainname == testname:
             X_train, X_test = datatrain.X[train_index], datatrain.X[test_index]
             y_train, y_test = datatrain.y[train_index], datatrain.y[test_index]
@@ -122,7 +125,7 @@ def validation_one(yname, train_size, testname, trainname, lay=2, wid=128, wei=0
     with open('output.txt', 'a') as f:
         f.write('validation_one ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + ' ' + t2s(testname) + ' ' + t2s(trainname) + '\n')
 
-def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=128, wei=0.5):
+def validation_two(yname, train_size, testname, trainhigh, trainlow):
     datalow = FileData(trainlow, yname)
     datahigh = FileData(trainhigh, yname)
     dataexp = FileData(testname, yname)
@@ -162,7 +165,7 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=
     print(mape)
     print(yname, "validation_two ", t2s(trainlow), ' ', t2s(trainhigh), ' ', train_size, ' ', np.mean(mape), np.std(mape))
 
-def validation_three(yname, train_size, testname, trainexp, trainhigh, trainlow, lay=2, wid=128, wei=0.5):
+def validation_three(yname, train_size, testname, trainexp, trainhigh, trainlow):
     datalow = FileData(trainlow, yname)
     datahigh = FileData(trainhigh, yname)
     dataexp = FileData(trainexp, yname)

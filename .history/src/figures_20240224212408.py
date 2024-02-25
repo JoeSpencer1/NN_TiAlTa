@@ -1069,10 +1069,9 @@ colors = ['darkred', 'green', 'gray', 'blue', 'darkorange']
 bar_width = 0.15
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
 ax1.bar(categories, σvalues, yerr=σerrors, capsize=4, color=colors)
-ax1.set_yticks([1, 25, 50, 75, 100, 125, 150])
-ax1.set_yticklabels([1, 25, 50, 75, 100, 125, 150])
-ax1.set_ylim([1, 150])
-ax1.set_yscale('log')
+ax1.set_yticks([0, 25, 50, 75, 100, 125, 150])
+ax1.set_yticklabels([0, 25, 50, 75, 100, 125, 150])
+ax1.set_ylim([0, 150])
 ax1.set_xlabel('Trainind data type')
 ax1.tick_params(axis='x', labelsize=7)
 ax1.set_ylabel('MAPE (%)')
@@ -1081,11 +1080,10 @@ ax1.annotate("A: $\sigma_{y}$", xy=(0.15, 0.95), xycoords="axes fraction",
               fontsize=12, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
 ax2.bar(categories, Evalues, yerr=Eerrors, capsize=4, color=colors)
-ax2.set_yticks([1, 25, 50, 75, 100, 125, 150, 200, 250])
+ax2.set_yticks([0, 25, 50, 75, 100, 125, 150])
 ax2.tick_params(axis='x', labelsize=7)
-ax2.set_yticklabels([1, 25, 50, 75, 100, 125, 150, 200, 250])
-ax2.set_ylim([1, 250])
-ax2.set_yscale('log')
+ax2.set_yticklabels([0, 25, 50, 75, 100, 125, 150])
+ax2.set_ylim([0, 150])
 ax2.set_xlabel('Trainind data type')
 ax2.set_ylabel('MAPE (%)')
 plt.subplots_adjust(bottom=0.18)
@@ -1093,40 +1091,4 @@ ax2.annotate("B: $E_{r}$", xy=(0.15, 0.95), xycoords="axes fraction",
               fontsize=12, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
 plt.savefig("/Users/Joe/Desktop/trainingerrors.jpeg", dpi=800, bbox_inches="tight")
-plt.show()
-
-categories = ['Physical', '3D FEM', 'Rough 3D', '2D FEM (4∠)', '2D FEM (70.3˚)']
-σvalues = [10.667567, 556.4979, 1787.3728, 124.29811, 94.961464]
-σerrors = [4.947879, 701.87775, 1157.989, 98.34832, 85.76816]
-Evalues = [3.6597977, 221.13496, 743.5117, 16.04507, 24.682934]
-Eerrors = [2.9540114, 107.329185, 410.12277, 4.6217675, 13.9773035]
-
-colors = ['darkred', 'green', 'gray', 'blue', 'darkorange']
-bar_width = 0.15
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-ax1.bar(categories, σvalues, yerr=σerrors, capsize=4, color=colors)
-ax1.set_yticks([1, 25, 50, 75, 100, 125, 150])
-ax1.set_yticklabels([1, 25, 50, 75, 100, 125, 150])
-ax1.set_ylim([1, 3500])
-ax1.set_yscale('log')
-ax1.set_xlabel('Trainind data type')
-ax1.tick_params(axis='x', labelsize=7)
-ax1.set_ylabel('MAPE (%)')
-plt.subplots_adjust(bottom=0.18)
-ax1.annotate("A: $\sigma_{y}$", xy=(0.15, 0.95), xycoords="axes fraction",
-              fontsize=12, ha="center",
-              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
-ax2.bar(categories, Evalues, yerr=Eerrors, capsize=4, color=colors)
-ax2.set_yticks([1, 25, 50, 75, 100, 125, 150, 200, 250])
-ax2.tick_params(axis='x', labelsize=7)
-ax2.set_yticklabels([1, 25, 50, 75, 100, 125, 150, 200, 250])
-ax2.set_ylim([1, 1400])
-ax2.set_yscale('log')
-ax2.set_xlabel('Trainind data type')
-ax2.set_ylabel('MAPE (%)')
-plt.subplots_adjust(bottom=0.18)
-ax2.annotate("B: $E_{r}$", xy=(0.15, 0.95), xycoords="axes fraction",
-              fontsize=12, ha="center",
-              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
-plt.savefig("/Users/Joe/Desktop/sourceerrors.jpeg", dpi=800, bbox_inches="tight")
 plt.show()
