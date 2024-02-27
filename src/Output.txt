@@ -737,3 +737,92 @@ validation_one	Estar	10	2.0597403	1.129313	TI33_3D	TI33_3D
 validation_one	Estar	10	1.2027538	1.8326986	TI33_3D_rough	TI33_3D_rough					
 validation_one	Estar	10	56.905693	45.235996	"[TI33_2D_70.3,TI33_2D_60,TI33_2D_45,TI33_2D_30]"	"[TI33_2D_70.3,TI33_2D_60,TI33_2D_45,TI33_2D_30]"					
 validation_one	Estar	10	100.09694	112.177414	TI33_2D_70.3	TI33_2D_70.3					
+
+
+validation_one sigma_y 10 11.253201 17.18857 TI33_3D_rough TI33_3D_rough
+validation_one sigma_y 10 16.501354 6.970909 TI33_25 TI33_25
+validation_one sigma_y 10 101.663635 139.18367 TI33_2D_70.3 TI33_2D_70.3
+validation_one sigma_y 10 63.72634 39.187878 [TI33_2D_70.3,TI33_2D_60,TI33_2D_45,TI33_2D_30] [TI33_2D_70.3,TI33_2D_60,TI33_2D_45,TI33_2D_30]
+validation_one sigma_y 10 6.193608 3.1449554 TI33_3D TI33_3D
+
+validation_one Estar 10 45.115273 25.45875 [TI33_2D_70.3,TI33_2D_60,TI33_2D_45,TI33_2D_30] [TI33_2D_70.3,TI33_2D_60,TI33_2D_45,TI33_2D_30]
+validation_one Estar 10 2.340493 2.8033817 TI33_3D_rough TI33_3D_rough
+validation_one Estar 10 2.1846197 1.1185644 TI33_3D TI33_3D
+validation_one Estar 10 5.1434193 6.133382 TI33_25 TI33_25
+validation_one Estar 10 87.772415 110.2626 TI33_2D_70.3 TI33_2D_70.3
+
+validation_one Estar 10 1.2066065 1.6977552 TI33_3D_rough TI33_3D_rough
+validation_one Estar 10 1.7230072 0.6158464 TI33_3D TI33_3D
+validation_one sigma_y 10 11.504042 7.82698 TI33_25 TI33_25
+validation_one sigma_y 10 4.566204 3.668053 TI33_3D TI33_3D
+validation_one sigma_y 10 57.051704 47.980812 TI33_2D_70.3 TI33_2D_70.3
+validation_one sigma_y 10 64.29072 39.551517 [TI33_2D_70.3,TI33_2D_60,TI33_2D_45,TI33_2D_30] [TI33_2D_70.3,TI33_2D_60,TI33_2D_45,TI33_2D_30]
+validation_one sigma_y 10 15.034177 22.690535 TI33_3D_rough TI33_3D_rough
+validation_one Estar 10 3.0234962 1.8369312 TI33_25 TI33_25
+validation_one Estar 10 75.48366 105.43825 TI33_2D_70.3 TI33_2D_70.3
+validation_one Estar 10 55.53825 37.35246 [TI33_2D_70.3,TI33_2D_60,TI33_2D_45,TI33_2D_30] [TI33_2D_70.3,TI33_2D_60,TI33_2D_45,TI33_2D_30]
+
+validation_one Estar 10 20.397278 12.586864 TI33_25 [TI33_2D_70.3,TI33_2D_60,TI33_2D_45,TI33_2D_30]
+validation_one sigma_y 10 77.93003 44.69997 TI33_25 [TI33_2D_70.3,TI33_2D_60,TI33_2D_45,TI33_2D_30]
+validation_one sigma_y 10 620.4915 489.63214 TI33_25 TI33_3D
+validation_one sigma_y 10 14.16403 13.364889 TI33_25 TI33_25
+validation_one Estar 10 2.675754 1.6192563 TI33_25 TI33_25
+validation_one Estar 10 218.11299 73.27764 TI33_25 TI33_3D
+validation_one Estar 10 667.82465 426.55557 TI33_25 TI33_3D_rough
+validation_one sigma_y 10 2373.6372 2651.4167 TI33_25 TI33_3D_rough
+validation_one Estar 10 19.74934 7.844336 TI33_25 TI33_2D_70.3
+validation_one sigma_y 10 105.439354 55.037132 TI33_25 TI33_2D_70.3
+
+validation_one Estar 10 720.469 487.55655 TI33_25 TI33_3D_rough
+validation_one Estar 10 156.15677 124.10646 TI33_25 TI33_3D
+validation_one sigma_y 10 98.10169 112.64225 TI33_25 TI33_2D_70.3
+validation_one Estar 10 32.551167 32.65314 TI33_25 [TI33_2D_70.3,TI33_2D_60,TI33_2D_45,TI33_2D_30]
+validation_one sigma_y 10 14.099376 7.4272733 TI33_25 TI33_25
+validation_one sigma_y 10 1403.7062 1314.4589 TI33_25 TI33_3D_rough
+validation_one sigma_y 10 116.03391 95.91373 TI33_25 [TI33_2D_70.3,TI33_2D_60,TI33_2D_45,TI33_2D_30]
+validation_one sigma_y 10 440.49673 335.90366 TI33_25 TI33_3D
+validation_one Estar 10 5.288526 1.7973316 TI33_25 TI33_25
+validation_one Estar 10 24.773851 11.756805 TI33_25 TI33_2D_70.3
+
+
+validation_one sigma_y 3 97.92705 68.0881 TI33_25 TI33_25
+validation_one sigma_y 5 44.919983 30.071459 TI33_25 TI33_25
+validation_one sigma_y 10 13.710184 10.397435 TI33_25 TI33_25
+validation_one sigma_y 20 5.6055813 1.8928303 TI33_25 TI33_25
+
+validation_one Estar 3 41.181553 31.725086 TI33_25 TI33_25
+validation_one Estar 5 14.834806 9.762169 TI33_25 TI33_25
+validation_one Estar 20 1.617932 0.86335397 TI33_25 TI33_25
+validation_one Estar 10 3.3106105 2.7015624 TI33_25 TI33_25
+
+validation_one sigma_y 3 63.221947 107.521866 TI33_3D TI33_3D
+validation_one sigma_y 5 15.145498 11.670342 TI33_3D TI33_3D
+validation_one sigma_y 10 5.043668 1.9513265 TI33_3D TI33_3D
+validation_one sigma_y 20 3.0760546 2.902387 TI33_3D TI33_3D
+
+validation_one Estar 3 64.906784 113.49438 TI33_3D TI33_3D
+validation_one Estar 5 7.4394073 3.9983902 TI33_3D TI33_3D
+validation_one Estar 10 1.8653822 0.63076806 TI33_3D TI33_3D
+validation_one Estar 20 1.0505006 0.56984025 TI33_3D TI33_3D
+
+validation_one sigma_y 3 946.00696 1065.5519 TI33_2D_70.3 TI33_2D_70.3
+validation_one sigma_y 5 108.87001 74.938644 TI33_2D_70.3 TI33_2D_70.3
+validation_one sigma_y 10 151.44951 161.3145 TI33_2D_70.3 TI33_2D_70.3
+validation_one sigma_y 20 66.123886 67.1574 TI33_2D_70.3 TI33_2D_70.3
+validation_one sigma_y 30 12.111946 7.992657 TI33_2D_70.3 TI33_2D_70.3
+validation_one sigma_y 40 5.358251 2.0353396 TI33_2D_70.3 TI33_2D_70.3
+validation_one sigma_y 50 5.318699 1.752065 TI33_2D_70.3 TI33_2D_70.3
+
+validation_one Estar 3 795.6792 672.7983 TI33_2D_70.3 TI33_2D_70.3
+validation_one Estar 5 417.30768 283.35727 TI33_2D_70.3 TI33_2D_70.3
+validation_one Estar 10 110.31688 136.33336 TI33_2D_70.3 TI33_2D_70.3
+validation_one Estar 20 30.161097 48.610672 TI33_2D_70.3 TI33_2D_70.3
+validation_one Estar 30 4.311988 6.499562 TI33_2D_70.3 TI33_2D_70.3
+validation_one Estar 40 0.8245777 0.17367359 TI33_2D_70.3 TI33_2D_70.3
+validation_one Estar 50 0.68837607 0.2196937 TI33_2D_70.3 TI33_2D_70.3
+
+
+validation_one sigma_y 10 388.7212 245.83269 TI33_25 [TI33_3D,TI33_3D_rough]
+validation_one Estar 10 144.05302 89.383156 TI33_25 [TI33_3D,TI33_3D_rough]
+validation_one Estar 10 4.714753 8.985055 [TI33_3D,TI33_3D_rough] [TI33_3D,TI33_3D_rough]
+validation_one sigma_y 10 6.0102615 7.139462 [TI33_3D,TI33_3D_rough] [TI33_3D,TI33_3D_rough]
