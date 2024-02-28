@@ -11,8 +11,8 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
-        "validation_two('sigma_y', 12, 'Berkovich', 'Berkovich', 'FEM_70deg')",
-        "validation_two('sigma_y', 12, 'B3090', 'B3090', 'FEM_70deg')"
+        "validation_two('sigma_y', 10, 'Berkovich', 'Berkovich', 'FEM_70deg')",
+        "validation_two('sigma_y', 70, 'Berkovich', 'Berkovich', 'FEM_70deg')"
         ])
     
     processes = []

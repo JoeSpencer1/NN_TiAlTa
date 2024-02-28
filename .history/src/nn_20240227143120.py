@@ -125,6 +125,12 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=
     datalow = FileData(trainlow, yname)
     datahigh = FileData(trainhigh, yname)
     datatest = FileData(testname, yname)
+    while len(datalow.X) < len(datatest.X):
+        datalow.X = np.vstack(datalow.X, datalow.X)
+        datalow.y = np.vstack(datalow.y, datalow.y)
+    while len(datahigh.X) < len(datatest.X):
+        datahigh.X = np.vstack(datahigh.X, datahigh.X)
+        datahigh.y = np.vstack(datahigh.y, datahigh.y)
 
     mape = []
     iter = 0
@@ -141,7 +147,7 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=
             mape.append(dde.utils.apply(nn, (data,)))
 
     else:
-        for train_index, test_index in kf.split(datahigh.X):
+        for train_index, test_index in kf.split(datatest.X):
             iter += 1
             print("\nIteration: {}".format(iter), flush=True)
             train_index = train_index % len(datahigh.X)

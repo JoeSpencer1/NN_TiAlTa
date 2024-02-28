@@ -141,7 +141,7 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=
             mape.append(dde.utils.apply(nn, (data,)))
 
     else:
-        for train_index, test_index in kf.split(datahigh.X):
+        for train_index, _ in kf.split(datahigh.X):
             iter += 1
             print("\nIteration: {}".format(iter), flush=True)
             train_index = train_index % len(datahigh.X)

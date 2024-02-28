@@ -11,8 +11,12 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
-        "validation_two('sigma_y', 12, 'Berkovich', 'Berkovich', 'FEM_70deg')",
-        "validation_two('sigma_y', 12, 'B3090', 'B3090', 'FEM_70deg')"
+        "validation_two('sigma_y', 10, 'B3090', 'B3090', 'Berkovich')",
+        "validation_two('Estar', 10, 'B3090', 'B3090', 'Berkovich')",
+        "validation_two('sigma_y', 10, 'B3090', 'B3090', 'FEM_70deg')",
+        "validation_two('Estar', 10, 'B3090', 'B3090', 'FEM_70deg')",
+        "validation_two('sigma_y', 10, 'B3090', 'B3090', 'B3090')",
+        "validation_two('Estar', 10, 'B3090', 'B3090', 'B3090')"
         ])
     
     processes = []
@@ -26,19 +30,6 @@ if __name__ == '__main__':
     for process in processes:
         process.join()
         
-        '''
-        "validation_two('sigma_y', 5, 'TI33_25', 'TI33_3D', 'TI33_2D_70.3')",
-        "validation_two('Estar', 5, 'TI33_25', 'TI33_3D', 'TI33_2D_70.3')",
-        "validation_two('sigma_y', 10, 'TI33_25', 'TI33_3D', 'TI33_2D_70.3')",
-        "validation_two('Estar', 10, 'TI33_25', 'TI33_3D', 'TI33_2D_70.3')",
-        "validation_two('sigma_y', 15, 'TI33_25', 'TI33_3D', 'TI33_2D_70.3')",
-        "validation_two('Estar', 15, 'TI33_25', 'TI33_3D', 'TI33_2D_70.3')",
-        "validation_two('sigma_y', 20, 'TI33_25', 'TI33_3D', 'TI33_2D_70.3')",
-        "validation_two('Estar', 20, 'TI33_25', 'TI33_3D', 'TI33_2D_70.3')",
-        "validation_two('sigma_y', 25, 'TI33_25', 'TI33_3D', 'TI33_2D_70.3')",
-        "validation_two('Estar', 25, 'TI33_25', 'TI33_3D', 'TI33_2D_70.3')",
-        "validation_two('sigma_y', 30, 'TI33_25', 'TI33_3D', 'TI33_2D_70.3')",
-        "validation_two('Estar', 30, 'TI33_25', 'TI33_3D', 'TI33_2D_70.3')"'''
         
 
         '''

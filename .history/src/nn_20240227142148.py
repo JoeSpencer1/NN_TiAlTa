@@ -134,7 +134,7 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=
     )
 
     if train_size == 0:
-        for train_index, test_index in kf.split(datatest.X):
+        for train_index, test_index in kf.split(datalow.X):
             data = dde.data.DataSet(
                 X_train=datalow.X, y_train=datalow.y, X_test=datatest.X, y_test=datatest.y, standardize=True
             )

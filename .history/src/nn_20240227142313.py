@@ -130,11 +130,11 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=
     iter = 0
 
     kf = ShuffleSplit(
-        n_splits=10, train_size=train_size, random_state=0
+        n_splits=10, train_size=train_size, test_size=len(datatest.X) - 1, random_state=0
     )
 
     if train_size == 0:
-        for train_index, test_index in kf.split(datatest.X):
+        for train_index, test_index in kf.split(datalow.X):
             data = dde.data.DataSet(
                 X_train=datalow.X, y_train=datalow.y, X_test=datatest.X, y_test=datatest.y, standardize=True
             )

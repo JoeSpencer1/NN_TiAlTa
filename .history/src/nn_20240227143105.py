@@ -125,6 +125,12 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=
     datalow = FileData(trainlow, yname)
     datahigh = FileData(trainhigh, yname)
     datatest = FileData(testname, yname)
+    while len(datalow.X) < len(datatest.X):
+        datalow.X = np.vstack(datalow.X, datalow.X)
+        datalow.y = np.vstack(datalow.y, datalow.y)
+    while len(datahigh.X) < len(datatest.X):
+        datahigh.X = np.vstack(datahigh.X, datahigh.X)
+        datahigh.y = np.vstack(datahigh.y, datahigh.y)
 
     mape = []
     iter = 0

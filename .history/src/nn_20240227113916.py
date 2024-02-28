@@ -124,7 +124,7 @@ def validation_one(yname, train_size, testname, trainname, lay=2, wid=32):
 def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=128, wei=0.5):
     datalow = FileData(trainlow, yname)
     datahigh = FileData(trainhigh, yname)
-    datatest = FileData(testname, yname)
+    dataexp = FileData(testname, yname)
 
     mape = []
     iter = 0
@@ -134,26 +134,24 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=
     )
 
     if train_size == 0:
-        for train_index, test_index in kf.split(datatest.X):
+        for train_index, test_index in kf.split(datalow.X):
             data = dde.data.DataSet(
-                X_train=datalow.X, y_train=datalow.y, X_test=datatest.X, y_test=datatest.y, standardize=True
+                X_train=datalow.X, y_train=datalow.y, X_test=dataexp.X, y_test=dataexp.y, standardize=True
             )
             mape.append(dde.utils.apply(nn, (data,)))
 
     else:
         for train_index, test_index in kf.split(datahigh.X):
             iter += 1
-            print("\nIteration: {}".format(iter), flush=True)
-            train_index = train_index % len(datahigh.X)
-            test_index = test_index % len(datatest.X)
+            print("\nCross-validation iteration: {}".format(iter), flush=True)
 
             data = dde.data.MfDataSet(
                 X_lo_train=datalow.X,
                 X_hi_train=datahigh.X[train_index],
                 y_lo_train=datalow.y,
                 y_hi_train=datahigh.y[train_index],
-                X_hi_test=datatest.X[test_index],
-                y_hi_test=datatest.y[test_index],
+                X_hi_test=dataexp.X[test_index],
+                y_hi_test=dataexp.y[test_index],
                 standardize=True
             )
             mape.append(dde.utils.apply(mfnn, (data,lay,wid,wei,))[0])
@@ -191,6 +189,7 @@ def validation_three(yname, train_size, testname, trainexp, trainhigh, trainlow,
         kf = ShuffleSplit(n_splits=10, train_size=train_size, random_state=0)
         for train_index, _ in kf.split(dataexp.X):
             print("\nIteration: {}".format(len(ape)))
+            print(train_index)
             data = dde.data.MfDataSet(
                 X_lo_train=datalow.X,
                 X_hi_train=np.vstack((datahigh.X, dataexp.X[train_index])),

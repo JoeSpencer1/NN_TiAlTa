@@ -141,22 +141,23 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=
             mape.append(dde.utils.apply(nn, (data,)))
 
     else:
-        for train_index, test_index in kf.split(datahigh.X):
-            iter += 1
-            print("\nIteration: {}".format(iter), flush=True)
-            train_index = train_index % len(datahigh.X)
-            test_index = test_index % len(datatest.X)
+        for train_index, _ in kf.split(datahigh.X):
+            for _, test_index in kf.split(datatest.X):
+                iter += 1
+                print("\nIteration: {}".format(iter), flush=True)
+                train_index = train_index % len(datahigh.X)
+                test_index = test_index % len(datatest.X)
 
-            data = dde.data.MfDataSet(
-                X_lo_train=datalow.X,
-                X_hi_train=datahigh.X[train_index],
-                y_lo_train=datalow.y,
-                y_hi_train=datahigh.y[train_index],
-                X_hi_test=datatest.X[test_index],
-                y_hi_test=datatest.y[test_index],
-                standardize=True
-            )
-            mape.append(dde.utils.apply(mfnn, (data,lay,wid,wei,))[0])
+                data = dde.data.MfDataSet(
+                    X_lo_train=datalow.X,
+                    X_hi_train=datahigh.X[train_index],
+                    y_lo_train=datalow.y,
+                    y_hi_train=datahigh.y[train_index],
+                    X_hi_test=datatest.X[test_index],
+                    y_hi_test=datatest.y[test_index],
+                    standardize=True
+                )
+                mape.append(dde.utils.apply(mfnn, (data,lay,wid,wei,))[0])
 
     with open('Output.txt', 'a') as f:
         f.write('validation_two ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape, axis=0)) + ' ' + str(np.std(mape, axis=0)) + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + t2s(trainlow) + '\n')

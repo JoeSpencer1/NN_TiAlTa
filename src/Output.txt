@@ -826,3 +826,31 @@ validation_one sigma_y 10 388.7212 245.83269 TI33_25 [TI33_3D,TI33_3D_rough]
 validation_one Estar 10 144.05302 89.383156 TI33_25 [TI33_3D,TI33_3D_rough]
 validation_one Estar 10 4.714753 8.985055 [TI33_3D,TI33_3D_rough] [TI33_3D,TI33_3D_rough]
 validation_one sigma_y 10 6.0102615 7.139462 [TI33_3D,TI33_3D_rough] [TI33_3D,TI33_3D_rough]
+
+validation_one sigma_y 10 131.42216 57.434708 FEM_70deg FEM_70deg
+validation_one sigma_y 10 64.12469 74.31448 Berkovich Berkovich
+validation_one sigma_y 10 17.774277 8.35963 B3090 B3090
+validation_one Estar 10 15.372951 6.980425 FEM_70deg FEM_70deg
+validation_one Estar 10 9.175023 6.767213 Berkovich Berkovich
+validation_one Estar 10 5.548396 2.5732067 B3090 B3090
+
+validation_one sigma_y 10 77.57888 40.122776 B3090 FEM_70deg
+validation_one sigma_y 10 176.4686 174.80022 B3090 Berkovich
+validation_one sigma_y 10 16.064955 5.163011 B3090 B3090
+validation_one Estar 10 15.719934 4.8256316 B3090 FEM_70deg
+validation_one Estar 10 56.081463 26.193697 B3090 Berkovich
+validation_one Estar 10 6.3016496 2.523986 B3090 B3090
+
+validation_two sigma_y 10 0.7613413117824478 0.2625327832455277 B3090 B3090 FEM_70deg
+validation_two sigma_y 10 2.333461995615693 0.915050705460494 B3090 B3090 Berkovich
+validation_two sigma_y 10 0.18672690389590724 0.03513782829243794 B3090 B3090 B3090
+validation_two Estar 10 1.2239358512393568 0.22744101889685756 B3090 B3090 FEM_70deg
+validation_two Estar 10 2.0838714136229095 0.6473599663743916 B3090 B3090 Berkovich
+validation_two Estar 10 0.19210038011937577 0.04789312874137409 B3090 B3090 B3090
+validation_two Estar 25 15.069139882137904 9.273758375373504 TI33_25 TI33_3D TI33_2D_70.3
+validation_two sigma_y 25 115.66303522112858 71.49230208842002 TI33_25 TI33_3D TI33_2D_70.3
+validation_two sigma_y 10 29.320593982696256 29.705326367085835 Berkovich Berkovich FEM_70deg
+validation_two sigma_y 2 37.308148764070744 22.243302535089217 Berkovich Berkovich FEM_70deg
+validation_two sigma_y 12 22.21417158969911 11.248468636215799 Berkovich Berkovich FEM_70deg
+validation_two sigma_y 12 0.8975099018496968 0.49710336757783513 B3090 B3090 FEM_70deg
+validation_two sigma_y 12 19.34682184804337 10.84010927044996 Berkovich Berkovich FEM_70deg
