@@ -163,7 +163,7 @@ C60x = [0.0125, 0.025, 0.05, 0.1]
 C60y = [0.004029647, 0.016118587, 0.049746948, 0.17236334]
 Cfx = [0.0001, 1]
 '''
-'''
+''''''
 df = pd.read_csv('../data/model/compare.csv', skiprows=1)
 fig, ax = plt.subplots()
 ax.plot(df['Depth (nm)'], df['Load (uN)'], linewidth=0.3, color='gray', zorder=1, label='Experimental results')
@@ -200,7 +200,7 @@ ax.grid(False)
 leg = ax.legend()
 plt.savefig('/Users/joe/Desktop/figure5.jpeg', dpi=800, bbox_inches="tight")
 plt.show()
-'''
+
 '''
 n = [0, 5, 10, 20]
 threeσ = [376.0572733054678, 39.5938033843615, 41.8456251546561, 37.20982506131551]
