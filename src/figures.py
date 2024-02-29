@@ -165,6 +165,7 @@ Cfx = [0.0001, 1]
 '''
 ''''''
 df = pd.read_csv('../data/model/compare.csv', skiprows=1)
+print(df.columns)
 fig, ax = plt.subplots()
 ax.plot(df['Depth (nm)'], df['Load (uN)'], linewidth=0.3, color='gray', zorder=1, label='Experimental results')
 ax.plot(df['Depth0 (nm)'], df['Load0 (uN)'], linewidth=0.3, color='gray', zorder=1)
@@ -192,6 +193,7 @@ ax.plot(df['Depth22 (nm)'], df['Load22 (uN)'], color='gray', linewidth=0.3, zord
 ax.plot(df['Depth23 (nm)'], df['Load23 (uN)'], color='gray', linewidth=0.3, zorder=1)
 ax.plot(df['Depth24 (nm)'], df['Load24 (uN)'], color='gray', linewidth=0.3, zorder=1)
 ax.scatter(df['hm (nm)'], df['F (uN)'], color='blue', marker='.', zorder=2, label='3D FEM simulation')
+ax.scatter(df['Depth']*1000, df['Force'], color='red', marker='*', zorder=3, s = 10, label='2D FEM simulation')
 ax.set_xlabel('Indenter depth (nm)')
 ax.set_xlim([0, 275])
 ax.set_ylabel('Load (μN)')
