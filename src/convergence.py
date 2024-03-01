@@ -51,7 +51,7 @@ print('e2=', e2)
 print('e3=', e3)
 print('p=', np.log(e1/e3)/np.log(4))
 print('C=', e1 / maxh ** (np.log(e1/e3)/np.log(4)))
-'''
+''''''
 # Quadratic case
 df = pd.read_excel('../data/conv/3D_qua.xlsx')
 print(df)
@@ -102,7 +102,7 @@ print('e2=', e2)
 print('e3=', e3)
 print('p=', np.log(e1/e3)/np.log(4))
 print('C=', e1 / maxh ** (np.log(e1/e3)/np.log(4)))
-'''
+
 # 30˚ case
 df = pd.read_excel('../data/conv/2D_30.xlsx')
 print(df)
@@ -300,7 +300,7 @@ for i in range(len(x1)):
 e1 = np.sqrt(e1 / leng)
 e2 = np.sqrt(e2 / leng)
 e3 = np.sqrt(e3 / leng)
-maxh = 0.5
+maxh = 0.3333
 print('\ne1=', e1)
 print('e2=', e2)
 print('e3=', e3)
