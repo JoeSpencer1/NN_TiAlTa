@@ -26,46 +26,46 @@ class FileData(object):
 
         # This is for Al alloys
         if name in ('Al7075', 'Al6061'):
-            df["dP/dh (N/m)"] *= 0.2 * (df["C (GPa)"] / 3) ** 0.5 * 10 ** (-1.5)
+            df['dP/dh (N/m)'] *= 0.2 * (df['C (GPa)'] / 3) ** 0.5 * 10 ** (-1.5)
         # This is for Ti alloys
         if name in ('B3090'):
-            df["dP/dh (N/m)"] *= 0.2 / df["hmax(um)"]
+            df['dP/dh (N/m)'] *= 0.2 / df['hmax(um)']
         # Scale TI33 to hm=0.2μm
         if 'TI33' in name:
             # For 25˚ case
             df['dP/dh (N/m)'] *= 0.2 / df['hmax(um)']
         # Scale from Conical to Berkovich with small deformations
         if 'FEM_70deg' in name:
-            df["dP/dh (N/m)"] *= 1.167 / 1.128
+            df['dP/dh (N/m)'] *= 1.167 / 1.128
         # Scale from Conical to Berkovich with large deformations (See )
         if '2D' in name:
             df['dP/dh (N/m)'] *= 1.2370 / 1.1957
         # Get Estar if none provided
         if name == 'FEM_70deg' or 'Berkovich' in name or '2D' in name or '3D' in name:
-            df["Estar (GPa)"] = EtoEr(df['E (GPa)'].values, df['nu'].values)[:, None]
+            df['Er (GPa)'] = EtoEr(df['E (GPa)'].values, df['nu'].values)[:, None]
 
         print(df.describe())
 
         if self.X is None:
-            self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
+            self.X = df[['C (GPa)', 'dP/dh (N/m)', 'Wp/Wt']].values
         else:
-            self.X = np.vstack((self.X, df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values))
-        if self.yname == "Estar":
+            self.X = np.vstack((self.X, df[['C (GPa)', 'dP/dh (N/m)', 'Wp/Wt']].values))
+        if self.yname == 'Er':
             if self.y is None:
-                self.y = df["Estar (GPa)"].values[:, None]
+                self.y = df['Er (GPa)'].values[:, None]
             else:
-                self.y = np.vstack((self.y, df["Estar (GPa)"].values[:, None]))
-        elif self.yname == "sigma_y":
+                self.y = np.vstack((self.y, df['Er (GPa)'].values[:, None]))
+        elif self.yname == 'sigma_y':
             if self.y is None:
-                self.y = df["sy (GPa)"].values[:, None]
+                self.y = df['sy (GPa)'].values[:, None]
             else:
-                self.y = np.vstack((self.y, df["sy (GPa)"].values[:, None]))
-        elif self.yname.startswith("sigma_"):
+                self.y = np.vstack((self.y, df['sy (GPa)'].values[:, None]))
+        elif self.yname.startswith('sigma_'):
             e_plastic = self.yname[6:]
             if self.y is None:
-                self.y = df["s" + e_plastic + " (GPa)"].values[:, None]
+                self.y = df['s' + e_plastic + ' (GPa)'].values[:, None]
             else:
-                self.y = np.vstack((self.y, df["s" + e_plastic + " (GPa)"].values[:, None]))
+                self.y = np.vstack((self.y, df['s' + e_plastic + ' (GPa)'].values[:, None]))
 
 
 
@@ -129,21 +129,21 @@ class FEMData0(object):
 
     def read_1angle(self):
         df = pd.read_csv("../data/FEM_{}deg.csv".format(self.angles[0]))
-        df["Estar (GPa)"] = EtoEstar(df["E (GPa)"])
-        df["sy/Estar"] = df["sy (GPa)"] / df["Estar (GPa)"]
+        df['Er (GPa)'] = EtoEstar(df["E (GPa)"])
+        df["sy/Estar"] = df["sy (GPa)"] / df['Er (GPa)']
         df = df.loc[~((df["n"] > 0.3) & (df["sy/Estar"] >= 0.03))]
         # df = df.loc[df["n"] <= 0.3]
         # Scale c* from Conical to Berkovich
         # df["dP/dh (N/m)"] *= 1.167 / 1.128
         # Add noise
         # sigma = 0.2
-        # df["Estar (GPa)"] *= 1 + sigma * np.random.randn(len(df))
+        # df['Er (GPa)'] *= 1 + sigma * np.random.randn(len(df))
         # df["sy (GPa)"] *= 1 + sigma * np.random.randn(len(df))
         print(df.describe())
 
         self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
-        if self.yname == "Estar":
-            self.y = df["Estar (GPa)"].values[:, None]
+        if self.yname == 'Er':
+            self.y = df['Er (GPa)'].values[:, None]
         elif self.yname == "sigma_y":
             self.y = df["sy (GPa)"].values[:, None]
         elif self.yname.startswith("sigma_"):
@@ -169,8 +169,8 @@ class Data1(object):
         df = pd.read_csv(name)
         if 'Estar (GPa)' not in df:
             df['Estar (GPa)'] = EtoEstar(df['E (GPa)'])
-            #df["Estar (GPa)"] = EtoEr(df['E (GPa)'].values, df['nu'].values)[:, None]
-        df['sy/Estar'] = df['sy (GPa)'] / df["Estar (GPa)"]
+            #df['Er (GPa)'] = EtoEr(df['E (GPa)'].values, df['nu'].values)[:, None]
+        df['sy/Estar'] = df['sy (GPa)'] / df['Er (GPa)']
         if self.filename == 'FEM_70deg':
             #df = df.loc[~((df["n"] > 0.3) & (df["sy/Estar"] >= 0.03))]
             df = df.loc[df['n'] <= 0.3]
@@ -185,13 +185,13 @@ class Data1(object):
         # df["dP/dh (N/m)"] *= 1.167 / 1.128
         # Add noise
         # sigma = 0.2
-        # df["Estar (GPa)"] *= 1 + sigma * np.random.randn(len(df))
+        # df['Er (GPa)'] *= 1 + sigma * np.random.randn(len(df))
         # df["sy (GPa)"] *= 1 + sigma * np.random.randn(len(df))
         print(df.describe())
 
         self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
-        if self.yname == "Estar":
-            self.y = df["Estar (GPa)"].values[:, None]
+        if self.yname == 'Er':
+            self.y = df['Er (GPa)'].values[:, None]
         else:
             self.y = df["sy (GPa)"].values[:, None]
 
@@ -207,8 +207,8 @@ class FEMDataC(object):
 
     def read_1angle(self):
         df = pd.read_csv('../data/'+self.filename+'.csv')
-        df["Estar (GPa)"] = EtoEstar(df["E (GPa)"])
-        df["sy/Estar"] = df["sy (GPa)"] / df["Estar (GPa)"]
+        df['Er (GPa)'] = EtoEstar(df["E (GPa)"])
+        df["sy/Estar"] = df["sy (GPa)"] / df['Er (GPa)']
         #
         if self.filename == 'FEM_70deg':
             df = df.loc[~((df["n"] > 0.3) & (df["sy/Estar"] >= 0.03))]
@@ -217,14 +217,14 @@ class FEMDataC(object):
         # df["dP/dh (N/m)"] *= 1.167 / 1.128
         # Add noise
         # sigma = 0.2
-        # df["Estar (GPa)"] *= 1 + sigma * np.random.randn(len(df))
+        # df['Er (GPa)'] *= 1 + sigma * np.random.randn(len(df))
         # df["sy (GPa)"] *= 1 + sigma * np.random.randn(len(df))
         #
         print(df.describe())
 
         self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
-        if self.yname == "Estar":
-            self.y = df["Estar (GPa)"].values[:, None]
+        if self.yname == 'Er':
+            self.y = df['Er (GPa)'].values[:, None]
         elif self.yname == "sigma_y":
             self.y = df["sy (GPa)"].values[:, None]
         elif self.yname.startswith("sigma_"):
@@ -288,8 +288,8 @@ class ExpDataC(object):
         print(df.describe())
 
         self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
-        if self.yname == "Estar":
-            self.y = df["Estar (GPa)"].values[:, None]
+        if self.yname == 'Er':
+            self.y = df['Er (GPa)'].values[:, None]
         elif self.yname == "sigma_y":
             self.y = df["sy (GPa)"].values[:, None]
         elif self.yname.startswith("sigma_"):
@@ -316,7 +316,7 @@ class BerkovichDataC(object):
         print(df.describe())
 
         self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
-        if self.yname == "Estar":
+        if self.yname == 'Er':
             self.y = EtoEstar(df['E (GPa)'])
         elif self.yname == "sigma_y":
             self.y = df["sy (GPa)"].values[:, None]
@@ -358,8 +358,8 @@ class FEMData2(object):
 
     def read_1angle(self):
         df = pd.read_csv("../data/FEM_{}deg1.csv".format(self.angles[0]))
-        df["Estar (GPa)"] = EtoEstar(df["E (GPa)"])
-        df["sy/Estar"] = df["sy (GPa)"] / df["Estar (GPa)"]
+        df['Er (GPa)'] = EtoEstar(df["E (GPa)"])
+        df["sy/Estar"] = df["sy (GPa)"] / df['Er (GPa)']
         df = df.loc[~((df["n"] > 0.3) & (df["sy/Estar"] >= 0.03))]
         #
         # df = df.loc[df["n"] <= 0.3]
@@ -367,13 +367,13 @@ class FEMData2(object):
         # df["dP/dh (N/m)"] *= 1.167 / 1.128
         # Add noise
         # sigma = 0.2
-        # df["Estar (GPa)"] *= 1 + sigma * np.random.randn(len(df))
+        # df['Er (GPa)'] *= 1 + sigma * np.random.randn(len(df))
         # df["sy (GPa)"] *= 1 + sigma * np.random.randn(len(df))
         print(df.describe())
 
         self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
-        if self.yname == "Estar":
-            self.y = df["Estar (GPa)"].values[:, None]
+        if self.yname == 'Er':
+            self.y = df['Er (GPa)'].values[:, None]
         elif self.yname == "sigma_y":
             self.y = df["sy (GPa)"].values[:, None]
         elif self.yname.startswith("sigma_"):
@@ -424,8 +424,8 @@ class ExpData2(object):
         print(df.describe())
 
         self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
-        if self.yname == "Estar":
-            self.y = df["Estar (GPa)"].values[:, None]
+        if self.yname == 'Er':
+            self.y = df['Er (GPa)'].values[:, None]
         elif self.yname == "sigma_y":
             self.y = df["sy (GPa)"].values[:, None]
         elif self.yname.startswith("sigma_"):
@@ -459,7 +459,7 @@ class BerkovichData2(object):
         print(df.describe())
 
         self.X = df[["C (GPa)", "dP/dh (N/m)", "Wp/Wt"]].values
-        if self.yname == "Estar":
+        if self.yname == 'Er':
             self.y = EtoEstar(df["E (GPa)"].values)[:, None]
         elif self.yname == "sigma_y":
             self.y = df["sy (GPa)"].values[:, None]
