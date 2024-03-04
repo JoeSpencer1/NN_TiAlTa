@@ -257,7 +257,7 @@ print('p=', np.log(e1/e3)/np.log(4))
 print('C=', e1 / maxh ** (np.log(e1/e3)/np.log(4)))
 '''
 # 70˚ case
-df = pd.read_excel('../data/conv/2D_70.xlsx')
+df = pd.read_excel('../data/conv/2D_70_a.xlsx')
 print(df)
 
 x1, y1, z1 = df['X1 (m)'], df['Y1 (m)'], df['Z1 (m)']
@@ -300,7 +300,7 @@ for i in range(len(x1)):
 e1 = np.sqrt(e1 / leng)
 e2 = np.sqrt(e2 / leng)
 e3 = np.sqrt(e3 / leng)
-maxh = 0.3333
+maxh = 0.166666
 print('\ne1=', e1)
 print('e2=', e2)
 print('e3=', e3)
