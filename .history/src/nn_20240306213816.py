@@ -48,8 +48,11 @@ def nn(data, lay, wid):
         layer_size, activation, initializer, regularization=regularization
     )
     model = dde.Model(data, net)
+    print('Poop1')
     model.compile(optimizer, lr=lr, loss=loss, metrics=['MAPE'])
+    print('Poop2')
     losshistory, train_state = model.train(epochs=epochs)
+    print('Poop3')
     dde.saveplot(losshistory, train_state, issave=True, isplot=False)
     return train_state.best_metrics[0]
 

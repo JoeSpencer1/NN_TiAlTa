@@ -48,13 +48,16 @@ def nn(data, lay, wid):
         layer_size, activation, initializer, regularization=regularization
     )
     model = dde.Model(data, net)
+    print('Poop1')
     model.compile(optimizer, lr=lr, loss=loss, metrics=['MAPE'])
+    print('Poop2')
     losshistory, train_state = model.train(epochs=epochs)
+    print('Poop3')
     dde.saveplot(losshistory, train_state, issave=True, isplot=False)
     return train_state.best_metrics[0]
 
-def mfnn(data, lay, wid):
-    #lay, wid = 2, 128
+def mfnn(data, lay, wid, wei):
+    #lay, wid, wei = 2, 128, 0.5
     x_dim, y_dim = 3, 1
     activation = 'selu'
     initializer = 'LeCun normal'
@@ -67,11 +70,14 @@ def mfnn(data, lay, wid):
         regularization=regularization,
         residue=True,
         trainable_low_fidelity=True,
-        trainable_high_fidelity=True
+        trainable_high_fidelity=True,
     )
 
     model = dde.Model(data, net)
     model.compile('adam', lr=0.0001, loss='MAPE', metrics=['MAPE', 'APE SD'])
+    # Set weight of high-fidelity and low-fidelity data to 50%
+    if wei <= 0 or wei >= 1:
+        model.loss_weights = [1 - wei, wei]
     losshistory, train_state = model.train(epochs=30000)
 
     dde.saveplot(losshistory, train_state, issave=True, isplot=False)
@@ -110,7 +116,7 @@ def validation_one(yname, train_size, testname, trainname, lay=2, wid=32):
     with open('output.txt', 'a') as f:
         f.write('validation_one ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + ' ' + t2s(testname) + ' ' + t2s(trainname) + ' ' + str(lay) + ' ' + str(wid) + '\n')
 
-def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=128):
+def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=128, wei=0.5):
     datalow = FileData(trainlow, yname)
     datahigh = FileData(trainhigh, yname)
     datatest = FileData(testname, yname)
@@ -118,21 +124,18 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=
     mape = []
     iter = 0
 
+    kf = ShuffleSplit(
+        n_splits=10, test_size=len(datahigh.y) - train_size, random_state=0
+    )
 
     if train_size == 0:
-        for _ in range(10):
+        for train_index, test_index in kf.split(datatest.X):
             data = dde.data.DataSet(
                 X_train=datalow.X, y_train=datalow.y, X_test=datatest.X, y_test=datatest.y, standardize=True
             )
             mape.append(dde.utils.apply(nn, (data,lay,wid)))
 
-        with open('Output.txt', 'a') as f:
-            f.write('validation_two ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + t2s(trainlow) + ' ' + str(lay) + ' ' + str(wid) + '\n')
-
     else:
-        kf = ShuffleSplit(
-            n_splits=10, test_size=len(datahigh.y) - train_size, random_state=0
-        )
         for train_index, test_index in kf.split(datahigh.X):
             iter += 1
             print('\nIteration: {}'.format(iter), flush=True)
@@ -148,15 +151,14 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=
                 y_hi_test=datatest.y[test_index],
                 standardize=True
             )
-            mape.append(dde.utils.apply(mfnn, (data,lay,wid,))[0])
+            mape.append(dde.utils.apply(mfnn, (data,lay,wid,wei,)))
 
     with open('Output.txt', 'a') as f:
-        f.write('validation_two ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape, axis=0)) + ' ' + str(np.std(mape, axis=0)) + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + t2s(trainlow) + ' ' + str(lay) + ' ' + str(wid) + '\n')
-    print(np.std(mape))
+        f.write('validation_two ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape, axis=0)) + ' ' + str(np.std(mape, axis=0)) + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + t2s(trainlow) + ' ' + str(lay) + ' ' + str(wid) + ' ' + str(wei) + '\n')
     print(mape)
-    print(yname, 'validation_two ', t2s(trainlow), ' ', t2s(trainhigh), ' ', str(train_size), ' ', np.mean(mape), np.std(mape))
+    print(yname, 'validation_two ', t2s(trainlow), ' ', t2s(trainhigh), ' ', train_size, ' ', np.mean(mape), np.std(mape))
 
-def validation_three(yname, train_size, testname, trainexp, trainhigh, trainlow, lay=2, wid=128):
+def validation_three(yname, train_size, testname, trainexp, trainhigh, trainlow, lay=2, wid=128, wei=0.5):
     datalow = FileData(trainlow, yname)
     datahigh = FileData(trainhigh, yname)
     dataexp = FileData(trainexp, yname)
@@ -177,7 +179,7 @@ def validation_three(yname, train_size, testname, trainexp, trainhigh, trainlow,
                 y_hi_test=datatest.y,
                 standardize=True
             )
-            res = dde.utils.apply(mfnn, (data,lay,wid,))
+            res = dde.utils.apply(mfnn, (data,lay,wid,wei,))
             ape.append(res[:2])
             y.append(res[2])
     else:
@@ -193,13 +195,13 @@ def validation_three(yname, train_size, testname, trainexp, trainhigh, trainlow,
                 y_hi_test=datatest.y,
                 standardize=True
             )
-            res = dde.utils.apply(mfnn, (data,lay,wid,))
+            res = dde.utils.apply(mfnn, (data,lay,wid,wei,))
             ape.append(res[:2])
             y.append(res[2])
 
     print(yname, 'validation_exp_cross2', train_size, np.mean(ape, axis=0), np.std(ape, axis=0))
     with open('output.txt', 'a') as f:
-        f.write('validation_three ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(ape, axis=0)[0]) + ' ' + str(np.std(ape, axis=0)[0]) + ' ' + t2s(testname) + ' ' + t2s(trainexp) + ' ' + t2s(trainhigh) + ' ' + t2s(trainlow) + ' ' + str(lay) + ' ' + str(wid) + '\n')
+        f.write('validation_three ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(ape, axis=0)[0]) + ' ' + str(np.std(ape, axis=0)[0]) + ' ' + t2s(testname) + ' ' + t2s(trainexp) + ' ' + t2s(trainhigh) + ' ' + t2s(trainlow) + ' ' + str(lay) + ' ' + str(wid) + ' ' + str(wei) + '\n')
     print('Saved to ', yname, '.dat.')
     np.savetxt(yname + '.dat', np.hstack(y).T)  
 

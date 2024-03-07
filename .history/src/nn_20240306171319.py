@@ -48,8 +48,11 @@ def nn(data, lay, wid):
         layer_size, activation, initializer, regularization=regularization
     )
     model = dde.Model(data, net)
+    print('Poop1')
     model.compile(optimizer, lr=lr, loss=loss, metrics=['MAPE'])
+    print('Poop2')
     losshistory, train_state = model.train(epochs=epochs)
+    print('Poop3')
     dde.saveplot(losshistory, train_state, issave=True, isplot=False)
     return train_state.best_metrics[0]
 
@@ -120,14 +123,14 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=
 
 
     if train_size == 0:
-        for _ in range(10):
+        for train_index, test_index in kf.split(datatest.X):
+            kf = ShuffleSplit(
+                n_splits=10, train_size = 25, test_size=25, random_state=0
+            )
             data = dde.data.DataSet(
                 X_train=datalow.X, y_train=datalow.y, X_test=datatest.X, y_test=datatest.y, standardize=True
             )
             mape.append(dde.utils.apply(nn, (data,lay,wid)))
-
-        with open('Output.txt', 'a') as f:
-            f.write('validation_two ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + t2s(trainlow) + ' ' + str(lay) + ' ' + str(wid) + '\n')
 
     else:
         kf = ShuffleSplit(
@@ -148,11 +151,10 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=
                 y_hi_test=datatest.y[test_index],
                 standardize=True
             )
-            mape.append(dde.utils.apply(mfnn, (data,lay,wid,))[0])
+            mape.append(dde.utils.apply(mfnn, (data,lay,wid,)))
 
     with open('Output.txt', 'a') as f:
-        f.write('validation_two ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape, axis=0)) + ' ' + str(np.std(mape, axis=0)) + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + t2s(trainlow) + ' ' + str(lay) + ' ' + str(wid) + '\n')
-    print(np.std(mape))
+        f.write('validation_two ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + t2s(trainlow) + ' ' + str(lay) + ' ' + str(wid) + '\n')
     print(mape)
     print(yname, 'validation_two ', t2s(trainlow), ' ', t2s(trainhigh), ' ', str(train_size), ' ', np.mean(mape), np.std(mape))
 
