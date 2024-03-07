@@ -126,6 +126,9 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=
             )
             mape.append(dde.utils.apply(nn, (data,lay,wid)))
 
+        with open('Output.txt', 'a') as f:
+            f.write('validation_two ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + t2s(trainlow) + ' ' + str(lay) + ' ' + str(wid) + '\n')
+
     else:
         kf = ShuffleSplit(
             n_splits=10, test_size=len(datahigh.y) - train_size, random_state=0

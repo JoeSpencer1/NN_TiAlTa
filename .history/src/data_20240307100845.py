@@ -60,7 +60,13 @@ class FileData(object):
                 self.y = df['sy (GPa)'].values[:, None]
             else:
                 self.y = np.vstack((self.y, df['sy (GPa)'].values[:, None]))
-    
+        elif self.yname.startswith('sigma_'):
+            e_plastic = self.yname[6:]
+            if self.y is None:
+                self.y = df['s' + e_plastic + ' (GPa)'].values[:, None]
+            else:
+                self.y = np.vstack((self.y, df['s' + e_plastic + ' (GPa)'].values[:, None]))
+
 
 
 

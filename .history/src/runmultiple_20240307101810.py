@@ -11,17 +11,17 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
-        "validation_two('sigma_y', 0, 'TI33_25', 'TI33_25', '3D_quad')",
-        "validation_two('sigma_y', 1, 'TI33_25', 'TI33_25', '3D_quad')",
-        "validation_two('sigma_y', 2, 'TI33_25', 'TI33_25', '3D_quad')",
-        "validation_two('sigma_y', 3, 'TI33_25', 'TI33_25', '3D_quad')",
-        "validation_two('sigma_y', 4, 'TI33_25', 'TI33_25', '3D_quad')",
-        "validation_two('sigma_y', 5, 'TI33_25', 'TI33_25', '3D_quad')",
-        "validation_two('sigma_y', 6, 'TI33_25', 'TI33_25', '3D_quad')",
-        "validation_two('sigma_y', 8, 'TI33_25', 'TI33_25', '3D_quad')",
-        "validation_two('sigma_y', 10, 'TI33_25', 'TI33_25', '3D_quad')",
-        "validation_two('sigma_y', 15, 'TI33_25', 'TI33_25', '3D_quad')",
-        "validation_two('sigma_y', 20, 'TI33_25', 'TI33_25', '3D_quad')",
+        "validation_one('sigma_y', 0, '3D_linear', '3D_linear')",
+        "validation_one('sigma_y', 1, '3D_linear', '3D_linear')",
+        "validation_one('sigma_y', 2, '3D_linear', '3D_linear')",
+        "validation_one('sigma_y', 3, '3D_linear', '3D_linear')",
+        "validation_one('sigma_y', 4, '3D_linear', '3D_linear')",
+        "validation_one('sigma_y', 5, '3D_linear', '3D_linear')",
+        "validation_one('sigma_y', 6, '3D_linear', '3D_linear')",
+        "validation_one('sigma_y', 8, '3D_linear', '3D_linear')",
+        "validation_one('sigma_y', 10, '3D_linear', '3D_linear')",
+        "validation_one('sigma_y', 15, '3D_linear', '3D_linear')",
+        "validation_one('sigma_y', 20, '3D_linear', '3D_linear')",
         ])
     
     processes = []
