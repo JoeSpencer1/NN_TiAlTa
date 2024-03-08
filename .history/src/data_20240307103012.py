@@ -55,7 +55,7 @@ class FileData(object):
                 self.y = df['Er (GPa)'].values[:, None]
             else:
                 self.y = np.vstack((self.y, df['Er (GPa)'].values[:, None]))
-        elif self.yname == 'sigma_y':
+        else self.yname == 'sigma_y':
             if self.y is None:
                 self.y = df['sy (GPa)'].values[:, None]
             else:

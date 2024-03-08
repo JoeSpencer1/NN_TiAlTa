@@ -11,17 +11,28 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
-        "validation_one('Er', 0, '2D_70.3', '2D_70.3')",
-        "validation_one('Er', 1, '2D_70.3', '2D_70.3')",
-        "validation_one('Er', 2, '2D_70.3', '2D_70.3')",
-        "validation_one('Er', 3, '2D_70.3', '2D_70.3')",
-        "validation_one('Er', 4, '2D_70.3', '2D_70.3')",
-        "validation_one('Er', 5, '2D_70.3', '2D_70.3')",
-        "validation_one('Er', 6, '2D_70.3', '2D_70.3')",
-        "validation_one('Er', 8, '2D_70.3', '2D_70.3')",
-        "validation_one('Er', 10, '2D_70.3', '2D_70.3')",
-        "validation_one('Er', 15, '2D_70.3', '2D_70.3')",
-        "validation_one('Er', 20, '2D_70.3', '2D_70.3')",
+        "validation_three('Er', 0, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('sigma_y', 0, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('Er', 1, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('sigma_y', 1, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('Er', 2, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('sigma_y', 2, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('Er', 3, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('sigma_y', 3, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('Er', 4, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('sigma_y', 4, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('Er', 5, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('sigma_y', 5, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('Er', 6, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('sigma_y', 6, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('Er', 8, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('sigma_y', 8, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('Er', 10, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('sigma_y', 10, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('Er', 15, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('sigma_y', 15, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('Er', 20, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')",
+        "validation_three('sigma_y', 20, 'TI33_25', 'TI33_25', ('3D_quad', '3D_linear'), '2D_70.3')"
         ])
     
     processes = []
@@ -34,8 +45,7 @@ if __name__ == '__main__':
         process.start()
     for process in processes:
         process.join()
-        '''
-        '''
+
         '''
 
         (All 3 data types)

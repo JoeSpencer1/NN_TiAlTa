@@ -28,16 +28,16 @@ class FileData(object):
         if 'Al7075' in name or 'Al6061' in name:
             df['dP/dh (N/m)'] *= 0.2 * (df['C (GPa)'] / 3) ** 0.5 * 10 ** (-1.5)
         # This is for Ti alloys
-        if 'B3090' in name:
+        if name in ('Lu et al/B3090'):
             df['dP/dh (N/m)'] *= 0.2 / df['hmax(um)']
         # Scale TI33 to hm=0.2μm
         if 'TI33' in name or '2D' in name or '3D' in name:
             # For 25˚ case
             df['dP/dh (N/m)'] *= 0.2 / df['hmax(um)']
         # Scale from Conical to Berkovich with small deformations
-        if 'FEM_70deg' in name:
+        if 'Lu et al/FEM_70deg' in name:
             df['dP/dh (N/m)'] *= 1.167 / 1.128
-        # Scale from Conical to Berkovich with large deformations (See Dao et al. 2001
+        # Scale from Conical to Berkovich with large deformations (See )
         if '2D' in name:
             df['dP/dh (N/m)'] *= 1.2370 / 1.1957
         # Get Estar if none provided
@@ -60,7 +60,13 @@ class FileData(object):
                 self.y = df['sy (GPa)'].values[:, None]
             else:
                 self.y = np.vstack((self.y, df['sy (GPa)'].values[:, None]))
-    
+        elif self.yname.startswith('sigma_'):
+            e_plastic = self.yname[6:]
+            if self.y is None:
+                self.y = df['s' + e_plastic + ' (GPa)'].values[:, None]
+            else:
+                self.y = np.vstack((self.y, df['s' + e_plastic + ' (GPa)'].values[:, None]))
+
 
 
 
