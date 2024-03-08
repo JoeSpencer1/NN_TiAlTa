@@ -300,7 +300,7 @@ for i in range(len(x1)):
 e1 = np.sqrt(e1 / leng)
 e2 = np.sqrt(e2 / leng)
 e3 = np.sqrt(e3 / leng)
-maxh = 0.166666
+maxh = 0.25
 print('\ne1=', e1)
 print('e2=', e2)
 print('e3=', e3)
