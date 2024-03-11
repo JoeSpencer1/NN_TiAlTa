@@ -6,7 +6,7 @@ import itertools
 
 import numpy as np
 from sklearn.svm import SVR
-from sklearn.model_selection import KFold, LeaveOneOut, RepeatedKFold, ShuffleSplit, StratifiedKFold
+from sklearn.model_selection import KFold, LeaveOneOut, RepeatedKFold, ShuffleSplit
 
 import deepxde as dde
 from data import FileData
@@ -88,9 +88,7 @@ def validation_one(yname, train_size, testname, trainname, lay=2, wid=32):
     kf = ShuffleSplit(
         n_splits=10, test_size=len(datatest.X) - train_size, random_state=0
     )
-    if train_size == 0:
-        kf = ShuffleSplit(n_splits=10, test_size=2, train_size=1, random_state=0)
-
+    
     mape = []
     iter = 0
     for train_index, test_index in kf.split(datatrain.X):
@@ -143,8 +141,10 @@ def validation_two(yname, train_size, testname, trainhigh, trainlow, lay=2, wid=
                 X_hi_train=datahigh.X[train_index],
                 y_lo_train=datalow.y,
                 y_hi_train=datahigh.y[train_index],
-                X_hi_test=datatest.X[test_index],
-                y_hi_test=datatest.y[test_index],
+                X_hi_test=datatest.X,
+                y_hi_test=datatest.y,
+                #X_hi_test=datatest.X[test_index],
+                #y_hi_test=datatest.y[test_index],
                 standardize=True
             )
             mape.append(dde.utils.apply(mfnn, (data,lay,wid,))[0])

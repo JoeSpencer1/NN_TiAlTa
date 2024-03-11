@@ -88,9 +88,9 @@ def validation_one(yname, train_size, testname, trainname, lay=2, wid=32):
     kf = ShuffleSplit(
         n_splits=10, test_size=len(datatest.X) - train_size, random_state=0
     )
-    if train_size == 0:
-        kf = ShuffleSplit(n_splits=10, test_size=2, train_size=1, random_state=0)
-
+    if train_size == 1:
+        kf = StratifiedKFold(n_splits=10, shuffle=True, random_state=0)
+    
     mape = []
     iter = 0
     for train_index, test_index in kf.split(datatrain.X):

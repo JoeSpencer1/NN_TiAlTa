@@ -163,7 +163,7 @@ C60x = [0.0125, 0.025, 0.05, 0.1]
 C60y = [0.004029647, 0.016118587, 0.049746948, 0.17236334]
 Cfx = [0.0001, 1]
 '''
-'''
+''''''
 df = pd.read_csv('../data/model/compare.csv', skiprows=1)
 fig, ax = plt.subplots()
 ax.plot(df['Depth (nm)'], df['Load (uN)'], linewidth=0.3, color='gray', zorder=1, label='Experimental results')
@@ -196,12 +196,12 @@ ax.scatter(df['Depth']*1000, df['Force'], color='red', marker='*', zorder=3, s =
 ax.set_xlabel('Indenter depth (nm)')
 ax.set_xlim([0, 275])
 ax.set_ylabel('Load (μN)')
-ax.set_ylim([0, 11000])
+ax.set_ylim([0, 12100])
 ax.grid(False)
 leg = ax.legend()
 plt.savefig('/Users/joe/Desktop/R2comp.pdf', dpi=800, bbox_inches="tight")
 plt.show()
-'''
+
 '''
 n = [0, 5, 10, 20]
 threeσ = [376.0572733054678, 39.5938033843615, 41.8456251546561, 37.20982506131551]
@@ -1065,7 +1065,7 @@ ax2.annotate("B: $E_{r}$", xy=(0.15, 0.95), xycoords="axes fraction",
 plt.savefig("/Users/Joe/Desktop/sourceerrors.jpeg", dpi=800, bbox_inches="tight")
 plt.show()
 '''
-''''''
+'''
 Bqx = [0.5, 0.25, 0.125]
 Bqy = [4.382014077591483e-05, 8.821735470284495e-06, 2.2054338675711253e-06]
 Blx = [0.5, 0.25, 0.125]
@@ -1077,16 +1077,15 @@ C45x = [0.1, 0.050, 0.025]
 C45y = [1.6512037815149402e-05, 3.2852160758298952e-06, 8.213040189574738e-07]
 C60x = [0.1, 0.050, 0.025]
 C60y = [1.906263394992679e-05, 3.286644375422991e-06, 8.216610938557475e-07]
-C70x = [0.25, 0.125, 0.0625]
-C70y = [0.0005425689999452868, 0.0001641086696789088, 4.102716741972695e-05]
+C70x = [0.1, 0.050, 0.025]
+C70y = [3.0350568075823378e-06, 1.1539420432540229e-06, 2.8848551081350625e-07]
 
 Cfx = [0.0025, 1]
 def equation(x, y, eqx):
     l = len(x) - 1
     p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
     C = 0
-    for i in range(3):
-        C += (1/3)*y[i]/(x[i]**p)
+    C = y[0]/(x[0]**p)
     print('C = ', C)
     print('p = ', p)
     eqy = [0, 0]
@@ -1139,25 +1138,25 @@ plt.savefig('/Users/joe/Desktop/figure4.jpeg', dpi=800, bbox_inches="tight")
 plt.show()
 
 fig, ax = plt.subplots()
-ax.scatter(Blx, Bly, color='blue', marker='s', label='Linear: $||e||_{L_{2}}=(0.12 \\times 10^{-3}) h^{1.47}$')
-ax.scatter(Bqx, Bqy, color='red', marker='o', facecolor='none', label='Quadratic: $||e||_{L_{2}}=(0.19\\times 10^{-3})h^{2.16}$')
-ax.scatter(C70x, C70y, color='black', marker='^', label='70.0˚: $||e||_{L_{2}}=(7.41\\times 10 ^{-3})h^{1.86}$')
+ax.scatter(Blx, Bly, color='blue', marker='s', label='Linear: $||e||_{L_{2}}=(0.11 \\times 10^{-3}) h^{1.47}$')
+ax.scatter(Bqx, Bqy, color='red', marker='o', facecolor='none', label='Quadratic: $||e||_{L_{2}}=(0.20\\times 10^{-3})h^{2.16}$')
+ax.scatter(C70x, C70y, color='black', marker='^', label='70.3˚: $||e||_{L_{2}}=(0.15\\times 10 ^{-3})h^{1.70}$')
 ax.plot(Bfx, Bfl, linestyle="--", color='blue')
 ax.plot(Bfx, Bfq, linestyle="--", color='red')
 ax.plot(Cfx, Cf70, linestyle="--", color='black')
 ax.plot()
 ax.set_xlabel('Element length (μm)')
 ax.set_xscale('log')
-ax.set_xlim([0.05, 1])
+ax.set_xlim([0.01, 1])
 ax.set_ylabel('L$_{2}$ error')
 ax.set_yscale('log')
-ax.set_ylim([0.05*10.0**-6, 10.0**-3])
+ax.set_ylim([0.05*10.0**-6, 8*10.0**-5])
 ax.grid(False)
 leg = ax.legend(loc='lower right')
 leg.set_title('Element order')
 plt.savefig('/Users/joe/Desktop/linqd2D.pdf', dpi=800, bbox_inches="tight")
 plt.show()
-'''
+''''''
 
 # 2D mesh
 n_2D = [5, 10, 15, 20]

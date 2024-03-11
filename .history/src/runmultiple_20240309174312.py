@@ -11,8 +11,7 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
-        "validation_three('Er', 100, 'Lu et al/B3090', 'Lu et al/B3090', 'Lu et al/Berkovich', 'Lu et al/FEM_70deg')",
-        "validation_three('sigma_y', 100, 'Lu et al/B3090', 'Lu et al/B3090', 'Lu et al/Berkovich', 'Lu et al/FEM_70deg')"
+        "validation_one('Er', 1, '3D_linear', '3D_linear')"
         ])
     
     processes = []
@@ -28,16 +27,17 @@ if __name__ == '__main__':
     with open('output.txt', 'a') as f:
         f.write('\n')
         '''
-        "validation_one('Er', 1, '2D_70', '2D_70')",
-        "validation_one('Er', 2, '2D_70', '2D_70')",
-        "validation_one('Er', 3, '2D_70', '2D_70')",
-        "validation_one('Er', 4, '2D_70', '2D_70')",
-        "validation_one('Er', 5, '2D_70', '2D_70')",
-        "validation_one('Er', 6, '2D_70', '2D_70')",
-        "validation_one('Er', 8, '2D_70', '2D_70')",
-        "validation_one('Er', 10, '2D_70', '2D_70')",
-        "validation_one('Er', 15, '2D_70', '2D_70')",
-        "validation_one('Er', 20, '2D_70', '2D_70')"
+        "validation_one('Er', 0, '3D_linear', '3D_linear')",
+        "validation_one('Er', 1, '3D_linear', '3D_linear')",
+        "validation_one('Er', 2, '3D_linear', '3D_linear')",
+        "validation_one('Er', 3, '3D_linear', '3D_linear')",
+        "validation_one('Er', 4, '3D_linear', '3D_linear')",
+        "validation_one('Er', 5, '3D_linear', '3D_linear')",
+        "validation_one('Er', 6, '3D_linear', '3D_linear')",
+        "validation_one('Er', 8, '3D_linear', '3D_linear')",
+        "validation_one('Er', 10, '3D_linear', '3D_linear')",
+        "validation_one('Er', 15, '3D_linear', '3D_linear')",
+        "validation_one('Er', 20, '3D_linear', '3D_linear')"
 
         '''
         '''

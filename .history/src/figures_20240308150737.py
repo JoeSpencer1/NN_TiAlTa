@@ -163,7 +163,7 @@ C60x = [0.0125, 0.025, 0.05, 0.1]
 C60y = [0.004029647, 0.016118587, 0.049746948, 0.17236334]
 Cfx = [0.0001, 1]
 '''
-'''
+''''''
 df = pd.read_csv('../data/model/compare.csv', skiprows=1)
 fig, ax = plt.subplots()
 ax.plot(df['Depth (nm)'], df['Load (uN)'], linewidth=0.3, color='gray', zorder=1, label='Experimental results')
@@ -201,7 +201,7 @@ ax.grid(False)
 leg = ax.legend()
 plt.savefig('/Users/joe/Desktop/R2comp.pdf', dpi=800, bbox_inches="tight")
 plt.show()
-'''
+
 '''
 n = [0, 5, 10, 20]
 threeσ = [376.0572733054678, 39.5938033843615, 41.8456251546561, 37.20982506131551]
@@ -1077,7 +1077,7 @@ C45x = [0.1, 0.050, 0.025]
 C45y = [1.6512037815149402e-05, 3.2852160758298952e-06, 8.213040189574738e-07]
 C60x = [0.1, 0.050, 0.025]
 C60y = [1.906263394992679e-05, 3.286644375422991e-06, 8.216610938557475e-07]
-C70x = [0.25, 0.125, 0.0625]
+C70x = [0.1, 0.050, 0.025]
 C70y = [0.0005425689999452868, 0.0001641086696789088, 4.102716741972695e-05]
 
 Cfx = [0.0025, 1]
@@ -1139,19 +1139,19 @@ plt.savefig('/Users/joe/Desktop/figure4.jpeg', dpi=800, bbox_inches="tight")
 plt.show()
 
 fig, ax = plt.subplots()
-ax.scatter(Blx, Bly, color='blue', marker='s', label='Linear: $||e||_{L_{2}}=(0.12 \\times 10^{-3}) h^{1.47}$')
-ax.scatter(Bqx, Bqy, color='red', marker='o', facecolor='none', label='Quadratic: $||e||_{L_{2}}=(0.19\\times 10^{-3})h^{2.16}$')
-ax.scatter(C70x, C70y, color='black', marker='^', label='70.0˚: $||e||_{L_{2}}=(7.41\\times 10 ^{-3})h^{1.86}$')
+ax.scatter(Blx, Bly, color='blue', marker='s', label='Linear: $||e||_{L_{2}}=(0.11 \\times 10^{-3}) h^{1.47}$')
+ax.scatter(Bqx, Bqy, color='red', marker='o', facecolor='none', label='Quadratic: $||e||_{L_{2}}=(0.20\\times 10^{-3})h^{2.16}$')
+ax.scatter(C70x, C70y, color='black', marker='^', label='70.3˚: $||e||_{L_{2}}=(0.15\\times 10 ^{-3})h^{1.70}$')
 ax.plot(Bfx, Bfl, linestyle="--", color='blue')
 ax.plot(Bfx, Bfq, linestyle="--", color='red')
 ax.plot(Cfx, Cf70, linestyle="--", color='black')
 ax.plot()
 ax.set_xlabel('Element length (μm)')
 ax.set_xscale('log')
-ax.set_xlim([0.05, 1])
+ax.set_xlim([0.01, 1])
 ax.set_ylabel('L$_{2}$ error')
 ax.set_yscale('log')
-ax.set_ylim([0.05*10.0**-6, 10.0**-3])
+ax.set_ylim([0.05*10.0**-6, 8*10.0**-5])
 ax.grid(False)
 leg = ax.legend(loc='lower right')
 leg.set_title('Element order')

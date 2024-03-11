@@ -88,8 +88,8 @@ def validation_one(yname, train_size, testname, trainname, lay=2, wid=32):
     kf = ShuffleSplit(
         n_splits=10, test_size=len(datatest.X) - train_size, random_state=0
     )
-    if train_size == 0:
-        kf = ShuffleSplit(n_splits=10, test_size=2, train_size=1, random_state=0)
+    if train_size=0:
+        kf = KFold(n_splits=10, test_size=2, train_size=1)
 
     mape = []
     iter = 0
