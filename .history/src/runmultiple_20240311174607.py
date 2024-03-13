@@ -11,10 +11,12 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
-        "validation_two('Er', 'TI33_25', 'TI33_25', 5, ('3D_quad', '2D_70'), 50)",
-        "validation_two('sigma_y', 'TI33_25', 'TI33_25', 5, ('3D_quad', '2D_70'), 50)",
-        "validation_two('Er', 'TI33_25', 'TI33_25', 5, '2D_70', 25)",
-        "validation_two('sigma_y', 'TI33_25', 'TI33_25', 5, ('3D_quad', '2D_70'), 25)"
+        "validation_one('Er', 'Lu et al/B3090', 'Lu et al/B3090', 20)",
+        "validation_one('sigma_y', 'Lu et al/B3090', 'Lu et al/B3090', 20)",
+        "validation_two('Er', 'Lu et al/B3090', 'Lu et al/B3090', 20, 'Lu et al/FEM_70deg', 25)",
+        "validation_two('sigma_y', 'Lu et al/B3090', 'Lu et al/B3090', 20, 'Lu et al/FEM_70deg', 25)",
+        "validation_three('Er', 'Lu et al/B3090', 'Lu et al/B3090', 20, 'Lu et al/Berkovich', 25, 'Lu et al/FEM_70deg', 25)",
+        "validation_three('sigma_y', 'Lu et al/B3090', 'Lu et al/B3090', 20, 'Lu et al/Berkovich', 25, 'Lu et al/FEM_70deg', 25)"
         ])
     
     processes = []

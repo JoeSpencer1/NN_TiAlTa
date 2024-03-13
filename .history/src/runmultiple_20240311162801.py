@@ -11,10 +11,14 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
-        "validation_two('Er', 'TI33_25', 'TI33_25', 5, ('3D_quad', '2D_70'), 50)",
-        "validation_two('sigma_y', 'TI33_25', 'TI33_25', 5, ('3D_quad', '2D_70'), 50)",
-        "validation_two('Er', 'TI33_25', 'TI33_25', 5, '2D_70', 25)",
-        "validation_two('sigma_y', 'TI33_25', 'TI33_25', 5, ('3D_quad', '2D_70'), 25)"
+        "validation_one('Er', 'TI33_25', 'TI33_25', 8)",
+        "validation_one('sigma_y', 'TI33_25', 'TI33_25', 8)",
+        "validation_two('Er', 'TI33_25', 'TI33_25', 8, '2D_70', 25)",
+        "validation_two('sigma_y', 'TI33_25', 'TI33_25', 8, '2D_70', 25)",
+        "validation_two('Er', 'TI33_25', 'TI33_25', 8, '2D_70_rough', 25)",
+        "validation_two('sigma_y', 'TI33_25', 'TI33_25', 8, '2D_70_rough', 25)",
+        "validation_three('Er', 'TI33_25', 'TI33_25', 8, '3D_quad', 25, '2D_70', 25)",
+        "validation_three('sigma_y', 'TI33_25', 'TI33_25', 8, '3D_quad', 25, '2D_70', 25)"
         ])
     
     processes = []
@@ -30,16 +34,14 @@ if __name__ == '__main__':
     with open('output.txt', 'a') as f:
         f.write('\n')
         '''
-        "validation_one('Er', 1, '2D_70', '2D_70')",
-        "validation_one('Er', 2, '2D_70', '2D_70')",
-        "validation_one('Er', 3, '2D_70', '2D_70')",
-        "validation_one('Er', 4, '2D_70', '2D_70')",
-        "validation_one('Er', 5, '2D_70', '2D_70')",
-        "validation_one('Er', 6, '2D_70', '2D_70')",
-        "validation_one('Er', 8, '2D_70', '2D_70')",
-        "validation_one('Er', 10, '2D_70', '2D_70')",
-        "validation_one('Er', 15, '2D_70', '2D_70')",
-        "validation_one('Er', 20, '2D_70', '2D_70')"
+        "validation_one('Er', 'TI33_25', 'TI33_25', 8)",
+        "validation_one('sigma_y', 'TI33_25', 'TI33_25', 8)",
+        "validation_two('Er', 'TI33_25', 'TI33_25', 8, '2D_70', 25)",
+        "validation_two('sigma_y', 'TI33_25', 'TI33_25', 8, '2D_70', 25)",
+        "validation_two('Er', 'TI33_25', 'TI33_25', 8, '2D_70_rough', 25)",
+        "validation_two('sigma_y', 'TI33_25', 'TI33_25', 8, '2D_70_rough', 25)",
+        "validation_three('Er', 'TI33_25', 'TI33_25', 8, '3D_quad', 25, '2D_70', 25)",
+        "validation_three('sigma_y', 'TI33_25', 'TI33_25', 8, '3D_quad', 25, '2D_70', 25)"
 
         '''
         '''

@@ -110,7 +110,7 @@ def validation_one(yname, testname, trainname, n_hi, lay=2, wid=32):
     print(mape)
     print(yname, n_hi, np.mean(mape), np.std(mape))
     with open('output.txt', 'a') as f:
-        f.write('validation_one ' + yname + ' ' + f'{np.mean(mape):.2f}' + ' ' + f'{np.std(mape):.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainname) + ' ' + str(n_hi) + ' ' + str(lay) + ' ' + str(wid) + '\n')
+        f.write('validation_one ' + yname + ' ' + str(np.mean(mape)) + ' ' + str(np.std(mape)) + ' ' + t2s(testname) + ' ' + t2s(trainname) + ' ' + str(n_hi) + ' ' + str(lay) + ' ' + str(wid) + '\n')
 
 def validation_two(yname, testname, trainhigh, n_hi, trainlow, n_lo, lay=2, wid=128):
     datalow = FileData(trainlow, yname)
@@ -132,7 +132,6 @@ def validation_two(yname, testname, trainhigh, n_hi, trainlow, n_lo, lay=2, wid=
         kf = ShuffleSplit(
             n_splits=10, test_size=len(datahigh.y) - n_hi, random_state=0
         )
-
         for train_index, test_index in kf.split(datahigh.X):
             iter += 1
             print('\nIteration: {}'.format(iter), flush=True)
@@ -150,8 +149,8 @@ def validation_two(yname, testname, trainhigh, n_hi, trainlow, n_lo, lay=2, wid=
             )
             mape.append(dde.utils.apply(mfnn, (data,lay,wid,))[0])
 
-    with open('output.txt', 'a') as f:
-        f.write('validation_two ' + yname + ' ' + f'{np.mean(mape, axis=0):.2f}' + ' ' + f'{np.std(mape, axis=0):.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + str(n_hi) + ' ' + t2s(trainlow) + ' ' + str(n_lo) + ' ' + str(lay) + ' ' + str(wid) + '\n')
+    with open('Output.txt', 'a') as f:
+        f.write('validation_two ' + yname + ' ' + str(np.mean(mape, axis=0)) + ' ' + str(np.std(mape, axis=0)) + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + str(n_hi) + ' ' + t2s(trainlow) + ' ' + str(n_lo) + ' ' + str(lay) + ' ' + str(wid) + '\n')
     print(np.std(mape))
     print(mape)
     print(yname, 'validation_two ', t2s(trainlow), ' ', t2s(trainhigh), ' ', str(n_hi), ' ', np.mean(mape), np.std(mape))
@@ -169,10 +168,10 @@ def validation_three(yname, testname, trainexp, n_exp, trainhigh, n_hi, trainlow
         for iter in range(10):
             print('\nIteration: {}'.format(iter))
             data = dde.data.MfDataSet(
-                X_lo_train=datalow.X[np.random.choice(datalow.X.shape[0], size=n_lo, replace=False)],
-                X_hi_train=datahigh.X[np.random.choice(datahigh.X.shape[0], size=n_hi, replace=False)],
-                y_lo_train=datalow.y[np.random.choice(datalow.y.shape[0], size=n_lo, replace=False)],
-                y_hi_train=datahigh.y[np.random.choice(datahigh.y.shape[0], size=n_hi, replace=False)],
+                X_lo_train=datalow.X,
+                X_hi_train=datahigh.X,
+                y_lo_train=datalow.y,
+                y_hi_train=datahigh.y,
                 X_hi_test=datatest.X,
                 y_hi_test=datatest.y,
                 standardize=True
@@ -181,14 +180,14 @@ def validation_three(yname, testname, trainexp, n_exp, trainhigh, n_hi, trainlow
             ape.append(res[:2])
             y.append(res[2])
     else:
-        kf = ShuffleSplit(n_splits=10, train_size=n_exp, random_state=0)
+        kf = ShuffleSplit(n_splits=10, train_size=train_size, random_state=0)
         for train_index, _ in kf.split(dataexp.X):
             print('\nIteration: {}'.format(len(ape)))
             data = dde.data.MfDataSet(
-                X_lo_train=datalow.X[np.random.choice(datalow.X.shape[0], size=n_lo, replace=False)],
-                X_hi_train=np.vstack((datahigh.X[np.random.choice(datahigh.X.shape[0], size=n_hi, replace=False)], dataexp.X[train_index])),
-                y_lo_train=datalow.y[np.random.choice(datalow.y.shape[0], size=n_lo, replace=False)],
-                y_hi_train=np.vstack((datahigh.y[np.random.choice(datalow.y.shape[0], size=n_lo, replace=False)], dataexp.y[train_index])),
+                X_lo_train=datalow.X,
+                X_hi_train=np.vstack((datahigh.X, dataexp.X[train_index])),
+                y_lo_train=datalow.y,
+                y_hi_train=np.vstack((datahigh.y, dataexp.y[train_index])),
                 X_hi_test=datatest.X,
                 y_hi_test=datatest.y,
                 standardize=True
@@ -197,8 +196,9 @@ def validation_three(yname, testname, trainexp, n_exp, trainhigh, n_hi, trainlow
             ape.append(res[:2])
             y.append(res[2])
 
+    print(yname, 'validation_exp_cross2', train_size, np.mean(ape, axis=0), np.std(ape, axis=0))
     with open('output.txt', 'a') as f:
-        f.write('validation_three ' + yname + ' ' + f'{np.mean(ape, axis=0)[0]:.2f}' + ' ' + f'{np.std(ape, axis=0)[0]:.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainexp) + ' ' + str(n_exp) + ' ' + t2s(trainhigh) + ' ' + str(n_hi) + ' ' + t2s(trainlow) + ' ' + str(n_lo) + ' ' + str(lay) + ' ' + str(wid) + '\n')
+        f.write('validation_three ' + yname + ' ' + str(train_size) + ' ' + str(np.mean(ape, axis=0)[0]) + ' ' + str(np.std(ape, axis=0)[0]) + ' ' + t2s(testname) + ' ' + t2s(trainexp) + ' ' + t2s(trainhigh) + ' ' + t2s(trainlow) + ' ' + str(lay) + ' ' + str(wid) + '\n')
     print('Saved to ', yname, '.dat.')
     np.savetxt(yname + '.dat', np.hstack(y).T)  
 

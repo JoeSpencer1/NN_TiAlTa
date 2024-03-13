@@ -132,6 +132,8 @@ def validation_two(yname, testname, trainhigh, n_hi, trainlow, n_lo, lay=2, wid=
         kf = ShuffleSplit(
             n_splits=10, test_size=len(datahigh.y) - n_hi, random_state=0
         )
+        datalow.X = datalow.X[np.random.choice(datalow.X.shape[0], size=n_lo, replace=False)]
+        datalow.y = datalow.y[np.random.choice(datalow.y.shape[0], size=n_lo, replace=False)]
 
         for train_index, test_index in kf.split(datahigh.X):
             iter += 1
@@ -140,9 +142,9 @@ def validation_two(yname, testname, trainhigh, n_hi, trainlow, n_lo, lay=2, wid=
             test_index = test_index % len(datatest.X)
 
             data = dde.data.MfDataSet(
-                X_lo_train=datalow.X[np.random.choice(datalow.X.shape[0], size=n_lo, replace=False)],
+                X_lo_train=datalow.X,
                 X_hi_train=datahigh.X[train_index],
-                y_lo_train=datalow.y[np.random.choice(datalow.y.shape[0], size=n_lo, replace=False)],
+                y_lo_train=datalow.y,
                 y_hi_train=datahigh.y[train_index],
                 X_hi_test=datatest.X[test_index],
                 y_hi_test=datatest.y[test_index],
@@ -150,7 +152,7 @@ def validation_two(yname, testname, trainhigh, n_hi, trainlow, n_lo, lay=2, wid=
             )
             mape.append(dde.utils.apply(mfnn, (data,lay,wid,))[0])
 
-    with open('output.txt', 'a') as f:
+    with open('Output.txt', 'a') as f:
         f.write('validation_two ' + yname + ' ' + f'{np.mean(mape, axis=0):.2f}' + ' ' + f'{np.std(mape, axis=0):.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + str(n_hi) + ' ' + t2s(trainlow) + ' ' + str(n_lo) + ' ' + str(lay) + ' ' + str(wid) + '\n')
     print(np.std(mape))
     print(mape)
@@ -164,6 +166,10 @@ def validation_three(yname, testname, trainexp, n_exp, trainhigh, n_hi, trainlow
 
     ape = []
     y = []
+    datalow.X = datalow.X
+    datalow.y = datalow.y
+    datahigh.X = datahigh.X
+    datahigh.y = datahigh.y
 
     if n_hi == 0:
         for iter in range(10):

@@ -132,7 +132,9 @@ def validation_two(yname, testname, trainhigh, n_hi, trainlow, n_lo, lay=2, wid=
         kf = ShuffleSplit(
             n_splits=10, test_size=len(datahigh.y) - n_hi, random_state=0
         )
-
+        datalow.X = np.random.choice(datalow.X.shape[0], size=n_lo, replace=False)
+        datalow.y = np.random.choice(datalow.y.shape[0], size=n_lo, replace=False)
+        
         for train_index, test_index in kf.split(datahigh.X):
             iter += 1
             print('\nIteration: {}'.format(iter), flush=True)
@@ -150,7 +152,7 @@ def validation_two(yname, testname, trainhigh, n_hi, trainlow, n_lo, lay=2, wid=
             )
             mape.append(dde.utils.apply(mfnn, (data,lay,wid,))[0])
 
-    with open('output.txt', 'a') as f:
+    with open('Output.txt', 'a') as f:
         f.write('validation_two ' + yname + ' ' + f'{np.mean(mape, axis=0):.2f}' + ' ' + f'{np.std(mape, axis=0):.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + str(n_hi) + ' ' + t2s(trainlow) + ' ' + str(n_lo) + ' ' + str(lay) + ' ' + str(wid) + '\n')
     print(np.std(mape))
     print(mape)
@@ -172,7 +174,7 @@ def validation_three(yname, testname, trainexp, n_exp, trainhigh, n_hi, trainlow
                 X_lo_train=datalow.X[np.random.choice(datalow.X.shape[0], size=n_lo, replace=False)],
                 X_hi_train=datahigh.X[np.random.choice(datahigh.X.shape[0], size=n_hi, replace=False)],
                 y_lo_train=datalow.y[np.random.choice(datalow.y.shape[0], size=n_lo, replace=False)],
-                y_hi_train=datahigh.y[np.random.choice(datahigh.y.shape[0], size=n_hi, replace=False)],
+                y_hi_train=datahigh.y[np.random.choice(datahigh.X.shape[0], size=n_hi, replace=False)],
                 X_hi_test=datatest.X,
                 y_hi_test=datatest.y,
                 standardize=True

@@ -109,7 +109,7 @@ def validation_one(yname, testname, trainname, n_hi, lay=2, wid=32):
 
     print(mape)
     print(yname, n_hi, np.mean(mape), np.std(mape))
-    with open('output.txt', 'a') as f:
+    with open('n_hi', 'a') as f:
         f.write('validation_one ' + yname + ' ' + f'{np.mean(mape):.2f}' + ' ' + f'{np.std(mape):.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainname) + ' ' + str(n_hi) + ' ' + str(lay) + ' ' + str(wid) + '\n')
 
 def validation_two(yname, testname, trainhigh, n_hi, trainlow, n_lo, lay=2, wid=128):
@@ -197,7 +197,7 @@ def validation_three(yname, testname, trainexp, n_exp, trainhigh, n_hi, trainlow
             ape.append(res[:2])
             y.append(res[2])
 
-    with open('output.txt', 'a') as f:
+    with open('n_hi', 'a') as f:
         f.write('validation_three ' + yname + ' ' + f'{np.mean(ape, axis=0)[0]:.2f}' + ' ' + f'{np.std(ape, axis=0)[0]:.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainexp) + ' ' + str(n_exp) + ' ' + t2s(trainhigh) + ' ' + str(n_hi) + ' ' + t2s(trainlow) + ' ' + str(n_lo) + ' ' + str(lay) + ' ' + str(wid) + '\n')
     print('Saved to ', yname, '.dat.')
     np.savetxt(yname + '.dat', np.hstack(y).T)  

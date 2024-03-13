@@ -240,12 +240,115 @@ validation_one Er 15 3.154594 2.2147734 2D_70 2D_70 2 32
 validation_one Er 20 1.1552227 0.7246111 2D_70 2D_70 2 32
 
 
-validation_one Er 20 3.212072 2.5975409 Lu et al/B3090 Lu et al/B3090 2 32
-validation_one sigma_y 20 9.621378 4.2125545 Lu et al/B3090 Lu et al/B3090 2 32
 
-validation_one Er 100 0.35949597 0.13330969 Lu et al/B3090 Lu et al/B3090 2 32
-validation_one sigma_y 100 2.6305327 0.6988293 Lu et al/B3090 Lu et al/B3090 2 32
 
-validation_three Er 100 0.9011155058625819 0.27951954541580853 Lu et al/B3090 Lu et al/B3090 Lu et al/Berkovich Lu et al/FEM_70deg 2 128
-validation_three sigma_y 100 0.385893209748074 0.12746516112143566 Lu et al/B3090 Lu et al/B3090 Lu et al/Berkovich Lu et al/FEM_70deg 2 128
+
+
+
+
+
+
+
+
+validation_one Er 2.60 1.64 TI33_25 TI33_25 10 2 32
+validation_one sigma_y 16.37 10.76 TI33_25 TI33_25 10 2 32
+validation_two Er 3.54 3.29 TI33_25 TI33_25 10 3D_quad 25 2 128
+validation_two sigma_y 15.49 6.55 TI33_25 TI33_25 10 3D_quad 25 2 128
+validation_three Er 6.34 2.39 TI33_25 TI33_25 10 3D_quad 25 2D_70 25 2 128
+validation_three sigma_y 46.69 25.75 TI33_25 TI33_25 10 3D_quad 25 2D_70 25 2 128
+
+validation_one Er 1.44 0.73 TI33_25 TI33_25 20 2 32
+validation_one sigma_y 7.37 4.64 TI33_25 TI33_25 20 2 32
+validation_two Er 3.59 6.43 TI33_25 TI33_25 20 3D_quad 25 2 128
+validation_two Er 2.41 3.21 TI33_25 TI33_25 20 3D_quad 25 2 128
+validation_two sigma_y 10.88 4.97 TI33_25 TI33_25 20 3D_quad 25 2 128
+validation_two sigma_y 12.54 12.52 TI33_25 TI33_25 20 3D_quad 25 2 128
+validation_three Er 1.41 0.95 TI33_25 TI33_25 20 3D_quad 25 2D_70 25 2 128
+validation_three sigma_y 11.09 5.25 TI33_25 TI33_25 20 3D_quad 25 2D_70 25 2 128
+
+validation_one Er 5.50 3.06 TI33_25 TI33_25 8 2 32
+validation_one sigma_y 21.92 25.08 TI33_25 TI33_25 8 2 32
+validation_two Er 7.65 8.02 TI33_25 TI33_25 8 2D_70_rough 25 2 128
+validation_two Er 20.93 22.03 TI33_25 TI33_25 8 2D_70 25 2 128
+validation_two sigma_y 133.99 139.77 TI33_25 TI33_25 8 2D_70 25 2 128
+validation_two sigma_y 33.57 14.17 TI33_25 TI33_25 8 2D_70_rough 25 2 128
+validation_three Er 12.83 18.16 TI33_25 TI33_25 8 3D_quad 25 2D_70 25 2 128
+validation_three sigma_y 79.83 64.13 TI33_25 TI33_25 8 3D_quad 25 2D_70 25 2 128
+
+validation_one Er 9.46 12.41 TI33_25 TI33_25 8 2 32
+validation_one sigma_y 20.12 12.32 TI33_25 TI33_25 8 2 32
+
+validation_one sigma_y 18.51 11.95 TI33_25 TI33_25 8 2 32
+validation_one Er 4.88 2.89 TI33_25 TI33_25 8 2 32
+validation_two Er 13.20 7.43 TI33_25 TI33_25 8 2D_70 25 2 128
+validation_two Er 5.97 6.39 TI33_25 TI33_25 8 2D_70_rough 25 2 128
+validation_two sigma_y 42.84 38.18 TI33_25 TI33_25 8 2D_70_rough 25 2 128
+validation_two sigma_y 100.17 51.99 TI33_25 TI33_25 8 2D_70 25 2 128
+validation_three Er 15.45 17.44 TI33_25 TI33_25 8 3D_quad 25 2D_70 25 2 128
+validation_three sigma_y 76.81 41.48 TI33_25 TI33_25 8 3D_quad 25 2D_70 25 2 128
+
+validation_one Er 17.76 12.55 TI33_25 TI33_25 5 2 32
+validation_one sigma_y 36.77 17.55 TI33_25 TI33_25 5 2 32
+validation_two Er 7.36 5.27 TI33_25 TI33_25 5 2D_70_rough 25 2 128
+validation_two Er 26.65 18.79 TI33_25 TI33_25 5 2D_70 25 2 128
+validation_two sigma_y 177.65 100.43 TI33_25 TI33_25 5 2D_70 25 2 128
+validation_two sigma_y 55.86 30.82 TI33_25 TI33_25 5 2D_70_rough 25 2 128
+validation_three Er 19.78 10.22 TI33_25 TI33_25 5 3D_quad 25 2D_70 25 2 128
+validation_three sigma_y 120.38 48.64 TI33_25 TI33_25 5 3D_quad 25 2D_70 25 2 128
+
+
+validation_two Er 1.70 1.06 TI33_25 TI33_25 24 2D_70 25 2 128
+validation_two sigma_y 25.75 19.27 TI33_25 TI33_25 24 2D_70 25 2 128
+validation_one sigma_y 2.47 1.90 TI33_25 TI33_25 24 2 32
+validation_one Er 0.71 0.91 2D_70 2D_70 24 2 32
+validation_three Er 0.16 0.08 TI33_25 TI33_25 24 3D_quad 25 2D_70 25 2 128
+validation_three sigma_y 2.59 0.98 TI33_25 TI33_25 24 3D_quad 25 2D_70 25 2 128
+
+validation_one sigma_y 5.23 2.85 TI33_25 TI33_25 20 2 32
+validation_one Er 1.49 1.93 2D_70 2D_70 20 2 32
+validation_two sigma_y 53.57 31.14 TI33_25 TI33_25 20 2D_70 25 2 128
+validation_two Er 6.87 4.97 TI33_25 TI33_25 20 2D_70 25 2 128
+validation_three sigma_y 12.07 4.91 TI33_25 TI33_25 20 3D_quad 25 2D_70 25 2 128
+validation_three Er 1.50 1.16 TI33_25 TI33_25 20 3D_quad 25 2D_70 25 2 128
+
+validation_one Er 1.28 0.65 TI33_25 TI33_25 20 2 32
+validation_one sigma_y 7.00 2.66 TI33_25 TI33_25 20 2 32
+validation_two Er 5.76 3.48 TI33_25 TI33_25 20 2D_70 25 2 128
+validation_two sigma_y 57.10 24.74 TI33_25 TI33_25 20 2D_70 25 2 128
+validation_three Er 1.41 0.98 TI33_25 TI33_25 20 3D_quad 25 2D_70 25 2 128
+validation_three sigma_y 15.70 12.96 TI33_25 TI33_25 20 3D_quad 25 2D_70 25 2 128
+
+
+validation_one sigma_y 13.81 6.36 2D_70_rough 2D_70_rough 10 2 32
+validation_one Er 5.58 3.20 2D_70_rough 2D_70_rough 10 2 32
+validation_one sigma_y 21.81 13.31 2D_70 2D_70 10 2 32
+validation_one Er 6.43 4.20 2D_70 2D_70 10 2 32
+
+validation_one Er 1.23 1.76 TI33_25 TI33_25 24 2 32
+validation_one sigma_y 3.77 2.93 TI33_25 TI33_25 24 2 32
+
+
+
+
+
+
+validation_one Er 16.48 12.25 TI33_25 TI33_25 5 2 32
+validation_one sigma_y 42.01 18.46 TI33_25 TI33_25 5 2 32
+
+validation_two Er 10.50 4.78 TI33_25 TI33_25 5 3D_quad 25 2 128
+validation_two sigma_y 38.80 23.38 TI33_25 TI33_25 5 3D_quad 25 2 128
+validation_two Er 10.67 5.94 TI33_25 TI33_25 5 [3D_quad,2D_70] 25 2 128
+validation_two sigma_y 28.80 4.52 TI33_25 TI33_25 5 [3D_quad,2D_70] 25 2 128
+
+validation_three Er 20.33 7.07 TI33_25 TI33_25 5 3D_quad 25 2D_70 25 2 128
+validation_three sigma_y 147.34 40.46 TI33_25 TI33_25 5 3D_quad 25 2D_70 25 2 128
+validation_three Er 7.83 2.46 TI33_25 TI33_25 5 2D_70 25 3D_quad 25 2 128
+validation_three sigma_y 30.86 7.44 TI33_25 TI33_25 5 2D_70 25 3D_quad 25 2 128
+
+
+
+validation_two Er 31.37 24.39 TI33_25 TI33_25 5 2D_70 25 2 128
+validation_two sigma_y 34.80 14.67 TI33_25 TI33_25 5 [3D_quad,2D_70] 25 2 128
+validation_two Er 10.06 3.20 TI33_25 TI33_25 5 [3D_quad,2D_70] 50 2 128
+validation_two sigma_y 33.21 15.27 TI33_25 TI33_25 5 [3D_quad,2D_70] 50 2 128
 
