@@ -352,3 +352,13 @@ validation_two sigma_y 34.80 14.67 TI33_25 TI33_25 5 [3D_quad,2D_70] 25 2 128
 validation_two Er 10.06 3.20 TI33_25 TI33_25 5 [3D_quad,2D_70] 50 2 128
 validation_two sigma_y 33.21 15.27 TI33_25 TI33_25 5 [3D_quad,2D_70] 50 2 128
 
+
+validation_two Er 3.71 2.55 TI33_25 TI33_25 5 [3D_linear,2D_70] 50 2 128
+validation_two sigma_y 11.44 8.33 TI33_25 TI33_25 5 [3D_linear,2D_70] 50 2 128
+
+validation_two Er 9.63 3.96 TI33_25 TI33_25 5 [3D_quad,2D_70] 50 2 128
+validation_two sigma_y 31.87 10.20 TI33_25 TI33_25 5 [3D_quad,2D_70] 50 2 128
+
+validation_two Er 24.10 8.97 TI33_25 TI33_25 5 2D_70 25 2 128
+validation_two sigma_y 152.99 89.93 TI33_25 TI33_25 5 2D_70 25 2 128
+
