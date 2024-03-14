@@ -60,6 +60,14 @@ class FileData(object):
                 self.y = df['sy (GPa)'].values[:, None]
             else:
                 self.y = np.vstack((self.y, df['sy (GPa)'].values[:, None]))
+
+    def pop(self, index):
+        self.X = np.delete(self.X, index, axis=0)
+        self.y = np.delete(self.y, index, axis=0)
+    
+    def push(self, index):
+        self.X = np.append(index.X)
+        self.y = np.append(index.y)
     
 
 

@@ -11,8 +11,8 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
-        "validation_two('Er', 'TI33_25', 'TI33_25', 5, '2D_70', 25)",
-        "validation_two('sigma_y', 'TI33_25', 'TI33_25', 5, '2D_70', 25)"
+        "validation_one('Er', 'Lu et al/B3090', 'Lu et al/B3090', 100)",
+        "validation_one('sigma_y', 'Lu et al/B3090', 'Lu et al/B3090', 100)",
         ])
     
     processes = []
@@ -27,82 +27,10 @@ if __name__ == '__main__':
         process.join()
     with open('output.txt', 'a') as f:
         f.write('\n')
-        '''
-        "validation_one('Er', 1, '2D_70', '2D_70')",
-        "validation_one('Er', 2, '2D_70', '2D_70')",
-        "validation_one('Er', 3, '2D_70', '2D_70')",
-        "validation_one('Er', 4, '2D_70', '2D_70')",
-        "validation_one('Er', 5, '2D_70', '2D_70')",
-        "validation_one('Er', 6, '2D_70', '2D_70')",
-        "validation_one('Er', 8, '2D_70', '2D_70')",
-        "validation_one('Er', 10, '2D_70', '2D_70')",
-        "validation_one('Er', 15, '2D_70', '2D_70')",
-        "validation_one('Er', 20, '2D_70', '2D_70')"
 
         '''
-        '''
-
-        (All 3 data types)
-        "validation_three('Er', 0, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 0, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 1, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 1, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 2, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 2, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 3, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 3, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 4, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 4, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 5, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 5, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 6, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 6, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 8, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 8, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 10, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 10, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 20, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_three('Er', 20, 'TI33_2D_70.3', 'TI33_3D', 'TI33_25', 'TI33_25')"   
-        
-        (2 data types)
-        "validation_two('Er', 0, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 0, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 1, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 1, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 2, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 2, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 3, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 3, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 4, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 4, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 5, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 5, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 6, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 6, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 8, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 8, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 10, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 10, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 20, 'TI33_3D', 'TI33_25', 'TI33_25')",
-        "validation_two('Er', 20, 'TI33_3D', 'TI33_25', 'TI33_25')"
-        
-        (1 data type)  
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 1)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 1)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 2)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 2)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 3)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 3)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 4)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 4)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 5)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 5)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 6)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 6)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 8)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 8)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 10)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 10)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 20)",
-        "validation_one('Er', 'TI33_2D_70.3', 'TI33_2D_70.3', 20)"
+        "validation_three('Er', 'Lu et al/B3090', 'Lu et al/B3090', 100, 'Lu et al/Berkovich', 14, 'Lu et al/FEM_70deg', 100, typ='hi')",
+        "validation_three('sigma_y', 'Lu et al/B3090', 'Lu et al/B3090', 100, 'Lu et al/Berkovich', 14, 'Lu et al/FEM_70deg', 100, typ='hi')",
+        "validation_three('Er', 'Lu et al/B3090', 'Lu et al/B3090', 100, 'Lu et al/Berkovich', 14, 'Lu et al/FEM_70deg', 100, typ='lo')",
+        "validation_three('sigma_y', 'Lu et al/B3090', 'Lu et al/B3090', 100, 'Lu et al/Berkovich', 14, 'Lu et al/FEM_70deg', 100, typ='lo')"
         '''
