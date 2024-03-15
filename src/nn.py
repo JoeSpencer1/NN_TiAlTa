@@ -112,10 +112,12 @@ def validation_one(yname, testname, trainname, n_hi, lay=2, wid=32):
     with open('output.txt', 'a') as f:
         f.write('validation_one ' + yname + ' ' + f'{np.mean(mape):.2f}' + ' ' + f'{np.std(mape):.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainname) + ' ' + str(n_hi) + ' ' + str(lay) + ' ' + str(wid) + '\n')
 
-def validation_two(yname, testname, trainhigh, n_hi, trainlow, n_lo, lay=2, wid=128):
+def validation_two(yname, testname, trainhigh, n_hi, trainlow, n_lo, v_lo=0, lay=2, wid=128):
     datalow = FileData(trainlow, yname)
     datahigh = FileData(trainhigh, yname)
     datatest = FileData(testname, yname)
+
+    datalow.y *= 1 + v_lo * np.random.normal(loc=0, scale=1, size=datalow.y.shape)
 
     mape = []
     iter = 0
@@ -151,16 +153,19 @@ def validation_two(yname, testname, trainhigh, n_hi, trainlow, n_lo, lay=2, wid=
             mape.append(dde.utils.apply(mfnn, (data,lay,wid,))[0])
 
     with open('output.txt', 'a') as f:
-        f.write('validation_two ' + yname + ' ' + f'{np.mean(mape, axis=0):.2f}' + ' ' + f'{np.std(mape, axis=0):.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + str(n_hi) + ' ' + t2s(trainlow) + ' ' + str(n_lo) + ' ' + str(lay) + ' ' + str(wid) + '\n')
+        f.write('validation_two ' + yname + ' ' + f'{np.mean(mape, axis=0):.2f}' + ' ' + f'{np.std(mape, axis=0):.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + str(n_hi) + ' ' + t2s(trainlow) + ' ' + str(v_lo) + ' ' + str(lay) + ' ' + str(wid) + '\n')
     print(np.std(mape))
     print(mape)
     print(yname, 'validation_two ', t2s(trainlow), ' ', t2s(trainhigh), ' ', str(n_hi), ' ', np.mean(mape), np.std(mape))
 
-def validation_three(yname, testname, trainexp, n_exp, trainhigh, n_hi, trainlow, n_lo, typ='hi',lay=2, wid=128):
+def validation_three(yname, testname, trainexp, n_exp, trainhigh, n_hi, trainlow, n_lo, typ='hi', v_lo=0, v_hi=0, lay=2, wid=128):
     datalow = FileData(trainlow, yname)
     datahigh = FileData(trainhigh, yname)
     dataexp = FileData(trainexp, yname)
     datatest = FileData(testname, yname)
+
+    datalow.y *= 1 + v_lo * np.random.normal(loc=0, scale=1, size=datalow.y.shape)
+    datahigh.y *= 1 + v_hi * np.random.normal(loc=0, scale=1, size=datahigh.y.shape)
 
     ape = []
     y = []
@@ -209,7 +214,7 @@ def validation_three(yname, testname, trainexp, n_exp, trainhigh, n_hi, trainlow
             y.append(res[2])
 
     with open('output.txt', 'a') as f:
-        f.write('validation_three ' + yname + ' ' + f'{np.mean(ape, axis=0)[0]:.2f}' + ' ' + f'{np.std(ape, axis=0)[0]:.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainexp) + ' ' + str(n_exp) + ' ' + t2s(trainhigh) + ' ' + str(n_hi) + ' ' + t2s(trainlow) + ' ' + str(n_lo) + ' ' + typ + ' ' + str(lay) + ' ' + str(wid) + '\n')
+        f.write('validation_three ' + yname + ' ' + f'{np.mean(ape, axis=0)[0]:.2f}' + ' ' + f'{np.std(ape, axis=0)[0]:.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainexp) + ' ' + str(n_exp) + ' ' + t2s(trainhigh) + ' ' + str(n_hi) + ' ' + t2s(trainlow) + ' ' + str(n_lo) + ' ' + typ + ' ' + str(v_hi) + ' ' + str(v_lo) + ' ' + str(lay) + ' ' + str(wid) + '\n')
     print('Saved to ', yname, '.dat.')
     np.savetxt(yname + '.dat', np.hstack(y).T)  
 
