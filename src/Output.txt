@@ -486,13 +486,13 @@ validation_three sigma_y 0.47 0.17 Lu et al/B3090 Lu et al/B3090 100 Lu et al/Be
 validation_three sigma_y 0.81 0.35 Lu et al/B3090 Lu et al/B3090 100 Lu et al/Berkovich 14 Lu et al/FEM_70deg 100 hi 2 128
 
 
-validation_one Er 3.30 2.64 TI33_25 TI33_25 10 2 32
 validation_one sigma_y 11.10 5.41 TI33_25 TI33_25 10 2 32
-validation_two Er 5.69 4.93 TI33_25 TI33_25 10 3D_quad 0.2 2 128
+validation_one Er 3.30 2.64 TI33_25 TI33_25 10 2 32
 validation_two sigma_y 20.87 8.18 TI33_25 TI33_25 10 3D_quad 0.2 2 128
+validation_two Er 5.69 4.93 TI33_25 TI33_25 10 3D_quad 0.2 2 128
 
+validation_two sigma_y 21.11 8.21 TI33_25 TI33_25 10 3D_quad 0 2 128
 validation_two Er 4.18 2.80 TI33_25 TI33_25 10 3D_quad 0 2 128
 validation_two sigma_y 31.33 12.90 TI33_25 TI33_25 10 3D_quad 0.3 2 128
 validation_two Er 5.45 2.33 TI33_25 TI33_25 10 3D_quad 0.3 2 128
-validation_two sigma_y 21.11 8.21 TI33_25 TI33_25 10 3D_quad 0 2 128
 
