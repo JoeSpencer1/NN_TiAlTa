@@ -11,10 +11,10 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
-        "validation_two('Er', 'TI33_25', 'TI33_25', 10, '3D_quad', 10, v_lo=0)",
-        "validation_two('sigma_y', 'TI33_25', 'TI33_25', 10, '3D_quad', 10, v_lo=0)",
-        "validation_two('Er', 'TI33_25', 'TI33_25', 10, '3D_quad', 10, v_lo=0.3)",
-        "validation_two('sigma_y', 'TI33_25', 'TI33_25', 10, '3D_quad', 10, v_lo=0.3)"
+        "validation_one('Er', '3D_quad', '3D_quad', 5)",
+        "validation_one('sigma_y', '3D_quad', '3D_quad', 5)",
+        "validation_one('Er', '3D_linear', '3D_linear', 5)",
+        "validation_one('sigma_y', '3D_linear', '3D_linear', 5)"
         ])
     
     processes = []
