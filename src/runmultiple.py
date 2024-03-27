@@ -11,10 +11,16 @@ def run_main(arg):
 if __name__ == '__main__':
 
     arguments = np.array([
-        "validation_one('Er', '3D_quad', '3D_quad', 5)",
+        "validation_one('sigma_y', '3D_quad', '3D_quad', 1)",
+        "validation_one('sigma_y', '3D_quad', '3D_quad', 2)",
+        "validation_one('sigma_y', '3D_quad', '3D_quad', 3)",
+        "validation_one('sigma_y', '3D_quad', '3D_quad', 4)",
         "validation_one('sigma_y', '3D_quad', '3D_quad', 5)",
-        "validation_one('Er', '3D_linear', '3D_linear', 5)",
-        "validation_one('sigma_y', '3D_linear', '3D_linear', 5)"
+        "validation_one('sigma_y', '3D_quad', '3D_quad', 6)",
+        "validation_one('sigma_y', '3D_quad', '3D_quad', 8)",
+        "validation_one('sigma_y', '3D_quad', '3D_quad', 10)",
+        "validation_one('sigma_y', '3D_quad', '3D_quad', 15)",
+        "validation_one('sigma_y', '3D_quad', '3D_quad', 20)"
         ])
     
     processes = []
@@ -29,10 +35,3 @@ if __name__ == '__main__':
         process.join()
     with open('output.txt', 'a') as f:
         f.write('\n')
-
-        '''
-        "validation_three('Er', 'Lu et al/B3090', 'Lu et al/B3090', 100, 'Lu et al/Berkovich', 14, 'Lu et al/FEM_70deg', 100, typ='hi')",
-        "validation_three('sigma_y', 'Lu et al/B3090', 'Lu et al/B3090', 100, 'Lu et al/Berkovich', 14, 'Lu et al/FEM_70deg', 100, typ='hi')",
-        "validation_three('Er', 'Lu et al/B3090', 'Lu et al/B3090', 100, 'Lu et al/Berkovich', 14, 'Lu et al/FEM_70deg', 100, typ='lo')",
-        "validation_three('sigma_y', 'Lu et al/B3090', 'Lu et al/B3090', 100, 'Lu et al/Berkovich', 14, 'Lu et al/FEM_70deg', 100, typ='lo')"
-        '''
