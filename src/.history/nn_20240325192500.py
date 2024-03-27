@@ -97,6 +97,8 @@ def validation_one(yname, testname, trainname, n_hi, n_vd=0.2, lay=2, wid=32):
     kf = ShuffleSplit(
         n_splits=10, train_size=n_hi, test_size=len(datatrain.X) - n_hi, random_state=0
     )
+    if n_hi == 0:
+        kf = ShuffleSplit(n_splits=10, test_size=2, n_hi=1, random_state=0)
 
     mape = []
     iter = 0
@@ -169,7 +171,7 @@ def validation_two(yname, testname, trainhigh, n_hi, trainlow, n_lo, v_lo=0, n_v
             mape.append(dde.utils.apply(mfnn, (data,lay,wid,))[0])
 
     with open('output.txt', 'a') as f:
-        f.write('validation_two ' + yname + ' ' + f'{np.mean(mape, axis=0):.2f}' + ' ' + f'{np.std(mape, axis=0):.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + str(n_hi) + ' ' + t2s(trainlow) + ' ' + str(n_lo) + ' ' + str(v_lo) + ' ' + str(n_vd) + ' ' + str(lay) + ' ' + str(wid) + '\n')
+        f.write('validation_two ' + yname + ' ' + f'{np.mean(mape, axis=0):.2f}' + ' ' + f'{np.std(mape, axis=0):.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + str(n_hi) + ' ' + t2s(trainlow) + ' ' + str(v_lo) + ' ' + str(n_vd) + ' ' + str(lay) + ' ' + str(wid) + '\n')
     print(np.std(mape))
     print(mape)
     print(yname, 'validation_two ', t2s(trainlow), ' ', t2s(trainhigh), ' ', str(n_hi), ' ', np.mean(mape), np.std(mape))

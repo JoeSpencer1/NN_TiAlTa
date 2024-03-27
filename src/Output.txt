@@ -580,33 +580,151 @@ validation_one sigma_y 8.69 6.83 3D_quad 3D_quad 5 5 2 32
 validation_one Er 17.58 17.31 TI33_25 TI33_25 5 5 2 32
 validation_one sigma_y 35.92 20.00 TI33_25 TI33_25 5 5 2 32
 
-validation_one sigma_y 0.01 0.01 3D_linear 3D_linear 1 5 2 32
-validation_one sigma_y 17.34 8.18 3D_linear 3D_linear 5 5 2 32
-validation_one sigma_y 195.41 306.16 3D_linear 3D_linear 2 5 2 32
-validation_one sigma_y 1.94 2.63 3D_linear 3D_linear 15 5 2 32
-validation_one sigma_y 79.38 126.02 3D_linear 3D_linear 3 5 2 32
-validation_one sigma_y 2.83 2.30 3D_linear 3D_linear 10 5 2 32
-validation_one sigma_y 10.22 4.74 3D_linear 3D_linear 6 5 2 32
-validation_one sigma_y 37.75 26.68 3D_linear 3D_linear 4 5 2 32
-validation_one sigma_y 5.26 3.38 3D_linear 3D_linear 8 5 2 32
 
-validation_one Er 1.67 1.42 3D_linear 3D_linear 10 5 2 32
-validation_one Er 17.58 17.13 3D_linear 3D_linear 4 5 2 32
+
+
+validation_one sigma_y 195.41 306.16 3D_linear 3D_linear 2 5 2 32
+validation_one sigma_y 79.38 126.02 3D_linear 3D_linear 3 5 2 32
+validation_one sigma_y 37.75 26.68 3D_linear 3D_linear 4 5 2 32
+validation_one sigma_y 17.34 8.18 3D_linear 3D_linear 5 5 2 32
+validation_one sigma_y 10.22 4.74 3D_linear 3D_linear 6 5 2 32
+validation_one sigma_y 5.26 3.38 3D_linear 3D_linear 8 5 2 32
+validation_one sigma_y 2.83 2.30 3D_linear 3D_linear 10 5 2 32
+validation_one sigma_y 1.94 2.63 3D_linear 3D_linear 15 5 2 32
+
 validation_one Er 47.97 23.17 3D_linear 3D_linear 2 5 2 32
 validation_one Er 23.34 22.00 3D_linear 3D_linear 3 5 2 32
-validation_one Er 5.33 5.55 3D_linear 3D_linear 8 5 2 32
+validation_one Er 17.58 17.13 3D_linear 3D_linear 4 5 2 32
 validation_one Er 8.53 6.99 3D_linear 3D_linear 5 5 2 32
-validation_one Er 0.00 0.00 3D_linear 3D_linear 1 5 2 32
-validation_one Er 1.88 1.89 3D_linear 3D_linear 15 5 2 32
 validation_one Er 5.08 2.25 3D_linear 3D_linear 6 5 2 32
+validation_one Er 5.33 5.55 3D_linear 3D_linear 8 5 2 32
+validation_one Er 1.67 1.42 3D_linear 3D_linear 10 5 2 32
+validation_one Er 1.88 1.89 3D_linear 3D_linear 15 5 2 32
 
 validation_one sigma_y 350.67 436.04 3D_quad 3D_quad 2 5 2 32
-validation_one sigma_y 3.26 1.73 3D_quad 3D_quad 10 5 2 32
-validation_one sigma_y 16.58 9.29 3D_quad 3D_quad 5 5 2 32
-validation_one sigma_y 3.13 3.15 3D_quad 3D_quad 15 5 2 32
-validation_one sigma_y 21.34 15.41 3D_quad 3D_quad 4 5 2 32
-validation_one sigma_y 0.01 0.01 3D_quad 3D_quad 1 5 2 32
 validation_one sigma_y 30.67 26.78 3D_quad 3D_quad 3 5 2 32
-validation_one sigma_y 7.55 5.82 3D_quad 3D_quad 8 5 2 32
+validation_one sigma_y 21.34 15.41 3D_quad 3D_quad 4 5 2 32
+validation_one sigma_y 16.58 9.29 3D_quad 3D_quad 5 5 2 32
 validation_one sigma_y 5.39 3.15 3D_quad 3D_quad 6 5 2 32
+validation_one sigma_y 7.55 5.82 3D_quad 3D_quad 8 5 2 32
+validation_one sigma_y 3.26 1.73 3D_quad 3D_quad 10 5 2 32
+validation_one sigma_y 3.13 3.15 3D_quad 3D_quad 15 5 2 32
+
+validation_one Er 354.37 526.39 3D_quad 3D_quad 2 5 2 32
+validation_one Er 31.05 36.89 3D_quad 3D_quad 3 5 2 32
+validation_one Er 12.67 15.31 3D_quad 3D_quad 4 5 2 32
+validation_one Er 10.22 6.99 3D_quad 3D_quad 5 5 2 32
+validation_one Er 4.35 2.28 3D_quad 3D_quad 6 5 2 32
+validation_one Er 3.00 1.66 3D_quad 3D_quad 8 5 2 32
+validation_one Er 1.97 1.09 3D_quad 3D_quad 10 5 2 32
+validation_one Er 1.15 0.83 3D_quad 3D_quad 15 5 2 32
+
+validation_one sigma_y 229.52 199.14 3D_linear_r 3D_linear_r 2 5 2 32
+validation_one sigma_y 76.83 80.36 3D_linear_r 3D_linear_r 3 5 2 32
+validation_one sigma_y 42.30 32.28 3D_linear_r 3D_linear_r 4 5 2 32
+validation_one sigma_y 29.62 27.00 3D_linear_r 3D_linear_r 5 5 2 32
+validation_one sigma_y 16.59 10.77 3D_linear_r 3D_linear_r 6 5 2 32
+validation_one sigma_y 14.48 13.78 3D_linear_r 3D_linear_r 8 5 2 32
+validation_one sigma_y 3.03 4.27 3D_linear_r 3D_linear_r 15 5 2 32
+validation_one sigma_y 6.27 6.27 3D_linear_r 3D_linear_r 10 5 2 32
+
+validation_one Er 146.14 186.59 3D_linear_r 3D_linear_r 2 5 2 32
+validation_one Er 22.21 10.41 3D_linear_r 3D_linear_r 3 5 2 32
+validation_one Er 13.55 9.62 3D_linear_r 3D_linear_r 4 5 2 32
+validation_one Er 8.46 4.83 3D_linear_r 3D_linear_r 5 5 2 32
+validation_one Er 5.84 4.57 3D_linear_r 3D_linear_r 6 5 2 32
+validation_one Er 3.76 3.71 3D_linear_r 3D_linear_r 8 5 2 32
+validation_one Er 2.78 3.94 3D_linear_r 3D_linear_r 10 5 2 32
+validation_one Er 0.37 0.13 3D_linear_r 3D_linear_r 15 5 2 32
+
+validation_one sigma_y 123.87 120.43 2D_70_quad 2D_70_quad 2 5 2 32
+validation_one sigma_y 53.50 35.08 2D_70_quad 2D_70_quad 3 5 2 32
+validation_one sigma_y 29.67 34.51 2D_70_quad 2D_70_quad 4 5 2 32
+validation_one sigma_y 44.72 36.78 2D_70_quad 2D_70_quad 5 5 2 32
+validation_one sigma_y 14.43 10.98 2D_70_quad 2D_70_quad 6 5 2 32
+validation_one sigma_y 6.89 5.40 2D_70_quad 2D_70_quad 8 5 2 32
+validation_one sigma_y 3.31 1.28 2D_70_quad 2D_70_quad 10 5 2 32
+validation_one sigma_y 3.08 2.64 2D_70_quad 2D_70_quad 15 5 2 32
+
+validation_one Er 1025.29 2713.32 2D_70_quad 2D_70_quad 2 5 2 32
+validation_one Er 38.27 33.87 2D_70_quad 2D_70_quad 3 5 2 32
+validation_one Er 29.22 32.31 2D_70_quad 2D_70_quad 4 5 2 32
+validation_one Er 19.17 28.87 2D_70_quad 2D_70_quad 5 5 2 32
+validation_one Er 7.13 5.04 2D_70_quad 2D_70_quad 6 5 2 32
+validation_one Er 6.87 11.44 2D_70_quad 2D_70_quad 8 5 2 32
+validation_one Er 2.56 2.14 2D_70_quad 2D_70_quad 10 5 2 32
+validation_one Er 0.58 0.61 2D_70_quad 2D_70_quad 15 5 2 32
+
+validation_one sigma_y 1319.28 1954.64 TI33_25 TI33_25 2 5 2 32
+validation_one sigma_y 62.82 47.11 TI33_25 TI33_25 3 5 2 32
+validation_one sigma_y 31.91 14.59 TI33_25 TI33_25 4 5 2 32
+validation_one sigma_y 38.15 23.02 TI33_25 TI33_25 5 5 2 32
+validation_one sigma_y 26.48 18.01 TI33_25 TI33_25 6 5 2 32
+validation_one sigma_y 9.65 5.66 TI33_25 TI33_25 8 5 2 32
+validation_one sigma_y 6.30 2.46 TI33_25 TI33_25 10 5 2 32
+validation_one sigma_y 6.68 4.13 TI33_25 TI33_25 15 5 2 32
+
+validation_one Er 586.45 1256.42 TI33_25 TI33_25 2 5 2 32
+validation_one Er 71.37 106.09 TI33_25 TI33_25 3 5 2 32
+validation_one Er 27.56 40.34 TI33_25 TI33_25 4 5 2 32
+validation_one Er 11.31 7.92 TI33_25 TI33_25 5 5 2 32
+validation_one Er 11.62 13.00 TI33_25 TI33_25 6 5 2 32
+validation_one Er 3.17 2.26 TI33_25 TI33_25 8 5 2 32
+validation_one Er 2.00 1.10 TI33_25 TI33_25 10 5 2 32
+validation_one Er 1.33 1.23 TI33_25 TI33_25 15 5 2 32
+
+validation_two sigma_y 2073.51 320.13 TI33_25 TI33_25 0 2D_70_linear_r 25 0 5 2 128
+validation_two sigma_y 424.68 225.70 TI33_25 TI33_25 1 2D_70_linear_r 25 0 5 2 128
+validation_two sigma_y 199.99 170.15 TI33_25 TI33_25 2 2D_70_linear_r 25 0 5 2 128
+validation_two sigma_y 105.46 50.02 TI33_25 TI33_25 3 2D_70_linear_r 25 0 5 2 128
+validation_two sigma_y 109.21 81.88 TI33_25 TI33_25 4 2D_70_linear_r 25 0 5 2 128
+validation_two sigma_y 42.74 17.96 TI33_25 TI33_25 5 2D_70_linear_r 25 0 5 2 128
+validation_two sigma_y 30.79 10.77 TI33_25 TI33_25 6 2D_70_linear_r 25 0 5 2 128
+validation_two sigma_y 28.42 19.85 TI33_25 TI33_25 8 2D_70_linear_r 25 0 5 2 128
+validation_two sigma_y 16.21 7.02 TI33_25 TI33_25 10 2D_70_linear_r 25 0 5 2 128
+validation_two sigma_y 10.27 3.44 TI33_25 TI33_25 15 2D_70_linear_r 25 0 5 2 128
+
+validation_two Er 133.07 42.38 TI33_25 TI33_25 0 2D_70_linear_r 0 5 2 128
+validation_two Er 48.00 26.05 TI33_25 TI33_25 1 2D_70_linear_r 0 5 2 128
+validation_two Er 56.83 45.46 TI33_25 TI33_25 2 2D_70_linear_r 0 5 2 128
+validation_two Er 16.22 15.02 TI33_25 TI33_25 3 2D_70_linear_r 0 5 2 128
+validation_two Er 8.28 7.46 TI33_25 TI33_25 4 2D_70_linear_r 0 5 2 128
+validation_two Er 11.03 8.00 TI33_25 TI33_25 5 2D_70_linear_r 0 5 2 128
+validation_two Er 4.85 2.96 TI33_25 TI33_25 6 2D_70_linear_r 0 5 2 128
+validation_two Er 4.75 3.16 TI33_25 TI33_25 8 2D_70_linear_r 0 5 2 128
+validation_two Er 2.85 2.64 TI33_25 TI33_25 10 2D_70_linear_r 0 5 2 128
+validation_two Er 2.55 6.04 TI33_25 TI33_25 15 2D_70_linear_r 0 5 2 128
+
+validation_two sigma_y 702.38 303.06 TI33_25 TI33_25 0 2D_70_quad 25 0 5 2 128
+validation_two sigma_y 334.00 148.21 TI33_25 TI33_25 1 2D_70_quad 25 0 5 2 128
+validation_two sigma_y 238.38 90.71 TI33_25 TI33_25 2 2D_70_quad 25 0 5 2 128
+validation_two sigma_y 157.44 54.38 TI33_25 TI33_25 3 2D_70_quad 25 0 5 2 128
+validation_two sigma_y 121.52 40.52 TI33_25 TI33_25 4 2D_70_quad 25 0 5 2 128
+validation_two sigma_y 108.34 43.20 TI33_25 TI33_25 5 2D_70_quad 25 0 5 2 128
+validation_two sigma_y 111.85 47.53 TI33_25 TI33_25 6 2D_70_quad 25 0 5 2 128
+validation_two sigma_y 84.39 52.85 TI33_25 TI33_25 8 2D_70_quad 25 0 5 2 128
+validation_two sigma_y 61.93 41.84 TI33_25 TI33_25 10 2D_70_quad 25 0 5 2 128
+validation_two sigma_y 29.96 24.60 TI33_25 TI33_25 15 2D_70_quad 25 0 5 2 128
+
+validation_two Er 271.68 35.83 TI33_25 TI33_25 0 2D_70_quad 25 0 5 2 128
+validation_two Er 64.42 38.73 TI33_25 TI33_25 1 2D_70_quad 25 0 5 2 128
+validation_two Er 90.95 51.82 TI33_25 TI33_25 2 2D_70_quad 25 0 5 2 128
+validation_two Er 43.12 40.50 TI33_25 TI33_25 3 2D_70_quad 25 0 5 2 128
+validation_two Er 15.46 6.32 TI33_25 TI33_25 4 2D_70_quad 25 0 5 2 128
+validation_two Er 16.07 3.91 TI33_25 TI33_25 5 2D_70_quad 25 0 5 2 128
+validation_two Er 15.85 9.50 TI33_25 TI33_25 6 2D_70_quad 25 0 5 2 128
+validation_two Er 7.45 2.29 TI33_25 TI33_25 8 2D_70_quad 25 0 5 2 128
+validation_two Er 4.74 1.71 TI33_25 TI33_25 10 2D_70_quad 25 0 5 2 128
+validation_two Er 3.03 3.02 TI33_25 TI33_25 15 2D_70_quad 25 0 5 2 128
+
+validation_two sigma_y 101.32 38.90 TI33_25 TI33_25 0 3D_linear_r 25 0 5 2 128
+validation_two sigma_y 41.69 21.75 TI33_25 TI33_25 1 3D_linear_r 25 0 5 2 128
+validation_two sigma_y 14.66 8.49 TI33_25 TI33_25 4 3D_linear_r 25 0 5 2 128
+validation_two sigma_y 21.28 16.74 TI33_25 TI33_25 3 3D_linear_r 25 0 5 2 128
+validation_two sigma_y 30.00 26.87 TI33_25 TI33_25 2 3D_linear_r 25 0 5 2 128
+validation_two sigma_y 5.62 1.82 TI33_25 TI33_25 5 3D_linear_r 25 0 5 2 128
+validation_two sigma_y 4.34 1.79 TI33_25 TI33_25 8 3D_linear_r 25 0 5 2 128
+validation_two sigma_y 5.79 2.10 TI33_25 TI33_25 6 3D_linear_r 25 0 5 2 128
+validation_two sigma_y 4.41 2.99 TI33_25 TI33_25 10 3D_linear_r 25 0 5 2 128
+validation_two sigma_y 2.15 1.28 TI33_25 TI33_25 15 3D_linear_r 25 0 5 2 128
 

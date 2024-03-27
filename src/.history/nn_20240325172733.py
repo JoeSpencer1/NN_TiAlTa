@@ -85,7 +85,7 @@ def validation_one(yname, testname, trainname, n_hi, n_vd=0.2, lay=2, wid=32):
     datatrain = FileData(trainname, yname)
     datatest = FileData(testname, yname)
 
-    n_vd = int(n_vd * datatrain.X.shape[0]) if n_vd < 1 else int(n_vd)
+    n_vd = int(n_vd * datatrain.X.shape[0])
     v_ind = np.random.choice(datatrain.X.shape[0], size=n_vd, replace=False)
     t_ind = np.setdiff1d(np.arange(datatrain.X.shape[0]), v_ind)
     dataval = FileData(testname, yname)
@@ -97,6 +97,8 @@ def validation_one(yname, testname, trainname, n_hi, n_vd=0.2, lay=2, wid=32):
     kf = ShuffleSplit(
         n_splits=10, train_size=n_hi, test_size=len(datatrain.X) - n_hi, random_state=0
     )
+    if n_hi == 0:
+        kf = ShuffleSplit(n_splits=10, test_size=2, n_hi=1, random_state=0)
 
     mape = []
     iter = 0
@@ -124,7 +126,7 @@ def validation_two(yname, testname, trainhigh, n_hi, trainlow, n_lo, v_lo=0, n_v
     datahigh = FileData(trainhigh, yname)
     datatest = FileData(testname, yname)
 
-    n_vd = int(n_vd * datahigh.X.shape[0]) if n_vd < 1 else int(n_vd)
+    n_vd = int(n_vd * datahigh.X.shape[0])
     v_ind = np.random.choice(datahigh.X.shape[0], size=n_vd, replace=False)
     t_ind = np.setdiff1d(np.arange(datahigh.X.shape[0]), v_ind)
     dataval = FileData(testname, yname)
@@ -169,7 +171,7 @@ def validation_two(yname, testname, trainhigh, n_hi, trainlow, n_lo, v_lo=0, n_v
             mape.append(dde.utils.apply(mfnn, (data,lay,wid,))[0])
 
     with open('output.txt', 'a') as f:
-        f.write('validation_two ' + yname + ' ' + f'{np.mean(mape, axis=0):.2f}' + ' ' + f'{np.std(mape, axis=0):.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + str(n_hi) + ' ' + t2s(trainlow) + ' ' + str(n_lo) + ' ' + str(v_lo) + ' ' + str(n_vd) + ' ' + str(lay) + ' ' + str(wid) + '\n')
+        f.write('validation_two ' + yname + ' ' + f'{np.mean(mape, axis=0):.2f}' + ' ' + f'{np.std(mape, axis=0):.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainhigh) + ' ' + str(n_hi) + ' ' + t2s(trainlow) + ' ' + str(v_lo) + ' ' + str(n_vd) + ' ' + str(lay) + ' ' + str(wid) + '\n')
     print(np.std(mape))
     print(mape)
     print(yname, 'validation_two ', t2s(trainlow), ' ', t2s(trainhigh), ' ', str(n_hi), ' ', np.mean(mape), np.std(mape))
@@ -180,7 +182,7 @@ def validation_three(yname, testname, trainexp, n_exp, trainhigh, n_hi, trainlow
     dataexp = FileData(trainexp, yname)
     datatest = FileData(testname, yname)
 
-    n_vd = (int(n_vd * dataexp.X.shape[0])) if n_vd < 1 else int(n_vd)
+    n_vd = int(n_vd * dataexp.X.shape[0])
     v_ind = np.random.choice(dataexp.X.shape[0], size=n_vd, replace=False)
     t_ind = np.setdiff1d(np.arange(dataexp.X.shape[0]), v_ind)
     dataval = FileData(testname, yname)

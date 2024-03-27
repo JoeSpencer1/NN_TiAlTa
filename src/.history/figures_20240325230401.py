@@ -1078,16 +1078,15 @@ plt.show()
 ''''''
 Bqx = [0.5, 0.25, 0.125]
 Bqy = [4.0372711553219845e-09, 7.747377814928931e-10, 1.9368444537322373e-10]
-Blx = [0.5, 0.25, 0.125]
-Bly = [8.819859692027829e-10, 3.302762232738491e-10, 8.256905581846215e-11]
-fx = [0.01, 1.5]
+Blx = [0.5, 0.25, 0.125, 0.0625]
+Bly = [8.819859692027829e-10, 3.302762232738491e-10, 8.256905581846215e-11, 3.519635368693401e-10]
+Bfx = [0.01, 1.5]
 C70lx = [0.25, 0.125, 0.0625, 0.03125]
-C70lx = [0.25, 0.125, 0.0625]
 C70ly = [1.5246585249772645e-09, 4.582326181224469e-10, 1.2222572353786809e-10, 3.0556430884467364e-11]
-C70ly = [1.5246585249772645e-09, 4.582326181224469e-10, 1.2222572353786809e-10]
 C70qx = [0.25, 0.125, 0.0625]
 C70qy = [1.3124579276878138e-09, 3.5390593493538945e-10, 8.847648373384798e-11]
 
+Cfx = [0.0025, 1]
 def equation(x, y, eqx):
     l = len(x) - 1
     p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
@@ -1100,27 +1099,27 @@ def equation(x, y, eqx):
     for i in range(2):
         eqy[i] = C * eqx[i] ** p
     return eqy
-Bfq = equation(Bqx, Bqy, fx)
-Bfl = equation(Blx, Bly, fx)
-f70l = equation(C70lx, C70ly, fx)
-f70q = equation(C70qx, C70qy, fx)
+Bfq = equation(Bqx, Bqy, Bfx)
+Bfl = equation(Blx, Bly, Bfx)
+f70l = equation(C70lx, C70ly, Cfx)
+f70q = equation(C70qx, C70qy, Cfx)
 
 fig, ax = plt.subplots()
-ax.scatter(Blx, Bly, color='blue', marker='s', facecolor='none', label='Linear 3D: $||e||_{L_{2}}=0.0031h^{1.71}$')
-ax.scatter(Bqx, Bqy, color='red', marker='^', facecolor='none', label='Qadratic 3D: $||e||_{L_{2}}=0.0177h^{2.19}$')
-ax.scatter(C70lx, C70ly, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=0.0194h^{1.82}$')
-ax.scatter(C70qx, C70qy, color='violet', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=0.0197h^{1.95}$')
-ax.plot(fx, Bfl, linestyle="--", color='blue')
-ax.plot(fx, Bfq, linestyle="--", color='red')
-ax.plot(fx, f70l, linestyle="--", color='gray')
-ax.plot(fx, f70q, linestyle="--", color='violet')
+ax.scatter(Blx, Bly, color='blue', marker='s', label='Linear 3D: $||e||_{L_{2}}=(0.12 \\times 10^{-3}) h^{1.47}$')
+ax.scatter(Bqx, Bqy, color='red', marker='o', facecolor='none', label='Qadratic 3D: $||e||_{L_{2}}=(0.19\\times 10^{-3})h^{2.16}$')
+ax.scatter(C70lx, C70ly, color='gray', marker='^', label='Linear 2D: $||e||_{L_{2}}=(7.41\\times 10 ^{-3})h^{1.86}$')
+ax.scatter(C70qx, C70qy, color='violet', marker='D', label='Qadratic 2D: $||e||_{L_{2}}=(0.11\\times 10^{-3})h^{2.13}$')
+ax.plot(Bfx, Bfl, linestyle="--", color='blue')
+ax.plot(Bfx, Bfq, linestyle="--", color='red')
+ax.plot(Bfx, f70l, linestyle="--", color='gray')
+ax.plot(Bfx, f70q, linestyle="--", color='violet')
 ax.plot()
 ax.set_xlabel('Element length (μm)')
 ax.set_xscale('log')
-ax.set_xlim([0.04, 0.8])
+ax.set_xlim([0.05, 1])
 ax.set_ylabel('L$_{2}$ error')
 ax.set_yscale('log')
-ax.set_ylim([8*10.0**-12, 0.6*10.0**-8])
+ax.set_ylim([0.05*10.0**-10, 10.0**-8])
 ax.grid(False)
 leg = ax.legend(loc='lower right')
 leg.set_title('Element order')

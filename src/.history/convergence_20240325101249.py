@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-'''
+''''''
 # 3D linear case
 maxh = 0.5
 df = pd.read_excel('../data/conv/3D_lin.xlsx')
@@ -76,8 +76,8 @@ print('p=', np.log(e1/e3)/np.log(4))
 print('p1=', np.log(e1/e4)/np.log(8))
 print('p2=', np.log(e2/e4)/np.log(4))
 print('C=', np.average([e1/maxh**(np.log(e1/e4)/np.log(8)), e2/(maxh/2)**(np.log(e1/e4)), e3/(maxh/2)**(np.log(e1/e4)/np.log(8)), e4/maxh**(np.log(e1/e4)/np.log(8))]))
-'''
-'''
+
+''''''
 # 3D Quadratic case
 maxh = 0.5
 df = pd.read_excel('../data/conv/3D_qua.xlsx')
@@ -139,7 +139,7 @@ print('e2=', e2)
 print('e3=', e3)
 print('p=', np.log(e1/e3)/np.log(4))
 print('C=', np.average([e1/maxh**(np.log(e1/e3)/np.log(4)), e2/(maxh/2)**(np.log(e1/e4)), e3/(maxh/2)**(np.log(e1/e4)/np.log(8))]))
-'''
+
 ''''''
 # 2D linear case
 maxh = 0.25
@@ -175,18 +175,19 @@ for i in range(len(x1)):
         if abs(x4[j] - x1[i]) + abs(y4[j] - y1[i]) + abs(z4[j] - z1[i]) < df['r4'][i]:
             df['r4'][i] = abs(x4[j] - x1[i]) + abs(y4[j] - y1[i]) + abs(z4[j] - z1[i])
             df['err4'][i] = D4[j]
-    print(i, ' ', D2[i], ' ', D3[i], ' ', D4[i])
+    print(i, ' ', D2[i], ' ', D3[i], ' ', D4[i], ' ', D5[i])
 e1 = 0
 e2 = 0
 e3 = 0
 e4 = 0
+e5 = 0
 
 leng = 0
 for i in range(len(x1)):
     if np.isnan(D1[i]):
         leng = float(i)
         break
-    # 8 total nodes in an element (4 + 4).
+    # 8 total nodes in an element (4 + 4). Midpoints are counted even though they could be interpolated.
     # ε = (∫(u-uh)^2)^0.5. Each body corner is used 8 times and each body edge is used 4 times.
     fac = 8 * maxh ** 2 / 8
     for axis in [x1, y1]:
@@ -196,27 +197,32 @@ for i in range(len(x1)):
             fac /= 2
         if axis.equals(y1) and axis[i] in (-4, 0):
             fac /= 2
+        if abs(axis[i] % maxh) > maxh / 4:
+            fac /= 2
 
-    sol = (4 * df['err4'][i] - df['err3'][i]) / 3
+    sol = (4 * df['err5'][i] - df['err4'][i]) / 3
     e1 += fac * (sol - D1[i]) ** 2
     e2 += fac * (sol - df['err2'][i]) ** 2
     e3 += fac * (sol - df['err3'][i]) ** 2
     e4 += fac * (sol - df['err4'][i]) ** 2
+    e5 += fac * (sol - df['err5'][i]) ** 2
     
 e1 = np.sqrt(e1)
 e2 = np.sqrt(e2)
 e3 = np.sqrt(e3)
 e4 = np.sqrt(e4)
+e5 = np.sqrt(e5)
 print('\ne1=', e1)
 print('e2=', e2)
 print('e3=', e3)
 print('e4=', e4)
+print('e5=', e5)
 print('p=', np.log(e1/e4)/np.log(8))
 print('p4=', np.log(e2/e4)/np.log(4))
 print('p3=', np.log(e1/e3)/np.log(4))
-print('C=', np.average([e1/maxh**(np.log(e1/e4)/np.log(8)), e2/(maxh/2)**(np.log(e1/e4)/np.log(8)), e3/(maxh/4)**(np.log(e1/e4)/np.log(8)), e4/(maxh/8)**(np.log(e1/e4)/np.log(8))]))
+print('C=', np.average([e1/maxh**(np.log(e1/e5)/np.log(16)), e2/(maxh/2)**(np.log(e1/e5)/np.log(16)), e3/(maxh/4)**(np.log(e1/e5)/np.log(16)), e4/(maxh/8)**(np.log(e1/e5)/np.log(16)), e5/(maxh/16)**(np.log(e1/e5)/np.log(16))]))
 
-'''
+
 # 2D Quadratic case
 maxh = 0.25
 df = pd.read_excel('../data/conv/2D_70_qua.xlsx')
@@ -272,14 +278,18 @@ for i in range(len(x1)):
         break
     # 8 total nodes in an element (4 + 4). get 4x the value of corners, but corners are counted twice in an element and twice as many times. total of 4x4+2x4=24 values
     # ε = (∫(u-uh)^2)^0.5. Each body corner is used 8 times and each body edge is used 4 times.
-    fac = 8 * maxh ** 2 / 24 # eacah corner node counted twice, can be on up to 4 elements, total of 24 nodes. Edge nodes are counted 4 times on 2 elements.
+    fac = 8 * maxh ** 2 / 24
     for axis in [x1, y1]:
+        if axis[i] % maxh != 0:
+            fac /= 2
         if axis.equals(x1) and axis[i] in (0, 2):
             fac /= 2
         if axis.equals(y1) and axis[i] in (-4, 0):
             fac /= 2
+        if abs(axis[i] % maxh) > maxh / 4:
+            fac *= 1
 
-    sol = (4 * df['err3'][i] - df['err2'][i]) / 3
+    sol = (4 * df['err5'][i] - df['err4'][i]) / 3
     e1 += fac * (sol - D1[i]) ** 2
     e2 += fac * (sol - df['err2'][i]) ** 2
     e3 += fac * (sol - df['err3'][i]) ** 2
@@ -296,6 +306,10 @@ print('e2=', e2)
 print('e3=', e3)
 print('e4=', e4)
 print('e5=', e5)
-print('p=', np.log(e1/e3)/np.log(4))
-print('C=', np.average([e1/maxh**(np.log(e1/e3)/np.log(4)), e2/(maxh/2)**(np.log(e1/e3)/np.log(4)), e3/(maxh/4)**(np.log(e1/e3)/np.log(4))]))
-'''
+print('p=', np.log(e1/e5)/np.log(16))
+print('p1=', np.log(e2/e5)/np.log(8))
+print('p2=', np.log(e1/e4)/np.log(8))
+print('p5=', np.log(e3/e5)/np.log(4))
+print('p4=', np.log(e2/e4)/np.log(4))
+print('p3=', np.log(e1/e3)/np.log(4))
+print('C=', np.average([e1/maxh**(np.log(e1/e5)/np.log(16)), e2/(maxh/2)**(np.log(e1/e5)/np.log(16)), e3/(maxh/4)**(np.log(e1/e5)/np.log(16)), e4/(maxh/8)**(np.log(e1/e5)/np.log(16)), e5/(maxh/16)**(np.log(e1/e5)/np.log(16))]))

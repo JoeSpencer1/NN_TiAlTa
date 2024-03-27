@@ -140,7 +140,7 @@ print('e3=', e3)
 print('p=', np.log(e1/e3)/np.log(4))
 print('C=', np.average([e1/maxh**(np.log(e1/e3)/np.log(4)), e2/(maxh/2)**(np.log(e1/e4)), e3/(maxh/2)**(np.log(e1/e4)/np.log(8))]))
 '''
-''''''
+'''
 # 2D linear case
 maxh = 0.25
 df = pd.read_excel('../data/conv/2D_70_lin.xlsx')
@@ -215,8 +215,8 @@ print('p=', np.log(e1/e4)/np.log(8))
 print('p4=', np.log(e2/e4)/np.log(4))
 print('p3=', np.log(e1/e3)/np.log(4))
 print('C=', np.average([e1/maxh**(np.log(e1/e4)/np.log(8)), e2/(maxh/2)**(np.log(e1/e4)/np.log(8)), e3/(maxh/4)**(np.log(e1/e4)/np.log(8)), e4/(maxh/8)**(np.log(e1/e4)/np.log(8))]))
-
 '''
+''''''
 # 2D Quadratic case
 maxh = 0.25
 df = pd.read_excel('../data/conv/2D_70_qua.xlsx')
@@ -252,18 +252,10 @@ for i in range(len(x1)):
         if abs(x4[j] - x1[i]) + abs(y4[j] - y1[i]) + abs(z4[j] - z1[i]) < df['r4'][i]:
             df['r4'][i] = abs(x4[j] - x1[i]) + abs(y4[j] - y1[i]) + abs(z4[j] - z1[i])
             df['err4'][i] = D4[j]
-    for j in range(len(x5)):
-        if np.isnan(D5[j]):
-            break
-        if abs(x5[j] - x1[i]) + abs(y5[j] - y1[i]) + abs(z5[j] - z1[i]) < df['r5'][i]:
-            df['r5'][i] = abs(x5[j] - x1[i]) + abs(y5[j] - y1[i]) + abs(z5[j] - z1[i])
-            df['err5'][i] = D5[j]
-    print(i, ' ', D2[i], ' ', D3[i], ' ', D4[i], ' ', D5[i])
+    print(i, ' ', D2[i], ' ', D3[i], ' ', D4[i])
 e1 = 0
 e2 = 0
 e3 = 0
-e4 = 0
-e5 = 0
 
 leng = 0
 for i in range(len(x1)):
@@ -283,19 +275,12 @@ for i in range(len(x1)):
     e1 += fac * (sol - D1[i]) ** 2
     e2 += fac * (sol - df['err2'][i]) ** 2
     e3 += fac * (sol - df['err3'][i]) ** 2
-    e4 += fac * (sol - df['err4'][i]) ** 2
-    e5 += fac * (sol - df['err5'][i]) ** 2
     
 e1 = np.sqrt(e1)
 e2 = np.sqrt(e2)
 e3 = np.sqrt(e3)
-e4 = np.sqrt(e4)
-e5 = np.sqrt(e5)
 print('\ne1=', e1)
 print('e2=', e2)
 print('e3=', e3)
-print('e4=', e4)
-print('e5=', e5)
 print('p=', np.log(e1/e3)/np.log(4))
 print('C=', np.average([e1/maxh**(np.log(e1/e3)/np.log(4)), e2/(maxh/2)**(np.log(e1/e3)/np.log(4)), e3/(maxh/4)**(np.log(e1/e3)/np.log(4))]))
-'''
