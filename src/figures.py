@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-'''
+''''''
 df = pd.read_csv('../data/model/compare.csv', skiprows=1)
 fig, ax = plt.subplots()
 ax.plot(df['Depth (nm)'], df['Load (uN)'], linewidth=0.3, color='gray', zorder=1, label='Experimental results')
@@ -32,15 +32,19 @@ ax.plot(df['Depth23 (nm)'], df['Load23 (uN)'], color='gray', linewidth=0.3, zord
 ax.plot(df['Depth24 (nm)'], df['Load24 (uN)'], color='gray', linewidth=0.3, zorder=1)
 ax.scatter(df['hm (nm)'], df['F (uN)'], color='blue', marker='.', zorder=2, label='3D FEM simulation')
 ax.scatter(df['Depth']*1000, df['Force'], color='red', marker='*', zorder=3, s = 10, label='2D FEM simulation')
-ax.set_xlabel('Indenter depth (nm)')
+#ax.set_xlabel('Indenter depth (nm)')
+ax.set_xlabel('Indenter depth (nm)', fontsize=14)
 ax.set_xlim([0, 275])
-ax.set_ylabel('Load (μN)')
+#ax.set_ylabel('Load (μN)')
+ax.set_ylabel('Load (μN)', fontsize=14)
 ax.set_ylim([0, 11000])
 ax.grid(False)
-leg = ax.legend()
+leg = ax.legend(fontsize=14)
+#leg = ax.legend()
+#plt.savefig('/Users/joe/Desktop/NN_graphs/R2comp.pdf', dpi=800, bbox_inches="tight")
 plt.savefig('/Users/joe/Desktop/R2comp.pdf', dpi=800, bbox_inches="tight")
 plt.show()
-'''
+
 '''
 Bqx = [0.5, 0.25, 0.125]
 Bqy = [4.0372711553219845e-09, 7.747377814928931e-10, 1.9368444537322373e-10]
@@ -93,72 +97,91 @@ leg.set_title('Element order')
 plt.savefig('/Users/joe/Desktop/linqd2D.pdf', dpi=800, bbox_inches="tight")
 plt.show()
 '''
-'''
+''''''
 # NN trained using only Exp data
 n = [2, 3, 4, 5, 6, 8, 10, 15]
-expσ = [1106.81, 69.63, 26.74, 26.09, 22.29, 14.31, 6.84, 4.44]
-εexpσ = [1753.26, 55.26, 14.42, 11.69, 20.16, 8.48, 3.68, 2.4]
-expE = [63.26, 54.73, 35.98, 10.44, 21.04, 3.82, 1.13, 2.68]
-εexpE = [60.11, 54.11, 61.9, 8.32, 29.84, 1.83, 1.13, 1.77]
+expσ = [459.25, 57.65, 37.62, 25.06, 21.03, 15.31, 10.36, 5.07]
+εexpσ = [782.72, 23.27, 20.01, 10.49, 15.46, 6.43, 5.35, 3.07]
+expE = [252.46, 68.7, 31.93, 20.65, 10.36, 4.55, 2.33, 0.75]
+εexpE = [374.75, 82.24, 33.76, 25.67, 5.88, 3, 1.99, 0.64]
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-ax1.errorbar(n, expσ, yerr = εexpσ, color = 'blue', label = "MAPE with experimental training data")
+ax1.errorbar(n, expσ, yerr = εexpσ, color = 'blue', label = "NN, experimental training data")
 ax1.set_yscale('log')
-ax1.set_ylim([2, 3000])
+ax1.set_ylim([1, 2000])
 ax1.set_xlim([-0.5, 16])
 ax1.set_xticks([0, 5, 10, 15])
-ax1.set_yticks([2, 5, 20, 200, 2000])
-ax1.set_yticklabels([2, 5, 20, 200, 2000])
-ax1.legend()
-ax1.set_ylabel("MAPE (%)")
-ax1.set_xlabel("Experimental training data size")
-ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
-              fontsize=12, ha="center",
+ax1.set_xticklabels([0, 5, 10, 15], fontsize=14)
+ax1.set_yticks([1, 5, 20, 200, 2000])
+ax1.set_yticklabels([1, 5, 20, 200, 2000], fontsize=14)
+ax1.legend(fontsize=14)
+#ax1.set_ylabel("MAPE (%)")
+#ax1.set_xlabel("Experimental training data size")
+#ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
+#              fontsize=12, ha="center",
+#              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+ax1.set_ylabel("MAPE (%)", fontsize=18)
+ax1.set_xlabel("Experimental training data", fontsize=18)
+ax1.annotate("A: $\sigma_{y}$", xy=(0.1, 0.95), xycoords="axes fraction",
+              fontsize=18, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
 
 ax2.errorbar(n, expE, yerr = εexpE, color = 'blue')
 ax2.set_yscale('log')
-ax2.set_ylim([1, 150])
+ax2.set_ylim([0.5, 2000])
 ax2.set_xlim([-0.5, 16])
 ax2.set_xticks([0, 5, 10, 15])
-ax2.set_yticks([1, 3, 10, 30,100])
-ax2.set_yticklabels([1, 3, 10, 30,100])
-ax2.legend()
-ax2.set_ylabel("MAPE (%)")
-ax2.set_xlabel("Experimental training data size")
+ax2.set_xticklabels([0, 5, 10, 15], fontsize=14)
+ax2.set_yticks([1, 5, 20, 200, 2000])
+ax2.set_yticklabels([1, 5, 20, 200, 2000], fontsize=14)
+#ax2.legend()
+#ax2.set_ylabel("MAPE (%)")
+#ax2.set_xlabel("Experimental training data size")
+ax2.set_ylabel("MAPE (%)", fontsize=18)
+ax2.set_xlabel("Experimental training data", fontsize=18)
 plt.subplots_adjust(bottom=0.180)
 fig.tight_layout()
-ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
-              fontsize=12, ha="center",
+ax2.annotate("B: $E_{r}$", xy=(0.1, 0.95), xycoords="axes fraction",
+              fontsize=18, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
-plt.savefig("/Users/Joe/Desktop/NN_graphs/NN_exp.pdf", dpi=800, bbox_inches="tight")
+#ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
+#              fontsize=12, ha="center",
+#              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+#plt.savefig("/Users/Joe/Desktop/NN_graphs/NN_exp.pdf", dpi=800, bbox_inches="tight")
+plt.savefig("/Users/Joe/Desktop/NN_exp.pdf", dpi=800, bbox_inches="tight")
 plt.show()
-'''
+
 '''
 # NN trained using only 3D FEM data
 n = [2, 3, 4, 5, 6, 8, 10, 15]
 # Quad
-quadσ = [186.66, 46.38, 28.6, 14.01, 9.74, 6.19, 3.22, 2.46]
-εquadσ = [189.15, 56.01, 23.82, 7.84, 4.39, 5.08, 1.45, 2.53]
-quadE = [345.4, 42.02, 14.72, 7.1, 4.34, 2.17, 2.59, 1.05]
-εquadE = [507.45, 62.97, 18.38, 6.16, 3.04, 1.25, 1.69, 0.86]
+quadσ = [986.74, 68.14, 48.33, 62.06, 25.37, 13.41, 8.88, 3.05]
+εquadσ = [2339.3, 74.76, 47.22, 100.05, 19.2, 9.73, 8.6, 1.83]
+quadE = [2778.98, 29.71, 16.23, 19.93, 11.04, 2.89, 3.04, 1.54]
+εquadE = [7709.45, 26.63, 11.26, 15.32, 6.96, 1.78, 2.08, 1.06]
 # Linear
-linσ = [1995.92, 48.35, 34.45, 22.19, 14.58, 6.71, 4.52, 2.86]
-εlinσ = [5267.5, 33.75, 21.54, 15.88, 8.52, 3.58, 3.35, 2.67]
-linE = [79.87, 36.83, 20.77, 8.3, 6.37, 3.6, 0.89, 1.6]
-εlinE = [70.26, 42.85, 29.94, 6.17, 4.53, 5.16, 0.37, 2.09]
-# Rough
-roughσ = [214.67, 105.36, 30.22, 32.76, 19.03, 11.82, 8.21, 0.51]
-εroughσ = [382.82, 74.29, 20.58, 23.93, 12.61, 14.24, 11.15, 0.56]
-roughE = [117.55, 29.76, 21.78, 8.34, 5.86, 5.95, 2.4, 0.36]
-εroughE = [129.98, 17.51, 15.83, 6.72, 4.59, 8.15, 5.36, 0.19]
+linσ = [266.1, 155.85, 52.86, 38.35, 35, 15.56, 11.59, 5.29]
+εlinσ = [239.74, 165.01, 36.87, 15.93, 21, 8.09, 3.81, 3.58]
+linE = [232.69, 99.21, 32.35, 15.87, 18.67, 7.28, 5.68, 2.97]
+εlinE = [318.25, 147.57, 30.52, 10.15, 15.33, 4.46, 5.21, 3.73]
+# Rough quad
+rqσ = [6130.41, 93.06, 68.02, 69.92, 23.77, 15.54, 12.41, 8.9]
+εrqσ = [17436.26, 102.86, 102.64, 97.61, 19.81, 7.79, 12.34, 13.79]
+rqE = [444.95, 63.66, 17.07, 17.74, 8.23, 4.52, 4.15, 1.88]
+εrqE = [1017.29, 76.11, 7.92, 25.78, 4.2, 2.98, 3.02, 1.51]
+# Rough linear
+rlσ = [331.35, 82.95, 35.96, 30.1, 21.16, 8.89, 6.3, 1.71]
+εrlσ = [313.91, 91.45, 27.63, 35.86, 14.47, 7.7, 3.96, 2]
+rlE = [133.23, 53.87, 19.23, 25.34, 6.98, 6.7, 4.04, 0.9]
+εrlE = [155.38, 57.54, 11.61, 42.93, 3.67, 11.62, 3.23, 0.58]
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'blue', label = "MAPE with quadratic 3D FEM training data")
-ax1.errorbar(n, linσ, yerr = εlinσ, color = 'darkorange', linestyle = '--', label = "MAPE with linear 3D FEM training data")
-ax1.errorbar(n, roughσ, yerr = εroughσ, color = 'red', linestyle = '-.', label = "MAPE with rough 3D FEM training data")
+ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'blue', label = "NN, quadratic 3D FEM training data")
+ax1.errorbar(n, linσ, yerr = εlinσ, color = 'darkorange', linestyle = '--', label = "NN, linear 3D FEM")
+ax1.errorbar(n, rqσ, yerr = εrqσ, color = 'red', linestyle = '-.', label = "NN, rough quadratic 3D FEM")
+ax1.errorbar(n, rlσ, yerr = εrlσ, color = 'green', linestyle = ':', label = "NN, rough linear 3D FEM")
 ax1.set_yscale('log')
-ax1.set_ylim([0.5, 3000])
+ax1.set_ylim([0.5, 2000])
 ax1.set_xlim([-0.5, 16])
 ax1.set_xticks([0, 5, 10, 15])
 ax1.set_yticks([1, 5, 20, 200, 2000])
@@ -172,14 +195,15 @@ ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
 
 ax2.errorbar(n, quadE, yerr = εquadE, color = 'blue')
 ax2.errorbar(n, linE, yerr = εlinE, color = 'darkorange', linestyle = '--')
-ax2.errorbar(n, roughE, yerr = εroughE, color = 'red', linestyle = '-.')
+ax2.errorbar(n, rqE, yerr = εrqE, color = 'red', linestyle = '-.')
+ax2.errorbar(n, rlE, yerr = εrlE, color = 'green', linestyle = ':')
 ax2.set_yscale('log')
 ax2.set_ylim([0.3, 400])
 ax2.set_xlim([-0.5, 16])
 ax2.set_xticks([0, 5, 10, 15])
-ax2.set_yticks([1, 3, 8, 20, 200])
-ax2.set_yticklabels([1, 3, 8, 20, 200])
-ax2.legend()
+ax2.set_yticks([1, 5, 20, 100, 400])
+ax2.set_yticklabels([1, 5, 20, 100, 400])
+#ax2.legend()
 ax2.set_ylabel("MAPE (%)")
 ax2.set_xlabel("3D FEM training data size")
 plt.subplots_adjust(bottom=0.180)
@@ -189,36 +213,42 @@ ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
 plt.savefig("/Users/Joe/Desktop/NN_graphs/NN_3D.pdf", dpi=800, bbox_inches="tight")
 plt.show()
-'''
-'''
+
+''''''
 # NN trained using only 2D FEM data
 n = [2, 3, 4, 5, 6, 8, 10, 15]
 # Quad
-quadσ = [138.11, 43.18, 45.15, 25.09, 11.48, 4.66, 4.98, 1.4]
-εquadσ = [105.82, 28.19, 39.35, 15.59, 8.58, 1.81, 3.01, 1.33]
-quadE = [107.11, 84.02, 33.06, 24.34, 8.55, 3.16, 0.99, 0.58]
-εquadE = [101.72, 144.88, 42.79, 34.47, 9.99, 3.55, 0.77, 0.63]
+quadσ = [212.94, 94.18, 45.21, 36.36, 43.48, 27.84, 30.22, 11.38]
+εquadσ = [198.4, 60.71, 32.85, 25.92, 42.98, 17.2, 29.49, 22.21]
+quadE = [148.56, 47.97, 24.67, 18.92, 15.01, 6.97, 5.99, 2.86]
+εquadE = [225.48, 47.25, 20.73, 14.04, 10.13, 4.31, 4.14, 3.95]
 # Linear
-linσ = [276.46, 137.41, 258.65, 149.91, 73.08, 65.71, 132.51, 36.05]
-εlinσ = [159.96, 131, 469.07, 165.62, 46.38, 44.83, 110.42, 61.28]
-linE = [5420.07, 175.19, 240.3, 67.63, 14.73, 47.28, 5.72, 15.84]
-εlinE = [14794.34, 260.99, 620.91, 103.07, 17.36, 30.32, 4.18, 22.52]
-# Rough
-roughσ = [354.03, 79.83, 70, 38.13, 23.22, 14.63, 10.4, 2.08]
-εroughσ = [838.61, 64.48, 99.67, 21.22, 12.49, 14.81, 5.42, 1.2]
-roughE = [93.73, 46.15, 75.98, 24.53, 8.7, 5.57, 3.15, 3.64]
-εroughE = [55.47, 24.75, 136.34, 21.07, 3.57, 3.84, 2.25, 3.17]
+linσ = [2442.06, 123.75, 131.23, 64.36, 41.86, 48.24, 47.69, 143.44]
+εlinσ = [5165.55, 121.11, 116.49, 40.47, 38.56,56.27, 98.03, 208.49]
+linE = [756.26, 39.38, 42.67, 15.69, 12.98, 7.54, 5.43, 10.7]
+εlinE = [1567.03, 50.9, 18.97, 14.32, 11.65, 12.1, 7.56, 14.37]
+# Rough quadratic
+rqσ = [413.5, 58.08, 18.11, 28.25, 11.46, 7.36, 3.89, 2.45]
+εrqσ = [815.19, 79.78, 16.59, 36.32, 5.59, 3.37, 2.83, 3.53]
+rqE = [257.90, 37.33, 31.51, 30.03, 8.33, 3.37, 2.55, 1.20]
+εrqE = [295.82, 47.03, 62.86, 61.95, 15.46, 2.69, 3.56, 1.31]
+# Rough linear
+rlσ = [234.01, 27.22, 10.86, 28.07, 12.04, 5.53, 3.48, 0.78]
+εrlσ = [330.48, 26.25, 7.01, 37.49, 18.06, 6.16, 7.04, 0.8]
+rlE = [231.74, 103.86, 27.39, 11.12, 11.89, 3.97, 3.16, 0.82]
+εrlE = [280.37, 148.34, 47.39, 17.79, 10.66, 3.4, 2.58, 0.5]
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'blue', label = "MAPE with quadratic 2D FEM training data")
-ax1.errorbar(n, linσ, yerr = εlinσ, color = 'darkorange', linestyle = '--', label = "MAPE with linear 2D FEM training data")
-ax1.errorbar(n, roughσ, yerr = εroughσ, color = 'red', linestyle = '-.', label = "MAPE with rough 2D FEM training data")
+ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'blue', label = "NN, quadratic 2D FEM training data")
+ax1.errorbar(n, linσ, yerr = εlinσ, color = 'darkorange', linestyle = '--', label = "NN, linear 2D FEM")
+ax1.errorbar(n, rqσ, yerr = εrqσ, color = 'red', linestyle = '-.', label = "NN, rough quadratic 2D FEM")
+ax1.errorbar(n, rlσ, yerr = εrlσ, color = 'green', linestyle = ':', label = "NN, rough linear 2D FEM")
 ax1.set_yscale('log')
-ax1.set_ylim([1, 2010])
+ax1.set_ylim([0.3, 2000])
 ax1.set_xlim([-0.5, 16])
 ax1.set_xticks([0, 5, 10, 15])
-ax1.set_yticks([1, 3, 10, 100, 1000])
-ax1.set_yticklabels([1, 3, 20, 200, 2000])
+ax1.set_yticks([1, 4, 40, 200, 2000])
+ax1.set_yticklabels([1, 4, 40, 200, 2000])
 ax1.legend()
 ax1.set_ylabel("MAPE (%)")
 ax1.set_xlabel("2D FEM training data size")
@@ -228,14 +258,15 @@ ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
 
 ax2.errorbar(n, quadE, yerr = εquadE, color = 'blue')
 ax2.errorbar(n, linE, yerr = εlinE, color = 'darkorange', linestyle = '--')
-ax2.errorbar(n, roughE, yerr = εroughE, color = 'red', linestyle = '-.')
+ax2.errorbar(n, rqE, yerr = εrqE, color = 'red', linestyle = '-.')
+ax2.errorbar(n, rlE, yerr = εrlE, color = 'green', linestyle = ':')
 ax2.set_yscale('log')
-ax2.set_ylim([0.5, 5500])
+ax2.set_ylim([0.2, 1000])
 ax2.set_xlim([-0.5, 16])
 ax2.set_xticks([0, 5, 10, 15])
 ax2.set_yticks([1, 5, 20, 200, 2000])
-ax2.set_yticklabels([1, 5, 20, 200, 2000])
-ax2.legend()
+ax2.set_yticklabels([1, 5, 20, 100, 1000])
+#ax2.legend()
 ax2.set_ylabel("MAPE (%)")
 ax2.set_xlabel("2D FEM training data size")
 plt.subplots_adjust(bottom=0.180)
@@ -245,35 +276,41 @@ ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
 plt.savefig("/Users/Joe/Desktop/NN_graphs/NN_2D.pdf", dpi=800, bbox_inches="tight")
 plt.show()
-'''
-'''
+
+''''''
 # NN trained using 3D FEM + exp data
-n = [0, 1,2, 3, 4, 5, 6, 8, 10, 15]
+n = [1, 2, 3, 4, 5, 6, 8, 10, 15]
 # Quad
-quadσ = [740.72, 252.74, 111.54, 90.05, 90.79, 32.03, 38.39, 23.28, 24.59, 8.57]
-εquadσ = [404.34, 203.45, 66.79, 44.65, 94.55, 14.62, 24.99, 12.25, 23.08, 8.65]
-quadE = [61.32, 52.72, 15.51, 14.08, 10.74, 8.83, 7.09, 6.64, 4.44, 1.7]
-εquadE = [27.06, 39.16, 10.11, 6.88, 5.72, 4.42, 4.01, 3.69, 3.97, 3.21]
+quadσ = [1059.66, 100.98, 92.71, 30.64, 23.04, 17.84, 21.85, 15.16, 10.92]
+εquadσ = [636.84, 102.66, 104.39, 19.21, 12.42, 6.85, 10.31, 9.01, 9.78]
+quadE = [24.29, 23.16, 10.45, 11.09, 5.52, 5.61, 3.91, 2.93, 1.68]
+εquadE = [10.07, 15.14, 9.92, 7.51, 3.91, 5.65, 3.78, 1.88, 1.21]
 # Linear
-linσ = [543.86, 128.53, 97.73, 35.13, 21.94, 15.6, 13.91, 4.88, 4.29, 2.25]
-εlinσ = [303.57, 112.67, 107.49, 22.73, 14.82, 10.68, 12.13, 2.04, 2.66, 1.16]
-linE = [138.04, 19.43, 17.34, 13.28, 6.33, 3.19, 2.37, 1.54, 0.61, 0.2]
-εlinE = [52.77, 10.9, 17.39, 14.92, 10.78, 3.46, 1.51, 2.54, 0.39, 0.1]
-# Rough
-roughσ = [101.42, 44.69, 36.98, 20.33, 15.55, 7.81, 7.37, 4.67, 2.57, 2.05]
-εroughσ = [33.53, 20.28, 21.55, 14.56, 13.14, 2.69, 4.22, 2.56, 0.82, 1.27]
-roughE = [35.39, 3.56, 2.1, 1.52, 1.4, 0.9, 1.05, 0.54, 0.31, 0.21]
-εroughE = [5.22, 1.37, 1.03, 0.71, 0.7, 0.27, 0.69, 0.19, 0.14, 0.12]
+linσ = [1150.53, 73.17, 33.75, 24.88, 18.33, 13.9, 16.63, 8.6, 5.7]
+εlinσ = [950.8, 47.15, 17.25, 12.27, 11.61, 14.89, 4.78, 2.92, 3.84]
+linE = [43.66, 35.36, 7.44, 8.62, 4.38, 2.61, 1.83, 2.22, 0.89]
+εlinE = [41.87, 60.42, 3.24, 7.3, 2.85, 1.57, 0.93, 1.64, 0.48]
+# Rough quadratic
+rqσ = [1289.19, 241.96, 28.5, 20.11, 11.87, 10.18, 7.99, 4.65, 4.34]
+εrqσ = [1046.94, 516.09, 25.18, 14.51, 6.47, 6.28, 4.94, 3.34, 2.8]
+rqE = [17.2, 8.37, 2.35, 3.65, 2.54, 1.45, 1.1, 1.26, 0.58]
+εrqE = [8.1, 8.44, 2.08, 2.65, 2.5, 1.53, 0.42, 0.85, 0.39]
+# Rough linear
+rlσ = [1675.69, 21.21, 12.83, 6.27, 5.59, 6.9, 4.63, 6.51, 1.54]
+εrlσ = [804.48, 17.93, 9.39, 2.21, 3.41, 4.69, 2.35, 4.95, 0.94]
+rlE = [20.15, 5.9, 4.21, 3.32, 1.78, 2.04, 1.53, 1.32, 0.41]
+εrlE = [9.95, 4.12, 6.2, 2.25, 1.25, 1.95, 1.1, 1.19, 0.29]
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'blue', label = "MFNN trained with quadratic 3D FEM training data")
-ax1.errorbar(n, linσ, yerr = εlinσ, color = 'darkorange', linestyle = '--', label = "MAPE with linear 3D FEM training data")
-ax1.errorbar(n, roughσ, yerr = εroughσ, color = 'red', linestyle = '-.', label = "MAPE with rough 3D FEM training data")
+ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'blue', label = "MFNN, quadratic 3D FEM + experiment")
+ax1.errorbar(n, linσ, yerr = εlinσ, color = 'darkorange', linestyle = '--', label = "MFNN, linear 3D FEM + experiment")
+ax1.errorbar(n, rqσ, yerr = εrqσ, color = 'red', linestyle = '-.', label = "MFNN, rough quadratic 3D FEM + experiment")
+ax1.errorbar(n, rlσ, yerr = εrlσ, color = 'green', linestyle = ':', label = "MFNN, rough linear 3D FEM + experiment")
 ax1.set_yscale('log')
-ax1.set_ylim([1, 2010])
+ax1.set_ylim([1, 2000])
 ax1.set_xlim([-0.5, 16])
 ax1.set_xticks([0, 5, 10, 15])
-ax1.set_yticks([1, 3, 10, 100, 1000])
+ax1.set_yticks([1, 3, 20, 200, 2000])
 ax1.set_yticklabels([1, 3, 20, 200, 2000])
 ax1.legend()
 ax1.set_ylabel("MAPE (%)")
@@ -284,14 +321,15 @@ ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
 
 ax2.errorbar(n, quadE, yerr = εquadE, color = 'blue')
 ax2.errorbar(n, linE, yerr = εlinE, color = 'darkorange', linestyle = '--')
-ax2.errorbar(n, roughE, yerr = εroughE, color = 'red', linestyle = '-.')
+ax2.errorbar(n, rqE, yerr = εrqE, color = 'red', linestyle = '-.')
+ax2.errorbar(n, rlE, yerr = εrlE, color = 'green', linestyle = ':')
 ax2.set_yscale('log')
-ax2.set_ylim([0.1, 200])
+ax2.set_ylim([0.5, 100])
 ax2.set_xlim([-0.5, 16])
 ax2.set_xticks([0, 5, 10, 15])
-ax2.set_yticks([1, 5, 20, 200])
-ax2.set_yticklabels([1, 5, 20, 200])
-ax2.legend()
+ax2.set_yticks([1, 3, 10, 30, 100])
+ax2.set_yticklabels([1, 3, 10, 30, 100])
+#ax2.legend()
 ax2.set_ylabel("MAPE (%)")
 ax2.set_xlabel("Experimental training data size")
 plt.subplots_adjust(bottom=0.180)
@@ -301,36 +339,122 @@ ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
 plt.savefig("/Users/Joe/Desktop/NN_graphs/MFNN_3Dexp.pdf", dpi=800, bbox_inches="tight")
 plt.show()
-'''
+
 '''
 # NN trained using 2D FEM + exp data
-n = [0, 1,2, 3, 4, 5, 6, 8, 10, 15]
+n = [1, 2, 3, 4, 5, 6, 8, 10, 15]
 # Quad
-quadσ = [581.3, 339.88, 285.23, 150.08, 191.27, 122.55, 168.67, 89.58, 48.09, 24.95]
-εquadσ = [158.29, 306.29, 158.49, 65.99, 90.44, 53.61, 116.04, 48.03, 24.65, 12.05]
-quadE = [298.82, 64.09, 54.9, 53.03, 26.08, 26.25, 12.9, 10.98, 5.48, 2.82]
-εquadE = [40.3, 57.51, 46.59, 24.41, 23.17, 16.96, 6.82, 5.51, 2.93, 4.43]
+quadσ = [1361.85, 863.64, 123.4, 126.98, 72.64, 60.89, 59.13, 32.84, 13.14]
+εquadσ = [1111.76, 1540.86, 50.87, 65.35, 22.83, 20.09, 27.33, 21.3, 11.13]
+quadE = [65.44, 34.84, 38.36, 21.29, 11.58, 8.96, 5.74, 4.96, 3.39]
+εquadE = [51.47, 32.09, 69.16, 24.89, 6.36, 4.36, 2.89, 5.12, 1.63]
 # Linear
-linσ = [1466.83, 283.36, 240.21, 86.12, 62.09, 104.42, 28.63, 15.78, 18.84, 9.37]
-εlinσ = [466.01, 184.79, 240.76, 85.69, 39.93, 121.31, 19.92, 10.14, 15.83, 6.07]
-linE = [284.24, 122.93, 39.28, 7.33, 16.92, 8.45, 4.36, 2.09, 1.59, 1.37]
-εlinE = [27.14, 68.5, 48.34, 5, 21.8, 9.25, 4.24, 3.26, 1.97, 3.2]
-# Rough
-roughσ = [2210.49, 434.87, 202.75, 125.6, 63.71, 48.32, 39.08, 27.1, 20.68, 12.65]
-εroughσ = [497.72, 237.52, 133.06, 120, 24.73, 21.33, 15.24, 13.25, 10.21, 10.12]
-roughE = [136.36, 64.29, 26.06, 14.32, 6.82, 8.78, 8.77, 3.06, 2.07, 1.34]
-εroughE = [38.96, 38.14, 20.43, 10.47, 2.27, 6.67, 6.37, 2.05, 1.59, 1.62]
+linσ = [1723.27, 221, 53.92, 54.41, 83.75, 23.93, 25.42, 23.64, 13.26]
+εlinσ = [1685.46, 228.88, 30.26, 25.8, 117.77, 12.7, 27.64, 14.13, 11.15]
+linE = [80.47, 15.82, 7.7, 11.13, 6.26, 3.17, 2.25, 2.8, 2.89]
+εlinE = [113.42, 12.53, 8.1, 12.09, 3.01, 1.69, 1.77, 2.79, 5.28]
+# Rough quadratic
+rqσ = [14618, 10.57, 3.33, 1.94, 1.36, 1, 1.07, 0.73, 0.66]
+εrqσ = [37534.82, 13.1, 3.41, 1.87, 0.62, 0.38, 0.61, 0.31, 0.23]
+rqE = [0.83, 32.76, 0.53, 0.24, 0.26, 0.23, 0.14, 0.1, 0.12]
+εrqE = [0.49, 31.93, 0.59, 0.2, 0.15, 0.2, 0.11, 0.05, 0.06]
+# Rough linear
+rlσ = [2382.1, 2.93, 1.81, 1.12, 0.91, 0.96, 0.81, 0.73, 0.68]
+εrlσ = [1759.34, 2.29, 1.25, 0.94, 0.63, 0.33, 0.44, 0.43, 0.55]
+rlE = [18.97, 0.3, 0.19, 0.14, 0.16, 0.11, 0.1, 0.05, 0.06]
+εrlE = [13.92, 0.23, 0.22, 0.09, 0.21, 0.06, 0.04, 0.03, 0.03]
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'blue', label = "MFNN trained with quadratic 2D FEM training data")
-ax1.errorbar(n, linσ, yerr = εlinσ, color = 'darkorange', linestyle = '--', label = "MAPE with linear 2D FEM training data")
-ax1.errorbar(n, roughσ, yerr = εroughσ, color = 'red', linestyle = '-.', label = "MAPE with rough 2D FEM training data")
+#ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'blue', label = "MFNN, quadratic 2D FEM + experiment")
+#ax1.errorbar(n, linσ, yerr = εlinσ, color = 'darkorange', linestyle = '--', label = "MFNN, linear 2D FEM + experiment")
+#ax1.errorbar(n, rqσ, yerr = εrqσ, color = 'red', linestyle = '-.', label = "MFNN, rought quadratic 2D FEM + experiment")
+#ax1.errorbar(n, rlσ, yerr = εrlσ, color = 'green', linestyle = ':', label = "MFNN, rough linear 2D FEM + experiment")
+ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'blue', label = "quadr 2D FEM + experiment")
+ax1.errorbar(n, linσ, yerr = εlinσ, color = 'darkorange', linestyle = '--', label = "linear 2D FEM + experiment")
+ax1.errorbar(n, rqσ, yerr = εrqσ, color = 'red', linestyle = '-.', label = "rought quad 2D FEM + experiment")
+ax1.errorbar(n, rlσ, yerr = εrlσ, color = 'green', linestyle = ':', label = "rough linear 2D FEM + experiment")
 ax1.set_yscale('log')
-ax1.set_ylim([5, 3000])
+ax1.set_ylim([0.5, 3000])
 ax1.set_xlim([-0.5, 16])
 ax1.set_xticks([0, 5, 10, 15])
-ax1.set_yticks([5, 20, 100, 1000])
-ax1.set_yticklabels([5, 20, 100, 1000])
+ax1.set_xticklabels([0, 5, 10, 15], fontsize=12)
+ax1.set_yticks([1, 5, 50, 500, 3000])
+ax1.set_yticklabels([1, 5, 50, 500, 3000], fontsize=12)
+#ax1.legend()
+#ax1.set_ylabel("MAPE (%)")
+#ax1.set_xlabel("Experimental training data size")
+#ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
+#              fontsize=12, ha="center",
+#              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+ax1.legend(fontsize=12)
+ax1.set_ylabel("MAPE (%)", fontsize=18)
+ax1.set_xlabel("Experimental training data", fontsize=18)
+ax1.annotate("A: $\sigma_{y}$", xy=(0.1, 0.95), xycoords="axes fraction",
+              fontsize=18, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+ax2.errorbar(n, quadE, yerr = εquadE, color = 'blue')
+ax2.errorbar(n, linE, yerr = εlinE, color = 'darkorange', linestyle = '--')
+ax2.errorbar(n, rqE, yerr = εrqE, color = 'red', linestyle = '-.')
+ax2.errorbar(n, rlE, yerr = εrlE, color = 'green', linestyle = ':')
+ax2.set_yscale('log')
+ax2.set_ylim([0.5, 200])
+ax2.set_xlim([-0.5, 16])
+ax2.set_xticks([0, 5, 10, 15])
+ax2.set_xticklabels([0, 5, 10, 15], fontsize=12)
+ax2.set_yticks([1, 5, 20, 50, 200])
+ax2.set_yticklabels([1, 5, 20, 50, 200], fontsize=12)
+#ax2.legend()
+#ax2.set_ylabel("MAPE (%)")
+#ax2.set_xlabel("Experimental training data size")
+plt.subplots_adjust(bottom=0.180, left=0.08, right=0.95, wspace=0.18, hspace=0.5)
+#fig.tight_layout()
+#ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
+#              fontsize=12, ha="center",
+#              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+ax2.set_ylabel("MAPE (%)", fontsize=18)
+ax2.set_xlabel("Experimental training data", fontsize=18)
+ax2.annotate("A: $\sigma_{y}$", xy=(0.1, 0.95), xycoords="axes fraction",
+              fontsize=18, ha="center",
+              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/NN_graphs/MFNN_2Dexp.pdf", dpi=800, bbox_inches="tight")
+plt.show()
+'''
+''''''
+# NN trained using 2D FEM + 3D FEM + exp data
+n = [1, 2, 3, 4, 5, 6, 8, 10, 15]
+# Quad lo
+quadσ = [871.38, 263.41, 115.62, 53.59, 59.53, 21.74, 17.79, 9.61, 5.69]
+εquadσ = [1226.36, 240.95, 166.55, 29.94, 45.5, 7.92, 7.32, 2.5, 1.69]
+quadE = [161.76, 27.14, 35.97, 28.67, 10.65, 13.45, 3.83, 3.23, 0.84]
+εquadE = [205.34, 21.01, 42.06, 55.88, 6.1, 12.5, 1.44, 1.5, 0.38]
+# Linear lo
+linσ = [552.3, 94.28, 58.61, 46.12, 43.19, 20.47, 16.58, 11.12, 4.86]
+εlinσ = [441.62, 60.1, 39.11, 15.78, 35.69, 8.91, 7.72, 9.43, 1.86]
+linE = [200.11, 138.47, 35.57, 7.11, 6.17, 5.41, 2.73, 1.92, 0.65]
+εlinE = [184.05, 317.07, 56.48, 3.59, 3.72, 4.81, 1.32, 1.91, 0.57]
+# Rough quadratic lo
+rqσ = [213.68, 11.13, 13.18, 5.18, 3.36, 2.83, 0.92, 0.83, 0.7]
+εrqσ = [314.93, 9.34, 11.19, 3.5, 1.37, 1.67, 0.29, 0.45, 0.23]
+rqE = [48.12, 8.01, 3.2, 1.35, 0.75, 0.68, 0.15, 0.12, 0.09]
+εrqE = [39.6, 6.53, 2.23, 0.9, 0.38, 0.52, 0.08, 0.04, 0.03]
+# Rough linear lo
+rlσ = [63.52, 9.18, 6.64, 1.57, 1.93, 1.57, 1.14, 0.84, 0.58]
+εrlσ = [70, 7.01, 4.87, 0.58, 0.87, 1.39, 0.28, 0.35, 0.18]
+rlE = [11.48, 3.26, 0.61, 0.26, 0.26, 0.18, 0.09, 0.1, 0.05]
+εrlE = [4.86, 2.47, 0.61, 0.2, 0.21, 0.13, 0.05, 0.03, 0.02]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'blue', label = "MFNN, quadratic 2D & 3D FEM low training")
+ax1.errorbar(n, linσ, yerr = εlinσ, color = 'darkorange', linestyle = '--', label = "MFNN, linear FEM + experiment")
+ax1.errorbar(n, rqσ, yerr = εrqσ, color = 'red', linestyle = '-.', label = "MFNN, rough quadratic FEM + experiment")
+ax1.errorbar(n, rlσ, yerr = εrlσ, color = 'green', linestyle = ':', label = "MFNN, rough linear FEM + experiment")
+ax1.set_yscale('log')
+ax1.set_ylim([0.5, 1000])
+ax1.set_xlim([-0.5, 16])
+ax1.set_xticks([0, 5, 10, 15])
+ax1.set_yticks([1, 5, 20, 100, 1000])
+ax1.set_yticklabels([1, 5, 20, 100, 1000])
 ax1.legend()
 ax1.set_ylabel("MAPE (%)")
 ax1.set_xlabel("Experimental training data size")
@@ -340,14 +464,15 @@ ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
 
 ax2.errorbar(n, quadE, yerr = εquadE, color = 'blue')
 ax2.errorbar(n, linE, yerr = εlinE, color = 'darkorange', linestyle = '--')
-ax2.errorbar(n, roughE, yerr = εroughE, color = 'red', linestyle = '-.')
+ax2.errorbar(n, rqE, yerr = εrqE, color = 'red', linestyle = '-.')
+ax2.errorbar(n, rlE, yerr = εrlE, color = 'green', linestyle = ':')
 ax2.set_yscale('log')
-ax2.set_ylim([1, 350])
+ax2.set_ylim([0.5, 500])
 ax2.set_xlim([-0.5, 16])
 ax2.set_xticks([0, 5, 10, 15])
-ax2.set_yticks([1, 5, 20, 200])
-ax2.set_yticklabels([1, 5, 20, 200])
-ax2.legend()
+ax2.set_yticks([1, 5, 20, 100, 500])
+ax2.set_yticklabels([1, 5, 20, 100, 500])
+#ax2.legend()
 ax2.set_ylabel("MAPE (%)")
 ax2.set_xlabel("Experimental training data size")
 plt.subplots_adjust(bottom=0.180)
@@ -355,38 +480,44 @@ fig.tight_layout()
 ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
               fontsize=12, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
-plt.savefig("/Users/Joe/Desktop/NN_graphs/MFNN_2Dexp.pdf", dpi=800, bbox_inches="tight")
+plt.savefig("/Users/Joe/Desktop/NN_graphs/MFNN_2D3Dexp_lo.pdf", dpi=800, bbox_inches="tight")
 plt.show()
-'''
-'''
+
+
 # NN trained using 2D FEM + 3D FEM + exp data
 n = [1, 2, 3, 4, 5, 6, 8, 10, 15]
 # Quad hi
-quadσ = [273.27, 288.5, 202.79, 176.52, 120.24, 109.72, 74.81, 58.34, 29.89]
-εquadσ = [89.66, 138.66, 42.88, 93.03, 52.6, 29.28, 27.27, 22.3, 12.61]
-quadE = [40.6, 74.6, 48.21, 19.1, 19.34, 24.72, 8.08, 6.48, 3.52]
-εquadE = [21.99, 70.98, 48.16, 14.9, 8.7, 14.3, 2.25, 3.87, 1.39]
+quadσ = [58114.36, 341.14, 351.02, 235.6, 175.72, 137.22, 59.99, 44.14, 21.09]
+εquadσ = [149848.96, 1243.39, 258.34, 164.15, 140.49, 65.35, 21.89, 18.5, 4.31]
+quadE = [176.13, 487.97, 45.47, 21.19, 14.48, 14.53, 12, 10.51, 2.17]
+εquadE = [159.43, 458.61, 41.58, 13.95, 4.45, 13.54, 9.93, 12.44, 0.85]
 # Linear hi
-linσ = [225.86, 231.38, 36.09, 41.8, 32.38, 30.56, 23.63, 13.09, 5.92]
-εlinσ = [122.36, 191.19, 15.26, 15.23, 13.38, 20.66, 24.05, 6.11, 1.13]
-linE = [101.9, 77.21, 30.27, 13.15, 4, 3.69, 1.95, 1.53, 0.56]
-εlinE = [83.94, 93.03, 61.48, 14.87, 2.41, 2.86, 1.14, 1.01, 0.19]
-# Rough
-roughσ = [329.53, 197.85, 111.31, 83.08, 48.97, 37.71, 32.17, 14.57, 8.16]
-εroughσ = [134.78, 125.41, 59.23, 86.59, 30.54, 19.5, 37.55, 3.42, 2.31]
-roughE = [80.23, 26.61, 8.5, 9.2, 7.73, 8.26, 4.24, 2.42, 1.35]
-εroughE = [41.73, 29.27, 3.37, 8.05, 6.94, 7.91, 1.91, 0.99, 0.57]
+linσ = [4551.18, 2237.59, 89.47, 173.2, 60.55, 50.27, 35.49, 22.81, 6.1]
+εlinσ = [10147.38, 2559.53, 61.26, 147.02, 23.91, 45.5, 38.69, 13.16, 2.14]
+linE = [262.42, 831.94, 45.07, 24.43, 15.28, 10.81, 4.93, 2.12, 0.69]
+εlinE = [243.41, 1505.22, 51.23, 31.87, 10.25, 15.79, 2.24, 1.41, 0.86]
+# Rough quadratic hi
+rqσ = [11031.18, 23.43, 8.77, 3.96, 2.75, 1.47, 2.31, 1.13, 0.56]
+εrqσ = [20684.23, 18.78, 7.55, 1.88, 2.2, 0.83, 2.28, 0.15, 0.31]
+rqE = [71.47, 20.03, 3.74, 3.92, 0.7, 0.73, 0.36, 0.21, 0.09]
+εrqE = [104.42, 44.15, 3.68, 9, 0.69, 1.04, 0.34, 0.13, 0.02]
+# Rough linear hi
+rlσ = [4147.81, 48.35, 4.56, 3.83, 2.52, 2.04, 0.83, 1, 0.52]
+εrlσ = [3015.84, 60.55, 2.67, 3.4, 1.27, 1.36, 0.47, 0.75, 0.32]
+rlE = [149.93, 2.3, 1.86, 0.99, 0.37, 0.42, 0.24, 0.15, 0.07]
+εrlE = [230.24, 2.62, 2.9, 1.54, 0.21, 0.3, 0.13, 0.05, 0.03]
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'blue', label = "MFNN with quadratic FEM training data")
-ax1.errorbar(n, linσ, yerr = εlinσ, color = 'darkorange', linestyle = '--', label = "MAPE with linear FEM training data")
-ax1.errorbar(n, roughσ, yerr = εroughσ, color = 'red', linestyle = '-.', label = "MAPE with rough FEM training data")
+ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'blue', label = "MFNN, quadratic FEM 2D low + 3D high training")
+ax1.errorbar(n, linσ, yerr = εlinσ, color = 'darkorange', linestyle = '--', label = "MFNN, linear FEM training data")
+ax1.errorbar(n, rqσ, yerr = εrqσ, color = 'red', linestyle = '-.', label = "MFNN, rough quadratic FEM training data")
+ax1.errorbar(n, rlσ, yerr = εrlσ, color = 'green', linestyle = ':', label = "MFNN, rough linear FEM training data")
 ax1.set_yscale('log')
-ax1.set_ylim([3, 500])
+ax1.set_ylim([0.5, 2000])
 ax1.set_xlim([-0.5, 16])
 ax1.set_xticks([0, 5, 10, 15])
-ax1.set_yticks([5, 20, 100, 200, 500])
-ax1.set_yticklabels([5, 20, 100, 200, 500])
+ax1.set_yticks([1, 10, 50, 200, 2000])
+ax1.set_yticklabels([1, 20, 50, 200, 2000])
 ax1.legend()
 ax1.set_ylabel("MAPE (%)")
 ax1.set_xlabel("Experimental training data size")
@@ -396,14 +527,15 @@ ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
 
 ax2.errorbar(n, quadE, yerr = εquadE, color = 'blue')
 ax2.errorbar(n, linE, yerr = εlinE, color = 'darkorange', linestyle = '--')
-ax2.errorbar(n, roughE, yerr = εroughE, color = 'red', linestyle = '-.')
+ax2.errorbar(n, rqE, yerr = εrqE, color = 'red', linestyle = '-.')
+ax2.errorbar(n, rlE, yerr = εrlE, color = 'green', linestyle = ':')
 ax2.set_yscale('log')
-ax2.set_ylim([0.5, 200])
+ax2.set_ylim([0.5, 1000])
 ax2.set_xlim([-0.5, 16])
 ax2.set_xticks([0, 5, 10, 15])
-ax2.set_yticks([1, 5, 20, 50, 200])
-ax2.set_yticklabels([1, 5, 20, 50, 200])
-ax2.legend()
+ax2.set_yticks([1, 20, 50, 200, 1000])
+ax2.set_yticklabels([1, 20, 50, 200, 1000])
+#ax2.legend()
 ax2.set_ylabel("MAPE (%)")
 ax2.set_xlabel("Experimental training data size")
 plt.subplots_adjust(bottom=0.180)
@@ -415,57 +547,79 @@ plt.savefig("/Users/Joe/Desktop/NN_graphs/MFNN_2D3Dexp_hi.pdf", dpi=800, bbox_in
 plt.show()
 '''
 
-# NN trained using 2D FEM + 3D FEM + exp data
+# Comparison of different MFNNs
 n = [1, 2, 3, 4, 5, 6, 8, 10, 15]
+n_1 = [2, 3, 4, 5, 6, 8, 10, 15]
+expσ = [1059.66, 100.98, 92.71, 30.64, 23.04, 17.84, 21.85, 15.16, 10.92]
+εexpσ = [636.84, 102.66, 104.39, 19.21, 12.42, 6.85, 10.31, 9.01, 9.78]
+expE = [24.29, 23.16, 10.45, 11.09, 5.52, 5.61, 3.91, 2.93, 1.68]
+εexpE = [10.07, 15.14, 9.92, 7.51, 3.91, 5.65, 3.78, 1.88, 1.21]
+# Quad 2
+quad2σ = [459.25, 57.65, 37.62, 25.06, 21.03, 15.31, 10.36, 5.07]
+εquad2σ = [782.72, 23.27, 20.01, 10.49, 15.46, 6.43, 5.35, 3.07]
+quad2E = [252.46, 68.7, 31.93, 20.65, 10.36, 4.55, 2.33, 0.75]
+εquad2E = [374.75, 82.24, 33.76, 25.67, 5.88, 3, 1.99, 0.64]
+# Quad hi
+quadσ = [871.38, 263.41, 115.62, 53.59, 59.53, 21.74, 17.79, 9.61, 5.69]
+εquadσ = [1226.36, 240.95, 166.55, 29.94, 45.5, 7.92, 7.32, 2.5, 1.69]
+quadE = [161.76, 27.14, 35.97, 28.67, 10.65, 13.45, 3.83, 3.23, 0.84]
+εquadE = [205.34, 21.01, 42.06, 55.88, 6.1, 12.5, 1.44, 1.5, 0.38]
 # Quad lo
-quadσ = [770.63, 208.97, 48.8, 44.07, 36.48, 30.53, 18.31, 13.12, 5.21]
-εquadσ = [790.89, 323.28, 15.03, 17.8, 18.68, 14.28, 9.61, 4.58, 1.37]
-quadE = [167.69, 32.1, 27.41, 14.34, 9.99, 6.7, 4.16, 4.89, 0.91]
-εquadE = [192.73, 31.13, 41.98, 5.7, 5.35, 3.52, 1.65, 2.64, 0.49]
-# Linear lo
-linσ = [114.95, 16.28, 26.6, 10, 6.57, 4.64, 2.97, 3.09, 1.21]
-εlinσ = [95.76, 8.24, 29.18, 5.1, 4.85, 2.74, 1.96, 3.25, 0.42]
-linE = [20.59, 12.55, 3.44, 1.46, 2.63, 1.68, 0.64, 0.48, 0.15]
-εlinE = [8.36, 9.36, 1.75, 0.86, 1.21, 0.98, 0.43, 0.17, 0.04]
-# Rough
-roughσ = [184.56, 44.54, 33.83, 13.99, 8.4, 9.68, 4.16, 4.38, 1.52]
-εroughσ = [224.03, 39.43, 35.59, 4.51, 3.74, 4.54, 1.52, 2.77, 0.31]
-roughE = [93.81, 11.49, 3.04, 3.14, 1.41, 0.7, 0.48, 0.32, 0.13]
-εroughE = [123.2, 7.55, 1.28, 3.23, 1.16, 0.32, 0.4, 0.1, 0.02]
+quadlσ = [58114.36, 341.14, 351.02, 235.6, 175.72, 137.22, 59.99, 44.14, 21.09]
+εquadlσ = [149848.96, 1243.39, 258.34, 164.15, 140.49, 65.35, 21.89, 18.5, 4.31]
+quadlE = [176.13, 487.97, 45.47, 21.19, 14.48, 14.53, 12, 10.51, 2.17]
+εquadlE = [159.43, 458.61, 41.58, 13.95, 4.45, 13.54, 9.93, 12.44, 0.85]
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'blue', label = "MFNN with quadratic FEM training data")
-ax1.errorbar(n, linσ, yerr = εlinσ, color = 'darkorange', linestyle = '--', label = "MAPE with linear FEM training data")
-ax1.errorbar(n, roughσ, yerr = εroughσ, color = 'red', linestyle = '-.', label = "MAPE with rough FEM training data")
+#ax1.errorbar(n, quadlσ, yerr = εquadlσ, color = 'blue', label = "MFNN, quadratic 2D & 3D FEM low training")
+#ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'darkorange', linestyle = '--', label = "MFNN, quadratic 2D low + 3D FEM high")
+#ax1.errorbar(n_1, quad2σ, yerr = εquad2σ, color = 'red', linestyle = '-.', label = "MFNN, quadratic 3D low")
+#ax1.errorbar(n, expσ, yerr = εexpσ, color = 'green', linestyle = ':', label = "NN, experimental data")
+ax1.errorbar(n, quadlσ, yerr = εquadlσ, color = 'blue')
+ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'darkorange', linestyle = '--')
+ax1.errorbar(n_1, quad2σ, yerr = εquad2σ, color = 'red', linestyle = '-.')
+ax1.errorbar(n, expσ, yerr = εexpσ, color = 'green', linestyle = ':')
 ax1.set_yscale('log')
-ax1.set_ylim([3, 500])
+ax1.set_ylim([0.5, 2000])
 ax1.set_xlim([-0.5, 16])
 ax1.set_xticks([0, 5, 10, 15])
-ax1.set_yticks([5, 20, 100, 200, 500])
-ax1.set_yticklabels([5, 20, 100, 200, 500])
-ax1.legend()
-ax1.set_ylabel("MAPE (%)")
-ax1.set_xlabel("Experimental training data size")
-ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
-              fontsize=12, ha="center",
+ax1.set_xticklabels([0, 5, 10, 15], fontsize=12)
+ax1.set_yticks([1, 10, 100, 500, 2000])
+ax1.set_yticklabels([1, 20, 100, 500, 2000], fontsize=12)
+#ax1.legend()
+ax1.set_ylabel("MAPE (%)", fontsize=18)
+ax1.set_xlabel("Experimental training data", fontsize=18)
+#ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
+#              fontsize=12, ha="center",
+#              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+ax1.annotate("A: $\sigma_{y}$", xy=(0.1, 0.95), xycoords="axes fraction",
+              fontsize=18, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
 
-ax2.errorbar(n, quadE, yerr = εquadE, color = 'blue')
-ax2.errorbar(n, linE, yerr = εlinE, color = 'darkorange', linestyle = '--')
-ax2.errorbar(n, roughE, yerr = εroughE, color = 'red', linestyle = '-.')
+ax2.errorbar(n, quadlE, yerr = εquadlE, color = 'blue', label = "quad 2D & 3D low training")
+ax2.errorbar(n, quadE, yerr = εquadE, color = 'darkorange', linestyle = '--', label = "quad 2D low + 3D hi")
+ax2.errorbar(n_1, quad2E, yerr = εquad2E, color = 'red', linestyle = '-.', label = "quad 3D low")
+ax2.errorbar(n, expE, yerr = εexpE, color = 'green', linestyle = ':', label = "experiment only")
 ax2.set_yscale('log')
-ax2.set_ylim([0.5, 200])
+ax2.set_ylim([0.5, 1000])
 ax2.set_xlim([-0.5, 16])
 ax2.set_xticks([0, 5, 10, 15])
-ax2.set_yticks([1, 5, 20, 50, 200])
-ax2.set_yticklabels([1, 5, 20, 50, 200])
-ax2.legend()
-ax2.set_ylabel("MAPE (%)")
-ax2.set_xlabel("Experimental training data size")
-plt.subplots_adjust(bottom=0.180)
-fig.tight_layout()
-ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
-              fontsize=12, ha="center",
+ax2.set_xticklabels([0, 5, 10, 15], fontsize=12)
+ax2.set_yticks([1, 5, 20, 100, 1000])
+ax2.set_yticklabels([1, 5, 20, 100, 1000], fontsize=12)
+ax2.legend(fontsize=12)
+#ax2.set_ylabel("MAPE (%)")
+#ax2.set_xlabel("Experimental training data size")
+#plt.subplots_adjust(bottom=0.180)
+plt.subplots_adjust(bottom=0.180, left=0.08, right=0.95, wspace=0.18, hspace=0.5)
+#fig.tight_layout()
+#ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
+#              fontsize=12, ha="center",
+#              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+ax2.set_ylabel("MAPE (%)", fontsize=18)
+ax2.set_xlabel("Experimental training data", fontsize=18)
+ax2.annotate("B: $E_{r}$", xy=(0.1, 0.95), xycoords="axes fraction",
+              fontsize=18, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
-plt.savefig("/Users/Joe/Desktop/NN_graphs/MFNN_2D3Dexp_lo.pdf", dpi=800, bbox_inches="tight")
+plt.savefig("/Users/Joe/Desktop/NN_graphs/NN_MFNN_compare.pdf", dpi=800, bbox_inches="tight")
 plt.show()
