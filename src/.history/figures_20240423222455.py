@@ -134,11 +134,9 @@ ax2.set_yscale('log')
 ax2.set_ylim([0.5, 2000])
 ax2.set_xlim([-0.5, 16])
 ax2.set_xticks([0, 5, 10, 15])
-ax2.set_xticklabels([0, 5, 10, 15])
-#ax2.set_xticklabels([0, 5, 10, 15], fontsize=14)
+ax2.set_xticklabels([0, 5, 10, 15], fontsize=14)
 ax2.set_yticks([1, 5, 20, 200, 2000])
-ax2.set_yticklabels([1, 5, 20, 200, 2000])
-#ax2.set_yticklabels([1, 5, 20, 200, 2000], fontsize=14)
+ax2.set_yticklabels([1, 5, 20, 200, 2000], fontsize=14)
 ax2.set_ylabel("MAPE (%)")
 ax2.set_xlabel("Experimental training data size")
 plt.subplots_adjust(bottom=0.180)
@@ -416,7 +414,6 @@ ax2.legend()
 ax2.set_ylabel("MAPE (%)")
 ax2.set_xlabel("Experimental training data size")
 #plt.subplots_adjust(bottom=0.180, left=0.08, right=0.95, wspace=0.18, hspace=0.5)
-plt.subplots_adjust(bottom=0.180)
 fig.tight_layout()
 ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
               fontsize=12, ha="center",
@@ -569,42 +566,38 @@ quad2σ = [459.25, 57.65, 37.62, 25.06, 21.03, 15.31, 10.36, 5.07]
 quad2E = [252.46, 68.7, 31.93, 20.65, 10.36, 4.55, 2.33, 0.75]
 εquad2E = [374.75, 82.24, 33.76, 25.67, 5.88, 3, 1.99, 0.64]
 # Quad hi
-quadσ = [58114.36, 341.14, 351.02, 235.6, 175.72, 137.22, 59.99, 44.14, 21.09]
-εquadσ = [149848.96, 1243.39, 258.34, 164.15, 140.49, 65.35, 21.89, 18.5, 4.31]
-quadE = [176.13, 487.97, 45.47, 21.19, 14.48, 14.53, 12, 10.51, 2.17]
-εquadE = [159.43, 458.61, 41.58, 13.95, 4.45, 13.54, 9.93, 12.44, 0.85]
+quadσ = [871.38, 263.41, 115.62, 53.59, 59.53, 21.74, 17.79, 9.61, 5.69]
+εquadσ = [1226.36, 240.95, 166.55, 29.94, 45.5, 7.92, 7.32, 2.5, 1.69]
+quadE = [161.76, 27.14, 35.97, 28.67, 10.65, 13.45, 3.83, 3.23, 0.84]
+εquadE = [205.34, 21.01, 42.06, 55.88, 6.1, 12.5, 1.44, 1.5, 0.38]
 # Quad lo
-quadlσ = [871.38, 263.41, 115.62, 53.59, 59.53, 21.74, 17.79, 9.61, 5.69]
-εquadlσ = [1226.36, 240.95, 166.55, 29.94, 45.5, 7.92, 7.32, 2.5, 1.69]
-quadlE = [161.76, 27.14, 35.97, 28.67, 10.65, 13.45, 3.83, 3.23, 0.84]
-εquadlE = [205.34, 21.01, 42.06, 55.88, 6.1, 12.5, 1.44, 1.5, 0.38]
+quadlσ = [58114.36, 341.14, 351.02, 235.6, 175.72, 137.22, 59.99, 44.14, 21.09]
+εquadlσ = [149848.96, 1243.39, 258.34, 164.15, 140.49, 65.35, 21.89, 18.5, 4.31]
+quadlE = [176.13, 487.97, 45.47, 21.19, 14.48, 14.53, 12, 10.51, 2.17]
+εquadlE = [159.43, 458.61, 41.58, 13.95, 4.45, 13.54, 9.93, 12.44, 0.85]
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-ax1.errorbar(n, quadlσ, yerr = εquadlσ, color = 'blue', label = "MFNN, quadratic 2D & 3D FEM low training")
-ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'darkorange', linestyle = '--', label = "MFNN, quadratic 2D low + 3D FEM high")
-ax1.errorbar(n_1, quad2σ, yerr = εquad2σ, color = 'red', linestyle = '-.', label = "MFNN, quadratic 3D low")
-ax1.errorbar(n, expσ, yerr = εexpσ, color = 'green', linestyle = ':', label = "NN, experimental data")
-#ax1.errorbar(n, quadlσ, yerr = εquadlσ, color = 'blue')
-#ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'darkorange', linestyle = '--')
-#ax1.errorbar(n_1, quad2σ, yerr = εquad2σ, color = 'red', linestyle = '-.')
-#ax1.errorbar(n, expσ, yerr = εexpσ, color = 'green', linestyle = ':')
+#ax1.errorbar(n, quadlσ, yerr = εquadlσ, color = 'blue', label = "MFNN, quadratic 2D & 3D FEM low training")
+#ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'darkorange', linestyle = '--', label = "MFNN, quadratic 2D low + 3D FEM high")
+#ax1.errorbar(n_1, quad2σ, yerr = εquad2σ, color = 'red', linestyle = '-.', label = "MFNN, quadratic 3D low")
+#ax1.errorbar(n, expσ, yerr = εexpσ, color = 'green', linestyle = ':', label = "NN, experimental data")
+ax1.errorbar(n, quadlσ, yerr = εquadlσ, color = 'blue')
+ax1.errorbar(n, quadσ, yerr = εquadσ, color = 'darkorange', linestyle = '--')
+ax1.errorbar(n_1, quad2σ, yerr = εquad2σ, color = 'red', linestyle = '-.')
+ax1.errorbar(n, expσ, yerr = εexpσ, color = 'green', linestyle = ':')
 ax1.set_yscale('log')
 ax1.set_ylim([0.5, 2000])
 ax1.set_xlim([-0.5, 16])
 ax1.set_xticks([0, 5, 10, 15])
-ax1.set_xticklabels([0, 5, 10, 15])
-#ax1.set_xticklabels([0, 5, 10, 15], fontsize=12)
+ax1.set_xticklabels([0, 5, 10, 15], fontsize=12)
 ax1.set_yticks([1, 10, 100, 500, 2000])
-ax1.set_yticklabels([1, 20, 100, 500, 2000])
-#ax1.set_yticklabels([1, 20, 100, 500, 2000], fontsize=12)
+ax1.set_yticklabels([1, 20, 100, 500, 2000], fontsize=12)
 ax1.legend()
-ax1.set_ylabel("MAPE (%)")
-ax1.set_xlabel("Experimental training data size")
+ax1.set_ylabel("MAPE (%)", fontsize=18)
+ax1.set_xlabel("Experimental training data", fontsize=18)
 ax1.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
               fontsize=12, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
-#ax1.set_ylabel("MAPE (%)", fontsize=18)
-#ax1.set_xlabel("Experimental training data", fontsize=18)
 #ax1.annotate("A: $\sigma_{y}$", xy=(0.1, 0.95), xycoords="axes fraction",
 #              fontsize=18, ha="center",
 #              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
@@ -617,17 +610,15 @@ ax2.set_yscale('log')
 ax2.set_ylim([0.5, 1000])
 ax2.set_xlim([-0.5, 16])
 ax2.set_xticks([0, 5, 10, 15])
-ax2.set_xticklabels([0, 5, 10, 15])
-#ax2.set_xticklabels([0, 5, 10, 15], fontsize=12)
+ax2.set_xticklabels([0, 5, 10, 15], fontsize=12)
 ax2.set_yticks([1, 5, 20, 100, 1000])
-ax2.set_yticklabels([1, 5, 20, 100, 1000])
-#ax2.set_yticklabels([1, 5, 20, 100, 1000], fontsize=12)
+ax2.set_yticklabels([1, 5, 20, 100, 1000], fontsize=12)
 #ax2.legend(fontsize=12)
 ax2.set_ylabel("MAPE (%)")
 ax2.set_xlabel("Experimental training data size")
 plt.subplots_adjust(bottom=0.180)
 #plt.subplots_adjust(bottom=0.180, left=0.08, right=0.95, wspace=0.18, hspace=0.5)
-fig.tight_layout()
+#fig.tight_layout()
 ax2.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
               fontsize=12, ha="center",
               bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
