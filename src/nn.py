@@ -14,7 +14,8 @@ import tensorflow as tf
 tf.config.run_functions_eagerly(False)
 import os
 import multiprocessing
-#dde.backend.tf.Session()
+dde.backend.set_default_backend("tensorflow.compat.v1")
+dde.backend.tf.Session()
 
 global apeG, yG
 
@@ -30,19 +31,18 @@ def t2s(names):
     else:
         return '[' + ','.join(names) + ']'
 
+import deepxde as dde
+    
 def nn(data, lay, wid):
     #lay, wid = 2, 32
     layer_size = [data.train_x.shape[1]] + [wid] * lay + [1]
     activation = 'selu'
     initializer = 'LeCun normal'
     regularization = ['l2', 0.01]
-
+    
     loss = 'MAPE'
     optimizer = 'adam'
-    if data.train_x.shape[1] == 3:
-        lr = 0.0001
-    else:
-        lr = 0.001
+    lr = 0.0001 if data.train_x.shape[1] == 3 else 0.001
     epochs = 30000
     net = dde.maps.FNN(
         layer_size, activation, initializer, regularization=regularization

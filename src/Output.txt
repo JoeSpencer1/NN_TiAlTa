@@ -519,3 +519,44 @@ validation_three Er 1.01 0.43 TI33_25 TI33_25 15 3D_quad 15 2D_70_quad 15 lo 5 0
 
 validation_three Er 1.04 0.32 TI33_25 TI33_25 15 3D_quad 15 2D_70_quad 15 lo 5 0 0 2 128
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+validation_one Er 1.36 1.71 TI33_25 TI33_25 15 5 2 32
+

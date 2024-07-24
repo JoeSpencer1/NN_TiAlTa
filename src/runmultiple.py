@@ -23,12 +23,13 @@ def run_processes(arguments):
 
 if __name__ == '__main__':
     run_processes(np.array([
-        "validation_three('Er', 'TI33_25', 'TI33_25', 15, '3D_quad', 15, '2D_70_quad', 15, typ='lo')"
+        "validation_one('Er', 'TI33_25', 'TI33_25', 15)"
+#        "validation_three('Er', 'TI33_25', 'TI33_25', 15, '3D_quad', 15, '2D_70_quad', 15, typ='lo')",
+#        "validation_three('Er', 'TI33_25', 'TI33_25', 15, '3D_quad', 15, '2D_70_quad', 15, typ='hi')"
         ]))
     '''
         "validation_three('Er', 'TI33_25', 'TI33_25', 15, '3D_quad', 15, '2D_70_quad', 15, typ='hi')"
         "validation_two('Er', 'TI33_25', 'TI33_25', 15, '3D_quad', 15)"
-        "validation_one('Er', 'TI33_25', 'TI33_25', 15)"
     run_processes(np.array([
         "validation_three('sigma_y', 'TI33_25', 'TI33_25', 0, '3D_quad', 0, '2D_70_quad', 0, typ='lo')",
         "validation_three('sigma_y', 'TI33_25', 'TI33_25', 1, '3D_quad', 1, '2D_70_quad', 1, typ='lo')",
