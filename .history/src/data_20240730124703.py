@@ -6,29 +6,30 @@ import numpy as np
 import pandas as pd
 
 class FileData(object):
-    def __init__(self, filename, yname):
+    def __init__(self, filename, yname, new=False):
         
         self.filename = filename
         self.yname = yname
+        self.new = new
 
         self.X = None
         self.y = None
 
         if type(self.filename) is tuple:
             for i in range(len(self.filename)):
-                self.read(self.filename[i])
+                self.read(self.filename[i], self.new)
 
         else:
-            self.read(self.filename)
+            self.read(self.filename, self.new)
 
-    def read(self, name):
+    def read(self, name, new):
         df = pd.read_csv('../data/' + name + '.csv')
 
         # This is for Al alloys
         if 'Al7075' in name or 'Al6061' in name:
             df['dP/dh (N/m)'] *= 0.2 * (df['C (GPa)'] / 3) ** 0.5 * 10 ** (-1.5)
         # This is for Ti alloys
-        if 'B3090' in name:
+        if 'B3090' in name or 'B3067' in name:
             df['dP/dh (N/m)'] *= 0.2 / df['hmax(um)']
         # Scale TI33 to hm=0.2μm
         if 'TI33' in name or '2D' in name or '3D' in name:
@@ -41,7 +42,7 @@ class FileData(object):
         if '2D' in name:
             df['dP/dh (N/m)'] *= 1.2370 / 1.1957
         # Get Estar if none provided
-        if 'FEM_70deg' in name or 'Berkovich' in name or '2D' in name or '3D' in name:
+        if 'FEM_70deg' in name or 'Berkovich' in name or 'conical' in name or '2D' in name or '3D' in name:
             df['Er (GPa)'] = EtoEr(df['E (GPa)'].values, df['nu'].values)[:, None]
 
         print(df.describe())
@@ -60,6 +61,25 @@ class FileData(object):
                 self.y = df['sy (GPa)'].values[:, None]
             else:
                 self.y = np.vstack((self.y, df['sy (GPa)'].values[:, None]))
+        elif self.yname == 'all':
+            if self.new == False:
+                if self.y is None:
+                    #self.y = df[['Er (GPa)', 'sy (GPa)', 'n']].values
+                    self.y = df[['sy (GPa)']].values
+                else:
+                    self.y = np.vstack((self.y, df[['sy (GPa)']].values))
+                    #self.y = np.vstack((self.y, df[['Er (GPa)', 'sy (GPa)', 'n']].values))
+            elif self.new == True:
+                if self.y is None:
+                    #df['Er (GPa)'] = df['C (GPa)'].values
+                    #df['sy (GPa)'] = df['C (GPa)'].values
+                    #df['n'] = df['C (GPa)'].values
+                    #self.y = df[['Er (GPa)', 'sy (GPa)', 'n']].values
+                    self.y = df[['sy (GPa)']].values
+                else:
+                    self.y = np.vstack((self.y, df[['sy (GPa)']].values))
+                    #self.y = np.vstack((self.y, df[['Er (GPa)', 'sy (GPa)', 'n']].values))
+                    #self.y = np.vstack((self.y, df[['C (GPa)', 'C (GPa)', 'C (GPa)']].values))
 
     def pop(self, index):
         self.X = np.delete(self.X, index, axis=0)
