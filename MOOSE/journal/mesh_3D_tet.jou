@@ -53,6 +53,6 @@ refine surface 64 smooth
 create block 2
 block 2 add volume 8
 #block 2 element type hex8
-export genesis "~/GitHub/NN_TiAlTa/MOOSE/mesh/mesh_3D_tet.e" dimension 3 overwrite
+export genesis "~/GitHub/NN_TiAlTa/MOOSE/mesh/3D_tet.e" dimension 3 overwrite
 
 quality volume 1 8

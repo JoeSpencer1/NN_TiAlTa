@@ -48,6 +48,6 @@ block 2 add surface 2
 
 mesh surface 2
 block 2 element type quad4
-export genesis "~/GitHub/NN_TiAlTa/MOOSE/mesh/mesh_2D_2l.e" dimension 3 overwrite
+export genesis "~/GitHub/NN_TiAlTa/MOOSE/mesh/2D_2l.e" dimension 3 overwrite
 
 quality surface 1

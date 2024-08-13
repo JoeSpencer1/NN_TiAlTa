@@ -49,6 +49,6 @@ refine surface 47 smooth
 create block 2
 block 2 add volume 7
 block 2 element type hex27
-export genesis "~/GitHub/NN_TiAlTa/MOOSE/mesh/mesh_3D_3q.e" dimension 3 overwrite
+export genesis "~/GitHub/NN_TiAlTa/MOOSE/mesh/3D_3q.e" dimension 3 overwrite
 
 quality volume 1 2

@@ -53,6 +53,6 @@ refine vertex 12 radius 0.35
 refine vertex 12 radius 0.2
 move volume 1 x 0 y -1 z 0
 block 2 element type quad4
-export genesis "~/GitHub/NN_TiAlTa/MOOSE/mesh/mesh_2D_refl.e" dimension 3 overwrite
+export genesis "~/GitHub/NN_TiAlTa/MOOSE/mesh/2D_refl.e" dimension 3 overwrite
 
 quality surface 1
