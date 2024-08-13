@@ -1,18 +1,18 @@
 reset
 
 # Mesh height on first line, 60˚ block on second line, inner yellow mesh on third line, green mesh on fourth,
-create radialmesh numZ 1 zblock 1 2 first size 0.01 last size 0.25 \
-    numR 3 trisection rblock 1 0.5 interval 32 \
-        rblock 2 1.5 first size 0.125 last size 0.25 \
-        rblock 3 2 first size 0.25 last size 0.25 \
-    numA 1 span 60 ablock 1 interval 32 # z=0 side of block
+create radialmesh numZ 1 zblock 1 2 first size 0.01 last size 0.5 \
+    numR 3 trisection rblock 1 0.5 interval 8 \
+        rblock 2 1.5 first size 0.1 last size 0.5 \
+        rblock 3 2 first size 0.5 last size 0.5 \
+    numA 1 span 60 ablock 1 interval 8 # z=0 side of block
 zblock 1 remove volume 1
 rotate volume 2 3 angle 90 about x include_merged
 
 create block 1
 block 1 add volume 1 2
 block 1 element type hex8 
-#refine vertex 9 radius 0.1
+#refine vertex 9 radius 0.2
 #list node all
 
 create pyramid height 1.003618893150114627 sides 3 radius 4.358035829057745 top 0

@@ -1,11 +1,11 @@
 reset
 
 # Mesh height on first line, 60˚ block on second line, inner yellow mesh on third line, green mesh on fourth,
-create radialmesh numZ 1 zblock 1 2 first size 0.2 last size 0.2 \
-    numR 3 trisection rblock 1 0.5 interval 4 \
+create radialmesh numZ 1 zblock 1 2 first size 1.0 last size 1.0 \
+    numR 3 trisection rblock 1 0.5 interval 1 \
         rblock 2 1.5 first size 0.5 last size 0.5 \
         rblock 3 2 first size 0.5 last size 0.5 \
-    numA 1 span 60 ablock 1 interval 4 # z=0 side of block
+    numA 1 span 60 ablock 1 interval 1 # z=0 side of block
 zblock 1 remove volume 1
 rotate volume 2 3 angle 90 about x include_merged
 
@@ -43,7 +43,7 @@ volume 7 size 0.2
 #volume 7 scheme tetmesh
 volume 7 scheme auto
 mesh volume 7
-#refine surface 47 smooth
+refine surface 47 smooth
 
 #move volume 7 x 0 y -1 z 0
 create block 2
