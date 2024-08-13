@@ -14,8 +14,6 @@ volume 1 scheme tetmesh
 volume 1 size 0.5
 mesh volume 1
 refine curve 15 radius 0.5
-refine surface 16 radius 1
-refine surface 16 radius 0.5
 #refine vertex 10 radius 0.5
 refine surface 16 radius 0.25
 #list node all
