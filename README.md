@@ -1,11 +1,11 @@
-# temperature-dependant
+# Physics-informed neural network
 
 ## Description
-My version of the neural network created by Lu et al., used to find the impact of temperature.
+My version of the neural network published by Lu et al., used to find the impact of temperature.
 Lu et al.'s paper can be found [here](https://www.pnas.org/content/early/2020/03/13/1922210117), and the code they used can be found [here](https://github.com/lululxvi/deep-learning-for-indentation).
 
 ## Data
-This work uses different data than Lu et al. It can be found in the [data](data) folder. The data was collected from nanoindentation tests performed on samples of 33% TiAlTa at different temperatures.
+The data used in this work can be found in the [data](data) folder. The data was collected from nanoindentation tests performed on samples of 33% TiAlTa at different temperatures.
 
 ## Code
 All code is contained in the [src](src) folder. A short summary of each file is provided below:
@@ -16,7 +16,7 @@ the main project file, nn.py.
 - Figures used in presentations were created using figures.py.
 - Multiple functions can be performed in parallel with runmultiple.py to speed up processing time.
 - Fitting functions were used in model.py. The yield stress and elastic stress files must be cleared before a new yield stress dataset can be created for a material and model.py can be used.
-- MOOSE can be executed in the command line in the ~/projects/moose/modules/contact/ folder and then using the command _mpiexec `n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D.i`
+- MOOSE can be executed in the command line in the ~/projects/moose/modules/contact/ folder and then using the command `mpiexec n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D.i`
 
 Besides conventional python packages, the following package by Lu Lu is required to run the programs.
 - [DeepXDE](https://github.com/lululxvi/deepxde) `v1.11.1` is used, with `tensorflow.compat.v1` set as its backend. Some DeepXDE functions may need to be modified if a different version is used.
