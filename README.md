@@ -16,7 +16,7 @@ the main project file, nn.py.
 - Figures used in presentations were created using figures.py.
 - Multiple functions can be performed in parallel with runmultiple.py to speed up processing time.
 - Fitting functions were used in model.py. The yield stress and elastic stress files must be cleared before a new yield stress dataset can be created for a material and model.py can be used.
-- MOOSE can be executed in the command line in the ~/projects/moose/modules/contact/ folder and then using the command __mpiexec -n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D.i__
+- MOOSE can be executed in the command line in the ~/projects/moose/modules/contact/ folder and then using the command _mpiexec -n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D.i_
 
 Besides conventional python packages, the following package by Lu Lu is required to run the programs.
 - [DeepXDE](https://github.com/lululxvi/deepxde) v1.11.1 is used, with tensorflow.compat.v1 set as its backend. Some DeepXDE functions may need to be modified if a different version is used.
