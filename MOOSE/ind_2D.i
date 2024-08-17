@@ -1,7 +1,7 @@
 [GlobalParams]
   displacements = 'disp_x disp_y'
   volumetric_locking_correction = true
-  order = SECOND
+  order = FIRST
   family = LAGRANGE
 []
   
@@ -9,7 +9,7 @@
   coord_type = RZ
   [initial]
     type = FileMeshGenerator
-    file = mesh/2D_refq.e
+    file = mesh/2D_refl.e
   []
 []
   
@@ -19,7 +19,7 @@
     xy_data = '0    0
                 1   -0.226
                 1.5  0'
-  []
+  [] #Indenter displacement, μm
 []
 
 [AuxVariables]
@@ -87,8 +87,8 @@
   [tensor]
     type = ADComputeIsotropicElasticityTensor
     block = '1'
-    youngs_modulus = 1143
-    poissons_ratio = 6.91e-2
+    youngs_modulus = 1143 #E, GPa
+    poissons_ratio = 0.0691 #ν
   []
   [stress]
     type = ADComputeFiniteStrainElasticStress
@@ -98,13 +98,13 @@
   [tensor_2]
     type = ADComputeIsotropicElasticityTensor
     block = '2'
-    youngs_modulus = 135
-    poissons_ratio = 0.25
+    youngs_modulus = 139 #E, GPa
+    poissons_ratio = 0.25 #ν
   []
   [power_law_hardening]
     type = ADIsotropicPowerLawHardeningStressUpdate
-    strength_coefficient = 3.38 #K
-    strain_hardening_exponent = 0.146 #n
+    strength_coefficient = 7.26 #K, GPa
+    strain_hardening_exponent = 0.195 #n
     block = '2'
   []
   [radial_return_stress]
@@ -132,15 +132,15 @@
   []
 []
 
-[VectorPostprocessors]
-  [y_disp]
-    type = NodalValueSampler
-    variable = disp_y
-    block = 2
-    sort_by = x
-    execute_on = FINAL
-  []
-[]
+# [VectorPostprocessors]
+#   [y_disp]
+#     type = NodalValueSampler
+#     variable = disp_y
+#     block = 2
+#     sort_by = x
+#     execute_on = FINAL
+#   []
+# []
   
 [Executioner]
   type = Transient
@@ -175,12 +175,12 @@
     type = Console
     max_rows = 5
   [../]
-  [convfile]
-    type = CSV
-    show = 'y_disp'
-    execute_on = final
-    execute_vector_postprocessors_on = FINAL
-  []
+  # [convfile]
+  #   type = CSV
+  #   show = 'y_disp'
+  #   execute_on = final
+  #   execute_vector_postprocessors_on = FINAL
+  # []
 []
   
 [Preconditioning]

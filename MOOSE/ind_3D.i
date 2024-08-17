@@ -1,14 +1,14 @@
 [GlobalParams]
   displacements = 'disp_x disp_y disp_z'
   volumetric_locking_correction = true
-  order = SECOND
+  order = FIRST
   family = LAGRANGE
 []
   
 [Mesh]
   [initial]
     type = FileMeshGenerator
-    file = mesh/3D_2q.e
+    file = mesh/3D_refl.e
   []
 []
   
@@ -18,7 +18,7 @@
     xy_data = '0  0
          1   -0.226
          1.5  0'
-  []
+  [] #Indenter displacement, μm
 []
   
 [AuxVariables]
@@ -101,24 +101,24 @@
   [tensor]
     type = ADComputeIsotropicElasticityTensor
     block = '2'
-    youngs_modulus = 1143
-    poissons_ratio = 0.0691
+    youngs_modulus = 1143 #E, GPa
+    poissons_ratio = 0.0691 #ν
   []
   [stress]
     type = ADComputeFiniteStrainElasticStress
     block = '2'
   []
-  
+
   [tensor_2]
     type = ADComputeIsotropicElasticityTensor
     block = '1'
-    youngs_modulus = 135
-    poissons_ratio = 0.25
+    youngs_modulus = 139 #E, GPa
+    poissons_ratio = 0.25 #ν
   []
   [power_law_hardening]
     type = ADIsotropicPowerLawHardeningStressUpdate
-    strength_coefficient = 3.38 #K
-    strain_hardening_exponent = 0.146 #n
+    strength_coefficient = 7.26 #K, GPa
+    strain_hardening_exponent = 0.195 #n
     block = '1'
   []
   [radial_return_stress]
@@ -166,11 +166,11 @@
 
   l_max_its = 20
   nl_max_its = 50
-  dt = 0.01 #0.025
+  dt = 0.01
   dtmin = 0.00001
   end_time = 1.5
   nl_rel_tol = 1e-6
-  nl_abs_tol = 1e-10#20
+  nl_abs_tol = 1e-10
   automatic_scaling = true
   [Predictor]
     type = SimplePredictor
@@ -188,14 +188,13 @@
     type = Console
     max_rows = 5
   [../]
-  [convfile]
-    type = CSV
-    show = 'y_disp'
-    execute_on = final
-    execute_vector_postprocessors_on = FINAL
-  []
+  # [convfile]
+  #   type = CSV
+  #   show = 'y_disp'
+  #   execute_on = final
+  #   execute_vector_postprocessors_on = FINAL
+  # []
 []
-
 
 [Preconditioning]
   [./smp]
