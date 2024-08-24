@@ -694,3 +694,46 @@ validation_one Er 1.25 0.83 TI33_25 TI33_25 15 5 2 32
 
 
 
+validation_one sy 74.99 48.20 TI33_25 TI33_25 2 5 2 32
+validation_one sy 229.59 322.59 TI33_25 TI33_25 3 5 2 32
+validation_one sy 41.16 18.52 TI33_25 TI33_25 4 5 2 32
+validation_one sy 55.95 96.40 TI33_25 TI33_25 5 5 2 32
+validation_one sy 23.93 18.64 TI33_25 TI33_25 6 5 2 32
+validation_one sy 13.79 9.51 TI33_25 TI33_25 8 5 2 32
+validation_one sy 5.93 3.30 TI33_25 TI33_25 10 5 2 32
+validation_one sy 2.27 1.74 TI33_25 TI33_25 15 5 2 32
+
+validation_one Er 101.85 76.39 TI33_25 TI33_25 2 5 2 32
+validation_one Er 69.65 54.69 TI33_25 TI33_25 3 5 2 32
+validation_one Er 16.93 9.46 TI33_25 TI33_25 4 5 2 32
+validation_one Er 18.11 10.72 TI33_25 TI33_25 5 5 2 32
+validation_one Er 9.79 6.12 TI33_25 TI33_25 6 5 2 32
+validation_one Er 4.71 3.10 TI33_25 TI33_25 8 5 2 32
+validation_one Er 3.07 2.16 TI33_25 TI33_25 10 5 2 32
+validation_one Er 2.56 4.19 TI33_25 TI33_25 15 5 2 32
+
+
+
+
+
+
+validation_three sy 8.32 2.26 Al6061 B3090 1 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+validation_three sy 14.69 6.22 Al6061 B3090 2 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+validation_three sy 11.39 4.65 Al6061 B3090 3 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+validation_three sy 14.29 7.81 Al6061 B3090 4 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+validation_three sy 13.75 5.12 Al6061 B3090 5 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+validation_three sy 8.99 2.78 Al6061 B3090 6 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+validation_three sy 14.23 6.27 Al6061 B3090 8 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+validation_three sy 11.53 4.11 Al6061 B3090 10 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+validation_three sy 11.22 5.50 Al6061 B3090 20 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+
+validation_three Er 3.19 0.88 Al6061 B3090 1 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+validation_three Er 3.30 0.92 Al6061 B3090 2 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+validation_three Er 3.28 1.00 Al6061 B3090 3 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+validation_three Er 3.36 1.14 Al6061 B3090 4 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+validation_three Er 4.00 0.91 Al6061 B3090 5 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+validation_three Er 4.39 1.20 Al6061 B3090 6 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+validation_three Er 4.35 1.15 Al6061 B3090 8 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+validation_three Er 4.95 0.94 Al6061 B3090 10 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+validation_three Er 5.85 1.03 Al6061 B3090 20 Lu_Berkovich 14 Lu_conical 100 hi 28 0 0 2 128
+
