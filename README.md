@@ -18,6 +18,11 @@ the main project file, nn.py.
 - Fitting functions were used in model.py. The yield stress and elastic stress files must be cleared before a new yield stress dataset can be created for a material and model.py can be used.
 - MOOSE was configured using `./configure --with-derivative-size=300`. Contact problems like this one can be executed in the `~/projects/moose/modules/contact/` folder using the command,
     `mpiexec n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D.i`
+```
+function test() {
+  console.log("This code will have a copy button to the right of it");
+}
+```
 
 Besides conventional Python packages, the following package by Lu Lu is required to run the programs.
 - [DeepXDE](https://github.com/lululxvi/deepxde) `v1.11.1` is used, with `tensorflow.compat.v1` set as its backend. Some DeepXDE functions may need to be modified if a different version is used.
