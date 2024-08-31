@@ -1,14 +1,21 @@
+E =  139 #139
+K =  7.26 #7.26
+n =  0.195 #0.195
+hm = 0.226 #0.226
+nu = 0.25
+fname = mesh/3D_refq.e
+
 [GlobalParams]
   displacements = 'disp_x disp_y disp_z'
   volumetric_locking_correction = true
-  order = FIRST
+  order = SECOND
   family = LAGRANGE
 []
   
 [Mesh]
   [initial]
     type = FileMeshGenerator
-    file = mesh/3D_refl.e
+    file = ${fname}
   []
 []
   
@@ -16,7 +23,7 @@
   [push_down]
     type = PiecewiseLinear
     xy_data = '0  0
-         1   -0.206
+         1   -${hm}
          1.5  0'
   [] #Indenter displacement, μm
 []
@@ -79,12 +86,12 @@
   [InclinedNoDisplacementBC]
     [indenter_60]
     boundary = 3
-    penalty = 1e4#1e10
+    penalty = 1e4#1e3
     displacements = 'disp_x disp_y disp_z'
     []
     [specimen_60]
     boundary = 7
-    penalty = 1e4#1e10
+    penalty = 1e4#1e3
     displacements = 'disp_x disp_y disp_z'
     []
   []
@@ -112,13 +119,13 @@
   [tensor_2]
     type = ADComputeIsotropicElasticityTensor
     block = '1'
-    youngs_modulus = 139 #E, GPa
-    poissons_ratio = 0.25 #ν
+    youngs_modulus = ${E} #139 #E, GPa
+    poissons_ratio = ${nu} #0.25 #ν
   []
   [power_law_hardening]
     type = ADIsotropicPowerLawHardeningStressUpdate
-    strength_coefficient = 7.26 #K, GPa
-    strain_hardening_exponent = 0.195 #n
+    strength_coefficient = ${K} #7.26 #K, GPa
+    strain_hardening_exponent = ${n} #0.195 #n
     block = '1'
   []
   [radial_return_stress]
@@ -147,12 +154,12 @@
 []
 
 [VectorPostprocessors]
-  # [y_disp]
-  #   type = NodalValueSampler
-  #   variable = disp_y
-  #   block = '1'
-  #   sort_by = x
-  # []
+  [y_disp]
+    type = NodalValueSampler
+    variable = disp_y
+    block = '1'
+    sort_by = x
+  []
 []
   
 [Executioner]
@@ -188,12 +195,12 @@
     type = Console
     max_rows = 5
   [../]
-  # [convfile]
-  #   type = CSV
-  #   show = 'y_disp'
-  #   execute_on = final
-  #   execute_vector_postprocessors_on = FINAL
-  # []
+  [convfile]
+    type = CSV
+    show = 'y_disp'
+    execute_on = final
+    execute_vector_postprocessors_on = FINAL
+  []
 []
 
 [Preconditioning]
@@ -224,7 +231,8 @@
     friction_coefficient = 0.4
     normalize_penalty = true
     formulation = penalty #tangential_penalty
-    penalty = 1e4#1e6
+    # Set penalty here and in InclinedNoDisplacementBC lower if solution does not converge
+    penalty = 1e4#1e3
     #capture_tolerance = 1e-4
     tangential_tolerance = 1e-1
   []

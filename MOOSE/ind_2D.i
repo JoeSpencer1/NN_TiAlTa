@@ -1,3 +1,11 @@
+E =  185 #139
+K =  1.28 #7.26
+n =  0.05 #0.195
+hm = 0.2 #0.226
+nu = 0.25
+# For coarse meshes, decrease contact penalty to 1e3 
+fname = mesh/2D_refq.e
+
 [GlobalParams]
   displacements = 'disp_x disp_y'
   volumetric_locking_correction = true
@@ -9,7 +17,7 @@
   coord_type = RZ
   [initial]
     type = FileMeshGenerator
-    file = mesh/2D_refq.e
+    file = ${fname}
   []
 []
   
@@ -17,9 +25,9 @@
   [push_down]
     type = PiecewiseLinear
     xy_data = '0    0
-                1   -0.226
+                1   -${hm}
                 1.5  0'
-  [] #Indenter displacement, μm
+  [] #Indenter displacement, μm. 0.226 is average.
 []
 
 [AuxVariables]
@@ -98,13 +106,13 @@
   [tensor_2]
     type = ADComputeIsotropicElasticityTensor
     block = '2'
-    youngs_modulus = 139 #E, GPa
-    poissons_ratio = 0.25 #ν
+    youngs_modulus = ${E} #139 #E, GPa
+    poissons_ratio = ${nu} #0.25 #ν
   []
   [power_law_hardening]
     type = ADIsotropicPowerLawHardeningStressUpdate
-    strength_coefficient = 7.26 #K, GPa
-    strain_hardening_exponent = 0.195 #n
+    strength_coefficient = ${K} #7.26 #K, GPa
+    strain_hardening_exponent = ${n} #0.195 #n
     block = '2'
   []
   [radial_return_stress]
@@ -130,6 +138,12 @@
     variable = disp_y
     boundary = 1
   []
+  [h]
+    type = AverageElementSize
+    block = 2
+    outputs = 'csv'
+    execute_on = 'timestep_end'
+  []
 []
 
 # [VectorPostprocessors]
@@ -138,7 +152,6 @@
 #     variable = disp_y
 #     block = 2
 #     sort_by = x
-#     execute_on = FINAL
 #   []
 # []
   
@@ -211,7 +224,8 @@
     friction_coefficient = 0.4
     normalize_penalty = true
     formulation = penalty
-    penalty = 1e4
+    # Set penalty lower if solution does not converge
+    penalty = 1e4#1e3
     #capture_tolerance = 1e-4
     tangential_tolerance = 1e-1
   []
