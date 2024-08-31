@@ -20,9 +20,9 @@ the main project file, nn.py.
 ```
 ./configure --with-derivative-size=300
 ```
-- Contact problems like this one can be executed in the `~/projects/moose/modules/contact/` folder using the command,
+- Contact problems like this one can be executed in the `~/projects/moose/modules/contact/` folder using the commands,
 ```
-mpiexec n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D.i
+mpiexec -n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D.i
 ```
 
 Besides conventional Python packages, the following package by Lu Lu is required to run the programs.
