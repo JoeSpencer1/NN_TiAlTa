@@ -1,7 +1,7 @@
-E =  139 #139
-K =  7.26 #7.26
-n =  0.195 #0.195
-hm = 0.226 #0.226
+E =  10 #139
+K =  0.60 #7.26
+n =  0.2 #0.195
+hm = 0.15 #0.226
 nu = 0.25
 fname = mesh/3D_refq.e
 
@@ -153,14 +153,14 @@ fname = mesh/3D_refq.e
   []
 []
 
-[VectorPostprocessors]
-  [y_disp]
-    type = NodalValueSampler
-    variable = disp_y
-    block = '1'
-    sort_by = x
-  []
-[]
+# [VectorPostprocessors]
+#   [y_disp]
+#     type = NodalValueSampler
+#     variable = disp_y
+#     block = '1'
+#     sort_by = x
+#   []
+# []
   
 [Executioner]
   type = Transient
@@ -195,12 +195,12 @@ fname = mesh/3D_refq.e
     type = Console
     max_rows = 5
   [../]
-  [convfile]
-    type = CSV
-    show = 'y_disp'
-    execute_on = final
-    execute_vector_postprocessors_on = FINAL
-  []
+  # [convfile]
+  #   type = CSV
+  #   show = 'y_disp'
+  #   execute_on = final
+  #   execute_vector_postprocessors_on = FINAL
+  # []
 []
 
 [Preconditioning]

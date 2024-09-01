@@ -1,15 +1,15 @@
-E =  185 #139
-K =  1.28 #7.26
-n =  0.05 #0.195
-hm = 0.2 #0.226
+E =  139 #139
+K =  7.26 #7.26
+n =  0.195 #0.195
+hm = 0.226 #0.226
 nu = 0.25
 # For coarse meshes, decrease contact penalty to 1e3 
-fname = mesh/2D_refq.e
+fname = mesh/2D_rl1.e
 
 [GlobalParams]
   displacements = 'disp_x disp_y'
   volumetric_locking_correction = true
-  order = SECOND
+  order = FIRST
   family = LAGRANGE
 []
   
