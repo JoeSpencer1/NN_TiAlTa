@@ -1,4 +1,7 @@
 .history/
+moose/ind_2D_out_cp/
+moose/ind_3D_out_cp/
+moose/ind_3D_my_checkpoint_cp/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
