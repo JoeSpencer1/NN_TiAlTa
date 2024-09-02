@@ -1,4 +1,4 @@
-# Physics-informed neural network
+# Multi-fidelity neural network
 
 ## Description
 My version of the neural network published by Lu et al., used to find the impact of temperature.
